@@ -607,7 +607,7 @@ async function openSettingsModal() {
     const r = await fetch('/settings');
     _settingsCache = await r.json();
   } catch (e) {
-    document.getElementById('settingsStatus').textContent = 'Could not load settings.';
+    document.getElementById('settingsStatus').textContent = '설정을 불러오지 못했습니다.';
     document.getElementById('settingsStatus').className = 'settings-status err';
     return;
   }
@@ -645,8 +645,8 @@ async function openSettingsModal() {
   custom.innerHTML = `
     <input type="radio" name="settingsPreset" value="custom" ${cur.output_preset === 'custom' ? 'checked' : ''}>
     <div class="preset-text">
-      <div class="preset-label">Custom</div>
-      <div class="preset-blurb">Set pix_fmt and CRF manually. For unusual workflows: 10-bit HDR, format-specific delivery, or non-standard CRF for video production work.</div>
+      <div class="preset-label">사용자 지정</div>
+      <div class="preset-blurb">pix_fmt와 CRF를 직접 정합니다. 10비트 HDR, 특정 납품 포맷, 제작용 비표준 CRF처럼 드문 작업용.</div>
       <div class="preset-spec">pix_fmt=${cur.output_pix_fmt} · crf=${cur.output_crf}</div>
     </div>`;
   custom.addEventListener('click', () => selectPreset('custom'));
@@ -704,10 +704,10 @@ async function openSettingsModal() {
   civInput.value = '';
   hfInput.value = '';
   civInput.placeholder = cur.has_civitai_key
-    ? '•••••••••• saved — paste new to replace'
-    : '32-char API key';
+    ? '•••••••••• 저장됨 — 바꾸려면 새로 붙여 넣기'
+    : 'API 키 붙여 넣기';
   hfInput.placeholder = cur.has_hf_token
-    ? '•••••••••• saved — paste new to replace'
+    ? '•••••••••• 저장됨 — 바꾸려면 새로 붙여 넣기'
     : 'hf_…';
   document.getElementById('civitaiKeyClear').style.display = cur.has_civitai_key ? '' : 'none';
   document.getElementById('hfTokenClear').style.display = cur.has_hf_token ? '' : 'none';
@@ -765,19 +765,19 @@ function renderNotifyState(cur) {
   const ask = document.getElementById('notifyAllowBtn');
   const hint = document.getElementById('notifyHint');
   if (badge) { badge.textContent = on ? 'ON' : 'OFF'; badge.className = 'spicy-state' + (on ? ' on' : ''); }
-  if (btn) btn.textContent = on ? 'Turn off' : 'Turn on';
+  if (btn) btn.textContent = on ? '끄기' : '켜기';
   const perm = (typeof window.Notification !== 'undefined') ? window.Notification.permission : 'unsupported';
   if (ask) {
     ask.hidden = !on || perm !== 'default';
   }
   if (hint) {
-    hint.textContent = !on ? 'No chime, no browser alert.'
-      : perm === 'granted' ? 'A chime in this tab, and a browser alert when the tab is in the background'
-          + (cur.push_available ? ' — and, once you turn it on below, even with the tab closed.' : '. Closed-tab alerts need an Update on this install.')
-      : perm === 'denied' ? 'A chime in this tab. Browser alerts are blocked for this site in the browser\'s own settings.'
-      : perm === 'unsupported' ? 'A chime in this tab.'
-      : 'A chime in this tab. Allow browser alerts to be told when the tab is in the background'
-          + (cur.push_available ? ', or even when it is closed.' : '.');
+    hint.textContent = !on ? '알림음도 브라우저 알림도 없습니다.'
+      : perm === 'granted' ? '이 탭에서 알림음, 백그라운드면 브라우저 알림'
+          + (cur.push_available ? ' — 아래에서 켜면 탭을 닫아도 알립니다.' : '. 탭을 닫은 알림은 이 설치를 업데이트해야 합니다.')
+      : perm === 'denied' ? '이 탭에서 알림음. 브라우저 알림은 사이트 설정에서 차단되어 있습니다.'
+      : perm === 'unsupported' ? '이 탭에서 알림음.'
+      : '이 탭에서 알림음. 백그라운드 알림을 받으려면 브라우저 알림을 허용하세요'
+          + (cur.push_available ? ', 탭을 닫아도 받을 수 있습니다.' : '.');
   }
   // PUSH, for a closed tab. Offered when the install can sign pushes and the
   // browser can hold a subscription; the button says which state it is in.
@@ -876,25 +876,22 @@ function renderAnalyticsState(cur) {
     badge.textContent = on ? 'ON' : 'OFF';
     badge.className = 'spicy-state' + (on ? ' on' : '');
   }
-  if (btn) btn.textContent = on ? 'Turn off' : 'Turn on';
+  if (btn) btn.textContent = on ? '끄기' : '켜기';
   if (hint) {
     if (!on) {
-      hint.textContent = 'Off — nothing is sent, and nothing is written to '
-        + 'the local usage log either.';
+      hint.textContent = '꺼짐 — 아무것도 보내지 않고, 로컬 사용 로그에도 안 씁니다.';
     } else if (!cur.has_analytics_key) {
-      hint.innerHTML = 'On, but no project key is configured — this panel is '
-        + 'sending <b>nothing</b> over the network. Events are only written to '
-        + 'the local log.';
+      hint.innerHTML = '켜져 있지만 프로젝트 키가 없습니다 — 네트워크로는 <b>아무것도</b> 안 보냅니다. 이벤트는 로컬 로그에만 기록됩니다.';
     } else {
-      hint.textContent = 'Your anonymous ID: ' + (cur.analytics_install_id || '(not yet generated)');
+      hint.textContent = '익명 ID: ' + (cur.analytics_install_id || '(아직 없음)');
     }
   }
   setTokenStatus('analyticsKey', !!cur.has_analytics_key);
   setTokenStatus('analyticsQueryKey', !!cur.has_analytics_query_key);
   const k1 = document.getElementById('analyticsKeyInput');
   const k2 = document.getElementById('analyticsQueryKeyInput');
-  if (k1) { k1.value = ''; k1.placeholder = cur.has_analytics_key ? '•••••••••• saved — paste new to replace' : 'phc_…'; }
-  if (k2) { k2.value = ''; k2.placeholder = cur.has_analytics_query_key ? '•••••••••• saved — paste new to replace' : 'phx_…'; }
+  if (k1) { k1.value = ''; k1.placeholder = cur.has_analytics_key ? '•••••••••• 저장됨 — 바꾸려면 새로 붙여 넣기' : 'phc_…'; }
+  if (k2) { k2.value = ''; k2.placeholder = cur.has_analytics_query_key ? '•••••••••• 저장됨 — 바꾸려면 새로 붙여 넣기' : 'phx_…'; }
   const c1 = document.getElementById('analyticsKeyClear');
   const c2 = document.getElementById('analyticsQueryKeyClear');
   if (c1) c1.style.display = cur.has_analytics_key ? '' : 'none';
@@ -977,22 +974,22 @@ function renderSpicyState(isOn) {
   if (_spicyArmed) {
     badge.textContent = 'ARMED';
     badge.classList.add('armed');
-    btn.textContent = 'Click again to confirm';
+    btn.textContent = '한 번 더 눌러 확인';
     btn.classList.remove('ghost-btn');
     btn.classList.add('primary-btn');
     hint.style.display = '';
-    hint.textContent = 'Confirms turning Spicy mode ON. NSFW LoRAs will be available in the CivitAI browser. Cancel by closing the modal.';
+    hint.textContent = '성인 모드를 켭니다. CivitAI 브라우저에서 NSFW LoRA가 나옵니다. 창을 닫으면 취소됩니다.';
   } else if (isOn) {
     badge.textContent = 'ON';
     badge.classList.add('on');
-    btn.textContent = 'Disable';
+    btn.textContent = '끄기';
     btn.classList.remove('primary-btn');
     btn.classList.add('ghost-btn');
     hint.style.display = '';
-    hint.textContent = 'Spicy mode is ON. NSFW LoRAs are visible in the CivitAI browser when you tick "Show NSFW".';
+    hint.textContent = '성인 모드가 켜져 있습니다. CivitAI에서 "NSFW 보기"를 켜면 NSFW LoRA가 보입니다.';
   } else {
     badge.textContent = 'OFF';
-    btn.textContent = 'Enable Spicy mode';
+    btn.textContent = '성인 모드 켜기';
     btn.classList.remove('primary-btn');
     btn.classList.add('ghost-btn');
     hint.style.display = 'none';
@@ -1065,13 +1062,13 @@ function setTokenStatus(prefix, isSet, dirty) {
   if (!el) return;
   el.classList.remove('set', 'dirty');
   if (dirty) {
-    el.innerHTML = '<svg class="ph" aria-hidden="true" style="margin-right:4px;vertical-align:-2px"><use href="#ph-pencil-simple"/></svg>unsaved';
+    el.innerHTML = '<svg class="ph" aria-hidden="true" style="margin-right:4px;vertical-align:-2px"><use href="#ph-pencil-simple"/></svg>미저장';
     el.classList.add('dirty');
   } else if (isSet) {
-    el.innerHTML = '<svg class="ph" aria-hidden="true" style="margin-right:4px;vertical-align:-2px"><use href="#ph-check-bold"/></svg>saved';
+    el.innerHTML = '<svg class="ph" aria-hidden="true" style="margin-right:4px;vertical-align:-2px"><use href="#ph-check-bold"/></svg>저장됨';
     el.classList.add('set');
   } else {
-    el.textContent = 'not set';
+    el.textContent = '없음';
   }
 }
 
@@ -1086,10 +1083,10 @@ function toggleTokenVisibility(inputId, btn) {
   if (!inp) return;
   if (inp.type === 'password') {
     inp.type = 'text';
-    btn.textContent = 'hide';
+    btn.textContent = '숨기기';
   } else {
     inp.type = 'password';
-    btn.textContent = 'show';
+    btn.textContent = '보기';
   }
 }
 
@@ -1246,14 +1243,14 @@ async function applySettings() {
       return;
     }
     status.textContent = data.helper_restarted
-      ? 'Saved. Helper restarted — takes effect on the next render.'
-      : 'Saved.';
+      ? '저장됨. 헬퍼를 재시작했습니다 — 다음 렌더부터 적용됩니다.'
+      : '저장됨.';
     status.className = 'settings-status ok';
     btn.disabled = false;
     // Refresh cache so a re-open shows the new values without a stale flash.
     _settingsCache = { ...(_settingsCache || {}), settings: data.settings };
   } catch (e) {
-    status.textContent = 'Network error: ' + (e.message || e);
+    status.textContent = '네트워크 오류: ' + (e.message || e);
     status.className = 'settings-status err';
     btn.disabled = false;
   }

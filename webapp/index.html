@@ -4936,19 +4936,17 @@ The last line"></textarea>
       <div class="settings-row" style="margin-top:10px" id="settingsH3DitRow" hidden>
         <label>Hailuo H3 모델</label>
         <select id="settingsH3Dit" style="flex:1">
-          <option value="auto">Automatic — 이 맥이 담을 수 있는 최선</option>
+          <option value="auto">자동 — 이 맥이 담을 수 있는 최선</option>
           <option value="bf16">Full (bf16) — 피크 42 GiB</option>
           <option value="q8">Compact (Q8) — 피크 21 GiB, 메모리 절반</option>
         </select>
       </div>
       <div class="hint" id="settingsH3DitHint" style="margin-top:6px" hidden>
-        Measured on the same prompt and seed: <b>Full 38.9 GiB</b> peak in 196.9 s
-        versus <b>Compact 21.4 GiB</b> in 200.1 s — <b>45 % less memory for 1.6 %
-        more time</b>. Automatic prefers the Compact engine on every size of Mac;
-        Full runs only when you choose it here — or when the Compact engine is
-        not built on this install (re-run the H3 engine Install to build it).
-        The memory Compact gives back is memory H3 was holding, not memory it
-        needed.
+        같은 프롬프트·시드 측정: <b>Full 피크 38.9 GiB</b> / 196.9초,
+        <b>Compact 21.4 GiB</b> / 200.1초 — <b>시간 1.6% 더 쓰고 메모리 45% 절약</b>.
+        Automatic은 맥 크기와 관계없이 Compact를 고릅니다. Full은 여기서 고르거나,
+        이 설치에 Compact 엔진이 없을 때만 씁니다 (H3 Install을 다시 돌리면 생깁니다).
+        Compact가 돌려주는 메모리는 H3가 붙잡고 있던 양이지, 꼭 필요했던 양이 아닙니다.
       </div>
       <div class="hint" style="margin-top:6px">
         결과는 바뀌지 않습니다. 클립은 어느 쪽이든 바이트 단위로 같습니다.
@@ -5144,14 +5142,12 @@ The last line"></textarea>
           유지보수 / 셀프호스팅 키
         </summary>
         <div class="hint" style="margin:8px 0">
-          This build ships Phosphene's own project key, which is why the
-          counts above are sent by default. It is a write-only
-          <code>phc_</code> key — it can send events, it can't read any
-          back. Pasting your own key here <b>overrides</b> it; clearing
-          this field falls back to the shipped key rather than switching
-          sending off, so use the <b>Turn off</b> button above for that.
-          Point <code>PHOSPHENE_ANALYTICS_HOST</code> at your own receiver
-          to self-host. Full schema: <code>docs/ANALYTICS.md</code>.
+          이 빌드는 Phosphene 프로젝트 키가 들어 있어서 기본적으로 횟수를 보냅니다.
+          쓰기 전용 <code>phc_</code> 키입니다. 이벤트는 보낼 수 있고, 읽어 올 수는 없습니다.
+          여기에 자기 키를 붙이면 <b>덮어씁니다</b>. 칸을 비우면 꺼지는 게 아니라 기본 키로 돌아갑니다.
+          끄려면 위의 <b>끄기</b>를 쓰세요. 직접 받으려면
+          <code>PHOSPHENE_ANALYTICS_HOST</code>를 자기 수신기로 두세요.
+          스키마: <code>docs/ANALYTICS.md</code>.
         </div>
         <div class="token-row">
           <div class="token-label">
@@ -5568,5 +5564,8 @@ const BOOT = __BOOTSTRAP__;</script>
 <script type="module" src="/webapp/js/oneshot.js"></script>
 <script type="module" src="/webapp/js/main.js"></script>
 <div class="phos-toast-container" id="phosToast" aria-live="polite" aria-atomic="false"></div>
+</body>
+</html>
+alse"></div>
 </body>
 </html>

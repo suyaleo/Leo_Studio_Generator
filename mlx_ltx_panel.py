@@ -876,27 +876,25 @@ OUTPUT_PRESETS: dict[str, dict[str, str]] = {
         # VFX folks who'll grade or composite the clip downstream.
         "pix_fmt": "yuv444p",
         "crf": "0",
-        "label": "Video production (lossless)",
-        "blurb": "Mathematically lossless — full 4:4:4 chroma, no "
-                 "compression artifacts. ~50 MB per 5s clip. For pro "
-                 "workflows: color grading, compositing, VFX, anywhere "
-                 "you'll re-encode downstream and need every frame intact.",
+        "label": "영상 제작 (무손실)",
+        "blurb": "수학적 무손실 — 4:4:4 크로마 전부, 압축 아티팩트 없음. "
+                 "5초 클립당 약 50 MB. 색보정·합성·VFX처럼 다시 인코딩할 "
+                 "프로 작업용. 매 프레임이 그대로 필요합니다.",
     },
     "standard": {
         "pix_fmt": "yuv420p",
         "crf": "18",
-        "label": "Standard",
-        "blurb": "Visually lossless to ~95% of viewers. ~7 MB per 5s clip. "
-                 "Plays everywhere including X / Instagram / Discord. The "
-                 "default for new installs.",
+        "label": "표준",
+        "blurb": "보는 사람 약 95%에게는 손실이 안 보입니다. 5초 클립당 약 7 MB. "
+                 "X / Instagram / Discord 포함 어디서나 재생됩니다. "
+                 "새 설치의 기본값입니다.",
     },
     "web": {
         "pix_fmt": "yuv420p",
         "crf": "23",
-        "label": "Web / social",
-        "blurb": "Smallest files. ~3 MB per 5s clip. For embedding, mobile, "
-                 "or quick previews where bandwidth matters more than peak "
-                 "fidelity.",
+        "label": "웹 / SNS",
+        "blurb": "가장 작은 파일. 5초 클립당 약 3 MB. 임베드·모바일·빠른 미리보기처럼 "
+                 "화질보다 용량이 중요할 때.",
     },
 }
 
