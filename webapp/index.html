@@ -5054,7 +5054,7 @@ The last line"></textarea>
          server enforces the gate independently in _civitai_search, so a
          tampered client can't bypass this. -->
     <div class="settings-section">
-      <h3>Spicy mode <span class="hint" style="font-weight:400">(성인 콘텐츠)</span></h3>
+      <h3>성인 모드 <span class="hint" style="font-weight:400">(NSFW)</span></h3>
       <div class="hint" style="margin-bottom:10px">
         끄면 CivitAI LoRA 브라우저가 NSFW를 전부 숨깁니다.
         "NSFW 보기"가 사라지고 API NSFW 결과도 걸러집니다. 켜면 검색마다
@@ -5064,7 +5064,7 @@ The last line"></textarea>
         <span class="spicy-state" id="spicyStateBadge">OFF</span>
         <button type="button" class="ghost-btn" id="spicyToggleBtn"
                 onclick="toggleSpicyMode()" style="margin-left:auto">
-          Spicy mode 켜기
+          성인 모드 켜기
         </button>
       </div>
       <div class="hint" id="spicyHint" style="margin-top:8px; display:none"></div>
@@ -5214,15 +5214,15 @@ The last line"></textarea>
                oninput="document.getElementById('settingsCrfRange').value = this.value">
       </div>
       <div class="hint" style="margin-top:6px">
-        0 = mathematically lossless · 18 = visually lossless ·
-        23 = web default · 28+ = lossy
+        0 = 수학적 무손실 · 18 = 눈에 손실 없음 ·
+        23 = 웹 기본 · 28+ = 손실
       </div>
     </div>
 
     <div class="settings-foot">
       <span class="settings-status" id="settingsStatus"></span>
-      <button class="ghost-btn" onclick="closeSettingsModal()">Cancel</button>
-      <button class="primary-btn" id="settingsApplyBtn" onclick="applySettings()">Apply</button>
+      <button class="ghost-btn" onclick="closeSettingsModal()">취소</button>
+      <button class="primary-btn" id="settingsApplyBtn" onclick="applySettings()">적용</button>
     </div>
   </div>
 </div>
