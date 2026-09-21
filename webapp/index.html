@@ -1,9 +1,9 @@
 <!doctype html>
-<html lang="en">
+<html lang="ko">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Phosphene</title>
+  <title>Leo Studio</title>
   <!-- The build this PROCESS is serving, not the one in the working tree.
        Server-rendered, so it answers before a byte of JS runs and survives
        a page saved to disk. See build_stamp_text(). -->
@@ -110,8 +110,8 @@
       <strong id="ubTitle">A new version is available</strong>
       <span id="ubSub" class="ub-sub"></span>
     </div>
-    <button type="button" class="ub-go" id="ubUpdate">Update now</button>
-    <button type="button" class="ub-dismiss" id="ubLater" title="Hide until the next version">Later</button>
+    <button type="button" class="ub-go" id="ubUpdate">지금 업데이트</button>
+    <button type="button" class="ub-dismiss" id="ubLater" title="Hide until the next version">나중에</button>
   </div>
   <!-- ONE row, both asks, once ever. A second dismissible prompt for
        "contribute" would double the nagging to say a smaller thing, and the
@@ -120,8 +120,8 @@
   <div class="ub-star" id="ubStar" hidden>
     <span>Updating takes a minute — <a href="https://github.com/mrbizarro/phosphene" id="ubStarLink" target="_blank" rel="noopener">a star on GitHub</a> while you wait means the world.</span>
     <span class="ub-sep">·</span>
-    <span>Fixed something, or want to add an engine? <a href="https://github.com/mrbizarro/phosphene/blob/main/CONTRIBUTING.md" id="ubContribLink" target="_blank" rel="noopener">PRs are welcome and get credited</a>.</span>
-    <button type="button" class="ub-already" id="ubStarDone">Already did</button>
+    <span>Fixed something, or want to add an engine? <a href="https://github.com/mrbizarro/phosphene/blob/main/CONTRIBUTING.md" id="ubContribLink" target="_blank" rel="noopener">PR 환영, 기여자로 표기</a>.</span>
+    <button type="button" class="ub-already" id="ubStarDone">이미 함</button>
   </div>
 </div>
 
@@ -144,7 +144,7 @@
 </div>
 
 <header>
-  <a href="/" class="brand"><img src="/assets/phosphene_cycle_word_transparent.png" alt="Phosphene"></a>
+  <a href="/" class="brand"><img src="/assets/leo-studio.png?v=110513" alt="Leo Studio"></a>
   <!-- The standalone version badge is gone: #versionPill already carries the
        version in EVERY state it can be in — "Up to date · 4.2.0",
        "Update to 4.3.0", "Checking · 4.2.0", "4.2.0 · dev · <sha>",
@@ -182,7 +182,7 @@
        on the face because it is the one number worth a glance.
        PORTALED to <body>: <header> is overflow:hidden and would slice it —
        the same clipping that once cut off the avatar. -->
-  <div id="healthCluster" role="group" aria-label="System health" hidden>
+  <div id="healthCluster" role="group" aria-label="시스템 상태" hidden>
     <button type="button" id="healthChip" aria-haspopup="dialog"
             aria-expanded="false" aria-controls="healthPop"
             title="System health — click for detail">
@@ -190,14 +190,14 @@
       <span class="hc-face" id="hcFace">checking…</span>
       <svg class="ph hc-caret" aria-hidden="true"><use href="#ph-caret-down-bold"/></svg>
     </button>
-    <div id="healthPop" hidden role="dialog" aria-label="System health detail">
-      <div class="hc-row" data-pill="tierPill"><span class="hc-label">Tier</span></div>
-      <div class="hc-row" data-pill="memPill"><span class="hc-label">Memory</span></div>
-      <div class="hc-row" data-pill="helperPill"><span class="hc-label">Helper</span></div>
-      <div class="hc-row" data-pill="modelsPill"><span class="hc-label">Models</span></div>
+    <div id="healthPop" hidden role="dialog" aria-label="시스템 상태 상세">
+      <div class="hc-row" data-pill="tierPill"><span class="hc-label">티어</span></div>
+      <div class="hc-row" data-pill="memPill"><span class="hc-label">메모리</span></div>
+      <div class="hc-row" data-pill="helperPill"><span class="hc-label">헬퍼</span></div>
+      <div class="hc-row" data-pill="modelsPill"><span class="hc-label">모델</span></div>
       <div class="hc-row" data-pill="comfyPill"><span class="hc-label">ComfyUI</span></div>
-      <div class="hc-row" data-pill="queuePill"><span class="hc-label">Queue</span></div>
-      <div class="hc-row" data-pill="jobPill"><span class="hc-label">Render</span></div>
+      <div class="hc-row" data-pill="queuePill"><span class="hc-label">대기열</span></div>
+      <div class="hc-row" data-pill="jobPill"><span class="hc-label">렌더</span></div>
     </div>
     <span id="tierPill" class="pill" style="cursor:pointer" onclick="openTierModal()" title="Click to see what this Mac can do">click for system info</span>
     <span id="memPill" class="pill">memory…</span>
@@ -225,13 +225,13 @@
          pill-checking  Y1.001          (idle, while first poll runs)
        No modal — confirm() + small toast for everything. -->
   <span id="versionPill" class="pill pill-checking" style="cursor:pointer"
-        onclick="versionPillClick()" title="Phosphene version">phosphene · …</span>
+        onclick="versionPillClick()" title="Leo Studio 버전">Leo Studio · …</span>
   <!-- Bug-report button — neon-pulsing in the header pill row. Opens a
        modal that pre-fills environment info + log tail and finishes with a
        pre-filled GitHub issue (URL-built client-side, no auth). Sits before
        the settings cog so it's where the user looks first when something
        feels off. -->
-  <button id="bugBtn" class="icon-btn bug-btn" onclick="openBugModal()" title="Report a bug — opens GitHub issue with environment pre-filled">
+  <button id="bugBtn" class="icon-btn bug-btn" onclick="openBugModal()" title="버그 신고 — 환경 정보가 채워진 GitHub 이슈">
     <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
       <path d="M8 2l1.88 1.88"></path>
       <path d="M14.12 3.88L16 2"></path>
@@ -249,7 +249,7 @@
   <!-- Settings cog: opens the modal that lets users pick output codec
        presets (Standard / Video production / Web / Custom). Sits between the
        runtime pills and Stop Comfy so it's findable but not loud. -->
-  <button id="settingsBtn" class="icon-btn" onclick="openSettingsModal()" title="Output settings — codec, file size">
+  <button id="settingsBtn" class="icon-btn" onclick="openSettingsModal()" title="출력 설정 — 코덱, 파일 크기">
     <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
       <circle cx="12" cy="12" r="3"></circle>
       <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
@@ -260,10 +260,10 @@
        (users asked for features that already shipped because nothing on
        screen used their words). ? opens it too, on the shortcuts page. -->
   <button id="docsBtn" type="button" class="icon-btn docs-btn" onclick="openDocs()"
-          data-shortcut="docs.open" title="Docs — how every tool works, and every shortcut">
-    <svg class="ph" aria-hidden="true"><use href="#ph-book-open"/></svg><span class="docs-btn-word">Docs</span>
+          data-shortcut="docs.open" title="문서 — 도구 설명과 단축키">
+    <svg class="ph" aria-hidden="true"><use href="#ph-book-open"/></svg><span class="docs-btn-word">문서</span>
   </button>
-  <button id="stopComfyBtn" class="ghost-btn" style="display:none" onclick="api('/stop_comfy', 'POST').then(poll)">Stop Comfy</button>
+  <button id="stopComfyBtn" class="ghost-btn" style="display:none" onclick="api('/stop_comfy', 'POST').then(poll)">Comfy 중지</button>
   <!-- Official Phosphene account on X (2026-05-18). Sits next to the
        "by Bizarro" creator credit so the two brand links read as a
        single right-corner cluster. Subtle pulsing glow uses the
@@ -274,20 +274,6 @@
        current — the people most likely to star it — could never see it, and
        there was no way to find it on purpose. This is a static link, never a
        prompt: no badge, no pulse, no counter. -->
-  <a class="icon-btn star-link" id="starLink"
-     href="https://github.com/mrbizarro/phosphene" target="_blank" rel="noopener"
-     title="Star Phosphene on GitHub — it is how people find it">
-    <svg class="ph" aria-hidden="true"><use href="#ph-star"/></svg>
-  </a>
-  <a class="phosphene-x-link" href="https://x.com/PhospheneAI" target="_blank" rel="noopener"
-     title="Follow @PhospheneAI on X — the official Phosphene account">
-    <svg class="ph" aria-hidden="true"><use href="#ph-x-brand"/></svg>
-  </a>
-  <a class="creator-link" href="https://x.com/AIBizarrothe" target="_blank" rel="noopener" title="Follow Mr. Bizarro on X (the panel's creator)">
-    <img src="/assets/bizarro-avatar.jpg" class="creator-avatar" alt="">
-    <span>by Bizarro</span>
-    <span class="x-icon"><svg class="ph" aria-hidden="true"><use href="#ph-arrow-square-out"/></svg>X</span>
-  </a>
 </header>
 
 <main class="layout">
@@ -300,25 +286,25 @@
          character LoRAs). Default = manual; the choice persists in
          localStorage so the user lands on the same tab next session. -->
     <nav class="workflow-tabs" id="workflowTabs">
-      <button data-workflow="manual" class="active"><svg class="ph wf-icon" aria-hidden="true"><use href="#ph-film-strip"/></svg>Video</button>
+      <button data-workflow="manual" class="active"><svg class="ph wf-icon" aria-hidden="true"><use href="#ph-film-strip"/></svg>영상</button>
       <!-- One Shot is its own door (2026-09-08): one continuous shot of 30 s – 2 min,
            with its own composer and its own API (POST /oneshot). It was a mode chip
            on the video form; a shot that never cuts is a different thing to make
            than a clip, and it gets the tab. -->
-      <button data-workflow="oneshot"><svg class="ph wf-icon" aria-hidden="true"><use href="#ph-target"/></svg>One Shot</button>
-      <button data-workflow="studio"><svg class="ph wf-icon" aria-hidden="true"><use href="#ph-image"/></svg>Images</button>
+      <button data-workflow="oneshot"><svg class="ph wf-icon" aria-hidden="true"><use href="#ph-target"/></svg>원샷</button>
+      <button data-workflow="studio"><svg class="ph wf-icon" aria-hidden="true"><use href="#ph-image"/></svg>이미지</button>
       <!-- Storyboard sits next to the video surfaces; Audio and Train are the
            two "go elsewhere and come back" tabs. No NEW badge on purpose —
            with no film in progress the panel must look exactly as it did
            yesterday, plus one calm word. The count span is filled only while
            a storyboard render is actually in flight. -->
-      <button data-workflow="storyboard"><svg class="ph wf-icon" aria-hidden="true"><use href="#ph-film-slate"/></svg>Storyboard<span class="new-badge sb-live" id="sbTabCount" hidden></span></button>
+      <button data-workflow="storyboard"><svg class="ph wf-icon" aria-hidden="true"><use href="#ph-film-slate"/></svg>스토리보드<span class="new-badge sb-live" id="sbTabCount" hidden></span></button>
       <!-- The Editor is a PLACE, not a room inside the Storyboard. It opens
            with no board, on clips from any engine, and it stays open while
            you go and look at something else. -->
-      <button data-workflow="editor"><svg class="ph wf-icon" aria-hidden="true"><use href="#ph-scissors"/></svg>Editor</button>
-      <button data-workflow="audio"><svg class="ph wf-icon" aria-hidden="true"><use href="#ph-music-notes"/></svg>Audio<span class="new-badge">NEW</span></button>
-      <button data-workflow="train"><svg class="ph wf-icon" aria-hidden="true"><use href="#ph-user-plus"/></svg>Train Character</button>
+      <button data-workflow="editor"><svg class="ph wf-icon" aria-hidden="true"><use href="#ph-scissors"/></svg>편집</button>
+      <button data-workflow="audio"><svg class="ph wf-icon" aria-hidden="true"><use href="#ph-music-notes"/></svg>오디오</button>
+      <button data-workflow="train" title="캐릭터 학습"><svg class="ph wf-icon" aria-hidden="true"><use href="#ph-user-plus"/></svg>학습</button>
     </nav>
     <!-- The original manual form is unchanged; it sits below in the DOM
          and is shown/hidden by JS as the workflow tab toggles. -->
@@ -334,8 +320,8 @@
       <div class="models-inline-body">
         <div class="models-inline-icon" id="modelsInlineIcon"><svg class="ph" aria-hidden="true"><use href="#ph-download-simple"/></svg></div>
         <div class="models-inline-text">
-          <div class="ttl" id="modelsInlineTitle">Download required</div>
-          <div class="sub" id="modelsInlineSub">Click to start.</div>
+          <div class="ttl" id="modelsInlineTitle">다운로드 필요</div>
+          <div class="sub" id="modelsInlineSub">클릭해서 시작.</div>
           <div class="models-inline-progress" id="modelsInlineProgress" style="display:none">
             <div class="bar"><div class="fill" id="modelsInlineFill" style="width:0%"></div></div>
             <div class="last" id="modelsInlineLast"></div>
@@ -343,7 +329,7 @@
         </div>
         <div class="models-inline-actions" id="modelsInlineActions"></div>
       </div>
-      <a class="models-inline-link" onclick="openModelsModal()">Manage all models →</a>
+      <a class="models-inline-link" onclick="openModelsModal()">모델 관리 →</a>
     </div>
 
     <!-- Mode bar — segmented chip strip. Lifted OUT of #genForm so it
@@ -355,19 +341,19 @@
          chip keeps data-mode + .pill-btn (alongside .mode-chip) so the
          existing setMode() click wiring keeps working unchanged. -->
     <div class="mode-bar pill-group" id="modeGroup">
-      <button type="button" class="mode-chip pill-btn" data-mode="t2v">Text<span class="mc-sub sub">prompt → video</span></button>
+      <button type="button" class="mode-chip pill-btn" data-mode="t2v">텍스트<span class="mc-sub sub">프롬프트 → 영상</span></button>
       <!-- Character intent — Codex C+ 2026-05-17. Promoted from a chip
            strip inside T2V to a first-class mode pill so the cascade
            (character selected → quality flips to Q8, LoRAs auto-stack,
            audio LoRA fuses) is visible in the mode picker, not a hidden
            toggle inside another mode. Q8-only — hidden on cap_tier="q4". -->
-      <button type="button" class="mode-chip pill-btn" data-mode="character">Character<span class="mc-sub sub">trained face + voice</span></button>
-      <button type="button" class="mode-chip pill-btn" data-mode="i2v">Image<span class="mc-sub sub">image + prompt</span></button>
-      <button type="button" class="mode-chip pill-btn" data-mode="keyframe">FFLF<span class="mc-sub sub">first + last</span></button>
+      <button type="button" class="mode-chip pill-btn" data-mode="character">캐릭터<span class="mc-sub sub">얼굴·음성</span></button>
+      <button type="button" class="mode-chip pill-btn" data-mode="i2v">이미지<span class="mc-sub sub">이미지+프롬프트</span></button>
+      <button type="button" class="mode-chip pill-btn" data-mode="keyframe">FFLF<span class="mc-sub sub">첫↔끝</span></button>
       <!-- Multi-keyframe shares backend mode="keyframe"; the form dropdown
            chooses any total anchor count from 3–8. -->
-      <button type="button" class="mode-chip pill-btn" data-mode="keyframe" data-kf-default="multi">Keyframes<span class="mc-sub sub">3–8 frames</span></button>
-      <button type="button" class="mode-chip pill-btn" data-mode="extend">Extend<span class="mc-sub sub">continue a clip</span></button>
+      <button type="button" class="mode-chip pill-btn" data-mode="keyframe" data-kf-default="multi">키프레임<span class="mc-sub sub">3–8 프레임</span></button>
+      <button type="button" class="mode-chip pill-btn" data-mode="extend">연장<span class="mc-sub sub">클립 이어서</span></button>
       <!-- Remix — the IC-LoRA reference tools (Ingredients / Control / Colorize)
            grouped under ONE pill so the mode bar stays uncluttered. All three
            run on Q4 distilled (unlike FFLF/Extend/Character, which are Q8-only
@@ -384,7 +370,7 @@
            "would love to see IC-LoRA support … exposed in the UI"). This is
            the only Remix copy visible without a click, so it carries the
            searchable words. -->
-      <button type="button" class="mode-chip pill-btn" data-mode="remix">Remix<span class="mc-sub sub">motion control · refs · color</span></button>
+      <button type="button" class="mode-chip pill-btn" data-mode="remix">리믹스<span class="mc-sub sub">모션·레퍼런스·색</span></button>
       <!-- "Train" used to live here as a mode chip; promoted 2026-05-15 to
            a workflow tier (top tab strip). "Studio" (image generation) also
            lived here until 2026-05-17 — Mr Bizarro flagged that mixing image gen
@@ -400,15 +386,15 @@
          stays lit. Inline styles use var(--x, fallback) so they're safe whether
          or not the theme defines those vars. -->
     <div id="remixSubGroup" style="display:none;margin:-2px 0 12px;padding:9px 11px;border:1px solid var(--line,#262a33);border-left:3px solid var(--accent,#8b7bff);border-radius:11px;background:var(--accent-wash,rgba(139,123,255,.06))">
-      <div style="font-size:11px;letter-spacing:.13em;text-transform:uppercase;color:var(--dim,#7a8194);margin-bottom:7px">Remix tool · bring your own media · IC-LoRA</div>
+      <div style="font-size:11px;letter-spacing:.13em;text-transform:uppercase;color:var(--dim,#7a8194);margin-bottom:7px">리믹스 도구 · 내 미디어 · IC-LoRA</div>
       <div class="mode-bar pill-group">
-        <button type="button" class="mode-chip pill-btn" data-remix="ingredients" title="Ingredients IC-LoRA — 2–8 reference images (a face, a prop, a location) composed into one new clip.">Ingredients<span class="mc-sub sub">2–8 refs → one clip</span></button>
+        <button type="button" class="mode-chip pill-btn" data-remix="ingredients" title="Ingredients IC-LoRA — 얼굴·소품·장소 레퍼런스 2–8장을 한 클립으로.">재료<span class="mc-sub sub">레퍼런스 2–8 → 클립 1개</span></button>
         <!-- "Control" said nothing about what it controls. The name people
              actually search for is Motion Control / Union Control, and the
              title carries the adapter's real name so a user who read about
              LTX IC-LoRAs elsewhere recognises it here. -->
-        <button type="button" class="mode-chip pill-btn" data-remix="control" title="Union Control IC-LoRA — the render copies the motion, camera move, composition and pose of a clip you supply, while the prompt repaints the subject and scene. Feed it an ordinary video, or a pose / depth / canny sequence you already have.">Motion Control<span class="mc-sub sub">its motion → your scene</span></button>
-        <button type="button" class="mode-chip pill-btn" data-remix="restore" title="Colorize IC-LoRA — adds natural color to a black-and-white or desaturated clip.">Colorize<span class="mc-sub sub">B&amp;W clip → color</span></button>
+        <button type="button" class="mode-chip pill-btn" data-remix="control" title="Union Control IC-LoRA — the render copies the motion, camera move, composition and pose of a clip you supply, while the prompt repaints the subject and scene. Feed it an ordinary video, or a pose / depth / canny sequence you already have.">모션 제어<span class="mc-sub sub">그 움직임 → 이 장면</span></button>
+        <button type="button" class="mode-chip pill-btn" data-remix="restore" title="Colorize IC-LoRA — adds natural color to a black-and-white or desaturated clip.">컬러화<span class="mc-sub sub">흑백 → 컬러</span></button>
         <!-- Upscale & Face Fix (was "Upscale ×2" / "LTX Upscale"; mode stays
              `upscale`) — the LTX-2.5 Pixel Spatial Upscaler IC-LoRA. A
              generative 2× enlarge: the source clip rides the reference
@@ -531,7 +517,7 @@
         <div class="composer-refs">
           <!-- I2V — single image ref. -->
           <div class="mode-only" id="imageSection">
-            <h2>Reference image</h2>
+            <h2>레퍼런스 이미지</h2>
             <div class="picker" data-key="image">
               <div class="picker-drop" id="picker_drop_image">
                 <div class="picker-empty">
@@ -545,7 +531,7 @@
               <input type="file" id="picker_file_image" accept="image/*" style="display:none">
               <input type="hidden" name="image" id="image" value="">
               <div class="picker-recent" id="picker_recent_image_wrap" style="display:none">
-                <div class="picker-recent-label">Recent uploads · click to use</div>
+                <div class="picker-recent-label">최근 업로드 · 클릭해서 사용</div>
                 <div class="picker-recent-strip" id="picker_recent_image"></div>
               </div>
             </div>
@@ -580,7 +566,7 @@
 
           <!-- Keyframe interpolation — FFLF or a dynamic 3–8-anchor shot. -->
           <div class="kf-toggle-row" id="kfToggleRow" style="display:none">
-            <span class="kf-toggle-label">Keyframe mode</span>
+            <span class="kf-toggle-label">키프레임 모드</span>
             <div class="kf-toggle-group pill-group" role="group">
               <button type="button" class="kf-toggle-chip pill-btn active" data-kf-mode="2" onclick="setKeyframeMode(2)">FFLF <span class="kf-sub">start → end</span></button>
               <button type="button" class="kf-toggle-chip pill-btn" data-kf-mode="multi" onclick="setKeyframeMode(parseInt(document.getElementById('keyframe_count')?.value || '6', 10))">Multi-Keyframe <span class="kf-sub">3–8 frames</span></button>
@@ -588,7 +574,7 @@
           </div>
 
           <div class="mode-only" id="keyframeSection">
-            <h2>Start frame (frame 0)</h2>
+            <h2>시작 프레임 (frame 0)</h2>
             <div class="picker" data-key="start_image">
               <div class="picker-drop" id="picker_drop_start_image">
                 <div class="picker-empty">
@@ -602,7 +588,7 @@
               <input type="file" id="picker_file_start_image" accept="image/*" style="display:none">
               <input type="hidden" name="start_image" id="start_image" value="">
               <div class="picker-recent" id="picker_recent_start_image_wrap" style="display:none">
-                <div class="picker-recent-label">Recent uploads · click to use</div>
+                <div class="picker-recent-label">최근 업로드 · 클릭해서 사용</div>
                 <div class="picker-recent-strip" id="picker_recent_start_image"></div>
               </div>
             </div>
@@ -624,7 +610,7 @@
 
             <div class="mini-fields" id="kfTimingRow" style="display:none;margin-top:10px">
               <div class="mf-cell" style="grid-column:span 3">
-                <span class="mf-label">Segment timing</span>
+                <span class="mf-label">구간 타이밍</span>
                 <div class="hint" id="kfTimingHint" style="margin-top:8px">Intermediate beat timing is distributed evenly by default.</div>
               </div>
             </div>
@@ -643,7 +629,7 @@
               <input type="file" id="picker_file_end_image" accept="image/*" style="display:none">
               <input type="hidden" name="end_image" id="end_image" value="">
               <div class="picker-recent" id="picker_recent_end_image_wrap" style="display:none">
-                <div class="picker-recent-label">Recent uploads · click to use</div>
+                <div class="picker-recent-label">최근 업로드 · 클릭해서 사용</div>
                 <div class="picker-recent-strip" id="picker_recent_end_image"></div>
               </div>
             </div>
@@ -655,7 +641,7 @@
                extend-mode preset. Lives inside the composer card so the
                prompt sits below the source picker, mirroring the I2V flow. -->
           <div class="mode-only" id="extendSection">
-            <h2>Source video</h2>
+            <h2>원본 영상</h2>
             <select id="extendSrcSelect" onchange="document.getElementById('video_path').value=this.value"></select>
             <input name="video_path" id="video_path" placeholder="/path/to/source.mp4" style="margin-top:6px">
             <div class="row" style="margin-top:8px">
@@ -688,7 +674,7 @@
                  sampler's stage_1/stage_2 step model. Same labels make it
                  visually clear both intents live in the Q8 family without
                  forcing the implementation onto the HQ sampler. -->
-            <label class="lbl" style="margin-top:10px">Quality</label>
+            <label class="lbl" style="margin-top:10px">품질</label>
             <div class="pill-group cols-2 quality-strip" id="extendModeGroup">
               <button type="button" class="pill-btn pill-quality active" data-extend-mode="fast">
                 <span class="ql-name">Q8 Draft</span>
@@ -712,7 +698,7 @@
                in natural color. Q4 distilled (no Q8 needed). Shown/hidden by
                updateDerived() when currentMode === 'restore'. -->
           <div class="mode-only" id="restoreSection">
-            <h2>Source video to colorize</h2>
+            <h2>색입힐 원본 영상</h2>
             <select id="restoreSrcSelect" onchange="document.getElementById('restore_video_path').value=this.value"></select>
             <input name="restore_video_path" id="restore_video_path" placeholder="/path/to/blackandwhite.mp4" style="margin-top:6px">
             <div class="hint" style="margin-top:6px">Pick a black-and-white or washed-out clip. The prompt below describes the colors to paint in (e.g. "golden warm sunlight, blue sky, green grass"). Output matches the source's resolution + length. Runs on Q4 — no Q8 needed.</div>
@@ -727,7 +713,7 @@
                source is carried over. Shown/hidden by updateDerived() when
                currentMode === 'upscale'. -->
           <div class="mode-only" id="upscaleSection">
-            <h2>Clip to fix</h2>
+            <h2>보정할 클립</h2>
             <select id="upscaleSrcSelect" onchange="document.getElementById('upscale_source_path').value=this.value"></select>
             <input name="upscale_source_path" id="upscale_source_path" placeholder="/path/to/draft.mp4" style="margin-top:6px">
             <!-- Presets, not a slider: the number (keep_shot) maps server-side
@@ -783,11 +769,11 @@
               <input type="hidden" name="ingredient_images_json" id="ingredient_images_json" value="[]">
               <div class="ingredients-thumbs" id="ingredients_thumbs"></div>
               <div class="picker-recent" id="ingredients_recent_wrap" style="display:none">
-                <div class="picker-recent-label">Recent uploads · click to add</div>
+                <div class="picker-recent-label">최근 업로드 · 클릭해서 추가</div>
                 <div class="picker-recent-strip" id="ingredients_recent"></div>
               </div>
             </div>
-            <h2 style="margin-top:14px">Action / shot to generate</h2>
+            <h2 style="margin-top:14px">생성할 동작 / 샷</h2>
             <textarea id="ingredient_action" name="ingredient_action" class="composer-prompt" style="min-height:64px"
                       placeholder="What happens in the clip — e.g. the hedgehog waddles up and waves, the rabbit hops past with a spray bottle; warm acoustic jingle, cheerful voice, soft footsteps."></textarea>
             <div class="hint" style="margin-top:6px">The big prompt below describes WHAT'S in the reference sheet (each character, prop, and the location). This Action field describes the shot itself. Runs on Q4 — no Q8 needed.</div>
@@ -822,7 +808,7 @@
                prompt swaps the subject/scene. Q4 distilled (no Q8 needed).
                Shown/hidden by updateDerived() when currentMode === 'control'. -->
           <div class="mode-only" id="controlSection">
-            <h2>Motion Control <span class="hint" style="font-weight:400">· Union Control IC-LoRA · its motion, your subject</span></h2>
+            <h2>Motion Control <span class="hint" style="font-weight:400">· Union Control IC-LoRA · 그 모션, 내 피사체</span></h2>
             <select id="controlSrcSelect" onchange="document.getElementById('control_video_path').value=this.value"></select>
             <input name="control_video_path" id="control_video_path" placeholder="/path/to/control.mp4" style="margin-top:6px">
             <div class="hint" style="margin-top:6px">Pick the clip whose <strong>motion, camera move, composition and pose</strong> the render should copy. The prompt describes the <strong>new subject and scene</strong> painted onto that structure — drive a crane-up off a man's face in a suburban street and you get a crane-up off a monk's face on a salt flat. Output matches the control clip's resolution and length, on the Q4 distilled checkpoint — no Q8 needed.</div>
@@ -832,7 +818,7 @@
                  have is a preprocessor to derive one from an ordinary clip.
                  Say that plainly rather than letting "pose · depth" in a
                  label imply a turnkey path that does not exist here. -->
-            <div class="hint" style="margin-top:6px"><strong>What you can feed it.</strong> An ordinary video is enough — the Union adapter reads raw RGB, so nothing has to be preprocessed, and it ships with the base install (public weights, no Hugging Face token). A <strong>pose, depth, canny or segmentation sequence</strong> works too and follows more tightly, but you have to bring your own: <strong>Phosphene ships no preprocessor</strong> that derives one from a normal clip.</div>
+            <div class="hint" style="margin-top:6px"><strong>What you can feed it.</strong> An ordinary video is enough — the Union adapter reads raw RGB, so nothing has to be preprocessed, and it ships with the base install (public weights, no Hugging Face token). A <strong>pose, depth, canny or segmentation sequence</strong> works too and follows more tightly, but you have to bring your own: <strong>Leo Studio에는 전처리기가 없습니다</strong> that derives one from a normal clip.</div>
             <!-- Shown only on a generation where the adapter is not native.
                  The sentence is LTX_CONTROL_GENERATION_NOTE, server-owned —
                  painted by _paintControlGenNote() at boot. -->
@@ -845,7 +831,7 @@
              is the only nudge users get to describe the soundscape;
              documented in the LTX 2.3 paper but unobvious. -->
         <textarea name="prompt" id="prompt" class="composer-prompt"
-                  placeholder="Describe the scene AND the sound — e.g. wizard in a forest clearing, fireflies spiraling up · low whispered chant, ember crackle, distant owl. Audio is generated jointly with video; without sound cues the model outputs near-silent ambient."></textarea>
+                  placeholder="장면과 소리를 같이 적으세요. 예: 숲 공터의 마법사, 반딧불이가 위로 소용돌이치며 올라가고 · 낮은 속삭임, 불씨 타는 소리, 먼 부엉이. 소리는 영상과 같이 나옵니다. 소리 단서가 없으면 거의 무음입니다."></textarea>
 
         <!-- Tools strip — Enhance + HDR + No-music + Avoid disclosure.
              All inline so they read as part of composing the prompt.
@@ -859,20 +845,20 @@
                and the three labelled fields, and a rewrite strips every one of
                them (H3_PROMPTING_GUIDE §4.1, minimax-prompting SKILL.md). H3
                prompts go to the encoder verbatim. -->
-          <button type="button" class="ghost-btn" id="enhanceBtn" data-ltx-only onclick="enhancePrompt()" title="Use Gemma to rewrite your prompt in the style LTX 2.3 was trained on"><svg class="ph" aria-hidden="true" style="margin-right:6px"><use href="#ph-sparkle-fill"/></svg>Enhance</button>
+          <button type="button" class="ghost-btn" id="enhanceBtn" data-ltx-only onclick="enhancePrompt()" title="Gemma가 LTX 학습 스타일로 프롬프트를 다시 씁니다"><svg class="ph" aria-hidden="true" style="margin-right:6px"><use href="#ph-sparkle-fill"/></svg>다듬기</button>
           <!-- Avoid is data-ltx-only because H3 HAS NO NEGATIVE PROMPT. It is
                guidance-distilled: no CFG, no unconditional branch, one forward
                per step, and every official ComfyUI template ships zero
                negative-prompt nodes (H3_PROMPTING_GUIDE §7.4). A box wired to
                a field the engine never reads is worse than no box. The
                replacement hint below says what DOES work instead. -->
-          <button type="button" class="ct-link" id="avoidToggleBtn" data-ltx-only onclick="toggleAvoidRow()" title="Add 'avoid' / negative prompt — things the model should NOT generate">
-            <span id="avoidToggleLabel">Avoid +</span>
+          <button type="button" class="ct-link" id="avoidToggleBtn" data-ltx-only onclick="toggleAvoidRow()" title="제외 / 네거티브 프롬프트 — 나오지 않았으면 하는 것">
+            <span id="avoidToggleLabel">제외 +</span>
           </button>
           <!-- Stands in for Enhance + Avoid on the H3 surface: both of the
                controls it replaces are LTX mechanisms, and this is the one
                sentence a user needs in their place. -->
-          <span class="ct-hint" data-h3-only>No negative prompt on H3 — write refusals as plain sentences, and only for what it adds unasked: camera drift and on-screen text.</span>
+          <span class="ct-hint" data-h3-only>H3는 네거티브 프롬프트가 없습니다. 카메라 흔들림·화면 글자처럼 원치 않는 것만 문장으로 적으세요.</span>
           <span class="ct-spacer"></span>
           <!-- HDR toggle hidden again 2026-05-21 (Mr Bizarro request):
                "remove the HDR LoRA from this release, you can leave the
@@ -917,7 +903,7 @@
                  title="When on, the prompt is augmented with: 'Audio: voice and ambient sounds only, no music, no soundtrack, no score.' Useful for clips you'll score yourself in post — music can't be cleanly removed afterwards.">
             <input type="checkbox" id="noMusic" name="no_music">
             <span class="toggle-dot"></span>
-            <span>No music</span>
+            <span>음악 없음</span>
           </label>
           <!-- No voice toggle (2026-05-18) — Mr Bizarro's request: when a
                character with a voice LoRA is selected, audio generation
@@ -939,7 +925,7 @@
             <input type="checkbox" id="noVoice" name="no_voice"
                    onchange="markNoVoiceTouched()">
             <span class="toggle-dot"></span>
-            <span id="noVoiceLabel">No voice</span>
+            <span id="noVoiceLabel">음성 없음</span>
           </label>
         </div>
       </div>
@@ -990,7 +976,7 @@
            Still hidden entirely unless the chosen Length chains windows. -->
       <div class="cz-control h3-winprompts" id="h3WindowPromptsRow" data-h3-only hidden>
         <div class="cz-label">
-          <span>Per-window prompts</span>
+          <span>구간별 프롬프트</span>
           <!-- The `?`. The panel had no help idiom of its own — every
                explanation lived in a title= tooltip, which is invisible on
                a trackpad and unreachable on a touch screen. One round
@@ -1006,7 +992,7 @@
                  title="Give each 5 s window its own line. Off = one prompt for the whole clip.">
             <input type="checkbox" id="h3WinPromptsToggle">
             <span class="toggle-dot"></span>
-            <span>One line per window</span>
+            <span>구간마다 한 줄</span>
           </label>
         </div>
         <div class="h3-winhelp" id="h3WinHelpNote" hidden></div>
@@ -1096,7 +1082,7 @@
         <details id="shotSetupDetails" class="customize-section shot-setup">
           <summary class="cz-summary">
             <span class="cz-chevron" aria-hidden="true"><svg class="ph"><use href="#ph-caret-down-bold"/></svg></span>
-            <span class="cz-title">Shot setup</span>
+            <span class="cz-title">샷 설정</span>
             <span class="cz-meta" id="shotSetupSummary">quality · length · speed</span>
           </summary>
           <div class="cz-body">
@@ -1163,7 +1149,7 @@
             </div>
             <div>
               <div class="qs-label">
-                <span class="qs-name" id="qualityLabelName">Quality</span>
+                <span class="qs-name" id="qualityLabelName">품질</span>
                 <span class="qs-meta" id="qualityMeta"></span>
               </div>
               <!-- Compact 4-col strip. Each chip carries name + a single spec
@@ -1198,7 +1184,7 @@
                    it lives in Customize and a value off the axis lights no chip. -->
               <div class="ltx-axes" id="ltxAxes" data-ltx-only>
                 <div class="qs-label h3-axis-label">
-                  <span class="qs-name">Length</span>
+                  <span class="qs-name">길이</span>
                   <span class="qs-meta" id="ltxLengthMeta"></span>
                 </div>
                 <div class="quality-strip pill-group" id="ltxLengthGroup"></div>
@@ -1239,7 +1225,7 @@
               <div class="h3-axes" id="h3TierGroup" hidden>
                 <div class="quality-strip pill-group" id="h3QualityGroup"></div>
                 <div class="qs-label h3-axis-label" id="h3LengthLabel">
-                  <span class="qs-name">Length</span>
+                  <span class="qs-name">길이</span>
                   <span class="qs-meta" id="h3LengthMeta"></span>
                 </div>
                 <div class="quality-strip pill-group" id="h3LengthGroup"></div>
@@ -1291,7 +1277,7 @@
                     <span>Turbo</span>
                   </button>
                   <button type="button" class="pill-btn" data-h3-lora-slot="user" id="h3LoraSlotUserPill">
-                    <span>My LoRA</span><span class="sub" id="h3LoraSlotUserSub"></span>
+                    <span>내 LoRA</span><span class="sub" id="h3LoraSlotUserSub"></span>
                   </button>
                 </div>
                 <div class="h3-turbo-note" id="h3LoraSlotNote"></div>
@@ -1326,7 +1312,7 @@
                  hidden input + id="aspectGroup" click delegation + id="aspectRow"
                  container that setQuality() hides when quality=quick. -->
             <div class="mode-only show" id="aspectRow" data-ltx-only style="display:flex;align-items:center;gap:10px;margin:6px 0 8px 0;padding:0 2px;">
-              <span style="font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.4px;font-weight:600;flex:0 0 auto;">Orientation</span>
+              <span style="font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.4px;font-weight:600;flex:0 0 auto;">화면 방향</span>
               <div class="pill-group" id="aspectGroup" style="display:flex;gap:4px;flex:0 0 auto;">
                 <button type="button" class="pill-btn active" data-aspect="landscape" title="Landscape 16:9" style="padding:4px 10px;font-size:12px;display:inline-flex;gap:6px;align-items:center;">
                   <svg class="ph orient-icon" aria-hidden="true" style="width:14px;height:14px;transform:rotate(90deg);"><use href="#ph-device-mobile"/></svg><span>16:9</span>
@@ -1352,11 +1338,11 @@
               <div class="pill-group cols-2" id="h3OrientationGroup">
                 <button type="button" class="pill-btn active" data-h3-orientation="landscape"
                         title="The tier's canvas as trained and measured — e.g. 1024×576.">
-                  <span>Landscape</span><span class="sub" id="h3OrientLandSub">16:9-ish</span>
+                  <span>가로</span><span class="sub" id="h3OrientLandSub">16:9-ish</span>
                 </button>
                 <button type="button" class="pill-btn" data-h3-orientation="portrait"
                         title="The same canvas rotated for vertical/social — e.g. 576×1024. Same pixel budget, same wall clock.">
-                  <span>Portrait</span><span class="sub" id="h3OrientPortSub">vertical / social</span>
+                  <span>세로</span><span class="sub" id="h3OrientPortSub">vertical / social</span>
                 </button>
               </div>
             </div>
@@ -1427,7 +1413,7 @@
           <summary class="loras-summary">
             <span class="loras-chevron" aria-hidden="true"><svg class="ph"><use href="#ph-caret-down-bold"/></svg></span>
             <span class="loras-title">LoRAs</span>
-            <span class="loras-meta" id="lorasSummaryCount">none active</span>
+            <span class="loras-meta" id="lorasSummaryCount">없음</span>
             <!-- Action buttons live in the header so they're visible
                  regardless of how far the user has scrolled inside the
                  LoRA list. Rescan is icon-only (the ↻ glyph reads as
@@ -1443,11 +1429,11 @@
                      onchange="importH3Lora(this.files[0]); this.value = ''">
               <button type="button" class="loras-browse-btn is-ghost" id="h3LoraImportBtn" hidden
                       title="Import H3 LoRA — a .safetensors file you already have"
-                      onclick="event.stopPropagation(); event.preventDefault(); document.getElementById('h3LoraImportFile').click()"><svg class="ph" aria-hidden="true"><use href="#ph-folder-simple"/></svg>Import</button>
+                      onclick="event.stopPropagation(); event.preventDefault(); document.getElementById('h3LoraImportFile').click()"><svg class="ph" aria-hidden="true"><use href="#ph-folder-simple"/></svg>가져오기</button>
               <button type="button" class="loras-browse-btn"
-                      onclick="event.stopPropagation(); event.preventDefault(); openCivitaiModal()"><svg class="ph" aria-hidden="true"><use href="#ph-magnifying-glass"/></svg>Browse CivitAI</button>
+                      onclick="event.stopPropagation(); event.preventDefault(); openCivitaiModal()"><svg class="ph" aria-hidden="true"><use href="#ph-magnifying-glass"/></svg>CivitAI 찾아보기</button>
               <button type="button" class="loras-browse-btn is-ghost" id="loraUpdatesBtn" title="Check for updates — ask CivitAI whether any installed LoRA has a newer version"
-                      onclick="event.stopPropagation(); event.preventDefault(); checkLoraUpdates()">Updates</button>
+                      onclick="event.stopPropagation(); event.preventDefault(); checkLoraUpdates()">업데이트</button>
             </span>
           </summary>
           <div class="loras-body" id="lorasBody">
@@ -1466,7 +1452,7 @@
             </div>
             <div class="hint" id="lorasEmpty">
               Drop <code>.safetensors</code> files into <code id="lorasDir">mlx_models/loras/</code>
-              to use them, or click <strong>Browse CivitAI</strong> above.
+              to use them, or click <strong>CivitAI 찾아보기</strong> above.
               Each LoRA picks up an optional sidecar <code>.json</code> with
               name + trigger words + recommended strength.
             </div>
@@ -1508,7 +1494,7 @@
         <details id="finishDetails" class="customize-section">
           <summary class="cz-summary">
             <span class="cz-chevron" aria-hidden="true"><svg class="ph"><use href="#ph-caret-down-bold"/></svg></span>
-            <span class="cz-title">After the render</span>
+            <span class="cz-title">렌더 이후</span>
             <span class="cz-meta" id="finishSummary">native export</span>
           </summary>
           <div class="cz-body">
@@ -1575,7 +1561,7 @@
             <label class="check h3-facefix-after" id="h3FaceFixAfterRow"
                      title="Queues a second job right after the draft: the draft at twice the size with LTX-2.5 detail, the face and the sound kept. The draft itself stays as rendered, next to it. Needs the 0.3 GB Upscale adapter (Settings → Models).">
                 <input type="checkbox" id="h3FaceFixAfter" onchange="setH3FaceFixAfter(this.checked)">
-                <span>Also run <b>Upscale &amp; Face Fix</b> after the draft
+                <span>이어서 <b>업스케일 &amp; 얼굴 보정</b> after the draft
                   <span class="cz-label-hint" id="h3FaceFixEta">optional · 2× · face and sound kept · about the draft's time again</span></span>
               </label>
               </div>
@@ -1685,7 +1671,7 @@ A wizard lights a lantern in a dark forest. Audio: wind, a match striking.
 ---
 
 The same wizard walks out of frame. Audio: footsteps on leaves."></textarea>
-              <div class="hint" id="batchCount">Nothing pasted yet.</div>
+              <div class="hint" id="batchCount">아직 붙여넣은 게 없습니다.</div>
             </div>
 
             <div id="batchSeedsWrap" hidden>
@@ -1705,7 +1691,7 @@ The same wizard walks out of frame. Audio: footsteps on leaves."></textarea>
             <div class="batch-actions">
               <span class="batch-total" id="batchTotal"></span>
               <button type="button" class="batch-queue-btn" id="batchQueueBtn"
-                      onclick="queueBatch()">Queue batch</button>
+                      onclick="queueBatch()">일괄 넣기</button>
             </div>
             <div class="hint">Auto-open is forced off for a batch, and the queue
               runs them one after another — you can keep working while it does.</div>
@@ -1715,7 +1701,7 @@ The same wizard walks out of frame. Audio: footsteps on leaves."></textarea>
         <details id="customizeDetails" class="customize-section">
           <summary class="cz-summary">
             <span class="cz-chevron" aria-hidden="true"><svg class="ph"><use href="#ph-caret-down-bold"/></svg></span>
-            <span class="cz-title">Advanced</span>
+            <span class="cz-title">고급</span>
             <span class="cz-meta" id="customizeSummary"></span>
           </summary>
           <div class="cz-body">
@@ -1895,9 +1881,9 @@ The same wizard walks out of frame. Audio: footsteps on leaves."></textarea>
            primary touch target. -->
       <div class="form-action-footer" id="formActionFooter">
         <div class="queue-strip">
-          <button type="button" class="qchip" onclick="openBatch()" title="Queue many prompts, or several takes of this one"><svg class="ph" aria-hidden="true"><use href="#ph-film-strip"/></svg>Batch</button>
-          <button type="button" class="qchip" id="pauseBtn" onclick="togglePause()" title="Pause / resume the render queue"><svg class="ph" aria-hidden="true"><use href="#ph-pause-fill"/></svg>Pause queue</button>
-          <button type="button" class="qchip" onclick="api('/queue/clear','POST').then(poll)" title="Clear all queued jobs (running job continues)"><svg class="ph" aria-hidden="true"><use href="#ph-x"/></svg>Clear</button>
+          <button type="button" class="qchip" onclick="openBatch()" title="프롬프트 여러 개, 또는 이 테이크를 여러 장"><svg class="ph" aria-hidden="true"><use href="#ph-film-strip"/></svg>일괄</button>
+          <button type="button" class="qchip" id="pauseBtn" onclick="togglePause()" title="대기열 일시정지 / 재개"><svg class="ph" aria-hidden="true"><use href="#ph-pause-fill"/></svg>일시정지</button>
+          <button type="button" class="qchip" onclick="api('/queue/clear','POST').then(poll)" title="대기 작업만 비움 (진행 중인 잡은 계속)"><svg class="ph" aria-hidden="true"><use href="#ph-x"/></svg>비우기</button>
           <span class="qchip-spacer"></span>
           <span class="qchip-derived" id="derivedFooter"></span>
         </div>
@@ -1907,12 +1893,12 @@ The same wizard walks out of frame. Audio: footsteps on leaves."></textarea>
         <label class="check h3-facefix-after h3-facefix-footer" id="h3FaceFixFooterRow" data-h3-only hidden
                title="Queues a second job right after this render: the clip at twice the size with LTX-2.5 detail, the face and the sound kept. The original stays as rendered, next to it. Needs the 0.3 GB Upscale adapter (Settings → Models).">
           <input type="checkbox" id="h3FaceFixFooter" onchange="setH3FaceFixAfter(this.checked)">
-          <span>Also run <b>Upscale &amp; Face Fix</b>
+          <span>이어서 <b>업스케일 &amp; 얼굴 보정</b>
             <span class="cz-label-hint" id="h3FaceFixFooterEta"></span></span>
         </label>
         <div class="actions">
-          <button type="submit" class="primary" id="genBtn">Generate</button>
-          <button type="button" class="danger" onclick="api('/stop', 'POST').then(poll)">Stop</button>
+          <button type="submit" class="primary" id="genBtn">생성</button>
+          <button type="button" class="danger" onclick="api('/stop', 'POST').then(poll)">중지</button>
         </div>
       </div>
     </form>
@@ -1941,18 +1927,18 @@ The same wizard walks out of frame. Audio: footsteps on leaves."></textarea>
       <div class="composer-card">
         <div class="composer-refs">
           <div class="show">
-            <h2>Reference image(s) &mdash; for image-to-image (Reference Edit)
-              <span class="h2-hint">Drop a photo to edit/transform it · 2-3 subjects: Qwen Edit (reliable) · HiDream Dev (fragile)</span>
+            <h2>레퍼런스 이미지
+              <span class="h2-hint">사진을 놓으면 편집·변환 · 인물 2–3명: Qwen Edit</span>
             </h2>
             <div class="studio-ref-grid" id="imgStudioRefs">
               <div class="studio-ref-slot" data-slot="0">
-                <span class="ref-tag">Primary</span>
+                <span class="ref-tag">기본</span>
               </div>
               <div class="studio-ref-slot" data-slot="1">
-                <span class="ref-tag">Multi-ref</span>
+                <span class="ref-tag">추가</span>
               </div>
               <div class="studio-ref-slot" data-slot="2">
-                <span class="ref-tag">Multi-ref</span>
+                <span class="ref-tag">추가</span>
               </div>
             </div>
             <!-- Runtime warning when the user has 2+ refs loaded but the
@@ -1963,7 +1949,7 @@ The same wizard walks out of frame. Audio: footsteps on leaves."></textarea>
                  strip. Click a thumb → fills the next empty ref slot. Hidden
                  when /uploads is empty. -->
             <div class="studio-ref-recent" id="imgStudioRecentWrap" style="display:none">
-              <div class="studio-ref-recent-label">Recent uploads · click to use</div>
+              <div class="studio-ref-recent-label">최근 업로드 · 클릭해서 사용</div>
               <div class="studio-ref-recent-strip" id="imgStudioRecentStrip"></div>
             </div>
           </div>
@@ -2133,7 +2119,7 @@ The same wizard walks out of frame. Audio: footsteps on leaves."></textarea>
               </div>
             </div>
             <div class="ideo-ctrl-cell">
-              <span class="mf-label">Quality</span>
+              <span class="mf-label">품질</span>
               <select id="ideoQuality" onchange="ideoState.preset=this.value">
                 <option value="V4_DEFAULT_20" selected>Default — 20 steps</option>
                 <option value="V4_TURBO_12">Turbo — 12 steps (faster)</option>
@@ -2203,7 +2189,7 @@ The same wizard walks out of frame. Audio: footsteps on leaves."></textarea>
       <div class="quick-settings">
         <div>
           <div class="qs-label">
-            <span class="qs-name">Engine</span>
+            <span class="qs-name">엔진</span>
             <span class="qs-meta" id="imgStudioWallEstimate"></span>
           </div>
           <div class="studio-engine-row">
@@ -2275,16 +2261,16 @@ The same wizard walks out of frame. Audio: footsteps on leaves."></textarea>
            pills, never the primary touch target. -->
       <div class="form-action-footer" id="formActionFooterStudio">
         <div class="queue-strip">
-          <button type="button" class="qchip" onclick="openBatch()" title="Queue many prompts, or several takes of this one"><svg class="ph" aria-hidden="true"><use href="#ph-film-strip"/></svg>Batch</button>
-          <button type="button" class="qchip" id="pauseBtnStudio" onclick="togglePause()" title="Pause / resume the render queue"><svg class="ph" aria-hidden="true"><use href="#ph-pause-fill"/></svg>Pause queue</button>
-          <button type="button" class="qchip" onclick="api('/queue/clear','POST').then(poll)" title="Clear all queued jobs (running job continues)"><svg class="ph" aria-hidden="true"><use href="#ph-x"/></svg>Clear</button>
+          <button type="button" class="qchip" onclick="openBatch()" title="프롬프트 여러 개, 또는 이 테이크를 여러 장"><svg class="ph" aria-hidden="true"><use href="#ph-film-strip"/></svg>일괄</button>
+          <button type="button" class="qchip" id="pauseBtnStudio" onclick="togglePause()" title="대기열 일시정지 / 재개"><svg class="ph" aria-hidden="true"><use href="#ph-pause-fill"/></svg>일시정지</button>
+          <button type="button" class="qchip" onclick="api('/queue/clear','POST').then(poll)" title="대기 작업만 비움 (진행 중인 잡은 계속)"><svg class="ph" aria-hidden="true"><use href="#ph-x"/></svg>비우기</button>
           <span class="qchip-spacer"></span>
         </div>
         <div class="actions">
           <button class="primary" id="imgStudioGenBtn" onclick="imgStudioGenerate()">
-            <span id="imgStudioGenBtnLabel">Generate</span>
+            <span id="imgStudioGenBtnLabel">생성</span>
           </button>
-          <button type="button" class="danger" onclick="api('/stop', 'POST').then(poll)">Stop</button>
+          <button type="button" class="danger" onclick="api('/stop', 'POST').then(poll)">중지</button>
         </div>
       </div>
 
@@ -2322,14 +2308,14 @@ The same wizard walks out of frame. Audio: footsteps on leaves."></textarea>
           <div class="characters-loading">Scanning <code>mlx_models/loras/</code>…</div>
         </div>
         <div class="characters-empty" id="charactersEmpty" hidden>
-          <div class="characters-empty-title">No characters yet</div>
+          <div class="characters-empty-title">아직 캐릭터 없음</div>
           <div class="characters-empty-body">
-            Train one in the <a href="#" onclick="workflowSwitch('train'); return false;">Train tab</a> —
+            <a href="#" onclick="workflowSwitch('train'); return false;">학습 탭</a>에서 하나 만드세요 —
             once a <code>&lt;trigger&gt;_v2.safetensors</code> LoRA lands in <code>mlx_models/loras/</code> it shows up here automatically.
             Add a matching <code>.audio.safetensors</code> for voice; without it the character is silent.
           </div>
           <div style="margin-top:16px;display:flex;flex-direction:column;align-items:center;gap:8px">
-            <button type="button" class="primary-btn js-get-sample-char" onclick="downloadSampleCharacter()">Get a sample character (Bizarro)</button>
+            <button type="button" class="primary-btn js-get-sample-char" onclick="downloadSampleCharacter()">샘플 캐릭터 받기 (Bizarro)</button>
             <div style="font-size:12px;opacity:.7;max-width:34rem;line-height:1.5">Don't want to train one yet? Grab a ready-made character (~817&nbsp;MB, one-time) and try Character &amp; Remix right now.</div>
             <div class="js-get-sample-char-status" style="font-size:12px;opacity:.9" hidden></div>
           </div>
@@ -2360,26 +2346,26 @@ The same wizard walks out of frame. Audio: footsteps on leaves."></textarea>
         </div>
 
         <div class="characters-compose-card">
-          <label class="characters-field-label" for="charactersPrompt">Prompt</label>
+          <label class="characters-field-label" for="charactersPrompt">프롬프트</label>
           <textarea
             id="charactersPrompt"
             class="characters-prompt-input"
             rows="6"
-            placeholder='Write your scene. The trigger word is pre-filled — keep it in the prompt.'
+            placeholder='장면을 적으세요. 트리거 단어는 미리 들어가 있습니다. 프롬프트에 남겨 두세요.'
           ></textarea>
 
           <div class="characters-chip-row">
             <div class="characters-chip-group" data-group="duration">
-              <span class="characters-group-label">Duration</span>
+              <span class="characters-group-label">길이</span>
               <div class="characters-chips" id="charactersDurationChips" role="group"></div>
             </div>
             <div class="characters-chip-group" data-group="quality">
-              <span class="characters-group-label">Quality</span>
+              <span class="characters-group-label">품질</span>
               <div class="characters-chips" id="charactersQualityChips" role="group"></div>
             </div>
           </div>
 
-          <!-- Character LoRA strength. THE `value` BELOW IS A PLACEHOLDER: the
+          <!-- 캐릭터 LoRA 강도. THE `value` BELOW IS A PLACEHOLDER: the
                control is painted from window.CHARACTERS.charStrength by
                charactersSyncStrengthControls() on init and on every compose
                open. It used to be a hardcoded 0.8 — a 2.3-era correction for
@@ -2389,8 +2375,8 @@ The same wizard walks out of frame. Audio: footsteps on leaves."></textarea>
                hardcode a value here again; change the state default. -->
           <div class="characters-strength-row">
             <label for="charactersStrength" class="characters-strength-label">
-              Character LoRA strength
-              <span class="characters-strength-hint">(lower = less identity lock-in but fewer baked-in artifacts)</span>
+              캐릭터 LoRA 강도
+              <span class="characters-strength-hint">(낮을수록 아이덴티티는 약하고, 박힌 아티팩트도 적음)</span>
             </label>
             <div class="characters-strength-control">
               <input type="range" id="charactersStrength"
@@ -2424,7 +2410,7 @@ The same wizard walks out of frame. Audio: footsteps on leaves."></textarea>
 
           <button type="button" id="charactersGenerateBtn" class="characters-generate-btn"
                   onclick="charactersGenerate()">
-            <span class="characters-generate-label">Generate</span>
+            <span class="characters-generate-label">생성</span>
             <span class="characters-generate-busy" hidden>Queueing…</span>
           </button>
           <div class="characters-toast" id="charactersToast" hidden></div>
@@ -2447,19 +2433,19 @@ The same wizard walks out of frame. Audio: footsteps on leaves."></textarea>
            runs after the face phase. Selecting Style hides the Voice card
            and rewrites the guidance + button label. -->
       <div class="composer-card train-card train-type-card">
-        <h2>Train type
-          <span class="h2-hint">character identity, or a visual style</span>
+        <h2>학습 종류
+          <span class="h2-hint">캐릭터 얼굴, 또는 시각 스타일</span>
         </h2>
         <div class="pill-group cols-2" id="trainTypeGroup">
           <button type="button" class="pill-btn active" data-train-type="character"
                   onclick="setTrainType('character')">
-            <span>Character</span>
-            <span class="sub">face (+ voice) of one person</span>
+            <span>캐릭터</span>
+            <span class="sub">한 사람의 얼굴(+음성)</span>
           </button>
           <button type="button" class="pill-btn" data-train-type="style"
                   onclick="setTrainType('style')">
-            <span>Style <span class="experimental-tag" title="Lightly tested in v3.0 — please report issues">experimental</span></span>
-            <span class="sub">cinematic look · color · lighting</span>
+            <span>스타일 <span class="experimental-tag" title="실험적">실험</span></span>
+            <span class="sub">색·조명·시네마틱 룩</span>
           </button>
         </div>
       </div>
@@ -2476,50 +2462,50 @@ The same wizard walks out of frame. Audio: footsteps on leaves."></textarea>
            the segmented toggle above. -->
       <details class="train-guidance" id="trainGuidance">
         <summary>
-          <span class="train-guidance-eyebrow">Guide</span>
-          <span class="train-guidance-title" id="trainGuidanceTitle">How to train a character well</span>
+          <span class="train-guidance-eyebrow">가이드</span>
+          <span class="train-guidance-title" id="trainGuidanceTitle">캐릭터를 잘 학습하려면</span>
         </summary>
         <div class="train-guidance-body" id="trainGuidanceBodyCharacter">
           <div class="train-guidance-section">
-            <h3>Image count</h3>
-            <p>30–80 photos is the practical sweet spot. <b>Variety beats quantity</b> — 50 well-chosen images across shot types beats 100 portraits-only. Below 25 the LoRA overfits to whatever pose dominates; above 100–150 you start hitting diminishing returns and risk contradictory signals (e.g. half-bearded vs half-not). Training time stays roughly the same regardless of dataset size — it's fixed by step count, not image count.</p>
+            <h3>이미지 수</h3>
+            <p>실무 적정은 사진 30–80장. <b>양보다 다양성</b> — 샷 종류를 가린 50장이 초상만 100장보다 낫습니다. 25장 이하면 지배하는 포즈에 과적합. 100–150장을 넘으면 수익이 줄고 신호가 충돌합니다(수염 반반 등). 학습 시간은 데이터셋 크기와 거의 무관 — 이미지 수가 아니라 스텝 수입니다.</p>
           </div>
           <div class="train-guidance-section">
-            <h3>Shot type coverage — biggest single lever</h3>
-            <p>The LoRA can only generate <b>what it saw</b>. If your set is all torso-up portraits, long shots will look mushy because the model never learned what this person looks like at distance. Aim for this mix on a 50–80 image set:</p>
+            <h3>샷 종류 커버 — 가장 큰 한 레버</h3>
+            <p>LoRA는 <b>본 것만</b> 만듭니다. 상반신 초상만이면 롱샷이 뭉개집니다. 멀리서 이 사람을 배운 적이 없어서입니다. 50–80장 세트에서 이 비율을 노리세요:</p>
             <ul>
-              <li><b>5–8 tight close-ups</b> · face fills frame, anchors identity</li>
-              <li><b>15–25 medium close-ups</b> · head + shoulders, the workhorse</li>
-              <li><b>8–12 medium shots</b> · waist up, teaches body proportions</li>
-              <li><b>10–15 wide / full-body shots</b> · the missing piece in most datasets — without these, long shots in T2V come out distorted or texture-mushy</li>
-              <li><b>2–3 extreme long shots</b> · figure at distance, environment dominates</li>
+              <li><b>타이트 클로즈업 5–8</b> · 얼굴이 프레임을 채워 아이덴티티를 고정</li>
+              <li><b>미디엄 클로즈업 15–25</b> · 머리+어깨, 실무 중심</li>
+              <li><b>미디엄 8–12</b> · 허리 위, 체형 비율</li>
+              <li><b>와이드 / 전신 10–15</b> · 대부분 데이터셋에 없는 조각 — 없으면 T2V 롱샷이 찌그러지거나 텍스처가 뭉개짐</li>
+              <li><b>익스트림 롱 2–3</b> · 멀리 있는 인물, 환경이 지배</li>
             </ul>
           </div>
           <div class="train-guidance-section">
-            <h3>Image aspect ratio</h3>
-            <p>Use whatever native aspect ratio the photos came in — portrait, landscape, square, all fine. The trainer's letterbox crop preserves the original proportions (it adds black bars to fit the training canvas rather than chopping the sides off). The model learns the bars are a constant background factor across every sample and ignores them at inference.</p>
+            <h3>이미지 화면비</h3>
+            <p>사진 원래 화면비를 쓰세요 — 세로, 가로, 정사각 전부 됩니다. 트레이너 레터박스 크롭이 비율을 유지합니다(옆을 자르지 않고 검정 바를 넣음). 모델은 바가 모든 샘플의 상수 배경임을 배우고 추론 때 무시합니다.</p>
           </div>
           <div class="train-guidance-section">
-            <h3>Lighting variety</h3>
-            <p>Mix indoor and outdoor, warm and cool, day and night, key-light from different angles. If every photo shares studio lighting, the LoRA bakes that lighting into every generation.</p>
+            <h3>조명 다양성</h3>
+            <p>실내·실외, 따뜻함·차가움, 낮·밤, 키라이트 각도를 섞으세요. 전부 스튜디오 조명이면 LoRA가 그 조명을 모든 생성에 굽습니다.</p>
           </div>
           <div class="train-guidance-section">
-            <h3>Background variety</h3>
-            <p>Different rooms, streets, contexts. A single backdrop teaches the LoRA to refuse to put the character anywhere else.</p>
+            <h3>배경 다양성</h3>
+            <p>방, 거리, 맥락을 다르게. 배경이 하나면 LoRA가 캐릭터를 다른 곳에 두기를 거부합니다.</p>
           </div>
           <div class="train-guidance-section">
-            <h3>Avoid</h3>
+            <h3>피할 것</h3>
             <ul>
-              <li>group photos (the LoRA can't tell which face is the subject)</li>
-              <li>obvious props that aren't part of the look</li>
-              <li>heavy makeup that varies wildly between shots</li>
-              <li>face partly obscured (hand over mouth, microphone in front of face)</li>
-              <li>blurry / out-of-focus shots — training amplifies blur</li>
+              <li>단체 사진 (어느 얼굴이 주체인지 LoRA가 모름)</li>
+              <li>룩이 아닌 눈에 띄는 소품</li>
+              <li>샷마다 크게 다른 진한 메이크업</li>
+              <li>얼굴이 가려짐 (손, 마이크)</li>
+              <li>흐리거나 핀이 나간 샷 — 학습이 블러를 증폭</li>
             </ul>
           </div>
           <div class="train-guidance-section">
-            <h3>Caption rule</h3>
-            <p>Describe what <b>varies</b> in each shot — outfit, setting, pose, lighting, framing. Don't describe invariant identity features (face shape, hair color, build); the LoRA absorbs those automatically. The auto-caption button uses Gemma 3 to generate <code>[VISUAL]:</code>-format captions following this rule.</p>
+            <h3>캡션 규칙</h3>
+            <p>샷마다 <b>달라지는 것</b>을 적으세요 — 옷, 장소, 포즈, 조명, 프레이밍. 안 바뀌는 아이덴티티(얼굴형, 머리색, 체형)는 적지 마세요. LoRA가 알아서 흡수합니다. 자동 캡션은 Gemma 3가 이 규칙의 <code>[VISUAL]:</code> 형식으로 씁니다.</p>
           </div>
         </div>
         <!-- Style guidance — shown when train_type=style. Hand-picked movie
@@ -2529,58 +2515,58 @@ The same wizard walks out of frame. Audio: footsteps on leaves."></textarea>
              face; "lighting consistency" is the whole point for a style). -->
         <div class="train-guidance-body" id="trainGuidanceBodyStyle" hidden>
           <div class="train-guidance-section">
-            <h3>Frame count</h3>
-            <p>20–100+ hand-picked movie frames. More variety inside the look (different scenes, different subjects) helps generalization. Skip duplicate-ish shots from the same scene — they teach less than fewer-but-more-varied frames.</p>
+            <h3>프레임 수</h3>
+            <p>손수 고른 영화 프레임 20–100장 이상. 룩 안의 다양성(다른 장면, 다른 피사체)이 일반화에 도움이 됩니다. 같은 장면의 비슷한 샷은 건너뛰세요 — 적고 다양한 프레임보다 덜 배웁니다.</p>
           </div>
           <div class="train-guidance-section">
-            <h3>What makes a frame "in the style"</h3>
+            <h3>프레임이 "그 스타일"이려면</h3>
             <ul>
-              <li><b>Composition</b> · framing, headroom, negative space, geometry</li>
-              <li><b>Color grading</b> · palette, contrast, white point, saturation</li>
-              <li><b>Lighting</b> · key direction, hardness, motivation, falloff</li>
-              <li><b>Lens character</b> · focal length, depth of field, optical traits</li>
-              <li><b>Mood</b> · the atmospheric thumbprint the user is after</li>
+              <li><b>구도</b> · 프레이밍, 헤드룸, 여백, 기하</li>
+              <li><b>컬러 그레이딩</b> · 팔레트, 대비, 화이트 포인트, 채도</li>
+              <li><b>조명</b> · 키 방향, 경도, 동기, 폴오프</li>
+              <li><b>렌즈 성격</b> · 초점거리, 심도, 광학 특성</li>
+              <li><b>무드</b> · 원하는 대기 지문</li>
             </ul>
           </div>
           <div class="train-guidance-section">
-            <h3>Consistency beats variety</h3>
-            <p>Opposite of a character dataset. You want every frame to share the visual fingerprint you're training on. Mixed grades and lighting motivations dilute the style — the LoRA averages everything you show it.</p>
+            <h3>다양성보다 일관성</h3>
+            <p>캐릭터 데이터셋과 반대입니다. 모든 프레임이 학습하는 시각 지문을 공유해야 합니다. 그레이드·조명 동기가 섞이면 스타일이 묽어집니다 — LoRA가 보여 준 것을 평균합니다.</p>
           </div>
           <div class="train-guidance-section">
-            <h3>Avoid</h3>
+            <h3>피할 것</h3>
             <ul>
-              <li>frames where the subject's identity dominates the frame</li>
-              <li>watermarks, subtitles, channel logos</li>
-              <li>heavily compressed or low-bitrate source frames</li>
-              <li>extreme aspect crops (letterboxed black bars hurt)</li>
+              <li>피사체 아이덴티티가 프레임을 지배하는 컷</li>
+              <li>워터마크, 자막, 채널 로고</li>
+              <li>심하게 압축되거나 비트레이트가 낮은 소스</li>
+              <li>극단적 화면비 크롭 (레터박스 검정 바가 해로움)</li>
             </ul>
           </div>
           <div class="train-guidance-section">
-            <h3>Caption rule</h3>
-            <p>Describe the <b>shot itself</b>, not who's in it — composition, color grading, lighting, mood. The trigger anchors the look; the caption body teaches the model what to associate with that trigger.</p>
+            <h3>캡션 규칙</h3>
+            <p><b>샷 자체</b>를 적으세요, 누가 나오는지가 아니라 — 구도, 컬러 그레이딩, 조명, 무드. 트리거가 룩을 고정하고, 캡션 본문이 모델에게 무엇을 묶을지 가르칩니다.</p>
           </div>
         </div>
         <div class="train-guidance-foot">
-          <button type="button" class="train-guidance-dismiss" onclick="trainGuidanceDismiss()">Got it — don't show again</button>
+          <button type="button" class="train-guidance-dismiss" onclick="trainGuidanceDismiss()">알겠어요 — 다시 보지 않기</button>
         </div>
       </details>
 
       <!-- ============== DATASET CARD ============== -->
       <div class="composer-card train-card">
-        <h2>Dataset
-          <span class="h2-hint" id="trainDatasetHint">15-50 stills · drop your character into the box</span>
+        <h2>데이터셋
+          <span class="h2-hint" id="trainDatasetHint">스틸 15–50장 · 캐릭터를 상자에 넣기</span>
         </h2>
         <div class="train-drop" id="trainDrop">
           <div class="train-drop-empty" id="trainDropEmpty">
             <div class="picker-icon"><svg class="ph"><use href="#ph-image"/></svg></div>
-            <div class="picker-cta">Drop 15-50 images <em>+ optional matching <code>.txt</code> captions</em> here, or <strong>click to browse</strong></div>
-            <div class="hint">PNG / JPG / WEBP for images, <code>.txt</code> for captions (same filename stem). Each preview shows the 1:1 center-crop the trainer will see.</div>
+            <div class="picker-cta">이미지 15–50장 <em>+ 선택으로 짝 <code>.txt</code> 캡션</em>을 여기 놓거나, <strong>클릭해서 고르기</strong></div>
+            <div class="hint">이미지는 PNG / JPG / WEBP, 캡션은 <code>.txt</code> (같은 파일명 줄기). 미리보기는 트레이너가 보는 1:1 센터 크롭입니다.</div>
           </div>
           <div class="train-thumbs" id="trainThumbs" hidden></div>
           <input type="file" id="trainFileInput" accept="image/png,image/jpeg,image/webp,text/plain,.png,.jpg,.jpeg,.webp,.txt" multiple style="display:none">
         </div>
         <div class="train-counter-row">
-          <span class="train-counter" id="trainCounter">0 / 50 images</span>
+          <span class="train-counter" id="trainCounter">0 / 50 장</span>
           <span class="train-counter-hint" id="trainCounterHint">need at least 15 to train</span>
           <span class="train-caption-counter" id="trainCaptionCounter" hidden>0 captioned</span>
           <span class="qchip-spacer"></span>
@@ -2650,7 +2636,7 @@ The same wizard walks out of frame. Audio: footsteps on leaves."></textarea>
 
       <!-- ============== TRIGGER + PRESET ============== -->
       <div class="composer-card train-card">
-        <h2>Trigger word
+        <h2>트리거 단어
           <span class="h2-hint" id="trainTriggerHint">a rare, letters-only token the model will associate with this character</span>
         </h2>
         <div class="train-trigger-row">
@@ -2704,12 +2690,12 @@ The same wizard walks out of frame. Audio: footsteps on leaves."></textarea>
         <input type="hidden" name="crop_strategy" id="trainCropStrategy" value="center">
 
         <details class="train-advanced">
-          <summary>Advanced</summary>
+          <summary>고급</summary>
           <div class="train-advanced-grid">
             <div class="mf-cell">
               <span class="mf-label">Rank</span>
               <select id="trainRank">
-                <option value="">preset default</option>
+                <option value="">프리셋 기본</option>
                 <option value="4">4</option>
                 <option value="8">8</option>
                 <option value="16">16</option>
@@ -2719,12 +2705,12 @@ The same wizard walks out of frame. Audio: footsteps on leaves."></textarea>
             </div>
             <div class="mf-cell">
               <span class="mf-label">Steps</span>
-              <input type="number" id="trainSteps" min="100" max="10000" step="100" placeholder="preset default">
+              <input type="number" id="trainSteps" min="100" max="10000" step="100" placeholder="프리셋 기본">
             </div>
             <div class="mf-cell">
-              <span class="mf-label">Learning rate</span>
+              <span class="mf-label">학습률</span>
               <select id="trainLR">
-                <option value="">preset default</option>
+                <option value="">프리셋 기본</option>
                 <option value="0.00005">5e-5</option>
                 <option value="0.0001">1e-4</option>
                 <option value="0.0002">2e-4</option>
@@ -2734,7 +2720,7 @@ The same wizard walks out of frame. Audio: footsteps on leaves."></textarea>
             <div class="mf-cell">
               <span class="mf-label">Resolution</span>
               <select id="trainResolution">
-                <option value="">preset default</option>
+                <option value="">프리셋 기본</option>
                 <option value="384">384²</option>
                 <option value="448">448²</option>
                 <option value="512">512²</option>
@@ -2743,12 +2729,12 @@ The same wizard walks out of frame. Audio: footsteps on leaves."></textarea>
               </select>
             </div>
             <div class="mf-cell" style="grid-column: 1 / -1">
-              <span class="mf-label">Caption strategy</span>
+              <span class="mf-label">캡션 전략</span>
               <select id="trainCaptionStrategy">
-                <option value="user_provided" selected>user-provided (<code>.txt</code> files alongside images) — recommended</option>
-                <option value="trigger_simple">&lt;trigger&gt; man — dumbest-strongest fallback</option>
-                <option value="trigger_only">trigger only — no role hint</option>
-                <option value="qwen_vl" disabled>auto-caption via Qwen-VL — coming soon</option>
+                <option value="user_provided" selected>직접 제공 (이미지 옆 <code>.txt</code>) — 권장</option>
+                <option value="trigger_simple">&lt;trigger&gt; man — 가장 단순한 폴백</option>
+                <option value="trigger_only">트리거만 — 역할 힌트 없음</option>
+                <option value="qwen_vl" disabled>Qwen-VL 자동 캡션 — 준비 중</option>
               </select>
             </div>
           </div>
@@ -2765,13 +2751,13 @@ The same wizard walks out of frame. Audio: footsteps on leaves."></textarea>
            as siblings, not different surfaces. The whole card is
            hidden when train_type=style (styles don't have voices). -->
       <div class="composer-card train-card" id="trainVoiceCard">
-        <h2>Voice
-          <span class="h2-hint">optional · a short clean clip becomes the character's voice</span>
+        <h2>음성
+          <span class="h2-hint">선택 · 짧고 깨끗한 클립이 캐릭터 음성이 됨</span>
         </h2>
         <div class="train-voice-drop" id="trainVoiceDrop">
           <div class="train-voice-empty" id="trainVoiceEmpty">
             <div class="picker-icon"><svg class="ph"><use href="#ph-music-notes"/></svg></div>
-            <div class="picker-cta">Drop a voice clip here, or <strong>click to browse</strong></div>
+            <div class="picker-cta">음성 클립을 여기 놓거나, <strong>클릭해서 고르기</strong></div>
             <div class="hint"><strong>MP3, WAV, M4A or FLAC</strong> — any format, auto-decoded. One file, up to 50 MB.</div>
             <div class="hint" style="margin-top:4px"><strong>Aim for 10–25 seconds</strong> of clean speech, single speaker, no music or background noise. Shorter than 5 s won't train well; longer than 30 s just adds repetition.</div>
           </div>
@@ -2841,12 +2827,12 @@ The same wizard walks out of frame. Audio: footsteps on leaves."></textarea>
       <!-- Sticky action footer — same chrome as the video/studio forms. -->
       <div class="form-action-footer" id="formActionFooterTrain">
         <div class="queue-strip">
-          <button type="button" class="qchip" id="pauseBtnTrain" onclick="togglePause()" title="Pause / resume the queue"><svg class="ph" aria-hidden="true"><use href="#ph-pause-fill"/></svg>Pause queue</button>
+          <button type="button" class="qchip" id="pauseBtnTrain" onclick="togglePause()" title="대기열 일시정지 / 재개"><svg class="ph" aria-hidden="true"><use href="#ph-pause-fill"/></svg>일시정지</button>
           <button type="button" class="qchip" onclick="api('/queue/clear','POST').then(poll)" title="Clear all queued jobs"><svg class="ph" aria-hidden="true"><use href="#ph-x"/></svg>Clear</button>
           <span class="qchip-spacer"></span>
         </div>
         <div class="actions">
-          <button type="button" class="primary" id="trainStartBtn" onclick="trainStart()" disabled>Train Character</button>
+          <button type="button" class="primary" KEEP onclick="trainStart()" disabled>캐릭터 학습</button>
           <button type="button" class="danger" onclick="api('/stop','POST').then(poll)">Stop</button>
         </div>
       </div>
@@ -2860,11 +2846,11 @@ The same wizard walks out of frame. Audio: footsteps on leaves."></textarea>
            character name as a link that switches workflow + selects
            the character on the Video tab. -->
       <div class="composer-card train-card">
-        <h2>Use your trained characters</h2>
+        <h2>학습한 캐릭터 쓰기</h2>
         <div class="hint" style="margin-top:2px">
-          Generate a video with your trained characters
+          학습한 캐릭터로 영상을 만드세요
           <a href="#" class="train-go-video-link"
-             onclick="workflowSwitch('manual'); return false;">on the Video tab</a>
+             onclick="workflowSwitch('manual'); return false;">영상 탭에서</a>
           — the links below take you to each character's picker chip.
         </div>
         <!-- THE LOOP THE MEASUREMENT DID NOT CLOSE (#62). The panel has
@@ -2875,7 +2861,7 @@ The same wizard walks out of frame. Audio: footsteps on leaves."></textarea>
              and names the fix. Filled by trainRefreshLoraList(). -->
         <div class="train-verdict-banner" id="trainVerdictBanner" hidden></div>
         <div class="train-lora-link-row" id="trainLoraList" style="margin-top:8px;display:flex;flex-wrap:wrap;gap:8px;">
-          <div class="hint" style="padding:4px 0">No trained characters yet. Start your first run above.</div>
+          <div class="hint" style="padding:4px 0">아직 학습 캐릭터 없음. 위에서 첫 러닝을 시작하세요.</div>
         </div>
         <div class="hint" style="margin-top:8px">Trained LoRAs land in <code id="trainLorasDir">mlx_models/loras/</code> alongside any LoRAs you've downloaded — they show up in the regular picker too.</div>
       </div>
@@ -2894,35 +2880,35 @@ The same wizard walks out of frame. Audio: footsteps on leaves."></textarea>
       <!-- Saved boards. Hidden while the list is empty — with no film in
            progress this tab is a concept box and a button, nothing else. -->
       <div class="sb-boards" id="sbBoards" hidden>
-        <div class="sb-boards-head">Your storyboards</div>
+        <div class="sb-boards-head">내 스토리보드</div>
         <ul class="row-list sb-boardlist" id="sbBoardListMini"></ul>
       </div>
 
       <div class="composer-card sb-brief" id="sbBrief">
         <textarea class="composer-prompt sb-concept" id="sbConcept" rows="4"
           oninput="sbConceptInput()"
-          placeholder="A retired boxer walks his old neighbourhood at dawn and remembers a fight he lost."></textarea>
+          placeholder="은퇴한 복서가 새벽 옛 동네를 걷다 졌던 경기를 떠올린다."></textarea>
       </div>
 
       <div class="cz-control" id="sbLengthRow">
-        <div class="cz-label">Shots <span class="cz-label-hint">how many, roughly</span></div>
+        <div class="cz-label">샷 <span class="cz-label-hint">대략 몇 개</span></div>
         <div class="quality-strip pill-group cols-5" id="sbLengthGroup">
           <button type="button" class="q-chip pill-btn" data-sb-shots="6">
-            <span class="ql-name">6</span><span class="q-spec ql-spec sub">a scene</span></button>
+            <span class="ql-name">6</span><span class="q-spec ql-spec sub">장면</span></button>
           <button type="button" class="q-chip pill-btn active" data-sb-shots="12">
-            <span class="ql-name">12</span><span class="q-spec ql-spec sub">a short</span></button>
+            <span class="ql-name">12</span><span class="q-spec ql-spec sub">숏</span></button>
           <button type="button" class="q-chip pill-btn" data-sb-shots="24">
-            <span class="ql-name">24</span><span class="q-spec ql-spec sub">a film</span></button>
+            <span class="ql-name">24</span><span class="q-spec ql-spec sub">필름</span></button>
           <button type="button" class="q-chip pill-btn" data-sb-shots="36">
-            <span class="ql-name">36</span><span class="q-spec ql-spec sub">long</span></button>
+            <span class="ql-name">36</span><span class="q-spec ql-spec sub">길게</span></button>
           <!-- ONE SHOT: a film that is one shot. The planner writes beats
                (one per 5 s) instead of shots; the render is the Video tab's
                One Shot. -->
           <button type="button" class="q-chip pill-btn" data-sb-shots="take" title="One continuous shot that never cuts — the planner writes one beat per five seconds and the world changes around the subject">
-            <span class="ql-name">1</span><span class="q-spec ql-spec sub">One Shot</span></button>
+            <span class="ql-name">1</span><span class="q-spec ql-spec sub">원샷</span></button>
         </div>
         <div class="cz-control" id="sbTakeRow" hidden>
-          <div class="cz-label">One Shot length <span class="cz-label-hint">one beat per 5 seconds · the camera never cuts</span></div>
+          <div class="cz-label">원샷 길이 <span class="cz-label-hint">5초마다 비트 하나 · 카메라는 안 자름</span></div>
           <div class="pill-group cols-5" id="sbTakeGroup">
             <button type="button" class="pill-btn" data-sb-take="30"><span>30 s</span><span class="sub">6 beats</span></button>
             <button type="button" class="pill-btn" data-sb-take="45"><span>45 s</span><span class="sub">9 beats</span></button>
@@ -2938,7 +2924,7 @@ The same wizard walks out of frame. Audio: footsteps on leaves."></textarea>
            plan exists and changing it means re-planning (the Re-plan modal
            carries the same control). Per-shot override stays cut for v1. -->
       <div class="cz-control" id="sbEngineRow">
-        <div class="cz-label">Engine <span class="cz-label-hint">who renders the shots</span></div>
+        <div class="cz-label">엔진 <span class="cz-label-hint">샷을 누가 렌더할지</span></div>
         <div class="pill-group cols-3" id="sbEngineGroup"></div>
         <div class="sb-enginepick-note" id="sbEnginePickNote"></div>
       </div>
@@ -2950,8 +2936,8 @@ The same wizard walks out of frame. Audio: footsteps on leaves."></textarea>
            downbeats under this track. The same path the Editor's soundtrack
            takes — a file on this Mac. -->
       <div class="cz-control" id="sbTrackRow">
-        <div class="cz-label">Soundtrack
-          <span class="cz-label-hint" id="sbTrackMeta">optional — a track makes it a music video cut to the beat</span></div>
+        <div class="cz-label">사운드트랙
+          <span class="cz-label-hint" id="sbTrackMeta">선택 — 트랙이 있으면 비트에 맞춘 뮤직비디오</span></div>
         <div class="sb-track-row">
           <input type="text" id="sbTrack" class="sb-input" spellcheck="false"
                  oninput="sbTrackInput()"
@@ -2966,19 +2952,19 @@ The same wizard walks out of frame. Audio: footsteps on leaves."></textarea>
       </div>
 
       <div class="cz-control" id="sbStyleRow">
-        <div class="cz-label">Look <span class="cz-label-hint">goes on every shot</span></div>
+        <div class="cz-label">룩 <span class="cz-label-hint">모든 샷에</span></div>
         <input type="text" id="sbStyle" class="sb-input"
                placeholder="16mm, cold morning light, handheld, muted greens">
       </div>
 
       <div class="cz-control" id="sbCastRow">
-        <div class="cz-label">Who's in it <span class="cz-label-hint">optional</span></div>
+        <div class="cz-label">누가 나오나 <span class="cz-label-hint">선택</span></div>
         <div class="chars-strip"><div class="chars-avatar-row" id="sbCharsList"></div></div>
         <div class="chars-strip-empty" id="sbCharsEmpty" hidden>
-          No trained characters yet —
-          <a href="#" onclick="workflowSwitch('train'); return false;">train one in the Train tab</a>, or
+          아직 학습 캐릭터 없음 —
+          <a href="#" onclick="workflowSwitch('train'); return false;">학습 탭에서 하나 만들기</a>, 또는
           <button type="button" class="ghost-btn js-get-sample-char" style="padding:2px 8px;font-size:12px"
-                  onclick="downloadSampleCharacter()">get a sample character (Bizarro)</button>.
+                  onclick="downloadSampleCharacter()">샘플 캐릭터 받기 (Bizarro)</button>.
         </div>
         <div class="chars-q4-note">__Q8_CHARACTER_INSTALL_COPY__</div>
         <!-- Wardrobe rides with the CHARACTER, not the shot. "A man in a dark
@@ -2995,22 +2981,22 @@ The same wizard walks out of frame. Audio: footsteps on leaves."></textarea>
            the room ONCE and injecting it into every shot that claims it is the
            only thing that survives shots being re-rendered one at a time. -->
       <div class="cz-control" id="sbLocRow">
-        <div class="cz-label">Where it happens
-          <span class="cz-label-hint">one line per place — shots reuse them</span></div>
+        <div class="cz-label">어디서
+          <span class="cz-label-hint">장소마다 한 줄 — 샷이 재사용</span></div>
         <textarea id="sbLocations" class="sb-textarea" rows="3" oninput="sbLocInput()"
           placeholder="the study: dark oak panelling, three curved monitors glowing cold blue, a brass desk lamp&#10;the driveway: bright suburban driveway, red convertible, late afternoon sun"></textarea>
-        <div class="cz-meta" id="sbLocMeta">no locations — every shot invents its own</div>
+        <div class="cz-meta" id="sbLocMeta">장소 없음 — 샷마다 제각각 만듦</div>
       </div>
 
       <details class="customize-section" id="sbMustSection">
         <summary class="cz-summary">
           <span class="cz-chevron"><svg class="ph" aria-hidden="true"><use href="#ph-caret-down"/></svg></span>
-          <span class="cz-title">Shots it must include</span>
-          <span class="cz-meta" id="sbMustMeta">none</span>
+          <span class="cz-title">꼭 넣을 샷</span>
+          <span class="cz-meta" id="sbMustMeta">없음</span>
         </summary>
         <div class="cz-body">
           <div class="cz-control">
-            <div class="cz-label">One per line</div>
+            <div class="cz-label">한 줄에 하나</div>
             <textarea id="sbMust" class="sb-textarea" rows="4" oninput="sbMustInput()"
               placeholder="close-up on his hands wrapping&#10;the empty gym at the end"></textarea>
           </div>
@@ -3021,21 +3007,21 @@ The same wizard walks out of frame. Audio: footsteps on leaves."></textarea>
            the film. Each step is the panel's existing one; only the
            hand-over is new. -->
       <label class="check sb-auto" title="After the plan lands, every shot renders on its own, the cut is made (on the beat when there is a track) and the film is assembled — no more buttons. You can still stop the render or re-cut afterwards.">
-        <input type="checkbox" id="sbAuto"> Auto — plan, render every shot, cut and make the film
+        <input type="checkbox" id="sbAuto"> Auto — 기획, 샷 전부 렌더, 컷하고 필름 만들기
       </label>
       <!-- ANCHOR STILLS. A still of each shot's first frame (from the
            character's sheet when it has one) is made first, in seconds; the
            clip then starts from it. -->
       <label class="check sb-auto" title="Before each shot renders, an image of its first frame is made (from the character's sheet when the shot has one) and the clip starts from that still. LTX shots only; the still shows on the shot card with a New still button.">
-        <input type="checkbox" id="sbAnchorStills"> Start each shot from a still
+        <input type="checkbox" id="sbAnchorStills"> 각 샷을 스틸에서 시작
       </label>
       <!-- LONG WINDOWS. A shot longer than one LTX window renders as a chain
            of windows instead of being cut to fit. -->
       <label class="check sb-auto" title="A shot longer than 5 seconds renders as a chain of 5-second passes, each continuing from the last, instead of being shortened to fit one. Slower. LTX shots only.">
-        <input type="checkbox" id="sbLongWindows"> Long shots (over 5 s): chain 5-second passes · needs the Q8 pack
+        <input type="checkbox" id="sbLongWindows"> 긴 샷(5초 초과): 5초 패스를 이음 · Q8 팩 필요
       </label>
       <div class="sb-ramline">
-        <span>These three decide how the film gets made.</span>
+        <span>이 셋이 필름 만드는 방식을 정합니다.</span>
         <button type="button" class="help-dot" id="sbSwitchHelpBtn" aria-expanded="false"
                 aria-controls="sbSwitchHelpNote" title="What do they do?" onclick="sbToggleSwitchHelp()">?</button>
       </div>
@@ -3047,12 +3033,12 @@ The same wizard walks out of frame. Audio: footsteps on leaves."></textarea>
       </div>
       <div class="form-action-footer">
         <div class="sb-ramline" id="sbRamLine">
-          <span>Planning borrows the memory for about a minute, then gives it back.</span>
+          <span>기획은 약 1분 메모리를 빌렸다가 돌려줍니다.</span>
           <button type="button" class="help-dot" id="sbRamHelpBtn" aria-expanded="false"
                   aria-controls="sbRamHelpNote" title="Why?" onclick="sbToggleRamHelp()">?</button>
         </div>
         <div class="h3-winhelp" id="sbRamHelpNote" hidden></div>
-        <button type="button" class="primary" id="sbPlanBtn" onclick="sbPlan()">Plan film</button>
+        <button type="button" class="primary" id="sbPlanBtn" onclick="sbPlan()">필름 기획</button>
       </div>
     </div>
 
@@ -3076,35 +3062,35 @@ The same wizard walks out of frame. Audio: footsteps on leaves."></textarea>
          the take from GET /oneshot/status. -->
     <div id="oneshotSectionTab" style="display:none">
       <div class="composer-card os-card">
-        <h2>One Shot <span class="h2-hint">30 s to 2 min · never cuts</span></h2>
-        <div class="hint os-lead">Write the whole shot once and it renders as parts that continue from each other's last frame. Everything below is optional: the beats direct five seconds each, one camera line holds the move, and a trained character speaks with its own face and voice.</div>
+        <h2>원샷 <span class="h2-hint">30초~2분 · 자르지 않음</span></h2>
+        <div class="hint os-lead">샷을 한 번 적으면 파트마다 직전 마지막 프레임에서 이어 찍습니다. 아래는 전부 선택: 비트가 5초씩, 카메라 한 줄이 움직임을 잡고, 학습 캐릭터가 자기 얼굴·목소리로 말합니다.</div>
 
         <div class="os-block">
-          <div class="qs-label h3-axis-label"><span class="qs-name">Engine</span><span class="qs-meta" id="osEngineMeta"></span></div>
+          <div class="qs-label h3-axis-label"><span class="qs-name">엔진</span><span class="qs-meta" id="osEngineMeta"></span></div>
           <div class="pill-group cols-2" id="osEngineGroup" role="group" aria-label="Engine">
-            <button type="button" class="pill-btn active" data-os-engine="ltx" aria-label="LTX 2.5 — 10 second parts, faces, voices, dialogue"><span>LTX 2.5</span><span class="sub">10 s parts · faces, voices, dialogue</span></button>
-            <button type="button" class="pill-btn" data-os-engine="h3" aria-label="Hailuo H3 — 15 second parts, motion, landscapes, crowds"><span>Hailuo H3</span><span class="sub">15 s parts · motion, landscapes, crowds</span></button>
+            <button type="button" class="pill-btn active" data-os-engine="ltx" aria-label="LTX 2.5 — 10 second parts, faces, voices, dialogue"><span>LTX 2.5</span><span class="sub">10초 파트 · 얼굴, 목소리, 대사</span></button>
+            <button type="button" class="pill-btn" data-os-engine="h3" aria-label="Hailuo H3 — 15 second parts, motion, landscapes, crowds"><span>Hailuo H3</span><span class="sub">15초 파트 · 모션, 풍경, 군중</span></button>
           </div>
         </div>
 
         <div class="os-block">
-          <div class="qs-label h3-axis-label"><span class="qs-name">The shot</span><span class="qs-meta">who, where, the time of day and the weather, the sound — once, for the whole shot</span></div>
+          <div class="qs-label h3-axis-label"><span class="qs-name">샷</span><span class="qs-meta">누구, 어디, 시간대와 날씨, 소리 — 전체 샷에 한 번</span></div>
           <textarea id="osPrompt" class="sb-textarea os-prompt" rows="4" spellcheck="false" placeholder="A red vintage tram rolls through a rain-soaked Lisbon street at night, neon on the wet cobbles; a woman with a yellow umbrella waits at the stop. The tram bell rings twice; rain on the roof, distant fado from a bar."></textarea>
         </div>
 
         <div class="os-two">
           <div class="os-block">
-            <div class="qs-label h3-axis-label"><span class="qs-name">Start frame</span><span class="qs-meta">optional · the shot opens on this picture</span></div>
+            <div class="qs-label h3-axis-label"><span class="qs-name">시작 프레임</span><span class="qs-meta">선택 · 샷이 이 그림에서 열림</span></div>
             <div class="os-anchor" id="osAnchor">
               <img class="os-anchor-thumb" id="osAnchorThumb" alt="" hidden>
-              <button type="button" class="ghost-btn small" id="osAnchorPick">Choose an image</button>
-              <button type="button" class="ghost-btn small" id="osAnchorClear" hidden>Clear</button>
+              <button type="button" class="ghost-btn small" id="osAnchorPick">이미지 고르기</button>
+              <button type="button" class="ghost-btn small" id="osAnchorClear" hidden>지우기</button>
               <span class="sub os-anchor-name" id="osAnchorName"></span>
               <input type="file" id="osAnchorFile" accept="image/*" hidden>
             </div>
           </div>
           <div class="os-block" id="osCharacterBlock">
-            <div class="qs-label h3-axis-label"><span class="qs-name">Who is in it</span><span class="qs-meta" id="osCharacterMeta">optional · a trained character, with its own face and voice</span></div>
+            <div class="qs-label h3-axis-label"><span class="qs-name">누가 나오나</span><span class="qs-meta" id="osCharacterMeta">선택 · 학습 캐릭터, 자기 얼굴과 목소리</span></div>
             <div class="pill-group os-characters" id="osCharacterGroup" role="group" aria-label="Who is in it"></div>
             <div class="hint os-character-note" id="osCharacterNote" hidden></div>
           </div>
@@ -3113,11 +3099,11 @@ The same wizard walks out of frame. Audio: footsteps on leaves."></textarea>
 
       <div class="composer-card os-card">
         <div class="os-block">
-          <div class="qs-label h3-axis-label"><span class="qs-name">Length</span><span class="qs-meta" id="osLengthMeta"></span></div>
+          <div class="qs-label h3-axis-label"><span class="qs-name">길이</span><span class="qs-meta" id="osLengthMeta"></span></div>
           <div class="quality-strip pill-group cols-5" id="osLengthGroup"></div>
         </div>
         <div class="os-block">
-          <div class="qs-label h3-axis-label"><span class="qs-name">Quality</span><span class="qs-meta" id="osQualityMeta"></span></div>
+          <div class="qs-label h3-axis-label"><span class="qs-name">품질</span><span class="qs-meta" id="osQualityMeta"></span></div>
           <div class="quality-strip pill-group" id="osQualityGroup"></div>
         </div>
         <div class="os-estimate" id="osEstimate" aria-live="polite"></div>
@@ -3126,21 +3112,21 @@ The same wizard walks out of frame. Audio: footsteps on leaves."></textarea>
       <div class="composer-card os-card">
         <div class="os-block">
           <div class="qs-label h3-axis-label">
-            <span class="qs-name">Beats</span>
-            <span class="qs-meta" id="osBeatsHint">one line per five seconds · none written — the prompt carries the whole shot</span>
+            <span class="qs-name">비트</span>
+            <span class="qs-meta" id="osBeatsHint">5초마다 한 줄 · 안 쓰면 프롬프트가 샷 전체를 담당</span>
           </div>
           <div class="os-beats-tools">
-            <button type="button" class="ghost-btn small" id="osSplitBtn" title="Splits the shot above into one line per sentence — a start to edit, not the final word">Split my prompt into beats</button>
-            <button type="button" class="ghost-btn small" id="osPlanBtn" title="The planner writes one beat per five seconds from the shot above — about half a minute">Write the beats for me</button>
+            <button type="button" class="ghost-btn small" id="osSplitBtn" title="위 샷을 문장마다 한 줄로 — 고칠 시작점이지 최종이 아님">프롬프트를 비트로 나누기</button>
+            <button type="button" class="ghost-btn small" id="osPlanBtn" title="기획이 위 샷에서 5초마다 비트 한 줄 — 약 30초">비트 써 주기</button>
           </div>
           <!-- One row per five seconds, the stamp glued to its own field: a
                beat that wraps or a box that scrolls can never put a stamp
                beside the wrong line (the reviewer's first finding). -->
           <div class="os-beat-rows" id="osBeats" role="group" aria-label="Beats, one per five seconds"></div>
-          <div class="hint os-beats-note">A blank row holds that moment. Enter moves to the next row; paste a whole list and it fills the rows. <a href="/docs/prompting" target="_blank" rel="noopener">How to write the beats</a>.</div>
+          <div class="hint os-beats-note">빈 줄은 그 순간을 유지합니다. Enter는 다음 줄. 목록을 붙여 넣으면 칸이 채워집니다. <a href="/docs/prompting" target="_blank" rel="noopener">비트 쓰는 법</a>.</div>
         </div>
         <div class="os-block">
-          <div class="qs-label h3-axis-label"><span class="qs-name">Camera</span><span class="qs-meta">optional · one move for the whole shot, its direction and speed — every part continues it</span></div>
+          <div class="qs-label h3-axis-label"><span class="qs-name">카메라</span><span class="qs-meta">선택 · 샷 전체의 한 움직임, 방향과 속도 — 모든 파트가 이어 감</span></div>
           <input type="text" id="osCamera" class="sb-input" maxlength="240" autocomplete="off" spellcheck="false" placeholder="a slow, steady clockwise arc around the table at eye level, wide to close">
         </div>
         <div class="os-toggles">
@@ -3160,9 +3146,9 @@ The same wizard walks out of frame. Audio: footsteps on leaves."></textarea>
         <details class="os-more" id="osMore">
           <summary>More</summary>
           <div class="os-more-grid">
-            <label class="os-field"><span class="sub">Seed</span><input type="text" id="osSeed" class="sb-input" inputmode="numeric" placeholder="random" autocomplete="off"></label>
+            <label class="os-field"><span class="sub">Seed</span><input type="text" id="osSeed" class="sb-input" inputmode="numeric" placeholder="무작위" autocomplete="off"></label>
             <label class="os-field"><span class="sub">Label</span><input type="text" id="osLabel" class="sb-input" maxlength="120" placeholder="how it appears in the queue" autocomplete="off"></label>
-            <label class="os-field os-check"><input type="checkbox" id="osNoMusic"><span>No music</span><span class="sub">voice, sound and ambience only</span></label>
+            <label class="os-field os-check"><input type="checkbox" id="osNoMusic"><span>음악 없음</span><span class="sub">voice, sound and ambience only</span></label>
           </div>
         </details>
       </div>
@@ -3170,8 +3156,8 @@ The same wizard walks out of frame. Audio: footsteps on leaves."></textarea>
       <div class="form-action-footer os-footer">
         <div class="queue-strip"><span class="qchip-derived" id="osSummary"></span></div>
         <div class="actions">
-          <button type="button" class="primary" id="osGenBtn">Generate</button>
-          <button type="button" class="danger" onclick="api('/stop','POST').then(poll)">Stop</button>
+          <button type="button" class="primary" id="osGenBtn">생성</button>
+          <button type="button" class="danger" onclick="api('/stop','POST').then(poll)">중지</button>
         </div>
       </div>
 
@@ -3184,8 +3170,8 @@ The same wizard walks out of frame. Audio: footsteps on leaves."></textarea>
 
     <div id="audioSectionTab" style="display:none">
       <div class="mode-bar pill-group cols-2" id="audioModeGroup" hidden>
-        <button type="button" class="mode-chip pill-btn" data-audio-mode="compose" onclick="audioModeSet('compose')">Compose<span class="mc-sub sub">write a song</span></button>
-        <button type="button" class="mode-chip pill-btn" data-audio-mode="drive" onclick="audioModeSet('drive')">Drive video<span class="mc-sub sub">use a track you have</span></button>
+        <button type="button" class="mode-chip pill-btn" data-audio-mode="compose" onclick="audioModeSet('compose')">작곡<span class="mc-sub sub">가사로 곡 쓰기</span></button>
+        <button type="button" class="mode-chip pill-btn" data-audio-mode="drive" onclick="audioModeSet('drive')">영상 구동<span class="mc-sub sub">가진 트랙으로</span></button>
       </div>
       <div id="musicComposePane" hidden>
         <div class="composer-card music-install-panel" id="musicInstallPanel" role="status" hidden></div>
@@ -3205,38 +3191,38 @@ A different turn
 
 [Outro]
 The last line"></textarea>
-          <div class="hint">Tags in square brackets mark the sections. Everything else is sung. A tag with nothing under it is an instrumental passage.</div>
-          <label for="musicStyle">Style</label>
+          <div class="hint">대괄호 태그가 구간입니다. 나머지는 노래. 아래가 빈 태그는 연주 구간입니다.</div>
+          <label for="musicStyle">스타일</label>
           <textarea id="musicStyle" class="composer-prompt" rows="2" placeholder="Genre, instruments, vocal, language and tempo in plain words — e.g. English, warm piano pop, expressive female voice, acoustic piano, light drums, 88 BPM"></textarea>
-          <div class="hint">Prose, not fields. Put the tempo, the language and the singer in the sentence.</div>
+          <div class="hint">칸이 아니라 문장. 템포, 언어, 가수를 문장에 넣으세요.</div>
           <div class="composer-tools">
             <label class="toggle-pill" id="musicInstrumentalPill" title="When on, the model is asked for a track with no vocal line. Your lyrics stay in the box and are not used.">
-              <input type="checkbox" id="musicInstrumental" onchange="musicFormChanged()"><span class="dot"></span><span>Instrumental</span>
+              <input type="checkbox" id="musicInstrumental" onchange="musicFormChanged()"><span class="dot"></span><span>연주곡</span>
             </label>
           </div>
         </div>
         <div class="quick-settings">
-          <div class="mf-label">Score</div>
+          <div class="mf-label">스코어</div>
           <div class="pill-group cols-3" id="musicModePills">
-            <button type="button" class="pill-btn active" data-value="full" onclick="musicPick('musicMode',this)">Melody + chords</button>
-            <button type="button" class="pill-btn" data-value="melody" onclick="musicPick('musicMode',this)">Melody only</button>
-            <button type="button" class="pill-btn" data-value="off" onclick="musicPick('musicMode',this)">No score</button>
+            <button type="button" class="pill-btn active" data-value="full" onclick="musicPick('musicMode',this)">멜로디 + 코드</button>
+            <button type="button" class="pill-btn" data-value="melody" onclick="musicPick('musicMode',this)">멜로디만</button>
+            <button type="button" class="pill-btn" data-value="off" onclick="musicPick('musicMode',this)">스코어 없음</button>
           </div>
           <input type="hidden" id="musicMode" value="full">
-          <div class="hint">YuE2 writes a sheet-music plan first, then the song.</div>
-          <div class="mf-label">Quality</div>
+          <div class="hint">YuE2가 악보 계획을 먼저 쓰고, 그다음 곡을 씁니다.</div>
+          <div class="mf-label">품질</div>
           <div class="pill-group cols-2" id="musicQualityPills">
             <button type="button" class="pill-btn" data-value="draft" onclick="musicPick('musicQuality',this)">Draft<span class="sub">8 steps</span></button>
             <button type="button" class="pill-btn active" data-value="final" onclick="musicPick('musicQuality',this)">Final<span class="sub">32 steps</span></button>
           </div>
           <input type="hidden" id="musicQuality" value="final">
-          <div class="hint">Draft is several times faster for auditioning ideas.</div>
+          <div class="hint">초안은 아이디어 들어 보기에 몇 배 빠릅니다.</div>
           <div class="range-strip">
-            <label for="musicMaxSeconds">Max length</label>
+            <label for="musicMaxSeconds">최대 길이</label>
             <input type="range" id="musicMaxSeconds" min="30" max="360" step="15" value="240" oninput="musicFormChanged()">
             <span id="musicMaxSecondsVal">4:00</span>
           </div>
-          <div class="hint">YuE2 writes as long as your lyrics need. This only cuts a longer song off; it never stretches a short one.</div>
+          <div class="hint">YuE2는 가사가 필요한 만큼 씁니다. 긴 곡만 자르고, 짧은 곡은 늘리지 않습니다.</div>
           <div class="mini-fields"><div class="mf-cell">
             <label class="mf-label" for="musicSeed">Seed</label>
             <input type="number" id="musicSeed" value="-1" min="-1" max="4294967295" step="1" placeholder="-1 = random" title="-1 = random">
@@ -3246,7 +3232,7 @@ The last line"></textarea>
           <div class="queue-strip"><span class="qchip-spacer"></span><span class="qchip-derived" id="musicEstimate" title="Estimated for a song that runs to Max length, from M4 Max timings (a 3-minute song took about 3 minutes on Final) scaled for this chip. Most songs end sooner; the first song after install also loads the models."></span></div>
           <div class="actions">
             <button type="button" class="primary" id="musicGenBtn" onclick="musicGenerate()">Compose</button>
-            <button type="button" class="danger" onclick="api('/stop', 'POST').then(poll)">Stop</button>
+            <button type="button" class="danger" onclick="api('/stop', 'POST').then(poll)">중지</button>
           </div>
           <div class="hint" id="musicStatus" role="status"></div>
           <div class="hint" id="musicHint">Generated with YuE2 by Multimodal Art Projection · MLX port by vanch007</div>
@@ -3256,7 +3242,7 @@ The last line"></textarea>
       <div class="composer-card">
         <div class="composer-refs">
           <div class="show">
-            <h2>Audio
+            <h2>오디오
               <span class="h2-hint">drives the generation · WAV / MP3 / M4A / FLAC</span>
             </h2>
             <div class="studio-ref-grid" style="grid-template-columns:1fr;">
@@ -3273,7 +3259,7 @@ The last line"></textarea>
 
         <div class="composer-refs">
           <div class="show">
-            <h2>Reference image
+            <h2>레퍼런스 이미지
               <span class="h2-hint">optional · anchors frame 0 like I2V</span>
             </h2>
             <!-- Y2.005 — use the shared .picker component (same as I2V /
@@ -3288,7 +3274,7 @@ The last line"></textarea>
                 <div class="picker-empty">
                   <div class="picker-icon"><svg class="ph"><use href="#ph-image"/></svg></div>
                   <div class="picker-cta">Drop an image here, or <strong>click to browse</strong></div>
-                  <div class="hint">PNG / JPG / WEBP — anchors frame 0 of the audio-driven clip</div>
+                  <div class="hint">PNG / JPG / WEBP — 오디오 구동 클립의 프레임 0을 고정</div>
                 </div>
                 <img class="picker-preview" id="picker_preview_a2v_image" alt="" style="display:none">
                 <button type="button" class="picker-clear" id="picker_clear_a2v_image" title="Clear" style="display:none"><svg class="ph" aria-hidden="true"><use href="#ph-x-bold"/></svg></button>
@@ -3296,7 +3282,7 @@ The last line"></textarea>
               <input type="file" id="picker_file_a2v_image" accept="image/*" style="display:none">
               <input type="hidden" name="a2v_image" id="a2v_image" value="">
               <div class="picker-recent" id="picker_recent_a2v_image_wrap" style="display:none">
-                <div class="picker-recent-label">Recent uploads · click to use</div>
+                <div class="picker-recent-label">최근 업로드 · 클릭해서 사용</div>
                 <div class="picker-recent-strip" id="picker_recent_a2v_image"></div>
               </div>
             </div>
@@ -3391,8 +3377,8 @@ The last line"></textarea>
           <span class="qchip-derived" id="audioStudioEstimate"></span>
         </div>
         <div class="actions">
-          <button type="button" class="primary" id="audioStudioGenBtn" onclick="audioStudioGenerate()">Generate</button>
-          <button type="button" class="danger" onclick="api('/stop', 'POST').then(poll)">Stop</button>
+          <button type="button" class="primary" id="audioStudioGenBtn" onclick="audioStudioGenerate()">생성</button>
+          <button type="button" class="danger" onclick="api('/stop', 'POST').then(poll)">중지</button>
         </div>
       </div>
       </div>
@@ -3412,7 +3398,7 @@ The last line"></textarea>
          were. Drag is Wave 2; click is the floor. -->
     <div id="edSectionTab" style="display:none">
       <header class="carousel-head ed-pool-head">
-        <h3>Media pool</h3>
+        <h3>미디어 풀</h3>
         <span class="ch-spacer"></span>
         <!-- BRING YOUR OWN. A title card, a logo, a phone clip — the pool
              showed everything the panel MADE and nothing the user already
@@ -3425,36 +3411,36 @@ The last line"></textarea>
                onchange="edPoolUpload(this.files); this.value = '';">
         <button type="button" class="ghost-btn" id="edPoolUploadBtn" hidden
                 onclick="document.getElementById('edPoolFile').click()"
-                title="Add a picture or a clip from this Mac. Pictures land as stills, clips land as clips.">Upload</button>
+                title="이 맥에서 그림이나 클립 추가. 그림은 스틸, 클립은 클립.">올리기</button>
         <button type="button" class="ghost-btn" id="edPoolRefreshBtn"
-                onclick="edPoolRefresh(true)" title="Re-read the clips on disk">Refresh</button>
+                onclick="edPoolRefresh(true)" title="디스크의 클립을 다시 읽기">새로고침</button>
       </header>
       <div class="ed-pool-tabs" id="edPoolTabs">
-        <button type="button" class="pill-btn active" data-src="film">This __SEQCAP__</button>
-        <button type="button" class="pill-btn" data-src="other">Other __SEQS__</button>
-        <button type="button" class="pill-btn" data-src="gallery">Generations</button>
+        <button type="button" class="pill-btn active" data-src="film">이 시퀀스</button>
+        <button type="button" class="pill-btn" data-src="other">다른 시퀀스</button>
+        <button type="button" class="pill-btn" data-src="gallery">생성물</button>
         <!-- IMAGES. The gallery has always held them — the image queue drops
              every render into panel_uploads/library/manual — and until a clip
              could be a STILL there was nothing a timeline could do with one. -->
-        <button type="button" class="pill-btn" data-src="images">Images</button>
+        <button type="button" class="pill-btn" data-src="images">이미지</button>
         <!-- SOUND. Laugh tracks, stings, beds: this film's audio/ folder and
              every sound file in the outputs, for the audio tracks. -->
-        <button type="button" class="pill-btn" data-src="sound">Sound</button>
+        <button type="button" class="pill-btn" data-src="sound">사운드</button>
       </div>
       <!-- BLACK IS NOT SOMETHING YOU PICK FROM A LIST. It has no file, so it
            has no row; it is made, with a length, which is its only property. -->
       <div class="ed-pool-make">
         <input type="number" class="sb-input" id="edSlugSecs" value="2.0"
-               min="0.2" max="60" step="0.5" aria-label="Seconds of black">
+               min="0.2" max="60" step="0.5" aria-label="검정 초">
         <button type="button" class="ghost-btn" id="edAddSlugBtn"
                 onclick="edAddSlug()"
-                title="Black, for as long as you say. No file, no proxy — it is drawn by the render.">Add black</button>
+                title="말한 길이만큼 검정. 파일·프록시 없음 — 렌더가 그립니다.">검정 추가</button>
         <!-- A TITLE IS MADE THE SAME WAY BLACK IS: it has no file, so it has
              no row. It lands on the overlay lane at the playhead, selected,
              with its text ready to type in the inspector. -->
         <button type="button" class="ghost-btn" id="edAddTitleBtn"
                 onclick="edAddTitle()"
-                title="Text over the picture, on the overlay lane at the playhead. Type it in the inspector; it is drawn by the render.">Add title</button>
+                title="그림 위 글자, 플레이헤드 오버레이 레인. Inspector에서 입력. 렌더가 그립니다.">타이틀 추가</button>
       </div>
       <!-- ROOM TONE. "The cuts are very rough in terms of sound." A bed under
            the whole film, made for this film (or from a preset), on its own
@@ -3490,8 +3476,8 @@ The last line"></textarea>
       <select class="sb-input ed-pool-film" id="edPoolFilm" hidden
               onchange="edPoolPickFilm(this.value)"
               aria-label="Which __SEQ__ to take clips from"></select>
-      <input type="text" class="sb-input ed-pool-search" id="edPoolSearch" data-shortcut="search.focus" title="Filter the media pool by name"
-             spellcheck="false" placeholder="Filter by name"
+      <input type="text" class="sb-input ed-pool-search" id="edPoolSearch" data-shortcut="search.focus" title="미디어 풀을 이름으로 필터"
+             spellcheck="false" placeholder="이름으로 필터"
              oninput="edPoolPaint()">
       <div class="ed-pool-list" id="edPoolList"></div>
       <div class="ed-pool-note" id="edPoolNote"></div>
@@ -3629,7 +3615,7 @@ The last line"></textarea>
               <path d="M8 2 L9.6 6.4 L14 8 L9.6 9.6 L8 14 L6.4 9.6 L2 8 L6.4 6.4 Z"
                     stroke="currentColor" stroke-width="1.3" stroke-linejoin="round" fill="none"/>
             </svg>
-            <span class="po-act-label" id="h3FinishLabel">Finish</span>
+            <span class="po-act-label" id="h3FinishLabel">완료</span>
           </button>
           <select id="h3FinishTier" class="po-finish-select"
                   title="Pick the quality to finish at — the length stays this clip's"
@@ -3640,14 +3626,14 @@ The last line"></textarea>
           <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true">
             <path d="M3 8 L8 13 L13 8 M8 3 L8 13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
-          <span class="po-act-label">Params</span>
+          <span class="po-act-label">설정값</span>
         </button>
         <button id="useAsExtendBtn" class="po-act" type="button"
                 onclick="useAsExtendSource()" title="Use this clip as the source for an Extend job">
           <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true">
             <path d="M3 8 L13 8 M9 4 L13 8 L9 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
-          <span class="po-act-label">Extend</span>
+          <span class="po-act-label">연장</span>
         </button>
         <!-- Upscale & Face Fix — ONE CLICK queues the face-safe 2× of this
              clip (a new file lands next to it). The ⋯ half opens the full
@@ -3659,7 +3645,7 @@ The last line"></textarea>
             <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true">
               <path d="M3 13 L13 3 M8 3 L13 3 L13 8 M3 8 L3 13 L8 13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
             </svg>
-            <span class="po-act-label">Upscale &amp; Face Fix</span>
+            <span class="po-act-label">업스케일 &amp; 얼굴 보정</span>
           </button>
           <button id="useAsUpscaleBtn" class="po-act po-split-more" type="button"
                   onclick="useAsUpscaleSource()" aria-label="Upscale &amp; Face Fix settings"
@@ -3679,7 +3665,7 @@ The last line"></textarea>
           <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true">
             <path d="M2 4 H14 M2 8 H14 M2 12 H9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
           </svg>
-          <span class="po-act-label">To film</span>
+          <span class="po-act-label">필름으로</span>
         </button>
         <select id="sbAddSelect" class="po-finish-select" style="display:none"
                 title="Which film should this clip join?"
@@ -3689,7 +3675,7 @@ The last line"></textarea>
           <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true">
             <path d="M5 3 L13 8 L5 13 Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" fill="none"/>
           </svg>
-          <span class="po-act-label">Animate</span>
+          <span class="po-act-label">애니메이트</span>
         </button>
         <!-- STORYBOARD ONLY. The shot list is the storyboard tab's primary surface and
              the player is a guest on it, so the guest carries the way out — reported by
@@ -3705,7 +3691,7 @@ The last line"></textarea>
             <path d="M4 4 L12 12 M12 4 L4 12" stroke="currentColor" stroke-width="1.5"
                   stroke-linecap="round"/>
           </svg>
-          <span class="po-act-label">Hide preview</span>
+          <span class="po-act-label">미리보기 숨기기</span>
         </button>
         <button id="expandBtn" class="po-act" type="button"
                 onclick="openExpandLightbox()" title="Expand to fullscreen — Esc closes it" data-shortcut="outputs.expand">
@@ -3713,7 +3699,7 @@ The last line"></textarea>
             <path d="M3 6 V3 H6 M10 3 H13 V6 M13 10 V13 H10 M6 13 H3 V10"
                   stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
-          <span class="po-act-label">Expand</span>
+          <span class="po-act-label">확대</span>
         </button>
         <button class="po-act po-act-danger" type="button"
                 onclick="hideActive()" title="Hide this output from the gallery">
@@ -3726,18 +3712,18 @@ The last line"></textarea>
            take is forming. It is the explicit way back; the poll never yanks a
            playing clip out from under the viewer. -->
       <button type="button" class="live-return-chip" id="liveReturnChip" hidden
-              onclick="returnToLiveRender()">LIVE · return to render</button>
+              onclick="returnToLiveRender()">LIVE · 렌더로 돌아가기</button>
       <!-- Full-size live state. It reads the same progress object as #nowCard
            and adds no polling. Hidden whenever the finished-output player is
            visible, so it cannot repeat the old overlay-over-playback mistake. -->
       <div class="live-stage-overlay" id="liveStageOverlay" hidden>
         <span class="live-stage-badge" id="liveStageBadge">LIVE</span>
         <div class="live-stage-copy">
-          <div class="live-stage-title" id="liveStageTitle">forming take</div>
+          <div class="live-stage-title" id="liveStageTitle">테이크 생성 중</div>
           <div class="live-stage-eta" id="liveStageEta"></div>
         </div>
         <button type="button" class="live-stage-stop" id="liveStageStop"
-                onclick="stopEarly()" hidden>Stop early</button>
+                onclick="stopEarly()" hidden>일찍 중지</button>
       </div>
     </div>
     <!-- Expand lightbox: full-viewport overlay shared by image + video.
@@ -3776,20 +3762,20 @@ The last line"></textarea>
         <div class="sb-empty-icon">
           <svg width="56" height="56" viewBox="0 0 256 256" aria-hidden="true"><use href="#ph-film-slate"/></svg>
         </div>
-        <div class="sb-empty-title">One idea in, a film's worth of shots out.</div>
-        <div class="sb-empty-sub">Describe the film on the left and Phosphene writes the shot list — every shot with its own prompt, length and cast. You read it, fix it, then render the lot as cheap drafts overnight.</div>
+        <div class="sb-empty-title">아이디어 하나 넣으면, 필름만큼의 샷이 나옵니다.</div>
+        <div class="sb-empty-sub">왼쪽에 필름을 적으면 Leo Studio가 샷 목록을 씁니다 — 샷마다 프롬프트, 길이, 캐스트. 읽고 고친 뒤, 값싼 초안으로 밤새 렌더하세요.</div>
         <ul class="sb-empty-steps">
-          <li><b>Plan</b> — a small language model writes the shot list. About a minute.</li>
-          <li><b>Read it</b> — change any prompt, drop a shot, add one. Nothing has rendered yet.</li>
-          <li><b>Draft</b> — every shot small and fast, so you can watch the whole thing before committing.</li>
-          <li><b>Finish</b> — only the shots you keep, at full size, on the same seeds.</li>
+          <li><b>기획</b> — 작은 언어 모델이 샷 목록을 씁니다. 약 1분.</li>
+          <li><b>읽기</b> — 프롬프트를 고치고, 샷을 빼고, 하나 더. 아직 렌더는 없습니다.</li>
+          <li><b>초안</b> — 샷마다 작고 빠르게, 확정 전에 전체를 볼 수 있게.</li>
+          <li><b>마무리</b> — 남긴 샷만 풀 사이즈, 같은 Seed.</li>
         </ul>
       </div>
 
       <!-- Board list: boards exist, none open. -->
       <div class="sb-plan" id="sbList" hidden>
         <header class="carousel-head">
-          <h3>Storyboards</h3>
+          <h3>스토리보드</h3>
           <span class="ch-spacer"></span>
         </header>
         <ul class="row-list sb-boardlist" id="sbBoardList"></ul>
@@ -3798,25 +3784,25 @@ The last line"></textarea>
       <!-- Planning: 30-90 s, and it says what it costs. -->
       <div class="sb-planning" id="sbPlanning" hidden>
         <div class="sb-planning-mark" aria-hidden="true"><i></i><i></i><i></i></div>
-        <div class="sb-planning-title" id="sbPlanningTitle" aria-live="polite">Writing the plan…</div>
-        <div class="sb-planning-sub" id="sbPlanningSub">About a minute. Nothing renders yet.</div>
+        <div class="sb-planning-title" id="sbPlanningTitle" aria-live="polite">기획 쓰는 중…</div>
+        <div class="sb-planning-sub" id="sbPlanningSub">약 1분. 아직 렌더는 없습니다.</div>
         <div class="sb-planning-steps" id="sbPlanningSteps">
-          <div class="sb-step" data-step="load"><span class="sb-step-dot"></span>Loading the planner</div>
-          <div class="sb-step" data-step="write"><span class="sb-step-dot"></span>Writing the plan</div>
-          <div class="sb-step" data-step="check"><span class="sb-step-dot"></span>Checking it</div>
-          <div class="sb-step" data-step="repair" hidden><span class="sb-step-dot"></span>Fixing what didn't validate</div>
-          <div class="sb-step" data-step="unload"><span class="sb-step-dot"></span>Giving the memory back</div>
+          <div class="sb-step" data-step="load"><span class="sb-step-dot"></span>기획 모델 불러오는 중</div>
+          <div class="sb-step" data-step="write"><span class="sb-step-dot"></span>기획 쓰는 중</div>
+          <div class="sb-step" data-step="check"><span class="sb-step-dot"></span>검토 중</div>
+          <div class="sb-step" data-step="repair" hidden><span class="sb-step-dot"></span>검증 실패한 것 고치는 중</div>
+          <div class="sb-step" data-step="unload"><span class="sb-step-dot"></span>메모리 돌려주는 중</div>
         </div>
-        <button type="button" class="ghost-btn" id="sbPlanCancel" onclick="sbCancelPlan()">Cancel</button>
+        <button type="button" class="ghost-btn" id="sbPlanCancel" onclick="sbCancelPlan()">취소</button>
       </div>
 
       <!-- Planner failed. Does NOT discard the brief — it is still on the left. -->
       <div class="sb-empty" id="sbPlanFail" hidden>
-        <div class="sb-empty-title">The planner couldn't write a usable plan.</div>
+        <div class="sb-empty-title">기획이 쓸 수 있는 플랜을 못 썼습니다.</div>
         <div class="sb-empty-sub" id="sbPlanFailMsg"></div>
         <div style="display:flex;gap:8px;margin-top:6px">
-          <button type="button" class="primary" style="width:auto;padding:8px 16px" onclick="sbTryAgain()">Try again</button>
-          <button type="button" class="ghost-btn" id="sbPlanFailRaw" onclick="sbShowRaw()" hidden>Show what it returned</button>
+          <button type="button" class="primary" style="width:auto;padding:8px 16px" onclick="sbTryAgain()">다시 시도</button>
+          <button type="button" class="ghost-btn" id="sbPlanFailRaw" onclick="sbShowRaw()" hidden>원문 보기</button>
         </div>
       </div>
 
@@ -3825,8 +3811,8 @@ The last line"></textarea>
       <div class="sb-plan" id="sbPlan" hidden>
         <header class="carousel-head sb-plan-head">
           <input class="sb-title" id="sbTitle" value="" spellcheck="false"
-                 onblur="sbTitleSave()" aria-label="Film title">
-          <span class="sb-plan-status" id="sbPlanStatus">Draft plan · not rendered</span>
+                 onblur="sbTitleSave()" aria-label="필름 제목">
+          <span class="sb-plan-status" id="sbPlanStatus">초안 기획 · 렌더 안 됨</span>
           <div class="stage-mode-toggle" id="sbStageToggle" role="group" aria-label="Stage view" hidden>
             <button type="button" class="smt-btn active" data-sb-stage="list" onclick="sbSetStage('list')">Shot list</button>
             <button type="button" class="smt-btn" data-sb-stage="player" onclick="sbSetStage('player')">Player</button>
@@ -3867,7 +3853,7 @@ The last line"></textarea>
         <details class="customize-section" id="sbQualitySection">
           <summary class="cz-summary">
             <span class="cz-chevron"><svg class="ph" aria-hidden="true"><use href="#ph-caret-down"/></svg></span>
-            <span class="cz-title">Quality</span>
+            <span class="cz-title">품질</span>
             <span class="cz-meta" id="sbQualityMeta"></span>
           </summary>
           <div class="cz-body">
@@ -3956,8 +3942,8 @@ The last line"></textarea>
         <div class="sb-empty-icon">
           <svg width="56" height="56" viewBox="0 0 256 256" aria-hidden="true"><use href="#ph-film-strip"/></svg>
         </div>
-        <div class="sb-empty-title">Pick a __SEQ__ to cut.</div>
-        <div class="sb-empty-sub">The Editor opens one timeline at a time. Choose a __SEQ__ below, or add clips from the media pool on the left — anything in your generations can go straight onto the track.</div>
+        <div class="sb-empty-title">자를 시퀀스를 고르세요.</div>
+        <div class="sb-empty-sub">편집기는 한 번에 타임라인 하나입니다. 시퀀스를 만들거나, 왼쪽 미디어 풀에서 + 로 클립을 넣으면 시퀀스가 생깁니다.</div>
         <div class="ed-pick" id="edPick"></div>
       </div>
 
@@ -4012,11 +3998,11 @@ The last line"></textarea>
         <span class="sbe-view" id="sbeView" role="group" aria-label="View">
           <button type="button" class="sbe-vbtn" id="sbeSrcBtn" onclick="sbeSrcMonToggle()"
                   aria-label="Source monitor" aria-pressed="false"
-                  title="Source monitor — the left screen, where a clip from the media pool plays before it goes on the timeline">
-            <svg class="sbe-cbar-i"><use href="#ic-source"/></svg><b>Source</b></button>
+                  title="소스 모니터 — 왼쪽 화면. 미디어 풀 클립이 타임라인에 올라가기 전 재생">
+            <svg class="sbe-cbar-i"><use href="#ic-source"/></svg><b>소스</b></button>
           <button type="button" class="sbe-vbtn" id="sbeInspectBtn" onclick="sbeInspectToggle()"
                   aria-label="Inspector" aria-pressed="false" data-shortcut="editor.inspector"
-                  title="Inspector — the right-hand panel: speed, fades, brightness, zoom, transitions and titles for what is selected">
+                  title="Inspector — 오른쪽 패널: 선택된 것의 속도, 페이드, 밝기, 줌, 트랜지션, 타이틀">
             <svg class="sbe-cbar-i"><use href="#ic-inspect"/></svg><b>Inspector</b></button>
           <!-- SOUND MODE. The one control that changes the split: the timeline
                takes the height, every sound lane is at full height, the picture
@@ -4026,29 +4012,29 @@ The last line"></textarea>
                really bad. A button is warranted." -->
           <button type="button" class="sbe-vbtn" id="sbeSoundBtn" onclick="sbeSoundModeToggle()"
                   aria-label="Sound mode" aria-pressed="false" data-shortcut="editor.soundMode"
-                  title="Sound mode — the sound lanes at full height and the picture small">
-            <svg class="sbe-cbar-i"><use href="#ic-wave"/></svg><b>Sound</b></button>
+                  title="사운드 모드 — 소리 레인이 크고 그림이 작음">
+            <svg class="sbe-cbar-i"><use href="#ic-wave"/></svg><b>사운드</b></button>
           <!-- PANELS. Photoshop's Tab: the app's left column (tabs, media pool,
                queue) out of the way, and back. ` on the keyboard. -->
           <button type="button" class="sbe-vbtn" id="sbePanelsBtn" onclick="sbePanelsToggle()"
                   aria-label="Side panels" aria-pressed="true" data-shortcut="editor.panels"
-                  title="Side panels — the app's left column: the tabs, the media pool and the queue">
-            <svg class="sbe-cbar-i"><use href="#ic-panels"/></svg><b>Panels</b></button>
+                  title="사이드 패널 — 앱 왼쪽 열: 탭, 미디어 풀, 대기열">
+            <svg class="sbe-cbar-i"><use href="#ic-panels"/></svg><b>패널</b></button>
           <span class="sbe-vsep" aria-hidden="true"></span>
           <button type="button" class="sbe-vbtn sbe-vbtn-act" id="sbeFullBtn" onclick="sbeFullscreen()"
                   aria-label="Full screen" data-shortcut="editor.fullscreen"
-                  title="Full screen — the Program monitor fills the whole screen. Esc brings it back">
+                  title="전체 화면 — 프로그램 모니터가 화면을 채움. Esc로 돌아옴">
             <svg class="sbe-cbar-i"><use href="#ic-full"/></svg></button>
         </span>
         <!-- One gesture, two directions: a segmented pair rather than two
              free-standing buttons that happen to sit next to each other. -->
         <span class="sbe-undogroup">
-          <button type="button" class="ghost-btn" id="sbeUndoBtn" onclick="sbeUndo()" title="Undo" data-shortcut="editor.undo" disabled>Undo</button>
-          <button type="button" class="ghost-btn" id="sbeRedoBtn" onclick="sbeRedo()" title="Redo" data-shortcut="editor.redo" disabled>Redo</button>
+          <button type="button" class="ghost-btn" id="sbeUndoBtn" onclick="sbeUndo()" title="실행 취소" data-shortcut="editor.undo" disabled>실행 취소</button>
+          <button type="button" class="ghost-btn" id="sbeRedoBtn" onclick="sbeRedo()" title="다시 실행" data-shortcut="editor.redo" disabled>다시 실행</button>
         </span>
         <button type="button" class="ghost-btn" id="sbeSaveBtn" onclick="sbeSaveNow()"
                 data-shortcut="editor.save"
-                title="Save the draft. Save is the only thing that writes it — between saves your edits are kept as a backup you can restore from Drafts.">Save</button>
+                title="초안 저장. 저장만이 씁니다. 저장 사이 편집은 백업으로 남아 초안에서 복원할 수 있습니다.">저장</button>
         <!-- RENDER CAME UP, NOT OUT. It was the far corner of a sticky bar at
              the bottom of the column, 54px of chrome under the timeline to
              hold two buttons; it is the one thing this screen is FOR, so it is
@@ -4057,14 +4043,14 @@ The last line"></textarea>
         <span class="sbe-split">
           <button type="button" class="primary" id="sbeRenderBtn" onclick="sbeRenderFilm()"
                   data-shortcut="editor.render"
-                  title="Render this timeline into one file">Render</button>
+                  title="이 타임라인을 한 파일로 렌더">렌더</button>
           <button type="button" class="primary sbe-car-btn" id="sbeRenderMore"
                   onclick="sbePopToggle('sbeRenderMenu', 'sbeRenderMore')"
-                  aria-haspopup="menu" title="Export, and what the render will do">▾</button>
+                  aria-haspopup="menu" title="보내기, 그리고 렌더가 할 일">▾</button>
         </span>
         <button type="button" class="ghost-btn sbe-kebab" id="sbeMoreBtn"
                 onclick="sbePopToggle('sbeMoreMenu', 'sbeMoreBtn')"
-                aria-haspopup="menu" title="Drafts, soundtrack, media pool, auto-edit, storyboard, close">⋯</button>
+                aria-haspopup="menu" title="초안, 사운드트랙, 미디어 풀, 자동 편집, 스토리보드, 닫기">⋯</button>
       </header>
 
       <!-- THE FOUR POPOVERS. Their contents are the REAL controls, moved
@@ -4078,7 +4064,7 @@ The last line"></textarea>
              HEVC is the Mac's hardware encoder at half the size; ProRes is a
              .mov for the grade that nothing here previews. Size is up
              only, never a crop. -->
-        <span class="sbe-pop-note">Deliver as</span>
+        <span class="sbe-pop-note">납품 형식</span>
         <span class="pill-group cols-3 sbe-deliver" id="sbeDeliverFormat">
           <button type="button" class="pill-btn active" data-format="h264" onclick="sbeDeliverPick('format', 'h264')"
                   title="The panel's own preset. Plays everywhere.">H.264</button>
@@ -4087,10 +4073,10 @@ The last line"></textarea>
           <button type="button" class="pill-btn" data-format="prores" onclick="sbeDeliverPick('format', 'prores')"
                   title="ProRes 422 HQ in a .mov, 10-bit 4:2:2 — for colour grading in an NLE. Not previewable here.">ProRes</button>
         </span>
-        <span class="sbe-deliver-cap">H.264 plays everywhere · HEVC half the size · ProRes for the grade (.mov)</span>
+        <span class="sbe-deliver-cap">H.264는 어디서나 · HEVC는 절반 크기 · ProRes는 그레이딩 (.mov)</span>
         <span class="pill-group cols-3 sbe-deliver" id="sbeDeliverSize">
           <button type="button" class="pill-btn active" data-size="native" onclick="sbeDeliverPick('size', 'native')"
-                  title="The largest picture in the cut, as it is.">As cut</button>
+                  title="컷에서 가장 큰 그림, 그대로.">컷 그대로</button>
           <button type="button" class="pill-btn" data-size="1080p" onclick="sbeDeliverPick('size', '1080p')"
                   title="Scaled to 1080 high, aspect kept, never cropped.">1080p</button>
           <button type="button" class="pill-btn" data-size="2160p" onclick="sbeDeliverPick('size', '2160p')"
@@ -4099,36 +4085,36 @@ The last line"></textarea>
         <span class="sbe-deliver-cap">Size is up only, never a crop · 4K adds pixels, not detail</span>
         <span class="pill-group cols-3 sbe-deliver" id="sbeDeliverFinish">
           <button type="button" class="pill-btn active" data-finish="none" onclick="sbeDeliverPick('finish', 'none')"
-                  title="The picture as rendered.">Clean</button>
+                  title="렌더된 그림 그대로.">Clean</button>
           <button type="button" class="pill-btn" data-finish="grain" onclick="sbeDeliverPick('finish', 'grain')"
                   title="Fine moving film grain over the delivered picture — takes the digital edge off.">Grain</button>
           <button type="button" class="pill-btn" data-finish="heavy_grain" onclick="sbeDeliverPick('finish', 'heavy_grain')"
                   title="Coarse grain, 16 mm territory. Added after the size, so a 4K delivery gets 4K grain.">Heavy grain</button>
         </span>
-        <span class="sbe-deliver-cap">Finish is on the delivery only — the preview and the export stay clean</span>
+        <span class="sbe-deliver-cap">마감은 납품 파일만 — 프리뷰와 보내기는 클린</span>
         <span class="sbe-pop-sep"></span>
         <button type="button" class="ghost-btn" id="sbeNleBtn" onclick="sbeExportNle()"
-                title="A folder with an FCP7 XML (Premiere + Resolve), an After Effects script, and hardlinked media. Audio comes out as stems, not the ducked mix.">Export for Premiere / Resolve / AE</button>
+                title="FCP7 XML(Premiere + Resolve), After Effects 스크립트, 하드링크 미디어 폴더. 소리는 덕된 믹스가 아니라 스템.">Premiere / Resolve / AE로 보내기</button>
         <span class="sbe-pop-note" id="sbeRenderNote"></span>
       </div>
 
       <div class="sbe-pop" id="sbeMoreMenu" hidden>
         <button type="button" class="ghost-btn" id="sbeVersBtn" onclick="sbeVersionsOpen(false)"
-                title="Every draft this __SEQ__ has, and every past save of this one">Drafts and versions…</button>
+                title="이 시퀀스의 모든 초안, 그리고 이번 초안의 지난 저장">초안과 버전…</button>
         <button type="button" class="ghost-btn" id="sbeImportBtn" onclick="edPoolFocus()"
-                title="This __SEQ__'s shots, other __SEQS__' clips, and everything in your generations.">Media pool</button>
+                title="이 시퀀스 샷, 다른 시퀀스 클립, 생성물 전부.">미디어 풀</button>
         <button type="button" class="ghost-btn" id="sbeAutoBtn" onclick="sbeAuto()"
-                title="Re-cuts the __SEQ__ from scratch. Throws away this arrangement.">Auto-edit…</button>
+                title="시퀀스를 처음부터 다시 컷. 이 배열은 버립니다.">자동 편집…</button>
         <span class="sbe-pop-sep"></span>
         <button type="button" class="ghost-btn" id="sbeBoardBtn" onclick="sbeGoToBoard()"
-                title="Open this __SEQ__'s shot list in the Storyboard tab" hidden>Storyboard</button>
+                title="이 시퀀스 샷 목록을 스토리보드 탭에서 열기" hidden>스토리보드</button>
         <button type="button" class="ghost-btn" id="sbeCloseBtn" onclick="sbeClose()"
-                title="Close this timeline (Esc). Nothing is deleted.">Close</button>
+                title="이 타임라인 닫기 (Esc). 삭제되는 것은 없습니다.">닫기</button>
       </div>
 
       <div class="sbe-pop sbe-pop-wide" id="sbeKeysPop" hidden>
         <span class="sbe-note sbe-keys" id="sbeKeys"></span>
-        <a class="sbe-keys-docs" href="#docs/shortcuts/keys-editor">Every shortcut, in the Docs →</a>
+        <a class="sbe-keys-docs" href="#docs/shortcuts/keys-editor">모든 단축키, 문서에서 →</a>
       </div>
       <!-- THE CLIP BAR'S OVERFLOW. Empty in the markup on purpose: the bar
            MOVES its own buttons in here when the pane is too narrow for them
@@ -4233,7 +4219,7 @@ The last line"></textarea>
              bar sat across the top of the film for the rest of the session
              over a question the user was not ready to answer. This one hides
              it and touches nothing; it is back on the next read. -->
-        <button type="button" class="ghost-btn" onclick="sbeNoticeLater()">Later</button>
+        <button type="button" class="ghost-btn" onclick="sbeNoticeLater()">나중에</button>
       </div>
 
       <div class="sbe-errs" id="sbeErrors" data-short="Not saved" hidden></div>
@@ -4359,7 +4345,7 @@ The last line"></textarea>
             </div>
           </div>
           <div class="sbe-mon-bar">
-            <span class="sbe-mon-label">Source</span>
+            <span class="sbe-mon-label">소스</span>
             <button type="button" class="ghost-btn sbe-ibtn" id="sbeSrcPlayBtn"
                     onclick="sbeSrcToggle()" disabled aria-label="Play the source" title="Play / pause the source">
               <svg class="sbe-cbar-i"><use href="#ic-play" id="sbeSrcPlayUse"/></svg></button>
@@ -4512,30 +4498,30 @@ The last line"></textarea>
         <!-- WHAT AM I ABOUT TO ACT ON. The bar's buttons are worth nothing
              without it: "Ripple delete" over an unnamed selection is the one
              gesture nobody should have to guess at. -->
-        <span class="sbe-cbar-who" id="sbeCbarWho">Nothing selected</span>
+        <span class="sbe-cbar-who" id="sbeCbarWho">선택 없음</span>
         <span class="sbe-cbar-sep"></span>
-        <button type="button" class="sbe-cbar-btn" id="sbeCbSplit" onclick="sbeSplitHere()" aria-label="Split">
-          <svg class="sbe-cbar-i"><use href="#ic-split"/></svg><b>Split</b></button>
-        <button type="button" class="sbe-cbar-btn" id="sbeCbLift" onclick="sbeLiftSelected()" aria-label="Lift">
-          <svg class="sbe-cbar-i"><use href="#ic-lift"/></svg><b>Lift</b></button>
-        <button type="button" class="sbe-cbar-btn" id="sbeCbRipple" onclick="sbeRippleSelected()" aria-label="Ripple delete">
-          <svg class="sbe-cbar-i"><use href="#ic-ripple"/></svg><b>Ripple delete</b></button>
-        <button type="button" class="sbe-cbar-btn" id="sbeCbDup" onclick="sbeDuplicateSel()" aria-label="Duplicate">
-          <svg class="sbe-cbar-i"><use href="#ic-dup"/></svg><b>Duplicate</b></button>
+        <button type="button" class="sbe-cbar-btn" id="sbeCbSplit" onclick="sbeSplitHere()" aria-label="스플릿">
+          <svg class="sbe-cbar-i"><use href="#ic-split"/></svg><b>스플릿</b></button>
+        <button type="button" class="sbe-cbar-btn" id="sbeCbLift" onclick="sbeLiftSelected()" aria-label="리프트">
+          <svg class="sbe-cbar-i"><use href="#ic-lift"/></svg><b>리프트</b></button>
+        <button type="button" class="sbe-cbar-btn" id="sbeCbRipple" onclick="sbeRippleSelected()" aria-label="리플 삭제">
+          <svg class="sbe-cbar-i"><use href="#ic-ripple"/></svg><b>리플 삭제</b></button>
+        <button type="button" class="sbe-cbar-btn" id="sbeCbDup" onclick="sbeDuplicateSel()" aria-label="복제">
+          <svg class="sbe-cbar-i"><use href="#ic-dup"/></svg><b>복제</b></button>
         <span class="sbe-cbar-sep"></span>
-        <button type="button" class="sbe-cbar-btn" id="sbeCbLink" onclick="sbeToggleAudioLink()" aria-label="Unlink sound">
-          <svg class="sbe-cbar-i"><use href="#ic-unlink" id="sbeCbLinkUse"/></svg><b>Unlink sound</b></button>
-        <button type="button" class="sbe-cbar-btn" id="sbeCbResync" onclick="sbeResyncSel()" aria-label="Resync sound">
-          <svg class="sbe-cbar-i"><use href="#ic-resync"/></svg><b>Resync sound</b></button>
-        <button type="button" class="sbe-cbar-btn" id="sbeCbMute" onclick="sbeToggleClipMute()" aria-label="Mute sound">
-          <svg class="sbe-cbar-i"><use href="#ic-mute" id="sbeCbMuteUse"/></svg><b>Mute sound</b></button>
-        <button type="button" class="sbe-cbar-btn" id="sbeCbDelSound" onclick="sbeDeleteStripSel()" aria-label="Delete sound">
-          <svg class="sbe-cbar-i"><use href="#ic-delsound"/></svg><b>Delete sound</b></button>
-        <button type="button" class="sbe-cbar-btn" id="sbeCbPoints" onclick="sbeClearPoints()" aria-label="Clear points">
-          <svg class="sbe-cbar-i"><use href="#ic-points"/></svg><b>Clear points</b></button>
+        <button type="button" class="sbe-cbar-btn" id="sbeCbLink" onclick="sbeToggleAudioLink()" aria-label="소리 언링크">
+          <svg class="sbe-cbar-i"><use href="#ic-unlink" id="sbeCbLinkUse"/></svg><b>소리 언링크</b></button>
+        <button type="button" class="sbe-cbar-btn" id="sbeCbResync" onclick="sbeResyncSel()" aria-label="소리 리스싱크">
+          <svg class="sbe-cbar-i"><use href="#ic-resync"/></svg><b>소리 리스싱크</b></button>
+        <button type="button" class="sbe-cbar-btn" id="sbeCbMute" onclick="sbeToggleClipMute()" aria-label="소리 음소거">
+          <svg class="sbe-cbar-i"><use href="#ic-mute" id="sbeCbMuteUse"/></svg><b>소리 음소거</b></button>
+        <button type="button" class="sbe-cbar-btn" id="sbeCbDelSound" onclick="sbeDeleteStripSel()" aria-label="소리 삭제">
+          <svg class="sbe-cbar-i"><use href="#ic-delsound"/></svg><b>소리 삭제</b></button>
+        <button type="button" class="sbe-cbar-btn" id="sbeCbPoints" onclick="sbeClearPoints()" aria-label="포인트 지우기">
+          <svg class="sbe-cbar-i"><use href="#ic-points"/></svg><b>포인트 지우기</b></button>
         <span class="sbe-cbar-sep"></span>
-        <button type="button" class="sbe-cbar-btn" id="sbeCbLock" onclick="sbeToggleLock()" aria-label="Lock">
-          <svg class="sbe-cbar-i"><use href="#ic-lock" id="sbeCbLockUse"/></svg><b>Lock</b></button>
+        <button type="button" class="sbe-cbar-btn" id="sbeCbLock" onclick="sbeToggleLock()" aria-label="잠금">
+          <svg class="sbe-cbar-i"><use href="#ic-lock" id="sbeCbLockUse"/></svg><b>잠금</b></button>
         <span class="sbe-cbar-sep"></span>
         <button type="button" class="sbe-cbar-btn" id="sbeCbFaceFix" onclick="sbeFaceFixSel()" aria-label="Face Fix ×2">
           <svg class="sbe-cbar-i"><use href="#ic-facefix"/></svg><b>Face Fix ×2</b></button>
@@ -4560,13 +4546,13 @@ The last line"></textarea>
                  aria-label="Timeline zoom"
                  title="Zoom. Fully left fits the whole __SEQ__ in the window. + and − on the keyboard. Over the track: shift + wheel pans, alt + wheel or a trackpad pinch zooms."
                  oninput="sbeZoomSlide(this.value)">
-          <button type="button" class="ghost-btn" onclick="sbeZoom(1)" title="Zoom in" data-shortcut="editor.zoom">+</button>
+          <button type="button" class="ghost-btn" onclick="sbeZoom(1)" title="줌 인" data-shortcut="editor.zoom">+</button>
         </span>
         <span class="sbe-info" id="sbeApprox" tabindex="0"
-              title="The preview is approximate: the browser lands within a few frames of each cut and freezes for about one there. The render is exact.">i</span>
+              title="프리뷰는 근사입니다. 브라우저가 컷마다 몇 프레임 안에서 멈추고 약 한 프레임 멈춥니다. 렌더는 정확합니다.">i</span>
         <button type="button" class="sbe-tbtn" id="sbeKeysBtn"
                 onclick="sbePopToggle('sbeKeysPop', 'sbeKeysBtn')"
-                aria-haspopup="menu" aria-label="Keys" title="Every gesture this timeline answers to">
+                aria-haspopup="menu" aria-label="키" title="이 타임라인이 받는 모든 제스처">
           <svg class="sbe-cbar-i"><use href="#ic-keys"/></svg></button>
       </div>
         <!-- THE TIMELINE'S TOP EDGE, as a handle. Positioned over the 8px gap
@@ -4575,7 +4561,7 @@ The last line"></textarea>
              aria-orientation="horizontal"
              aria-label="Resize the timeline — drag up for taller lanes"
              tabindex="0"
-             title="Drag up to make the timeline taller — the sound strips take the biggest share. Double-click to reset. ↑ / ↓ when focused."
+             title="위로 드래그하면 타임라인이 높아집니다. 소리 스트립이 가장 많이 받습니다. 더블클릭 리셋. 포커스 때 ↑ / ↓."
              onpointerdown="sbeTlGrabDown(event)"
              onpointermove="sbeTlGrabMove(event)"
              onpointerup="sbeTlGrabUp(event)"
@@ -4743,24 +4729,24 @@ The last line"></textarea>
          toggle on the right. Replaces the previous two-row stack. -->
     <div class="carousel-wrap">
       <div class="carousel-head">
-        <h3 id="carouselTitle">Outputs</h3>
+        <h3 id="carouselTitle">결과</h3>
         <!-- Kind chips, ID + onclick names preserved. -->
         <div class="stage-outputs-filter" id="mainOutputsFilter">
           <button type="button" id="mainOutputsFilterAll" class="active"
-                  onclick="setMainOutputsFilter('all')">All</button>
+                  onclick="setMainOutputsFilter('all')">전체</button>
           <button type="button" id="mainOutputsFilterVideos"
-                  onclick="setMainOutputsFilter('videos')">Videos</button>
+                  onclick="setMainOutputsFilter('videos')">영상</button>
           <button type="button" id="mainOutputsFilterPhotos"
-                  onclick="setMainOutputsFilter('photos')">Photos</button>
+                  onclick="setMainOutputsFilter('photos')">사진</button>
           <button type="button" id="mainOutputsFilterAudio"
-                  onclick="setMainOutputsFilter('audio')">Audio</button>
+                  onclick="setMainOutputsFilter('audio')">오디오</button>
         </div>
         <!-- SEARCH, over everything the sidecar knows: prompt words, mode,
              quality, engine, size, seed, LoRA and character names. A
              substring test on one lower-cased string per output, so it is
              free per keystroke; the title says how many match. -->
-        <input type="search" class="sb-input outputs-search" id="outputsSearch" data-shortcut="search.focus" title="Search outputs"
-               placeholder="Search prompts, models, LoRAs, sizes…" aria-label="Search outputs"
+        <input type="search" class="sb-input outputs-search" id="outputsSearch" data-shortcut="search.focus" title="결과 검색"
+               placeholder="프롬프트, 모델, LoRA, 크기…" aria-label="결과 검색"
                spellcheck="false" oninput="setOutputsQuery(this.value)" onsearch="setOutputsQuery(this.value)">
         <span class="ch-spacer"></span>
         <!-- "Show all (N)" — surfaces older renders that /status's polling
@@ -4910,34 +4896,34 @@ The last line"></textarea>
      onclick="if(event.target===this) closeSettingsModal()">
   <div class="models-card">
     <div class="models-head">
-      <h2 id="settingsModalTitle">Settings</h2>
-      <button class="ghost-btn" onclick="closeSettingsModal()">Close</button>
+      <h2 id="settingsModalTitle">설정</h2>
+      <button class="ghost-btn" onclick="closeSettingsModal()">닫기</button>
     </div>
     <div class="models-hint">
-      Pick how rendered clips are encoded. Settings are saved to
-      <code>panel_settings.json</code> and apply to every new render.
-      Files already in the gallery are not re-encoded.
+      렌더된 클립을 어떻게 인코딩할지 고릅니다. 설정은
+      <code>panel_settings.json</code>에 저장되고 이후 렌더에만 적용됩니다.
+      갤러리에 이미 있는 파일은 다시 인코딩하지 않습니다.
     </div>
 
     <div class="settings-section">
-      <h3>Output format</h3>
+      <h3>출력 포맷</h3>
       <div class="preset-grid" id="settingsPresets">
         <!-- populated by openSettingsModal() from /settings -->
       </div>
     </div>
 
     <div class="settings-section">
-      <h3>Memory / speed</h3>
+      <h3>메모리 / 속도</h3>
       <!-- The Memory-policy select that lived here was REMOVED (owner ruling
            2026-09-01): the helper never read the value, so Safe/Auto/Fast
            changed nothing about any render — the engine's own budget-aware
            decoder has owned this since the v0.14.8 pin. A control that does
            nothing teaches users not to trust the ones that do. -->
       <div class="settings-row" style="margin-top:10px">
-        <label>Live preview</label>
+        <label>라이브 프리뷰</label>
         <select id="settingsLivePreview" style="flex:1">
-          <option value="on">On — show the shot as it forms</option>
-          <option value="off">Off</option>
+          <option value="on">켜기 — 샷이 형성되는 모습을 보기</option>
+          <option value="off">끄기</option>
         </select>
       </div>
       <!-- H3 DiT. The setting has been honoured by `h3_dit_choice()` and
@@ -4948,11 +4934,11 @@ The last line"></textarea>
            the answer was a setting he could not see. Numbers here are measured,
            not estimated (640x384/73f, seed 424242, same-seed A/B). -->
       <div class="settings-row" style="margin-top:10px" id="settingsH3DitRow" hidden>
-        <label>Hailuo H3 model</label>
+        <label>Hailuo H3 모델</label>
         <select id="settingsH3Dit" style="flex:1">
-          <option value="auto">Automatic — best quality this Mac can hold</option>
-          <option value="bf16">Full (bf16) — 42 GiB peak</option>
-          <option value="q8">Compact (Q8) — 21 GiB peak, half the memory</option>
+          <option value="auto">Automatic — 이 맥이 담을 수 있는 최선</option>
+          <option value="bf16">Full (bf16) — 피크 42 GiB</option>
+          <option value="q8">Compact (Q8) — 피크 21 GiB, 메모리 절반</option>
         </select>
       </div>
       <div class="hint" id="settingsH3DitHint" style="margin-top:6px" hidden>
@@ -4965,25 +4951,23 @@ The last line"></textarea>
         needed.
       </div>
       <div class="hint" style="margin-top:6px">
-        Never changes the result — the clip is byte-for-byte the same either way.
-        Costs a fraction of the render: about 0.2 % on High, a few per cent on a
-        short draft, where the render is short enough for the decode to show.
-        Turning it off also removes the Stop-early button.
+        결과는 바뀌지 않습니다. 클립은 어느 쪽이든 바이트 단위로 같습니다.
+        비용은 렌더의 일부: High에서 약 0.2%, 짧은 초안에서는 몇 퍼센트.
+        끄면 일찍 중지 버튼도 사라집니다.
       </div>
     </div>
 
     <div class="settings-section">
-      <h3>Model files</h3>
+      <h3>모델 파일</h3>
       <div class="hint" style="margin-bottom:8px">
-        Verify every installed model weight against the official checksums on
-        Hugging Face. A file that's the right size but the wrong content — an
-        interrupted, mirrored, or stale download — decodes to garbled / "mosaic"
-        video. This catches it and offers a one-click re-download. Takes 1–2
-        minutes (it hashes every file).
+        설치된 모델 가중치를 Hugging Face 공식 체크섬과 대조합니다.
+        크기만 맞고 내용이 틀린 파일 — 끊긴·미러·낡은 다운로드 — 은
+        깨지거나 "모자이크" 영상이 됩니다. 그걸 잡고 원클릭 재다운로드를 줍니다.
+        1–2분 걸립니다(파일마다 해시).
       </div>
       <div class="settings-row">
         <button type="button" class="primary-btn" id="deepVerifyBtn"
-                onclick="startDeepVerify()">Verify model files (checksum)</button>
+                onclick="startDeepVerify()">모델 파일 검증 (checksum)</button>
         <span class="hint" id="deepVerifyStatus" style="margin-left:10px"></span>
       </div>
     </div>
@@ -4998,47 +4982,45 @@ The last line"></textarea>
          .models-list / .models-foot are reused wholesale, so a Storage row and
          a Models row look like siblings because they are. -->
     <div class="settings-section" id="settingsStorageSection" style="display:none">
-      <h3>Storage</h3>
+      <h3>저장 공간</h3>
       <div class="hint" style="margin-bottom:8px">
-        Weights on this disk that this build does not render with by default —
-        and, where one is listed, what you would lose by removing it. Removing
-        frees the space immediately; re-installing later is a fresh download of
-        the size shown. Nothing here is deleted without asking.
+        이 빌드가 기본으로 안 쓰는 가중치가 디스크에 있을 때 — 지우면
+        무엇을 잃는지도 적습니다. 지우면 공간이 바로 나고, 나중에 다시 받으면
+        표시된 크기만큼 새로 받습니다. 묻지 않고 지우지는 않습니다.
       </div>
       <ul class="models-list" id="storageList"></ul>
       <div class="models-foot" id="storageFoot"></div>
     </div>
 
     <div class="settings-section">
-      <h3>API tokens</h3>
+      <h3>API 토큰</h3>
       <div class="hint" style="margin-bottom:8px">
-        Saved locally in <code>panel_settings.json</code>. Never sent
-        anywhere except as auth headers to civitai.com / huggingface.co.
-        Power users can override with <code>CIVITAI_API_KEY</code> /
-        <code>HF_TOKEN</code> env vars; the saved value here wins when
-        both are set.
+        <code>panel_settings.json</code>에만 저장됩니다. civitai.com /
+        huggingface.co 인증 헤더 외로는 안 나갑니다.
+        <code>CIVITAI_API_KEY</code> / <code>HF_TOKEN</code>으로 덮을 수
+        있지만, 둘 다 있으면 여기 저장값이 이깁니다.
       </div>
 
       <!-- CivitAI token row -->
       <div class="token-row">
         <div class="token-label">
-          <span>CivitAI API key</span>
+          <span>CivitAI API 키</span>
           <span class="token-status" id="civitaiKeyStatus">—</span>
         </div>
         <div class="token-row-input">
           <input type="password" id="civitaiKeyInput" autocomplete="off"
-                 placeholder="paste key here…"
+                 placeholder="키를 붙여 넣기…"
                  oninput="onTokenInput('civitai')">
           <button type="button" class="ghost-btn" id="civitaiKeyToggle"
-                  onclick="toggleTokenVisibility('civitaiKeyInput', this)">show</button>
+                  onclick="toggleTokenVisibility('civitaiKeyInput', this)">보기</button>
           <button type="button" class="primary-btn token-savetest"
-                  onclick="testToken('civitai')" title="Save the pasted key and verify it with CivitAI">save & test</button>
+                  onclick="testToken('civitai')" title="붙여 넣은 키를 저장하고 CivitAI에서 확인">저장 & 테스트</button>
           <button type="button" class="ghost-btn" id="civitaiKeyClear"
-                  onclick="clearToken('civitai')" style="display:none">clear</button>
+                  onclick="clearToken('civitai')" style="display:none">지우기</button>
         </div>
         <div class="hint" id="civitaiTestResult">
-          Required for installing CivitAI LoRAs.
-          Get one at <a href="https://civitai.com/user/account" target="_blank" rel="noopener">civitai.com/user/account</a>
+          CivitAI LoRA 설치에 필요합니다.
+          <a href="https://civitai.com/user/account" target="_blank" rel="noopener">civitai.com/user/account</a>
           (Account → API Keys → Add).
         </div>
       </div>
@@ -5046,7 +5028,7 @@ The last line"></textarea>
       <!-- HF token row -->
       <div class="token-row">
         <div class="token-label">
-          <span>Hugging Face token</span>
+          <span>Hugging Face 토큰</span>
           <span class="token-status" id="hfTokenStatus">—</span>
         </div>
         <div class="token-row-input">
@@ -5054,16 +5036,16 @@ The last line"></textarea>
                  placeholder="hf_…"
                  oninput="onTokenInput('hf')">
           <button type="button" class="ghost-btn" id="hfTokenToggle"
-                  onclick="toggleTokenVisibility('hfTokenInput', this)">show</button>
+                  onclick="toggleTokenVisibility('hfTokenInput', this)">보기</button>
           <button type="button" class="primary-btn token-savetest"
-                  onclick="testToken('hf')" title="Save the pasted token and verify it with Hugging Face">save & test</button>
+                  onclick="testToken('hf')" title="붙여 넣은 토큰을 저장하고 Hugging Face에서 확인">저장 & 테스트</button>
           <button type="button" class="ghost-btn" id="hfTokenClear"
-                  onclick="clearToken('hf')" style="display:none">clear</button>
+                  onclick="clearToken('hf')" style="display:none">지우기</button>
         </div>
         <div class="hint" id="hfTestResult">
-          Required for gated LoRAs (Lightricks HDR + Control LoRAs).
-          Get one at <a href="https://huggingface.co/settings/tokens" target="_blank" rel="noopener">huggingface.co/settings/tokens</a>
-          — read access is enough.
+          게이트 LoRA(Lightricks HDR + Control LoRA)에 필요합니다.
+          <a href="https://huggingface.co/settings/tokens" target="_blank" rel="noopener">huggingface.co/settings/tokens</a>
+          — 읽기 권한이면 됩니다.
         </div>
       </div>
     </div>
@@ -5074,19 +5056,17 @@ The last line"></textarea>
          server enforces the gate independently in _civitai_search, so a
          tampered client can't bypass this. -->
     <div class="settings-section">
-      <h3>Spicy mode <span class="hint" style="font-weight:400">(adult content)</span></h3>
+      <h3>Spicy mode <span class="hint" style="font-weight:400">(성인 콘텐츠)</span></h3>
       <div class="hint" style="margin-bottom:10px">
-        When OFF, the CivitAI LoRA browser hides NSFW models entirely —
-        the "Show NSFW" toggle disappears and any NSFW result the API
-        returns is filtered out. When ON, you can choose per-search whether
-        to include NSFW results. The server enforces this gate even if the
-        client is tampered with.
+        끄면 CivitAI LoRA 브라우저가 NSFW를 전부 숨깁니다.
+        "NSFW 보기"가 사라지고 API NSFW 결과도 걸러집니다. 켜면 검색마다
+        NSFW를 넣을지 고릅니다. 클라이언트를 고쳐도 서버가 막습니다.
       </div>
       <div class="spicy-row">
         <span class="spicy-state" id="spicyStateBadge">OFF</span>
         <button type="button" class="ghost-btn" id="spicyToggleBtn"
                 onclick="toggleSpicyMode()" style="margin-left:auto">
-          Enable Spicy mode
+          Spicy mode 켜기
         </button>
       </div>
       <div class="hint" id="spicyHint" style="margin-top:8px; display:none"></div>
@@ -5096,12 +5076,12 @@ The last line"></textarea>
          in this browser and applied before the first paint from main.js.
          Same row shape as the switches below. -->
     <div class="settings-section">
-      <h3>Appearance</h3>
-      <div class="hint" style="margin-bottom:10px">The panel's palette. "System" follows the Mac's own light or dark setting and switches live. Saved in this browser only.</div>
+      <h3>외관</h3>
+      <div class="hint" style="margin-bottom:10px">패널 색. "시스템"은 맥의 라이트/다크를 실시간으로 따릅니다. 이 브라우저에만 저장됩니다.</div>
       <div class="pill-group cols-3" id="appearanceGroup">
-        <button type="button" class="pill-btn active" data-appearance="dark" onclick="setAppearance('dark')">Dark</button>
-        <button type="button" class="pill-btn" data-appearance="light" onclick="setAppearance('light')">Light</button>
-        <button type="button" class="pill-btn" data-appearance="system" onclick="setAppearance('system')">System</button>
+        <button type="button" class="pill-btn active" data-appearance="dark" onclick="setAppearance('dark')">다크</button>
+        <button type="button" class="pill-btn" data-appearance="light" onclick="setAppearance('light')">라이트</button>
+        <button type="button" class="pill-btn" data-appearance="system" onclick="setAppearance('system')">시스템</button>
       </div>
     </div>
 
@@ -5110,19 +5090,19 @@ The last line"></textarea>
          background — once the person has allowed them. Same row shape as
          the analytics switch below. -->
     <div class="settings-section">
-      <h3>Completion alerts</h3>
+      <h3>완료 알림</h3>
       <div class="hint" style="margin-bottom:10px" id="notifyHint"></div>
       <div class="spicy-row">
         <span class="spicy-state on" id="notifyStateBadge">ON</span>
         <button type="button" class="ghost-btn" id="notifyAllowBtn" hidden
-                onclick="askNotifyPermission()">Allow browser alerts</button>
+                onclick="askNotifyPermission()">브라우저 알림 허용</button>
         <button type="button" class="ghost-btn" id="notifyPushBtn" hidden
-                onclick="pushToggle()">Alert me here even when the tab is closed</button>
+                onclick="pushToggle()">탭이 닫혀 있어도 여기서 알림</button>
         <button type="button" class="ghost-btn" id="notifyPushTestBtn" hidden
-                onclick="pushTest()">Send a test</button>
+                onclick="pushTest()">테스트 보내기</button>
         <button type="button" class="ghost-btn" id="notifyToggleBtn"
                 onclick="toggleNotify()" style="margin-left:auto">
-          Turn off
+          끄기
         </button>
       </div>
     </div>
@@ -5136,38 +5116,32 @@ The last line"></textarea>
          keys there. Reuses the spicy-row / token-row markup so this
          section inherits the modal's existing styling with no new CSS. -->
     <div class="settings-section">
-      <h3>Anonymous usage analytics</h3>
+      <h3>익명 사용 통계</h3>
       <div class="hint" style="margin-bottom:10px">
-        Sends anonymous counts so bugs in the field get noticed: panel
-        version, hardware class (e.g. <em>M4 Max, 64 GB</em>), which
-        model generation you render with, which optional packs are
-        installed, and for each render the engine,
-        tier, resolution, frame count and a coarse duration bucket —
-        plus the first line of the error when one fails.
-        <b>Never your prompts, filenames, paths, images or video.</b>
-        You are a random ID, generated on this Mac and tied to nothing.
-        The panel sends no location, but the address your computer
-        connects from resolves to a <b>country and city</b> at the
-        receiver, and those are kept next to the event; the address
-        itself is discarded. That is the one thing on this list the
-        panel doesn't send and can't stop — turning analytics off is
-        what stops it, because then no request is made at all.
-        Everything the panel would send is also written in plain text to
-        <code>state/usage-log.jsonl</code> so you can read it yourself;
-        the full schema is in <code>docs/ANALYTICS.md</code>.
+        현장 버그를 알아채려고 익명 횟수를 보냅니다: 패널 버전,
+        하드웨어 급(예: <em>M4 Max, 64 GB</em>), 어떤 세대 모델로 렌더하는지,
+        어떤 선택 팩이 있는지, 렌더마다 엔진·티어·해상도·프레임 수·거친 길이
+        구간 — 실패하면 에러 첫 줄.
+        <b>프롬프트, 파일명, 경로, 이미지, 영상은 절대 안 보냅니다.</b>
+        이 맥에서 만든 아무 것도 안 묶인 무작위 ID입니다.
+        패널은 위치를 안 보내지만, 연결 주소는 수신 쪽에서
+        <b>나라와 도시</b>로 풀리고 이벤트 옆에 남습니다. 주소 자체는 버립니다.
+        이 목록에서 패널이 못 막는 유일한 것 — 통계를 끄면 요청 자체가 없어서
+        멈춥니다. 보낼 내용은 <code>state/usage-log.jsonl</code>에 평문으로도
+        씁니다. 스키마는 <code>docs/ANALYTICS.md</code>.
       </div>
       <div class="spicy-row">
         <span class="spicy-state" id="analyticsStateBadge">ON</span>
         <button type="button" class="ghost-btn" id="analyticsToggleBtn"
                 onclick="toggleAnalytics()" style="margin-left:auto">
-          Turn off
+          끄기
         </button>
       </div>
       <div class="hint" id="analyticsHint" style="margin-top:8px"></div>
 
       <details style="margin-top:12px">
         <summary style="cursor:pointer; font-size:12px; color:var(--muted, #9aa)">
-          Maintainer / self-hosting keys
+          유지보수 / 셀프호스팅 키
         </summary>
         <div class="hint" style="margin:8px 0">
           This build ships Phosphene's own project key, which is why the
@@ -5188,11 +5162,11 @@ The last line"></textarea>
             <input type="password" id="analyticsKeyInput" autocomplete="off"
                    placeholder="phc_…">
             <button type="button" class="ghost-btn"
-                    onclick="toggleTokenVisibility('analyticsKeyInput', this)">show</button>
+                    onclick="toggleTokenVisibility('analyticsKeyInput', this)">보기</button>
             <button type="button" class="primary-btn token-savetest"
-                    onclick="saveAnalyticsKey('analytics_key')">save</button>
+                    onclick="saveAnalyticsKey('analytics_key')">저장</button>
             <button type="button" class="ghost-btn" id="analyticsKeyClear"
-                    onclick="clearAnalyticsKey('analytics_key')" style="display:none">clear</button>
+                    onclick="clearAnalyticsKey('analytics_key')" style="display:none">지우기</button>
           </div>
           <div class="hint">
             Write-only project key. Pasting one redirects the pings to your
@@ -5208,11 +5182,11 @@ The last line"></textarea>
             <input type="password" id="analyticsQueryKeyInput" autocomplete="off"
                    placeholder="phx_…">
             <button type="button" class="ghost-btn"
-                    onclick="toggleTokenVisibility('analyticsQueryKeyInput', this)">show</button>
+                    onclick="toggleTokenVisibility('analyticsQueryKeyInput', this)">보기</button>
             <button type="button" class="primary-btn token-savetest"
-                    onclick="saveAnalyticsKey('analytics_query_key')">save</button>
+                    onclick="saveAnalyticsKey('analytics_query_key')">저장</button>
             <button type="button" class="ghost-btn" id="analyticsQueryKeyClear"
-                    onclick="clearAnalyticsKey('analytics_query_key')" style="display:none">clear</button>
+                    onclick="clearAnalyticsKey('analytics_query_key')" style="display:none">지우기</button>
           </div>
           <div class="hint">
             Read-only key that unlocks the fleet numbers in the Usage
@@ -5386,16 +5360,16 @@ The last line"></textarea>
       <label style="display:flex; flex-direction:column; gap:4px; font-size:12px; color:var(--muted)">
         Description
         <textarea id="bugBody" rows="14"
-                  style="padding:8px 10px; font-size:12px; background:rgba(140,160,220,0.04); border:1px solid var(--ph-border-soft); border-radius:6px; color:var(--text); font-family:ui-monospace,SFMono-Regular,Menlo,monospace; line-height:1.45; resize:vertical">Loading environment…</textarea>
+                  style="padding:8px 10px; font-size:12px; background:rgba(140,160,220,0.04); border:1px solid var(--ph-border-soft); border-radius:6px; color:var(--text); font-family:ui-monospace,SFMono-Regular,Menlo,monospace; line-height:1.45; resize:vertical">환경 정보 불러오는 중…</textarea>
       </label>
       <label id="bugCrashRow" style="display:none; align-items:center; gap:8px; font-size:12px; color:var(--muted)">
         <input id="bugCrashCheck" type="checkbox" checked>
-        <span id="bugCrashLabel">Include latest crash reports (zips up to 5 .ips files)</span>
+        <span id="bugCrashLabel">최근 크래시 리포트 포함 (.ips 최대 5개)</span>
       </label>
       <div id="bugSubmitRow" style="display:flex; gap:8px; justify-content:flex-end; align-items:center">
         <span id="bugStatus" style="flex:1; font-size:12px; color:var(--muted)"></span>
-        <button class="ghost-btn" onclick="closeBugModal()">Cancel</button>
-        <button id="bugSubmitBtn" class="primary-btn" onclick="submitBugReport()">Open GitHub issue</button>
+        <button class="ghost-btn" onclick="closeBugModal()">취소</button>
+        <button id="bugSubmitBtn" class="primary-btn" onclick="submitBugReport()">GitHub 이슈 열기</button>
       </div>
     </div>
   </div>
@@ -5408,11 +5382,11 @@ The last line"></textarea>
        language, refined badges. All IDs preserved so poll() and the
        click handlers downstream keep working. -->
   <nav class="tabs">
-    <span class="bp-live-dot" id="bpLiveDot" title="Idle"></span>
-    <button data-tab="now" class="active">Now</button>
-    <button data-tab="queue">Queue <span class="badge" id="queueBadge" style="display:none">0</span></button>
-    <button data-tab="recent">Recent</button>
-    <button data-tab="logs">Logs</button>
+    <span class="bp-live-dot" id="bpLiveDot" title="대기"></span>
+    <button data-tab="now" class="active">현재</button>
+    <button data-tab="queue">대기열 <span class="badge" id="queueBadge" style="display:none">0</span></button>
+    <button data-tab="recent">최근</button>
+    <button data-tab="logs">로그</button>
     <span class="spacer"></span>
     <a class="model-credit" id="modelTag" href="https://github.com/dgrauet/ltx-2-mlx" target="_blank" rel="noopener" title="MLX port by @dgrauet"></a>
     <!-- (Collapse-this-panel button removed 2026-05-12 — Mr Bizarro flagged
@@ -5447,8 +5421,8 @@ The last line"></textarea>
            that mode='image' goes through the same worker. -->
       <div class="row-list-filter">
         <button id="recentFilterAll" class="active" onclick="setRecentFilter('all')">All</button>
-        <button id="recentFilterVideos" onclick="setRecentFilter('videos')">Videos</button>
-        <button id="recentFilterPhotos" onclick="setRecentFilter('photos')">Photos</button>
+        <button id="recentFilterVideos" onclick="setRecentFilter('videos')">영상</button>
+        <button id="recentFilterPhotos" onclick="setRecentFilter('photos')">사진</button>
         <button id="recentFilterAudio" onclick="setRecentFilter('audio')">Audio</button>
       </div>
       <ul class="row-list" id="historyList"></ul>
@@ -5472,14 +5446,14 @@ The last line"></textarea>
 <div class="modal-bg docs-view" id="docsView" role="dialog" aria-modal="true"
      aria-labelledby="docsViewTitle" onclick="if(event.target===this) closeDocs()">
   <div class="docs-shell">
-    <aside class="docs-nav" id="docsNav" aria-label="Docs sections">
+    <aside class="docs-nav" id="docsNav" aria-label="문서 목차">
       <div class="docs-brand">
         <svg class="ph" aria-hidden="true"><use href="#ph-book-open"/></svg>
-        <span id="docsViewTitle">Phosphene Docs</span>
+        <span id="docsViewTitle">Leo Studio 문서</span>
       </div>
       <label class="docs-search-wrap">
         <svg class="ph" aria-hidden="true"><use href="#ph-magnifying-glass"/></svg>
-        <input type="search" class="docs-search" id="docsSearch" placeholder="Search the docs"
+        <input type="search" class="docs-search" id="docsSearch" placeholder="문서 검색"
                aria-label="Search the docs" spellcheck="false" autocomplete="off">
       </label>
       <nav class="docs-toc" id="docsToc"></nav>
@@ -5495,7 +5469,7 @@ The last line"></textarea>
       </header>
       <div class="docs-scroll" id="docsScroll">
         <article class="docs-article" id="docsArticle"></article>
-        <nav class="docs-pagenav" id="docsPageNav" aria-label="Previous and next page"></nav>
+        <nav class="docs-pagenav" id="docsPageNav" aria-label="이전·다음 페이지"></nav>
       </div>
     </section>
   </div>
@@ -5517,7 +5491,7 @@ The last line"></textarea>
          an LTX shot are written in different dialects, so a flip has to rewrite
          the prompts, not relabel them. -->
     <div class="cz-control" style="margin-top:12px">
-      <div class="cz-label">Engine <span class="cz-label-hint">who renders the shots</span></div>
+      <div class="cz-label">엔진 <span class="cz-label-hint">샷을 누가 렌더할지</span></div>
       <div class="pill-group cols-3" id="sbReplanEngineGroup"></div>
       <div class="sb-enginepick-note" id="sbReplanEngineNote"></div>
     </div>

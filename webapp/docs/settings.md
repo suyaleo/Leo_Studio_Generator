@@ -1,50 +1,50 @@
-# Settings
+# 설정
 
-The gear in the header opens Settings. Changes are saved to `panel_settings.json` when you press **Apply** and affect every new render; files already in the gallery are not re-encoded.
+헤더 톱니가 설정을 엽니다. **적용**하면 `panel_settings.json`에 저장되고 이후 렌더에만 먹습니다. 갤러리에 이미 있는 파일은 다시 인코딩하지 않습니다.
 
-## Output format {#output-format}
+## 출력 포맷 {#output-format}
 
-How finished clips are encoded.
+끝난 클립을 어떻게 인코딩할지.
 
-| Choice | One line |
+| 선택 | 한 줄 |
 |---|---|
-| **Standard** | visually lossless to almost everyone, about 7 MB per 5 s clip |
-| **Video production (lossless)** | for grading and editing elsewhere, about 50 MB per 5 s clip |
-| **Web / social** | the smallest files, about 3 MB per 5 s clip |
-| **Custom** | set the pixel format and CRF yourself: 0 is lossless, 18 visually lossless, 23 the web default, 28 and up visibly lossy |
+| **Standard** | 거의 무손실로 보임. 5초 클립 약 7 MB |
+| **Video production (lossless)** | 그레이딩·외부 편집용. 5초 약 50 MB |
+| **Web / social** | 가장 작음. 5초 약 3 MB |
+| **Custom** | 픽셀 포맷과 CRF를 직접. 0 무손실, 18 시각적 무손실, 23 웹 기본, 28 이상은 손실이 보임 |
 
-## Memory / speed {#memory-speed}
+## 메모리 / 속도 {#memory-speed}
 
-- **Live preview** — *On* shows the shot as it forms in the Now card. It never changes the result (the file is byte-for-byte the same either way); turning it off also removes the **Stop early** button.
-- **Hailuo H3 model** (when H3 is installed) — **Automatic** picks the best this Mac can hold; **Full (bf16)** peaks around 42 GiB; **Compact (Q8)** peaks around 21 GiB, about half the memory for a little more time. On a Mac too small for Full, that option says so and is disabled.
+- **라이브 프리뷰** — *켜기*면 현재 카드에 샷이 형성되는 모습이 보입니다. 결과 파일은 바이트 단위로 같습니다. 끄면 **일찍 중지** 버튼도 사라집니다.
+- **Hailuo H3 모델**(H3가 있을 때) — **Automatic**은 이 맥이 담을 수 있는 최선. **Full (bf16)** 피크 약 42 GiB. **Compact (Q8)** 피크 약 21 GiB, 시간은 조금 더. Full을 못 담는 맥에서는 그 옵션이 비활성입니다.
 
-## Model files {#model-files}
+## 모델 파일 {#model-files}
 
-**Verify model files (checksum)** checks every installed weight file against its published checksum and offers a one-click re-download of any that are damaged. It takes 1–2 minutes.
+**모델 파일 검증 (checksum)**은 설치된 가중치를 공개 체크섬과 대조하고, 깨진 것은 다시 받기를 제안합니다. 1–2분 걸립니다.
 
-## Storage {#storage}
+## 저장 공간 {#storage}
 
-Shown when this disk holds weights this version does not render with by default. Each pack lists its size and a **Remove** button, which asks first. Removing a pack never touches your renders in `mlx_outputs`.
+이 버전이 기본으로 안 쓰는 가중치가 디스크에 있을 때만 보입니다. 팩마다 크기와 **삭제**가 있고, 먼저 묻습니다. `mlx_outputs` 렌더는 건드리지 않습니다.
 
-## API tokens {#tokens}
+## API 토큰 {#tokens}
 
-Saved on this Mac only, and sent nowhere except as sign-in to the site they belong to.
+이 맥에만 저장됩니다. 해당 사이트 로그인 외로는 안 나갑니다.
 
-- **CivitAI API key** — needed to install LoRAs from CivitAI. **save & test** checks it.
-- **Hugging Face token** — needed for gated models; read access is enough.
+- **CivitAI API key** — CivitAI에서 LoRA 설치에 필요. **저장 & 테스트**.
+- **Hugging Face token** — 게이트 모델. 읽기 권한이면 됩니다.
 
-## Spicy mode (adult content) {#spicy}
+## Spicy mode (성인 콘텐츠) {#spicy}
 
-Off by default: the CivitAI browser hides NSFW results and the **Show NSFW** switch. **Enable Spicy mode** asks for a second click, then lets you choose per search.
+기본 끔. CivitAI 브라우저가 NSFW를 숨깁니다. **Spicy mode 켜기**는 한 번 더 확인한 뒤, 검색마다 고를 수 있습니다.
 
-## Appearance {#appearance}
+## 외관 {#appearance}
 
-**Dark**, **Light** or **System** (follows the Mac, live). Saved in this browser only.
+**다크**, **라이트**, **시스템**(맥 설정을 실시간 따름). 이 브라우저에만 저장됩니다.
 
-## Completion alerts {#alerts}
+## 완료 알림 {#alerts}
 
-A chime when a render finishes, and a browser notification when the tab is in the background once you allow it. **Send a test** tries it.
+렌더가 끝나면 차임. 탭이 뒤에 있으면 브라우저 알림(허용 후). **테스트 보내기**.
 
-## Anonymous usage analytics {#analytics}
+## 익명 사용 통계 {#analytics}
 
-Sends anonymous counts — version, hardware class, engine, tier, resolution, the first line of an error. Never your prompts, file names, paths, images or video; a copy of what is sent is kept in `state/usage-log.jsonl`. **Turn off** stops it.
+익명 횟수 — 버전, 하드웨어 급, 엔진, 티어, 해상도, 에러 첫 줄. 프롬프트·파일명·경로·이미지·영상은 안 보냅니다. 보낸 복사본은 `state/usage-log.jsonl`. **끄기**하면 멈춥니다.

@@ -742,7 +742,9 @@ function renderLorasList() {
   if (summary) {
     const total = allRows.length;
     const active = allRows.filter(r => r.active).length;
-    summary.textContent = `${total} installed · ${active} active${q ? ` · ${rows.length} match` : ''}`;
+    summary.textContent = active
+      ? `${active}개 사용 · ${total}개 설치${q ? ` · ${rows.length}건 일치` : ''}`
+      : (total ? `${total}개 설치 · 사용 없음` : '없음');
   }
 
   if (rows.length === 0) {

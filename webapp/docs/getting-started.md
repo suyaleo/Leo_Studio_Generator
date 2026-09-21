@@ -1,66 +1,66 @@
-# Getting started
+# 시작하기
 
-Phosphene makes video, images and sound on your Mac — nothing is uploaded, nothing is rented. You describe a shot, it goes into a queue, and the finished file lands in Outputs.
+Leo Studio는 맥에서 영상·이미지·소리를 만듭니다. 업로드도 임대도 없습니다. 샷을 적으면 대기열에 들어가고, 끝난 파일은 Outputs에 쌓입니다.
 
-## The tabs {#tabs}
+## 탭 {#tabs}
 
-The row of tabs at the top of the left column is where you choose what to make. [[sc:tabs.switch]] switches between them from the keyboard.
+왼쪽 열 맨 위 탭에서 무엇을 만들지 고릅니다. [[sc:tabs.switch]]로 키보드에서도 바꿉니다.
 
-| Tab | What it is for |
+| 탭 | 용도 |
 |---|---|
-| **Video** | A clip from a prompt — or from an image, a first and last frame, keyframes, a clip to extend, or your own media (Remix). See [Video](#docs/video). |
-| **One Shot** | One continuous shot of 30 seconds to 2 minutes that never cuts. See [One Shot](#docs/one-shot). |
-| **Images** | Stills: edit a reference image, or put words on a picture with Ideogram 4. See [Images](#docs/images). |
-| **Storyboard** | Plan a whole film from one idea, render every shot, grade them, cut them. See [Storyboard](#docs/storyboard). |
-| **Editor** | A timeline: trim, split, move sound, add titles and music, render the film. See [Editor](#docs/editor). |
-| **Audio** | A video driven by a sound file you bring — a voice, a song. See [Audio](#docs/audio). |
-| **Train Character** | Teach Phosphene a face (and a voice) from your photos. See [Train Character](#docs/train-character). |
+| **영상** | 프롬프트로 클립. 이미지, 첫·끝 프레임, 키프레임, 연장, 내 미디어(리믹스)도 됩니다. [영상](#docs/video) |
+| **원샷** | 자르지 않는 연속 샷 30초~2분. [원샷](#docs/one-shot) |
+| **이미지** | 스틸. 레퍼런스 편집, 또는 Ideogram 4로 글자. [이미지](#docs/images) |
+| **스토리보드** | 아이디어 하나로 샷을 짜고, 렌더·그레이딩·컷. [스토리보드](#docs/storyboard) |
+| **편집** | 타임라인. 트림·스플릿·사운드·타이틀·음악 후 필름 렌더. [편집](#docs/editor) |
+| **오디오** | 가져온 소리 파일로 영상을 구동. [오디오](#docs/audio) |
+| **캐릭터 학습** | 사진으로 얼굴(그리고 음성)을 학습. [캐릭터 학습](#docs/train-character) |
 
-## The engine {#engine}
+## 엔진 {#engine}
 
-The switch at the top right of the header chooses which model renders: **LTX** or **Hailuo H3**. They are two different engines with different strengths, not a good one and a spare:
+헤더 오른쪽 스위치가 렌더 모델을 고릅니다. **LTX** 또는 **Hailuo H3**. 주력과 예비가 아니라 서로 다른 엔진입니다.
 
-- **LTX** — every Video mode, LoRAs and trained characters.
-- **Hailuo H3** — joint video, dialogue and sound. Text and Image modes.
+- **LTX** — 영상 모드 전부, LoRA, 학습 캐릭터.
+- **Hailuo H3** — 영상·대사·소리를 같이. 텍스트·이미지 모드.
 
-The form changes with the engine: controls one engine does not use are hidden, and the Quality and Length chips show that engine's own sizes. The switch only appears when this Mac can run more than one engine. [How they compare](#docs/video/engines).
+폼은 엔진에 맞춰 바뀝니다. 안 쓰는 컨트롤은 숨고, 품질·길이 칩은 그 엔진 크기입니다. 이 맥이 엔진을 둘 다 돌릴 때만 스위치가 보입니다. [비교](#docs/video/engines).
 
-## The queue {#queue}
+## 대기열 {#queue}
 
-Everything you generate goes into one queue and renders one job at a time. The panel at the bottom has four tabs:
+생성은 한 대기열에 들어가고 한 번에 한 잡만 돕니다. 아래 패널 탭:
 
-- **Now** — the render in progress, with a live preview of the shot as it forms. **Stop early** (on the preview) asks first, then stops it: *"nothing is saved"*, and the queue carries on with the next job.
-- **Queue** — the jobs waiting. The × on a card removes it.
-- **Recent** — what finished, filtered by All / Videos / Photos.
-- **Logs** — the render log. See [Reading the log](#docs/troubleshooting/logs).
+- **현재** — 진행 중인 렌더와 라이브 프리뷰. 프리뷰의 **일찍 중지**는 먼저 묻고 멈춥니다. *저장되는 것 없음*, 다음 잡으로 갑니다.
+- **대기열** — 기다리는 잡. 카드의 ×로 빼기.
+- **최근** — 끝난 것. 전체 / 영상 / 사진.
+- **로그** — 렌더 로그. [로그 읽기](#docs/troubleshooting/logs).
 
-Under the Generate button: **⊞ Batch** pastes many prompts at once and queues them all; **Pause queue** holds the queue (the button then reads **Resume queue**); **Clear** removes every waiting job — the one running carries on.
+생성 버튼 아래: **일괄**은 프롬프트를 여러 개 붙여 넣고, **대기열 일시정지**는 대기열만 멈춥니다(버튼이 **대기열 재개**로 바뀜). **비우기**는 대기 잡만 지웁니다. 돌아가는 잡은 계속됩니다.
 
 ## Outputs {#outputs}
 
-The gallery on the right shows what you have made. Click a card to put it on the player.
+오른쪽 갤러리가 만든 결과입니다. 카드를 누르면 플레이어에 올라갑니다.
 
-- **All / Videos / Photos** filter it, and the search box finds outputs by prompt words, model, LoRA, size or seed ([[sc:search.focus]] jumps to it).
-- **Show all** loads older renders than the newest 60.
-- [[sc:outputs.step]] steps through the gallery, [[sc:player.toggle]] plays and pauses, [[sc:outputs.expand]] expands the player to full screen.
-- Under the player, the action row offers what you can do next with that clip: **Extend** it, run **Upscale & Face Fix** on it, send it **To film**, **Animate** a still, see its **Params**.
-- The trash button on a card moves the file to the macOS Trash after asking — restore it from Finder if you change your mind. [[sc:outputs.trash]] does the same for the selected output.
+- **전체 / 영상 / 사진** 필터, 검색은 프롬프트·모델·LoRA·크기·Seed ([[sc:search.focus]]).
+- **전부 보기**는 최신 60개보다 오래된 것도 불러옵니다.
+- [[sc:outputs.step]] 갤러리 이동, [[sc:player.toggle]] 재생/일시정지, [[sc:outputs.expand]] 전체 화면.
+- 플레이어 아래: **연장**, **업스케일 & 얼굴 보정**, **필름으로**, 스틸 **애니메이트**, **Params**.
+- 카드 휴지통은 macOS 휴지통으로 옮깁니다. Finder에서 되돌릴 수 있습니다. [[sc:outputs.trash]]는 선택된 결과에 동일.
 
-## Where files go {#files}
+## 파일이 가는 곳 {#files}
 
-| What | Where |
+| 무엇 | 어디 |
 |---|---|
-| Your renders | the `mlx_outputs` folder inside the Phosphene install. The folder button in the Outputs header opens it in Finder; Pinokio's **Outputs** item opens it too. |
-| Trained characters and downloaded LoRAs | `mlx_models/loras/` |
-| Settings | `panel_settings.json` |
+| 렌더 | 설치 안의 `mlx_outputs`. Outputs 헤더 폴더 버튼이 Finder로 엽니다. |
+| 학습 캐릭터·받은 LoRA | `mlx_models/loras/` |
+| 설정 | `panel_settings.json` |
 
-Every render also writes a small sidecar file beside it with its settings. That is what **Params** reads, and what lets Outputs search by LoRA or seed.
+렌더마다 옆에 작은 sidecar가 있습니다. **Params**가 그걸 읽고, LoRA·Seed 검색도 그걸로 됩니다.
 
-## Updating {#update}
+## 업데이트 {#update}
 
-- The version pill in the header says where you stand: **Up to date**, or **Update to** a newer version. When one is out, a banner offers **Update now** / **Later**.
-- In Pinokio, the **Update** item in the Phosphene sidebar updates everything, including Python dependencies. Updating keeps your queue, settings and models.
-- After an in-app update the banner reads *"Updated to … — restart to finish"*: click **Stop**, then **Start** in Pinokio. If the update touched dependencies, it tells you to use Pinokio's **Update** instead.
-- If an update started from a very old version only seems to move the panel, click **Update** once more — an old version updates its updater first.
+- 헤더 버전 칩: **최신**, 또는 **업데이트**. 나오면 배너에 **지금 업데이트** / **나중에**.
+- 대기열·설정·모델은 유지됩니다.
+- 앱 안 업데이트 뒤에는 *재시작해야 끝남*. 패널을 끄고 다시 켜세요.
+- 아주 오래된 버전에서 시작하면 업데이터가 먼저 바뀝니다. 한 번 더 업데이트하세요.
 
-> **Tip** Press [[sc:docs.open]] anywhere to open these docs on the shortcuts page, and use the search box on the left to find any button by the word written on it.
+> **팁** 어디서든 [[sc:docs.open]]으로 이 문서를 엽니다. 왼쪽 검색으로 버튼에 적힌 말로 찾으세요.

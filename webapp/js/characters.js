@@ -3038,17 +3038,17 @@ function setExtendMode(m) {
 function updatePromptPlaceholder() {
   const prompt = document.getElementById('prompt');
   if (!prompt) return;
-  const base = 'Describe the scene AND the sound — e.g. wizard in a forest clearing, fireflies spiraling up · low whispered chant, ember crackle, distant owl. Audio is generated jointly with video; without sound cues the model outputs near-silent ambient.';
-  const keyframeTwo = 'Describe the full first-to-last transition in one prompt. Include motion, camera, mood, and audio cues; the start/end images anchor the visual endpoints.';
-  const keyframeMulti = `One prompt controls the whole ${window._kfMode}-keyframe shot; the Beat at(s) controls define segment timing. Write one continuous action with the beats described in order, plus audio cues.`;
+  const base = '장면과 소리를 같이 적으세요. 예: 숲 공터의 마법사, 반딧불이가 위로 소용돌이치며 올라가고 · 낮은 속삭임, 불씨 타는 소리, 먼 부엉이. 소리는 영상과 같이 나옵니다. 소리 단서가 없으면 거의 무음입니다.';
+  const keyframeTwo = '처음에서 끝까지의 전환을 한 프롬프트에. 모션, 카메라, 무드, 소리 단서. 시작/끝 이미지가 시각 끝점을 고정합니다.';
+  const keyframeMulti = `프롬프트 하나가 ${window._kfMode}키프레임 샷 전체를 제어합니다. Beat at(s)가 구간 타이밍입니다. 비트 순서대로 이어지는 동작과 소리 단서를 적으세요.`;
   if (currentMode === 'keyframe') {
     prompt.placeholder = window._kfMode >= 3 ? keyframeMulti : keyframeTwo;
   } else if (currentMode === 'i2v') {
-    prompt.placeholder = 'Describe how the reference image should move, plus sound cues. The image anchors frame 0; the prompt directs the full clip.';
+    prompt.placeholder = '레퍼런스 이미지가 어떻게 움직일지, 그리고 소리 단서. 이미지는 프레임 0을 고정하고, 프롬프트가 클립 전체를 지시합니다.';
   } else if (currentMode === 'ingredients') {
-    prompt.placeholder = "Describe WHAT'S in the reference sheet — each character, prop, and the location. e.g. a friendly cartoon hedgehog with rounded chestnut fur; a green coiled garden hose; the bright interior of a 'Greenfield' garden store. (The Action field above describes the shot itself.)";
+    prompt.placeholder = '레퍼런스 시트에 있는 것 — 캐릭터, 소품, 장소. 예: 둥근 밤색 털의 고슴도치; 초록 호스; 가든 스토어 내부. (위 동작 칸이 샷 자체.)';
   } else if (currentMode === 'control') {
-    prompt.placeholder = "Describe the NEW subject/scene to paint onto the control clip's motion and structure — plus sound cues. e.g. a red origami crane unfolding on a black table · soft paper rustle. The control video drives the composition; this prompt swaps what's in it.";
+    prompt.placeholder = '컨트롤 클립의 모션·구조 위에 칠할 새 피사체/장면, 그리고 소리. 예: 검은 탁자 위 빨간 종이학 · 종이 소리. 컨트롤이 구도를 잡고, 이 프롬프트가 내용을 바꿉니다.';
   } else {
     prompt.placeholder = base;
   }

@@ -153,7 +153,7 @@ function imgStudioWireRefSlots() {
   });
 }
 
-const _STUDIO_REF_TAGS = ['Primary', 'Multi-ref', 'Multi-ref'];
+const _STUDIO_REF_TAGS = ['기본', '추가', '추가'];
 
 function imgStudioRenderSlot(idx) {
   const slot = document.querySelector(
@@ -171,8 +171,8 @@ function imgStudioRenderSlot(idx) {
   } else {
     slot.classList.remove('has-image');
     const cta = idx === 0
-      ? 'Drop · click<br>character'
-      : (idx === 1 ? 'Drop · click<br>place' : 'Drop · click<br>style');
+      ? '놓거나 클릭<br>인물'
+      : (idx === 1 ? '놓거나 클릭<br>장소' : '놓거나 클릭<br>스타일');
     slot.innerHTML = `
       <span class="ref-tag">${tag}</span>
       <div class="ref-empty">

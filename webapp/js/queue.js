@@ -732,7 +732,7 @@ function _h3NudgeEngineOffer() {
   const a = document.createElement('a');
   a.href = '#';
   a.className = 'phos-toast-action';
-  a.textContent = 'What it is';
+  a.textContent = '설명';
   a.onclick = (ev) => { ev.preventDefault(); el.remove(); openH3InstallCard(); };
   el.appendChild(a);
 }
@@ -1555,15 +1555,15 @@ function _setOfflineBanner(visible, msg) {
       bar.className = 'panel-offline-banner';
       bar.innerHTML =
         '<span class="icon"><img src="/assets/favicon-64.png" alt=""></span>' +
-        '<span class="label">Phosphene offline</span>' +
+        '<span class="label">Leo Studio 연결 끊김</span>' +
         '<span class="text"></span>' +
-        '<span class="hint">restart from Pinokio</span>';
+        '<span class="hint">패널을 다시 켜세요</span>';
       document.body.appendChild(bar);
     }
     bar.classList.remove('reconnected');
-    bar.querySelector('.label').textContent = 'Phosphene offline';
+    bar.querySelector('.label').textContent = 'Leo Studio 연결 끊김';
     bar.querySelector('.text').textContent = text;
-    bar.querySelector('.hint').textContent = 'restart from Pinokio';
+    bar.querySelector('.hint').textContent = '패널을 다시 켜세요';
     const entry = `${new Date().toLocaleTimeString()} offline · ${text}`;
     window._panelBannerLog.push(entry);
     if (window._panelBannerLog.length > 8) window._panelBannerLog.shift();
@@ -1575,8 +1575,8 @@ function _setOfflineBanner(visible, msg) {
     // the eye time to register and gives the user a chance to scroll
     // back in window._panelBannerLog if they want details.
     bar.classList.add('reconnected');
-    bar.querySelector('.label').textContent = 'Phosphene reconnected';
-    bar.querySelector('.text').textContent = 'queue + renders resumed';
+    bar.querySelector('.label').textContent = 'Leo Studio 다시 연결됨';
+    bar.querySelector('.text').textContent = '대기열·렌더 재개';
     bar.querySelector('.hint').textContent = '';
     const entry = `${new Date().toLocaleTimeString()} online · reconnected`;
     window._panelBannerLog.push(entry);
@@ -1619,7 +1619,7 @@ async function startDeepVerify() {
   const btn = document.getElementById('deepVerifyBtn');
   const st = document.getElementById('deepVerifyStatus');
   if (btn) btn.disabled = true;
-  if (st) st.textContent = 'starting…';
+  if (st) st.textContent = '시작 중…';
   try {
     await fetch('/models/verify-deep', { method: 'POST' });
     if (st) st.textContent = 'verifying… (this can take 1–2 min)';
@@ -1870,7 +1870,7 @@ async function poll() {
     // Suppress the offline banner while a known long-running endpoint is
     // in flight (e.g. /version/pull which blocks the server for ~30s on
     // git fetch + git pull). Without this suppression the banner flashes
-    // "Phosphene offline → reconnected" at the tail of every successful
+    // "Leo Studio 연결 끊김 → reconnected" at the tail of every successful
     // Update click — looks like an error to the user when nothing is
     // actually wrong.
     if (_POLL_FAILS >= 2 && !window._suppressOfflineBanner) _setOfflineBanner(true);
@@ -1980,7 +1980,7 @@ async function poll() {
     const elapsed = Math.max(0, Math.round(s.server_now - (dl.started_ts || s.server_now)));
     mp.innerHTML = `<span class="dot"></span>↓ ${dl.key} · ${elapsed}s`;
     mp.className = 'pill pill-running';
-    mp.title = `Downloading ${dl.repo_id} — ${dl.last_line || 'starting…'}`;
+    mp.title = `Downloading ${dl.repo_id} — ${dl.last_line || '시작 중…'}`;
   } else {
     // Per-repo ready/total counts, matches what the modal shows (3 rows by
     // default: Q4 + Gemma + Q8). base_available is a roll-up bool that
@@ -2052,7 +2052,8 @@ async function poll() {
     jp.className = 'pill';
   }
 
-  document.getElementById('pauseBtn').textContent = s.paused ? 'Resume queue' : 'Pause queue';
+  document.getElementById('pauseBtn').innerHTML = '<svg class="ph" aria-hidden="true"><use href="#ph-pause-fill"/></svg>'
+    + (s.paused ? '대기열 재개' : '대기열 일시정지');
 
   // Q8 / High enable.
   //
@@ -2122,12 +2123,12 @@ async function poll() {
     genBtn.title = 'Ingredients needs the LTX-2.3 generation — its reference '
                  + 'adapter has no 2.5 release. Use Image mode with Inspire, '
                  + 'or install the 2.3 pack from the Train tab.';
-    genBtn.textContent = 'Generate · needs LTX-2.3';
+    genBtn.textContent = '생성 · LTX-2.3 필요';
   } else if (genBtn.disabled
-             && genBtn.textContent.startsWith('Generate · needs LTX-2.3')) {
+             && genBtn.textContent.startsWith('생성 · LTX-2.3 필요')) {
     genBtn.disabled = false;
     genBtn.title = '';
-    genBtn.textContent = 'Generate';
+    genBtn.textContent = '생성';
   } else if (q8GatedMode && !s.q8_available) {
     genBtn.disabled = true;
     const modeName = currentMode === 'keyframe' ? 'Keyframe (FFLF)' : 'Extend';
@@ -2142,14 +2143,14 @@ async function poll() {
           return w ? `${modeName} needs ${w.name} (~${w.size}) — install it from Settings → Models.`
                    : `${modeName} needs the Q8 weights — install them from Settings → Models.`;
         })();
-    genBtn.textContent = 'Generate · Q8 required';
+    genBtn.textContent = '생성 · Q8 필요';
   } else if (genBtn.disabled && genBtn.textContent.startsWith('Generate · Q8')) {
     // Restore — only do so if WE were the ones who disabled it, otherwise
     // some future code path that disables Generate for a different reason
     // would get clobbered here.
     genBtn.disabled = false;
     genBtn.title = '';
-    genBtn.textContent = 'Generate';
+    genBtn.textContent = '생성';
   }
 
   // Now card
@@ -2271,7 +2272,7 @@ async function poll() {
       // exists to enable.
       nowCard.classList.remove('idle', 'failed');
       nowCard.classList.add('stopped');
-      nowCard.querySelector('.ttl').textContent = 'Stopped early';
+      nowCard.querySelector('.ttl').textContent = '중간에 멈춤';
       nowCard.querySelector('.meta').innerHTML =
         `<span style="color: var(--muted)">${escapeHtml(snippet(last.params.label || last.params.prompt, 80))}</span>` +
         `<br><span style="color: var(--text)">Nothing was saved.</span>`;
@@ -2288,10 +2289,10 @@ async function poll() {
     } else {
       nowCard.classList.add('idle');
       nowCard.classList.remove('failed', 'stopped');
-      nowCard.querySelector('.ttl').textContent = s.paused ? 'Paused' : 'Idle';
+      nowCard.querySelector('.ttl').textContent = s.paused ? '일시정지' : '대기';
       nowCard.querySelector('.meta').textContent = s.paused
-        ? 'Queue paused — nothing will render until you press Resume.'
-        : (s.queue.length ? 'Worker about to pick up next queued job.' : 'No jobs queued. Generate something on the left.');
+        ? '대기열 일시정지 — 재개할 때까지 렌더하지 않습니다.'
+        : (s.queue.length ? '다음 대기 잡을 곧 가져갑니다.' : '대기 잡 없음. 왼쪽에서 생성하세요.');
       // #80: a paused worker used to say "waits for resume" and offer no way
       // to resume from where the user was looking; the only control was the
       // Pause/Resume chip above the queue list, and a restart persisted the
@@ -2321,7 +2322,7 @@ async function poll() {
       if (showFailure) { liveDot.classList.add('failed'); liveDot.title = 'Last job failed'; }
       else if (s.paused) liveDot.title = 'Paused';
       else if (s.queue.length) liveDot.title = `${s.queue.length} queued`;
-      else liveDot.title = 'Idle';
+      else liveDot.title = '대기';
     }
   }
 
@@ -4189,7 +4190,7 @@ function _copyToClipboard(text, btn) {
     navigator.clipboard.writeText(text);
     if (btn) {
       const orig = btn.textContent;
-      btn.textContent = 'Copied!';
+      btn.textContent = '복사됨';
       setTimeout(() => { btn.textContent = orig; }, 1200);
     }
   } catch (e) { /* swallow */ }

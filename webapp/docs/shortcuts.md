@@ -1,13 +1,13 @@
-# Keyboard shortcuts
+# 키보드 단축키
 
-Phosphene uses the keys you already know from Premiere Pro, Final Cut Pro, DaVinci Resolve, Photoshop and After Effects. Every tooltip that has a shortcut names it in brackets, and the Editor's **Keys** button shows its own list.
+Premiere Pro, Final Cut Pro, DaVinci Resolve, Photoshop, After Effects에서 쓰던 키를 씁니다. 툴팁에 단축키가 있으면 괄호로 적혀 있고, 편집의 **Keys**가 자기 목록을 보여 줍니다.
 
-> **Conventions** ⌘ is Command (Ctrl works too), ⇧ Shift, ⌥ Option, ⏎ Return, ⌫ Delete. Keys never fire while you are typing in a text box, except ⌘⏎ and Esc. Nothing claims a key your browser or macOS needs — ⌘R still reloads, ⌘W still closes.
+> **표기** ⌘는 Command(Ctrl도 됨), ⇧ Shift, ⌥ Option, ⏎ Return, ⌫ Delete. 텍스트 박스에 치는 동안은 키가 안 먹습니다. ⌘⏎와 Esc만 예외. 브라우저·macOS가 쓰는 키는 안 가져갑니다. ⌘R은 새로고침, ⌘W는 닫기.
 
 [[shortcuts]]
 
-## Not bound, on purpose {#not-bound}
+## 일부러 안 묶은 것 {#not-bound}
 
-- **J / K / L shuttle** — Space and the arrows play and step. A shuttle needs variable playback speed the Editor's player does not have.
-- **⌘C / ⌘V for clips** — **Duplicate** ([[sc:editor.duplicate]]) covers "again, right here"; pasting at the playhead is not built.
-- **I / O in and out points** — the timeline has no in/out range to mark; trim a clip by dragging its edge.
+- **J / K / L 셔틀** — Space와 화살표로 재생·한 칸. 셔틀은 가변 배속이 필요한데 편집 플레이어에 없습니다.
+- **클립 ⌘C / ⌘V** — **복제** ([[sc:editor.duplicate]])가 "여기 바로 하나 더"입니다. 플레이헤드에 붙여넣기는 없습니다.
+- **I / O 인/아웃** — 타임라인에 인/아웃 범위가 없습니다. 가장자리를 드래그해서 트림하세요.

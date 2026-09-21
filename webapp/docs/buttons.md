@@ -1,77 +1,75 @@
-# Buttons and icons
+# 버튼과 아이콘
 
-The buttons that show a picture instead of a word. Hover any of them in the panel for its tooltip.
+그림만 있는 버튼입니다. 패널에서 올리면 툴팁이 나옵니다.
 
-## The header {#header}
+## 헤더 {#header}
 
-| Button | What it does |
+| 버튼 | 하는 일 |
 |---|---|
-| **LTX · 2.5** (engine switch) | chooses the engine that renders — LTX or Hailuo H3 |
-| the health chip (a coloured dot and a memory reading) | opens the machine's state: Tier, Memory, Helper, Models, Queue, Render. Green is fine, yellow needs a look, red is blocking |
-| the version pill | **Up to date**, **Update to …** (click to update), or **Restart Phosphene** (click to restart onto the new code) |
-| the bug | **Report a bug** — a GitHub issue pre-filled with your version and log |
-| [[icon:ph-gear-six]] | Settings |
-| [[icon:ph-book-open]] **Docs** | these docs ([[sc:docs.open]] opens them on the shortcuts page) |
-| [[icon:ph-star]] | star Phosphene on GitHub |
-| the X mark | the official @PhospheneAI account on X |
+| **LTX · 2.5** (엔진 스위치) | 렌더 엔진 — LTX 또는 Hailuo H3 |
+| 상태 칩(색 점과 메모리) | 기계 상태: 티어, 메모리, 헬퍼, 모델, 대기열, 렌더. 초록 정상, 노랑 볼 것, 빨강 막힘 |
+| 버전 칩 | **최신**, **업데이트 …**(클릭해서 업데이트), 또는 **Leo Studio 재시작** |
+| 버그 | **버그 신고** — 버전과 로그가 채워진 GitHub 이슈 |
+| [[icon:ph-gear-six]] | 설정 |
+| [[icon:ph-book-open]] **문서** | 이 문서 ([[sc:docs.open]]은 단축키 페이지로) |
 
-## The player {#player}
+## 플레이어 {#player}
 
-| Button | What it does |
+| 버튼 | 하는 일 |
 |---|---|
-| **Params** | the settings the selected output was made with |
-| **Upscale & Face Fix** | queues a 2× re-render of the clip that keeps the face and the sound; the fixed clip lands next to it. The small button beside it opens the [settings](#docs/remix/upscale-face-fix) |
-| **Extend** · **To film** · **Animate** | use the selected output as the start of something new |
-| the crossed-out eye (red) | hides this output from the gallery — the file is not deleted |
-| **Expand** | full screen ([[sc:outputs.expand]]; Esc closes it) |
+| **Params** | 선택된 결과가 만들어진 설정 |
+| **업스케일 & 얼굴 보정** | 얼굴·소리를 유지한 2× 재렌더를 대기열에. 옆 작은 버튼이 [설정](#docs/remix/upscale-face-fix) |
+| **연장** · **필름으로** · **애니메이트** | 선택된 결과로 다음 작업 |
+| 빨간 눈 가리기 | 갤러리에서만 숨김 — 파일은 안 지움 |
+| **확대** | 전체 화면 ([[sc:outputs.expand]], Esc로 닫기) |
 
-## Output cards {#cards}
+## 결과 카드 {#cards}
 
-| Button | What it does |
+| 버튼 | 하는 일 |
 |---|---|
-| **ⓘ** | how this output was made — prompt, engine, quality, seed, LoRAs |
-| **Upscale & Face Fix** (on a video card, on hover) | queues the face-safe 2× of that clip — same as the player button |
-| [[icon:ph-trash-simple]] | moves the file to the macOS Trash, after asking ([[sc:outputs.trash]] on the selected output) |
-| [[icon:ph-folder-simple]] (Outputs header) | reveals the outputs folder in Finder |
+| **ⓘ** | 이 결과가 만들어진 방법 — 프롬프트, 엔진, 품질, Seed, LoRA |
+| **업스케일 & 얼굴 보정**(영상 카드, 호버) | 그 클립의 얼굴 안전 2× — 플레이어 버튼과 같음 |
+| [[icon:ph-trash-simple]] | 물어본 뒤 macOS 휴지통 ([[sc:outputs.trash]]) |
+| [[icon:ph-folder-simple]] (Outputs 헤더) | Finder에서 출력 폴더 |
 
-## The queue and the Now card {#queue}
+## 대기열과 현재 카드 {#queue}
 
-| Button | What it does |
+| 버튼 | 하는 일 |
 |---|---|
-| **×** on a queued job | removes it from the queue |
-| **Face Fix** on a finished video in the history | queues Upscale & Face Fix for that clip |
-| **×** on a failed or stopped card | dismisses the message |
-| **Stop** (under Generate) | stops the render in progress |
-| **Stop early** (on the live preview) | stops it after asking — nothing is saved, the queue carries on |
+| 대기 잡의 **×** | 대기열에서 빼기 |
+| 히스토리 끝난 영상의 **Face Fix** | 그 클립에 업스케일 & 얼굴 보정 |
+| 실패·중지 카드의 **×** | 메시지 닫기 |
+| 생성 아래 **중지** | 진행 중 렌더 중지 |
+| 라이브 프리뷰 **일찍 중지** | 묻고 중지 — 저장 없음, 대기열은 계속 |
 
-## The Editor {#editor}
+## 편집 {#editor}
 
-| Button | What it does |
+| 버튼 | 하는 일 |
 |---|---|
-| 🔊 | mutes the preview only — the film is not changed ([[sc:editor.mute]]) |
-| **▾** beside Render | Deliver as (format, size, finish) and **Export for Premiere / Resolve / AE** |
-| **⋯** | Drafts and versions, Media pool, Auto-edit, Storyboard, Close |
-| **i** | the preview is approximate at cuts; the render is exact |
-| **Keys** | every key and gesture the timeline answers to |
-| **+** on a media pool row | puts the clip at the end of the sequence |
-| **▣** on a still | lays it over the picture at the playhead (the overlay lane) |
-| the +0.25s label on a sound strip | the sound is that far out of sync — click it to put it back |
+| 🔊 | 프리뷰만 음소거 — 필름은 안 바뀜 ([[sc:editor.mute]]) |
+| Render 옆 **▾** | Deliver as(포맷, 크기, 마감)와 **Premiere / Resolve / AE로보내기** |
+| **⋯** | 초안과 버전, 미디어 풀, Auto-edit, 스토리보드, 닫기 |
+| **i** | 프리뷰는 컷에서 근사, 렌더는 정확 |
+| **Keys** | 타임라인이 받는 키와 제스처 |
+| 미디어 풀 행의 **+** | 시퀀스 끝에 클립 |
+| 스틸의 **▣** | 플레이헤드에서 그림 위에 올림(오버레이 레인) |
+| 사운드 스트립의 +0.25s | 소리가 그만큼 어긋남 — 클릭하면 맞춤 |
 
-## Characters and LoRAs {#loras}
+## 캐릭터와 LoRA {#loras}
 
-| Button | What it does |
+| 버튼 | 하는 일 |
 |---|---|
-| [[icon:ph-pencil-simple]] on the character strip | rename or delete characters |
-| [[icon:ph-arrow-clockwise-bold]] on the character strip | rescan for new characters |
-| [[icon:ph-pencil-simple]] on a LoRA | rename it (display name only) |
-| [[icon:ph-download-simple]] on a LoRA | download the file — or, when marked **Update**, its newer version |
-| [[icon:ph-arrow-square-out]] on a LoRA | open its page on CivitAI |
-| [[icon:ph-x-bold]] on a LoRA | delete it from disk (asks first) |
+| 캐릭터 스트립 [[icon:ph-pencil-simple]] | 이름 바꾸기·삭제 |
+| 캐릭터 스트립 [[icon:ph-arrow-clockwise-bold]] | 새 캐릭터 재스캔 |
+| LoRA [[icon:ph-pencil-simple]] | 표시 이름만 바꾸기 |
+| LoRA [[icon:ph-download-simple]] | 파일 받기 — **Update**면 새 버전 |
+| LoRA [[icon:ph-arrow-square-out]] | CivitAI 페이지 |
+| LoRA [[icon:ph-x-bold]] | 디스크에서 삭제(먼저 물음) |
 
-## Storyboard cards {#storyboard}
+## 스토리보드 카드 {#storyboard}
 
-| Button | What it does |
+| 버튼 | 하는 일 |
 |---|---|
-| **↑ / ↓** | move the shot earlier or later |
-| the dice | a new seed for this shot |
-| **✕** | delete the shot |
+| **↑ / ↓** | 샷을 앞·뒤로 |
+| 주사위 | 이 샷의 새 Seed |
+| **✕** | 샷 삭제 |

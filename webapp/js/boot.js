@@ -351,9 +351,9 @@ function setOutputsQuery(v) {
 // was cleared, and "0 photos" where "0 matches" was true.
 function outputsTitleText() {
   const n = filteredMainOutputs().length;
-  const kind = mainOutputsFilter === 'all' ? '' : (' ' + mainOutputsFilter);
-  if (_outputsQuery) return 'Outputs · ' + n + ' match' + (n === 1 ? '' : 'es') + kind;
-  return 'Outputs · ' + n + (kind || (n === 1 ? ' output' : ' outputs'));
+  const kind = ({ videos: ' 영상', photos: ' 사진', audio: ' 오디오' })[mainOutputsFilter] || '';
+  if (_outputsQuery) return '결과 · ' + n + '건' + kind;
+  return '결과 · ' + n + (kind || '개');
 }
 function outputsQueryText() { return _outputsQuery; }
 function paintOutputsCount() {

@@ -27,19 +27,19 @@
 
 // Where a shortcut works. The order is the order the Docs page shows them.
 const SHORTCUT_SCOPES = [
-  { id: 'global', title: 'Anywhere',
-    note: 'Not while you are typing in a text box — except ⌘⏎ and Esc.' },
-  { id: 'prompt', title: 'While writing a prompt',
-    note: 'These work inside the text box.' },
-  { id: 'outputs', title: 'Outputs and the player',
-    note: 'On the Video, One Shot, Images and Audio tabs, with an output selected.' },
-  { id: 'editor', title: 'Editor — keys',
-    note: 'With a timeline open on the Editor tab. The Keys button above the tracks shows the same list.' },
-  { id: 'editor-mouse', title: 'Editor — mouse and modifiers',
-    note: 'Hold the modifier while you click or drag.' },
-  { id: 'storyboard', title: 'Storyboard', note: 'Click a shot card first to focus it.' },
-  { id: 'canvas', title: 'Images — Layout canvas',
-    note: 'Ideogram 4 in Layout mode, with a box selected.' },
+  { id: 'global', title: '어디서나',
+    note: '텍스트 박스에 치는 동안은 안 먹습니다. ⌘⏎와 Esc만 예외.' },
+  { id: 'prompt', title: '프롬프트를 쓸 때',
+    note: '텍스트 박스 안에서 됩니다.' },
+  { id: 'outputs', title: 'Outputs와 플레이어',
+    note: '영상, 원샷, 이미지, 오디오 탭에서 결과가 선택된 때.' },
+  { id: 'editor', title: '편집 — 키',
+    note: '편집 탭에 타임라인이 열려 있을 때. 트랙 위 Keys가 같은 목록입니다.' },
+  { id: 'editor-mouse', title: '편집 — 마우스와 수정키',
+    note: '클릭하거나 드래그하는 동안 수정키를 누르세요.' },
+  { id: 'storyboard', title: '스토리보드', note: '먼저 샷 카드를 눌러 포커스하세요.' },
+  { id: 'canvas', title: '이미지 — Layout 캔버스',
+    note: 'Ideogram 4 Layout 모드에서 박스가 선택된 때.' },
 ];
 
 const SHORTCUT_TABS = ['manual', 'oneshot', 'studio', 'storyboard', 'editor', 'audio', 'train'];
@@ -49,13 +49,13 @@ const SHORTCUTS = [
   // `?` is what a US keyboard reports; ⇧/ is the same physical chord as some
   // layouts and synthesized events report it.
   { id: 'docs.open', scope: 'global', combos: ['?'], hidden: ['shift+slash'], owner: 'shortcuts.js',
-    label: 'Open the Docs on this page',
+    label: '이 페이지의 문서 열기',
     run: () => { if (typeof openDocs !== 'function') return false; openDocs('shortcuts'); } },
   { id: 'tabs.switch', scope: 'global', owner: 'shortcuts.js',
     combos: ['shift+digit1', 'shift+digit2', 'shift+digit3', 'shift+digit4',
              'shift+digit5', 'shift+digit6', 'shift+digit7'],
     display: [['⇧', '1'], ['⇧', '7']], displayJoin: '–',
-    label: 'Switch tab: 1 Video · 2 One Shot · 3 Images · 4 Storyboard · 5 Editor · 6 Audio · 7 Train Character',
+    label: '탭 전환: 1 영상 · 2 원샷 · 3 이미지 · 4 스토리보드 · 5 편집 · 6 오디오 · 7 캐릭터 학습',
     run: (ev) => {
       const n = Number(String(ev.code || '').replace('Digit', ''));
       const tab = SHORTCUT_TABS[n - 1];
@@ -63,145 +63,145 @@ const SHORTCUTS = [
       workflowSwitch(tab);
     } },
   { id: 'search.focus', scope: 'global', combos: ['mod+f'], owner: 'shortcuts.js',
-    label: 'Jump to the search box on screen — Outputs, the Editor’s media pool, the LoRA browser or the Docs. Where there is none, the browser’s own Find opens.',
+    label: '화면의 검색 칸으로 — Outputs, 편집 미디어 풀, LoRA 브라우저, 문서. 없으면 브라우저 찾기가 열립니다.',
     run: () => shortcutFocusSearch() },
   { id: 'escape.close', scope: 'global', combos: ['escape'], owner: 'health.js, engines.js',
-    label: 'Close what is on top — a dialog, a menu, the Docs, the expanded player' },
+    label: '맨 위 닫기 — 대화상자, 메뉴, 문서, 확대 플레이어' },
 
   // ---- typing a prompt --------------------------------------------------------
   { id: 'prompt.generate', scope: 'prompt', combos: ['mod+enter'], typing: true,
     owner: 'shortcuts.js (Video, Images) · oneshot.js (One Shot)',
-    label: 'Generate — from the Video prompt, the Images prompt or the One Shot prompt. Same as pressing the Generate button, so it queues a render.',
+    label: '생성 — 영상·이미지·원샷 프롬프트에서. 생성 버튼을 누르는 것과 같아 렌더가 대기열에 들어갑니다.',
     run: (ev) => shortcutGenerateFrom(ev.target) },
   { id: 'oneshot.beats', scope: 'prompt', combos: ['enter', 'backspace'], owner: 'oneshot.js',
-    label: 'In One Shot beats: ⏎ goes to the next beat · ⌫ in an empty beat goes back one' },
+    label: '원샷 비트: ⏎ 다음 비트 · 빈 비트에서 ⌫는 하나 전으로' },
 
   // ---- outputs and the player -------------------------------------------------
   { id: 'player.toggle', scope: 'outputs', combos: ['space'], owner: 'shortcuts.js',
-    label: 'Play / pause the selected output',
+    label: '선택한 결과 재생 / 일시정지',
     run: (ev) => shortcutTogglePlayer(ev) },
   { id: 'outputs.step', scope: 'outputs', combos: ['arrowleft', 'arrowright'], owner: 'queue.js',
-    label: 'Previous / next output — wraps at the ends, works in the expanded player too' },
+    label: '이전 / 다음 결과 — 끝에서 순환, 확대 플레이어에서도' },
   { id: 'outputs.expand', scope: 'outputs', combos: ['f'], owner: 'queue.js',
-    label: 'Expand the selected output to full screen (Esc closes it)' },
+    label: '선택한 결과를 전체 화면 (Esc로 닫기)' },
   { id: 'outputs.trash', scope: 'outputs', combos: ['mod+backspace'], owner: 'shortcuts.js',
-    label: 'Move the selected output to the Trash — asks first, like the trash button on the card',
+    label: '선택한 결과를 휴지통으로 — 카드 휴지통처럼 먼저 묻습니다',
     run: () => shortcutTrashOutput() },
 
   // ---- the Editor: keys ---------------------------------------------------------
   // `calls` is the function the Editor's own keydown handler runs for these
   // keys; the test drives the real handler and holds it to this.
   { id: 'editor.play', scope: 'editor', combos: ['space'], owner: 'editor.js',
-    calls: 'sbeTogglePlay', label: 'Play / pause' },
+    calls: 'sbeTogglePlay', label: '재생 / 일시정지' },
   { id: 'editor.frame', scope: 'editor', combos: ['arrowleft', 'arrowright'], owner: 'editor.js',
-    calls: 'sbeSeek', label: 'Move the playhead one frame' },
+    calls: 'sbeSeek', label: '플레이헤드를 한 프레임' },
   { id: 'editor.frame10', scope: 'editor', combos: ['shift+arrowleft', 'shift+arrowright'],
-    owner: 'editor.js', calls: 'sbeSeek', label: 'Move the playhead ten frames' },
+    owner: 'editor.js', calls: 'sbeSeek', label: '플레이헤드를 열 프레임' },
   { id: 'editor.cut', scope: 'editor', combos: ['arrowup', 'arrowdown'], owner: 'editor.js',
-    calls: 'sbeJumpCut', label: 'Jump to the previous / next cut' },
+    calls: 'sbeJumpCut', label: '이전 / 다음 컷으로' },
   { id: 'editor.ends', scope: 'editor', combos: ['home', 'end'], owner: 'editor.js',
-    calls: 'sbeSeek', label: 'Go to the start / the end of the sequence (fn ← / fn → on a laptop)' },
+    calls: 'sbeSeek', label: '시퀀스 처음 / 끝 (노트북은 fn ← / fn →)' },
   { id: 'editor.nudge', scope: 'editor', combos: ['alt+arrowleft', 'alt+arrowright'],
     hidden: ['alt+shift+arrowleft', 'alt+shift+arrowright'], owner: 'editor.js',
-    calls: 'sbeNudge', label: 'Nudge the selected clips one frame earlier / later · add ⇧ for ten' },
+    calls: 'sbeNudge', label: '선택 클립을 한 프레임 앞 / 뒤 · ⇧면 열 프레임' },
   { id: 'editor.split', scope: 'editor', combos: ['s', 'mod+k', 'mod+b'], owner: 'editor.js',
-    calls: 'sbeSplitHere', label: 'Split the shot under the playhead — or, with sounds on an audio track selected, those sounds (S, or ⌘K as in Premiere, ⌘B as in Final Cut and Resolve)' },
+    calls: 'sbeSplitHere', label: '플레이헤드 아래 샷을 스플릿 — 오디오 트랙 소리가 선택돼 있으면 그 소리 (S, Premiere의 ⌘K, Final Cut·Resolve의 ⌘B)' },
   { id: 'editor.lift', scope: 'editor', combos: ['backspace'], hidden: ['delete'], owner: 'editor.js',
-    calls: 'sbeLiftSelected', label: 'Lift — take the selected clips or sounds out and leave the hole' },
+    calls: 'sbeLiftSelected', label: '리프트 — 선택 클립·소리를 빼고 구멍을 남김' },
   { id: 'editor.ripple', scope: 'editor', combos: ['shift+backspace'], hidden: ['shift+delete'],
     owner: 'editor.js', calls: 'sbeRippleSelected',
-    label: 'Ripple delete — take them out and close the gap (for sounds, on their own track)' },
+    label: '리플 삭제 — 빼고 틈을 닫음 (소리는 자기 트랙에서)' },
   { id: 'editor.removeOverlay', scope: 'editor', combos: ['backspace'], hidden: ['delete'],
-    owner: 'editor.js', calls: 'sbeOvDeleteSel', label: 'With a title or card selected: remove it' },
+    owner: 'editor.js', calls: 'sbeOvDeleteSel', label: '타이틀이나 카드가 선택돼 있으면: 제거' },
   { id: 'editor.removeTransition', scope: 'editor', combos: ['backspace'], hidden: ['delete'],
-    owner: 'editor.js', calls: 'sbeTxRemoveSel', label: 'With a cut selected: remove its transition' },
+    owner: 'editor.js', calls: 'sbeTxRemoveSel', label: '컷이 선택돼 있으면: 트랜지션 제거' },
   { id: 'editor.duplicate', scope: 'editor', combos: ['d'], owner: 'editor.js',
-    calls: 'sbeDuplicateSel', label: 'Duplicate the selected clips or sounds — the music and a clip\'s sound are copied onto an audio track' },
+    calls: 'sbeDuplicateSel', label: '선택 클립·소리 복제 — 음악과 클립 소리는 오디오 트랙으로 복사' },
   { id: 'editor.link', scope: 'editor', combos: ['shift+l'], owner: 'editor.js',
-    calls: 'sbeToggleAudioLink', label: 'Unlink / link the sound' },
+    calls: 'sbeToggleAudioLink', label: '소리 언링크 / 링크' },
   { id: 'editor.resync', scope: 'editor', combos: ['shift+r'], owner: 'editor.js',
-    calls: 'sbeResyncSel', label: 'Resync — slide the sound back under its own picture' },
+    calls: 'sbeResyncSel', label: '리스싱크 — 소리를 자기 그림 아래로' },
   { id: 'editor.selectAll', scope: 'editor', combos: ['mod+a'], owner: 'editor.js',
-    calls: 'sbeSelectAll', label: 'Select every clip' },
+    calls: 'sbeSelectAll', label: '클립 전부 선택' },
   // Escape never closes the timeline: no editor closes a project on Escape,
   // and the Escape that closed the Docs used to shut the film behind them.
   // Closing is the ⋯ menu's Close.
   { id: 'editor.deselect', scope: 'editor', combos: ['escape'], owner: 'editor.js',
-    calls: 'sbeSelectNone', label: 'Close an open menu, then clear the selection (never closes the timeline)' },
+    calls: 'sbeSelectNone', label: '열린 메뉴를 닫고 선택 해제 (타임라인은 안 닫음)' },
   { id: 'editor.zoom', scope: 'editor', combos: ['plus', 'minus'], hidden: ['equals', 'underscore'],
-    owner: 'editor.js', calls: 'sbeZoom', label: 'Zoom the timeline in / out' },
+    owner: 'editor.js', calls: 'sbeZoom', label: '타임라인 줌 인 / 아웃' },
   { id: 'editor.fit', scope: 'editor', combos: ['shift+z'], hidden: ['backslash'], owner: 'editor.js',
-    calls: 'sbeZoomFit', label: 'Fit the whole sequence in the window' },
+    calls: 'sbeZoomFit', label: '시퀀스 전체를 창에 맞추기' },
   { id: 'editor.snap', scope: 'editor', combos: ['n'], owner: 'editor.js',
-    calls: 'sbeToggleSnap', label: 'Snap to beat on / off' },
+    calls: 'sbeToggleSnap', label: '비트 스냅 켜기 / 끄기' },
   { id: 'editor.mute', scope: 'editor', combos: ['m'], owner: 'editor.js',
     calls: ['sbeSetMute', 'sbeUnmuteFromRefusal'],
-    label: 'Mute / unmute the preview — the film itself is not changed' },
+    label: '프리뷰 음소거 / 해제 — 필름은 안 바뀜' },
   // THE SPLIT. Sound mode is the one thing that changes it: the sound lanes
   // at full height and the picture small, or back. The ⌁ button on the tool
   // row and the ▾ on the A1 head are the same control.
   { id: 'editor.soundMode', scope: 'editor', combos: ['shift+a'], owner: 'editor.js',
     calls: 'sbeSoundModeToggle',
-    label: 'Sound mode on / off — the sound lanes at full height and the picture small (the ⌁ Sound button and the ▾ on the A1 head do the same)' },
+    label: '사운드 모드 켜기 / 끄기 — 소리 레인이 크고 그림이 작음 (⌁ 사운드와 A1 헤드 ▾와 같음)' },
   { id: 'editor.inspector', scope: 'editor', combos: ['mod+i'], owner: 'editor.js',
     calls: 'sbeInspectToggle',
-    label: 'Inspector open / close — speed, fades, brightness, zoom, transitions, titles (double-clicking a clip opens it too)' },
+    label: 'Inspector 열기 / 닫기 — 속도, 페이드, 밝기, 줌, 트랜지션, 타이틀 (클립 더블클릭도)' },
   { id: 'editor.fullscreen', scope: 'editor', combos: ['f'], owner: 'editor.js',
     calls: 'sbeFullscreen',
-    label: 'Program monitor full screen — F or Esc brings it back' },
+    label: '프로그램 모니터 전체 화면 — F 또는 Esc로 돌아옴' },
   { id: 'editor.panels', scope: 'editor', combos: ['backquote'], display: [['`']], owner: 'editor.js',
     calls: 'sbePanelsToggle',
-    label: 'Hide / show the media pool and the queue, so the cut has the window (Photoshop\'s Tab)' },
+    label: '미디어 풀과 대기열 숨기기 / 보이기, 컷이 창을 쓰게 (Photoshop Tab)' },
   { id: 'editor.undo', scope: 'editor', combos: ['mod+z'], owner: 'editor.js',
-    calls: 'sbeUndo', label: 'Undo' },
+    calls: 'sbeUndo', label: '실행 취소' },
   { id: 'editor.redo', scope: 'editor', combos: ['shift+mod+z'], owner: 'editor.js',
-    calls: 'sbeRedo', label: 'Redo' },
+    calls: 'sbeRedo', label: '다시 실행' },
   { id: 'editor.save', scope: 'editor', combos: ['mod+s'], owner: 'editor.js',
-    calls: 'sbeSaveNow', label: 'Save the draft' },
+    calls: 'sbeSaveNow', label: '초안 저장' },
   { id: 'editor.render', scope: 'editor', combos: ['mod+e'], owner: 'editor.js',
-    calls: 'sbeRenderFilm', label: 'Render the timeline into one file (⌘E, as Export in Final Cut)' },
+    calls: 'sbeRenderFilm', label: '타임라인을 한 파일로 렌더 (⌘E, Final Cut Export)' },
 
   // ---- the Editor: mouse -----------------------------------------------------------
   { id: 'editor.click', scope: 'editor-mouse', display: [['Click']], owner: 'editor.js',
-    label: 'Select a clip · click an empty part of the track to select nothing' },
+    label: '클립 선택 · 트랙 빈 곳을 누르면 선택 해제' },
   { id: 'editor.shiftClick', scope: 'editor-mouse', display: [['⇧', 'Click']], owner: 'editor.js',
-    label: 'Select the range from the selected clip to this one' },
+    label: '선택된 클립부터 여기까지 범위 선택' },
   { id: 'editor.cmdClick', scope: 'editor-mouse', display: [['⌘', 'Click']], owner: 'editor.js',
-    label: 'Add one clip to the selection, or drop it' },
+    label: '선택에 클립 하나 더하거나 빼기' },
   { id: 'editor.drag', scope: 'editor-mouse', display: [['Drag']], owner: 'editor.js',
-    label: 'Move a clip — or the whole selection, sound included · drag a clip’s edge to trim · the music strip drags and trims the same way' },
+    label: '클립 이동 — 또는 선택 전부, 소리 포함 · 가장자리 드래그가 트림 · 음악 스트립도 같음' },
   { id: 'editor.cmdDrag', scope: 'editor-mouse', display: [['⌘', 'Drag']], owner: 'editor.js',
-    label: 'Ripple — everything after the clip slides too' },
+    label: '리플 — 클립 뒤도 같이 밀림' },
   { id: 'editor.altDrag', scope: 'editor-mouse', display: [['⌥', 'Drag']], owner: 'editor.js',
-    label: 'Ignore the beat grid while dragging' },
+    label: '드래그하는 동안 비트 그리드 무시' },
   { id: 'editor.altShiftDrag', scope: 'editor-mouse', display: [['⌥', '⇧', 'Drag']], owner: 'editor.js',
-    label: 'Reorder instead of move' },
+    label: '이동 대신 순서 바꾸기' },
   { id: 'editor.rightClick', scope: 'editor-mouse', display: [['Right-click']], owner: 'editor.js',
-    label: 'The clip bar’s buttons at the pointer, plus Move earlier / Move later · on a hole: Close this hole or Generate a shot here' },
+    label: '포인터에 클립 바 버튼, 앞으로 / 뒤로 · 구멍에서: 이 구멍 닫기 또는 여기에 샷 생성' },
   { id: 'editor.levels', scope: 'editor-mouse', display: [['Click'], ['⇧', 'Click']], displayJoin: ' / ',
     owner: 'editor.js',
-    label: 'Level points, on an unlinked sound: click the yellow line to add one · drag it to set the level · ⇧-click it, or right-click it to remove it' },
+    label: '언링크 소리의 레벨 점: 노란 선 클릭이 추가 · 드래그가 레벨 · ⇧-클릭 또는 우클릭이 제거' },
   { id: 'editor.wheel', scope: 'editor-mouse', display: [['⌥', 'Scroll'], ['⇧', 'Scroll']], displayJoin: ' / ',
     owner: 'editor.js',
-    label: 'Over the track: ⌥ + scroll (or a trackpad pinch) zooms · ⇧ + scroll pans' },
+    label: '트랙 위에서: ⌥ + 스크롤(또는 트랙패드 핀치)이 줌 · ⇧ + 스크롤이 팬' },
   { id: 'editor.tlEdge', scope: 'editor-mouse', display: [['Drag'], ['Double-click']], displayJoin: ' / ',
     owner: 'editor.js',
-    label: 'The timeline’s top edge: drag up for taller tracks · double-click to reset · ↑ ↓ when it is focused' },
+    label: '타임라인 윗가장자리: 위로 드래그하면 트랙이 높아짐 · 더블클릭 리셋 · 포커스 때 ↑ ↓' },
 
   // ---- storyboard ------------------------------------------------------------------
   { id: 'storyboard.grade', scope: 'storyboard', combos: ['k', 'r', 'c'], owner: 'storyboard.js',
-    label: 'Grade the focused shot: K Keep · R Re-roll · C Cut — the same key again clears it' },
+    label: '포커스된 샷 그레이드: K Keep · R Re-roll · C Cut — 같은 키 다시면 해제' },
   { id: 'storyboard.collapse', scope: 'storyboard', combos: ['escape'], owner: 'storyboard.js',
-    label: 'Collapse the docked player back to the shot list' },
+    label: '도킹된 플레이어를 샷 목록으로 접기' },
 
   // ---- images: the layout canvas -------------------------------------------------
   { id: 'canvas.nudge', scope: 'canvas', combos: ['arrowleft', 'arrowright', 'arrowup', 'arrowdown'],
-    owner: 'stage.js', label: 'Nudge the selected box · add ⇧ for a bigger step' },
+    owner: 'stage.js', label: '선택 박스 살짝 밀기 · ⇧면 더 크게' },
   { id: 'canvas.delete', scope: 'canvas', combos: ['backspace'], hidden: ['delete'], owner: 'stage.js',
-    label: 'Delete the selected box' },
+    label: '선택 박스 삭제' },
   { id: 'canvas.deselect', scope: 'canvas', combos: ['escape'], owner: 'stage.js',
-    label: 'Deselect the box · while editing its words, stop editing' },
-  { id: 'canvas.undo', scope: 'canvas', combos: ['mod+z'], owner: 'stage.js', label: 'Undo' },
+    label: '박스 선택 해제 · 글 편집 중이면 편집 끝내기' },
+  { id: 'canvas.undo', scope: 'canvas', combos: ['mod+z'], owner: 'stage.js', label: '실행 취소' },
 ];
 
 // Combinations the browser or macOS keeps for itself. A page that claims one
@@ -304,7 +304,7 @@ function shortcutHint(id) {
   const s = shortcutById(id);
   if (!s) return '';
   const groups = shortcutGroups(s).map(g => g.join(g.some(x => x.length > 1) ? ' ' : ''));
-  return groups.join(s.displayJoin ? s.displayJoin : ' or ');
+  return groups.join(s.displayJoin ? s.displayJoin : ' 또는 ');
 }
 
 function _scEsc(t) {
@@ -402,7 +402,7 @@ function shortcutGenerateFrom(t) {
     const btn = document.getElementById('genBtn');
     if (!form || !btn) return false;
     if (btn.disabled) {
-      if (typeof phosToast === 'function') phosToast(btn.title || 'Generate is not available right now.', { duration: 5000 });
+      if (typeof phosToast === 'function') phosToast(btn.title || '지금은 생성을 쓸 수 없습니다.', { duration: 5000 });
       return;
     }
     // The ONE submit path — the same listener the Generate button fires.
@@ -413,7 +413,7 @@ function shortcutGenerateFrom(t) {
     const btn = document.getElementById('imgStudioGenBtn');
     if (!btn || typeof imgStudioGenerate !== 'function') return false;
     if (btn.disabled) {
-      if (typeof phosToast === 'function') phosToast(btn.title || 'Generate is not available right now.', { duration: 5000 });
+      if (typeof phosToast === 'function') phosToast(btn.title || '지금은 생성을 쓸 수 없습니다.', { duration: 5000 });
       return;
     }
     imgStudioGenerate();

@@ -1,50 +1,50 @@
-# Remix
+# 리믹스
 
-Remix is the last chip on the Video tab — *motion control · refs · color*. It holds four tools that start from **your own media**. Click it, then choose the tool in the row that opens; it remembers the last one you used.
+리믹스는 영상 탭 마지막 칩입니다 — *모션 컨트롤 · 레퍼런스 · 색*. **내 미디어**에서 시작하는 도구 넷입니다. 누른 뒤 열린 줄에서 도구를 고르고, 마지막 사용을 기억합니다.
 
 ## Ingredients {#ingredients}
 
-*2–8 refs → one clip.* Several reference images — a face, a prop, a location — composed into one new clip.
+*레퍼런스 2–8 → 클립 1개.* 얼굴, 소품, 장소 이미지를 한 클립으로 합성합니다.
 
-1. Drop 2 to 8 images into **Reference images** (or click one from *Recent uploads*). They tile into one reference sheet.
-2. The main prompt describes what is in the sheet; **Action / shot to generate** describes the shot.
-3. Optional: a **Character** with **Identity strength** (0.8–1.8; about 1.3 is the sweet spot).
+1. **레퍼런스 이미지**에 2–8장(*최근 업로드*에서 클릭). 한 시트로 타일됩니다.
+2. 큰 프롬프트는 시트에 있는 것, **생성할 동작 / 샷**은 샷 자체.
+3. 선택: **캐릭터**와 **아이덴티티 강도**(0.8–1.8, 약 1.3이 적정).
 
-> **Needs LTX-2.3** Ingredients' reference adapter has no LTX-2.5 release yet. On LTX-2.5 the chip is greyed out and says so; use Image mode with **Inspire** instead, or install the 2.3 pack.
+> **LTX-2.3 필요** Ingredients 레퍼런스 어댑터는 아직 LTX-2.5 릴리스가 없습니다. LTX-2.5에서는 칩이 회색입니다. 이미지 모드 **Inspire**를 쓰거나 2.3 팩을 설치하세요.
 
 ## Motion Control {#motion-control}
 
-*Its motion → your scene.* The render copies the motion, camera move, composition and pose of a clip you supply, while your prompt repaints the subject and the scene.
+*그 모션 → 내 장면.* 준 클립의 모션, 카메라, 구도, 포즈를 복사하고, 프롬프트가 피사체와 장면을 다시 칠합니다.
 
-1. Pick the clip in **Control video** (or paste its path). The output has that clip's size and length.
-2. Write the new subject and scene. Leave the camera out of the prompt — the clip already carries it.
+1. **Control video**에서 클립(또는 경로). 출력은 그 클립 크기와 길이.
+2. 새 피사체와 장면을 적습니다. 카메라는 프롬프트에서 빼세요. 클립이 이미 갖고 있습니다.
 
-An ordinary video works. A pose, depth or edge sequence you already have follows more tightly — Phosphene does not make those sequences for you. It works best on shots whose content changes (camera moves, wide scenes) and worst on a static, high-contrast single subject. On LTX-2.5 the motion and framing still transfer, but the prompt has much weaker control over the new subject — the panel shows that warning.
+일반 영상으로 됩니다. 이미 가진 포즈·깊이·에지 시퀀스가 더 꽉 따라갑니다 — Leo Studio는 그 시퀀스를 만들어 주지 않습니다. 내용이 바뀌는 샷(카메라 움직임, 와이드)에 강하고, 고대비 정지 단일 피사체에 약합니다. LTX-2.5에서도 모션·프레이밍은 넘어가지만, 새 피사체에 대한 프롬프트 제어는 훨씬 약합니다. 패널이 그 경고를 보여 줍니다.
 
 ## Colorize {#colorize}
 
-*B&W clip → color.* Pick the clip in **Source video to colorize** and describe the colours to paint in. The output keeps the source's size and length.
+*흑백 클립 → 컬러.* **색입힐 원본 영상**에서 고르고, 칠할 색을 적습니다. 출력은 원본 크기와 길이.
 
-## Upscale & Face Fix {#upscale-face-fix}
+## 업스케일 & 얼굴 보정 {#upscale-face-fix}
 
-*Any clip → 2× sharper, face kept.* Re-renders a clip at twice its size with generated detail — not a filter — and keeps the face and the sound. Made for Hailuo H3 drafts, works on any clip. (Earlier versions called this **LTX Upscale** / **Upscale ×2**.)
+*아무 클립 → 2× 더 선명, 얼굴 유지.* 필터가 아니라 생성 디테일로 두 배 다시 찍고, 얼굴과 소리를 남깁니다. Hailuo H3 초안용으로 만들었고 아무 클립에나 됩니다. (예전 이름 **LTX Upscale** / **Upscale ×2**.)
 
-**One click:** press **Upscale & Face Fix** under the player, on an Outputs card, on a finished row in the queue history, or on the Editor's clip bar. It queues the **Face Fix** recipe for that clip with the clip's own prompt and seed. The fixed clip is a **new file** next to the original, which is not changed. From the Editor, a line above the timeline offers to **swap it in** when it lands — same cut, same in and out points — or to keep the old one.
+**한 클릭:** 플레이어 아래, Outputs 카드, 대기열 히스토리 끝난 행, 편집기 클립 바의 **업스케일 & 얼굴 보정**. 그 클립의 프롬프트·Seed로 **Face Fix** 레시피를 넣습니다. 보정 클립은 원본 옆 **새 파일**. 원본은 안 바뀝니다. 편집기에서는 타임라인 위 줄이 도착하면 **바꿔 넣기**(같은 컷, 같은 인/아웃) 또는 옛것 유지를 줍니다.
 
-**With settings:** the small button beside **Upscale & Face Fix** under the player opens the clip here, in Remix.
+**설정 포함:** 플레이어 아래 버튼 옆 작은 버튼이 리믹스로 클립을 엽니다.
 
-1. Pick the clip in **Clip to fix**.
-2. Choose a preset:
+1. **보정할 클립**.
+2. 프리셋:
 
-| Preset | What it does | Time for 5 s at 640×384 on an M4 Max |
+| 프리셋 | 하는 일 | M4 Max에서 5초 640×384 |
 |---|---|---|
-| **Face Fix** | one refine step from the clip — sharper, the face is not redrawn (default, and what the one-click button runs) | about 2.5 min |
-| **Faithful** | three refine steps — sharper detail, the face can shift a little | about 5.5 min |
-| **Quick** | two refine steps, a touch softer | about 3.75 min |
-| **Re-imagine** | a full re-render — the sharpest, and faces drift | about 7 min |
+| **Face Fix** | 클립에서 한 번 다듬기 — 더 선명, 얼굴은 다시 안 그림(기본, 원클릭이 이 레시피) | 약 2.5분 |
+| **Faithful** | 세 번 다듬기 — 디테일, 얼굴이 조금 흔들릴 수 있음 | 약 5.5분 |
+| **Quick** | 두 번, 조금 부드러움 | 약 3.75분 |
+| **Re-imagine** | 풀 재렌더 — 가장 선명, 얼굴 드리프트 | 약 7분 |
 
-3. Generate. The sound, the length and the frame count are kept, and (if you leave it empty) the prompt comes from the source. The result is capped at this Mac's Image-to-Video size. A 5 s 1024×576 source takes much longer (about 20 min for Face Fix).
+3. 생성. 소리·길이·프레임 수는 유지. 프롬프트를 비우면 원본에서. 결과는 이 맥 Image-to-Video 크기에 캡. 5초 1024×576 원본은 훨씬 깁니다(Face Fix 약 20분).
 
-It needs the **LTX-2.5 Pixel Spatial Upscaler** adapter (0.3 GB) — download it from the Models window. A source already near the cap is refused, because it cannot grow enough to be worth the render.
+**LTX-2.5 Pixel Spatial Upscaler** 어댑터(0.3 GB)가 필요합니다. 모델 창에서 받으세요. 이미 캡에 가까운 원본은 거절합니다. 클 여지가 없어서입니다.
 
-Ingredients, Motion Control and Colorize run on the fast Q4 model — no Q8 download is needed.
+Ingredients, Motion Control, Colorize는 빠른 Q4 모델입니다. Q8 다운로드는 필요 없습니다.

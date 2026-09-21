@@ -1,280 +1,280 @@
-# Editor
+# 편집
 
-The Editor is a timeline for the clips you make — from any engine, from a storyboard or from nothing. Trim and split, move sound for J-cuts and L-cuts, add music, titles and transitions, then render one file or hand the cut to Premiere, Resolve or After Effects.
+편집기는 만든 클립의 타임라인입니다. 어떤 엔진이든, 스토리보드에서든, 빈 것에서든. 트림·스플릿, J컷·L컷용 사운드 이동, 음악·타이틀·트랜지션 후 한 파일로 렌더하거나 Premiere, Resolve, After Effects로 넘깁니다.
 
-## Opening a timeline {#open}
+## 타임라인 열기 {#open}
 
-- On the **Editor** tab, *Pick a sequence to cut* lists every sequence that has clips — click one.
-- From **Storyboard**: step **3 Edit**, **Open in Editor** on the board list, or **Re-cut in the Editor** on the film screen.
-- The last timeline you had open comes back when you return to the tab. Switching to another tab does not close it; **⋯ → Close** does (nothing is deleted).
-- A new, empty or copied version of a sequence is a draft — see [Saving, drafts and versions](#docs/editor/saving).
+- **편집** 탭에서 *자를 시퀀스 고르기*가 클립 있는 시퀀스를 나열합니다. 하나를 누르세요.
+- **스토리보드**: 단계 **3 편집**, 보드 목록 **편집기에서 열기**, 필름 화면 **편집기에서 다시 컷**.
+- 마지막으로 연 타임라인이 탭에 돌아오면 다시 나옵니다. 다른 탭으로 가도 안 닫힙니다. **⋯ → 닫기**가 닫습니다(삭제는 아님).
+- 새·빈·복사 시퀀스는 초안입니다. [저장, 초안, 버전](#docs/editor/saving).
 
-## The layout {#layout}
+## 레이아웃 {#layout}
 
-**The header** — the sequence's name, the draft chip, whether it is saved (*unsaved changes*, *saved · revision N*), the **View** group (below), **Undo**, **Redo**, **Save**, **Render** with its **▾**, and **⋯** (Drafts and versions, Media pool, Auto-edit, Storyboard, Close).
+**헤더** — 시퀀스 이름, 초안 칩, 저장 여부(*저장 안 됨*, *저장됨 · revision N*), **보기** 그룹, **실행 취소**, **다시 실행**, **저장**, **Render**와 **▾**, **⋯**(초안과 버전, 미디어 풀, Auto-edit, 스토리보드, 닫기).
 
-**The media pool** (left) — **This Sequence**, **Other sequences**, **Generations**, **Images** and **Sound**. Click a row to watch it in the Source monitor; **+** puts it at the end of the sequence; drag it onto the track to insert it where you drop it. On **Sound**, **+** puts the sound on an audio track at the playhead; on a video row, **♪** puts only its sound there — see [Audio tracks](#docs/editor/tracks). **Add black** adds that many seconds of black at the end, **Add title** puts a title at the playhead, **Filter by name** searches ([[sc:search.focus]]).
+**미디어 풀**(왼쪽) — **이 시퀀스**, **다른 시퀀스**, **생성물**, **이미지**, **사운드**. 행을 누르면 소스 모니터. **+**는 시퀀스 끝. 트랙에 드래그하면 떨어뜨린 곳에 삽입. **사운드**에서 **+**는 플레이헤드의 오디오 트랙. 영상 행의 **♪**는 소리만. [오디오 트랙](#docs/editor/tracks). **검정 추가**는 끝에 그 초만큼 검정, **타이틀 추가**는 플레이헤드에 타이틀, **이름으로 필터** 검색([[sc:search.focus]]).
 
-**The monitors** — **Source** on the left, **Program** on the right. **Program** plays the timeline. Under it, left to right: **▶** / **⏸**, the speaker (mutes the preview only), the time, and what is under the playhead (the clip's name, its trim, *source* if it has no proxy yet); a chip counts clips that finished rendering but are not on the timeline and opens the Inspector. **Source** plays a clip before you cut it in: click a clip in the pool, or **drag a clip onto it** — from the media pool or from the timeline (dragging a shot from the track onto the Source monitor loads it there and leaves the timeline exactly as it was). Until something is loaded it says *Drop a clip here to preview*. **Add to timeline** places the clip; **×** hides the monitor. The **Inspector** opens beside the monitors when you ask for it and holds the clip's properties (below) and *Rendered but not on the timeline*, with **Place** for each clip that finished but was never put on the track. Nothing on this screen resizes itself: the monitors and the panels change only when you press a toggle, and what you chose is remembered in this browser.
+**모니터** — 왼쪽 **소스**, 오른쪽 **프로그램**. **프로그램**이 타임라인을 재생. 아래: **▶** / **⏸**, 스피커(프리뷰만 음소거), 시간, 플레이헤드 아래(클립 이름, 트림, 프록시 없으면 *source*). 렌더는 끝났는데 타임라인에 없는 클립 수를 칩이 세고 Inspector를 엽니다. **소스**는 넣기 전 미리보기. 풀이나 타임라인에서 **클립을 올려 놓기**. 비어 있으면 *미리보려면 클립을 여기에*. **타임라인에 추가**, **×**는 모니터 숨김. **Inspector**는 모니터 옆에 열리고 클립 속성과 *렌더됐지만 타임라인에 없음*, 각각 **배치**. 이 화면은 스스로 크기를 안 바꿉니다. 토글을 누를 때만. 선택은 이 브라우저에 기억됩니다.
 
-**The tracks**, top to bottom:
+**트랙**, 위부터:
 
-| Track | What is on it |
+| 트랙 | 위에 있는 것 |
 |---|---|
-| **V2 Overlay** | titles and cards laid over the picture |
-| **V1 Picture** | the shots, in order |
-| **A1 Clip sound A** / **Clip sound B** | each shot's own sound, on two lanes — shots alternate A, B, A… so neighbours can overlap and crossfade |
-| **A2 Music** | the soundtrack |
-| **A3, A4, …** | audio tracks — laugh tracks, stings, beds, any number of sounds; every track plays together |
+| **V2 Overlay** | 그림 위 타이틀·카드 |
+| **V1 Picture** | 샷, 순서대로 |
+| **A1 Clip sound A** / **Clip sound B** | 샷 자체 소리, 두 레인 — 샷이 A, B, A…로 갈려 이웃이 겹치고 크로스페이드 |
+| **A2 Music** | 사운드트랙 |
+| **A3, A4, …** | 오디오 트랙 — 웃음, 스팅, 베드. 트랙은 같이 재생 |
 
-**The tool row** — directly above the tracks: the [clip bar](#docs/editor/clip-bar) on the left (icons; hover one for its name, what it does and its key), and on the right **Snap** (to the beat grid), zoom **−** / slider / **+**, the **i** (the preview is approximate at cuts; the render is exact — it turns amber when it has a note for you) and **Keys**. Drag the timeline's top edge (just below this row) up for taller tracks; double-click it to reset; each mode remembers its own height.
+**도구 줄** — 트랙 바로 위: 왼쪽 [클립 바](#docs/editor/clip-bar)(아이콘, 올리면 이름·하는 일·키), 오른쪽 **Snap**(비트 그리드), 줌 **−** / 슬라이더 / **+**, **i**(프리뷰는 컷에서 근사, 렌더는 정확 — 메모가 있으면 호박색), **Keys**. 이 줄 바로 아래 타임라인 윗가장자리를 위로 드래그하면 트랙이 높아집니다. 더블클릭이 리셋. 모드마다 높이를 기억합니다.
 
-**View** — the group of switches in the header decides what is on the screen. Each one is **highlighted while its panel is showing**; click to hide it, click again to bring it back:
+**보기** — 헤더 스위치가 화면에 무엇이 있는지 정합니다. 패널이 보일 때 **강조**. 누르면 숨기고 다시 누르면 돌아옵니다.
 
-- **Source** — the Source monitor on the left.
-- **Inspector** ([[sc:editor.inspector]], or double-click a clip) — the properties panel on the right.
-- **Sound** ([[sc:editor.soundMode]]) — Sound mode: every sound lane at full height, the picture small. See [Picture mode and Sound mode](#docs/editor/compact).
-- **Panels** ([[sc:editor.panels]]) — the app's left column: the tabs, the media pool and the queue. Hide it to give the cut the whole window.
-- **Full screen** (the corners, [[sc:editor.fullscreen]]) — the Program monitor fills the screen; **Esc** or **F** brings it back.
+- **소스** — 왼쪽 소스 모니터.
+- **Inspector** ([[sc:editor.inspector]], 또는 클립 더블클릭) — 오른쪽 속성.
+- **사운드** ([[sc:editor.soundMode]]) — 사운드 모드: 소리 레인이 크고 그림은 작음. [그림 모드와 사운드 모드](#docs/editor/compact).
+- **패널** ([[sc:editor.panels]]) — 앱 왼쪽 열: 탭, 미디어 풀, 대기열. 숨기면 컷이 창 전체를 씁니다.
+- **전체 화면**(모서리, [[sc:editor.fullscreen]]) — 프로그램 모니터가 화면을 채움. **Esc** 또는 **F**.
 
-In a narrow window the group shows icons only. Every icon button in the Editor shows its name, what it does and its key a moment after you point at it (or tab to it).
+좁은 창에서는 아이콘만. 편집기 아이콘 버튼은 가리키면(또는 탭하면) 이름·하는 일·키를 보여 줍니다.
 
-## Selecting {#selecting}
+## 선택 {#selecting}
 
-- **Click** a clip to select it. Click an empty part of the track to select nothing (and move the playhead there).
-- **⇧-click** selects the range from the selected clip to this one. **⌘-click** adds one clip or drops it.
-- [[sc:editor.selectAll]] selects every clip. [[sc:editor.deselect]] clears the selection — and with nothing selected, closes the timeline.
-- With several clips selected, the clip bar acts on **all** of them, as one undo step; the inspector shows the properties of the one you clicked last. A locked clip in the selection is left alone and named in a message.
+- **클릭**이 클립을 고릅니다. 트랙 빈 곳을 누르면 선택 해제(그리고 플레이헤드 이동).
+- **⇧-클릭**은 선택된 클립부터 여기까지. **⌘-클릭**은 하나 더하거나 뺌.
+- [[sc:editor.selectAll]] 전부. [[sc:editor.deselect]] 선택 해제 — 선택된 게 없으면 타임라인을 닫음.
+- 여러 클립이면 클립 바가 **전부**에, 한 실행 취소. Inspector는 마지막 클릭. 잠긴 클립은 건너뛰고 메시지에 이름.
 
-## Moving, trimming and splitting {#moving}
+## 이동, 트림, 스플릿 {#moving}
 
-- **Drag** a clip to move it. Drag a selected clip and the whole selection moves together, sound included.
-- **Drag the edge** of a clip to trim it. **⌘ while dragging** ripples: everything after it slides too.
-- Clips snap to the beat grid while **Snap to beat** is ticked ([[sc:editor.snap]] toggles it). **⌥ while dragging** ignores the grid for that drag. Sound strips and overlays snap to cuts.
-- **⌥⇧-drag** reorders instead of moving; right-click → **Move earlier** / **Move later** swaps a shot with its neighbour.
-- [[sc:editor.nudge]] nudges the selection one frame (with ⇧, ten).
-- **Split** ([[sc:editor.split]]) cuts the shot under the **playhead** — not the selection — into two.
+- **드래그**로 이동. 선택된 클립을 드래그하면 선택 전부가 소리 포함 같이 움직임.
+- **가장자리 드래그**가 트림. **⌘ 드래그**는 리플: 뒤도 같이 밀림.
+- **비트에 스냅**이 켜져 있으면 비트 그리드에 붙음([[sc:editor.snap]]). **⌥ 드래그**는 그 드래그만 그리드 무시. 사운드 스트립과 오버레이는 컷에 붙음.
+- **⌥⇧-드래그**는 이동 대신 순서. 우클릭 → **앞으로** / **뒤로**.
+- [[sc:editor.nudge]] 선택을 한 프레임(⇧면 열).
+- **스플릿** ([[sc:editor.split]])은 **플레이헤드** 아래 샷을 둘로 — 선택이 아님.
 
-## The clip bar {#clip-bar}
+## 클립 바 {#clip-bar}
 
-The row of icons directly above the tracks holds the actions you use all day, in four groups: edit (**Split**, **Lift**, **Ripple delete**, **Duplicate**), sound (**Unlink / Link**, **Resync**, **Mute**, **Delete sound**, **Clear points**), **Lock**, and **Face Fix ×2**. Hover an icon for its name, what it does and its key. Left of them, the readout names what is selected (*3 clips selected*).
+트랙 바로 위 아이콘. 네 그룹: 편집(**스플릿**, **리프트**, **리플 삭제**, **복제**), 사운드(**언링크 / 링크**, **리스싱크**, **음소거**, **소리 삭제**, **포인트 지우기**), **잠금**, **Face Fix ×2**. 올리면 이름·하는 일·키. 왼쪽 읽기가 선택(*클립 3개 선택*).
 
-Every button is always there. When it cannot act, it is greyed out and its tooltip says what would make it work. When the pane is too narrow, the tail of the row moves into a **More** menu, with the names written out — as they are in the right-click menu.
+버튼은 항상 있습니다. 못 하면 회색이고 툴팁이 무엇이 필요한지 말합니다. 좁으면 줄 끝이 **더보기**로, 이름이 적힘 — 우클릭 메뉴와 같음.
 
-| Button | What it does | Greyed out when |
+| 버튼 | 하는 일 | 회색일 때 |
 |---|---|---|
-| **Split** [[sc:editor.split]] | cuts the shot under the playhead in two at the playhead; nothing moves, nothing is lost | the playhead is not over a shot, is exactly on a cut, or the shot is locked |
-| **Lift** [[sc:editor.lift]] | takes the selection out and **leaves the hole** as black, so nothing after it moves | nothing is selected |
-| **Ripple delete** [[sc:editor.ripple]] | takes the selection out and **closes the gap** — everything after slides earlier and the film gets shorter | nothing is selected |
-| **Duplicate** [[sc:editor.duplicate]] | the same shot again right after itself — trim, speed, fades and grade included; everything after slides. On a **sound on an audio track**: the same sound right after itself on its track (or the next free spot on it). On the **music (A2)** or a **clip's sound (A1)**: a copy of the sound on an audio track, right after it — the first track with room, or a new one | nothing is selected; the music's length is not known yet (press **Prepare**); the clip has no sound, or plays at a speed other than 1× |
-| **Unlink sound** / **Link sound** / **Re-link sound** [[sc:editor.link]] | frees the sound from its picture so you can slide it (the J-cut and the L-cut). **Link sound** keeps the offset you made and makes the pair travel together; **Re-link sound** appears when the sound is back exactly under its picture | the selection is a still or black, which has no sound |
-| **Resync sound** [[sc:editor.resync]] | slides the sound back to where its own picture plays it. Your trim is kept and it stays unlinked | the sound is still linked (so it cannot be out of sync), the clip has no sound, or it is already in sync |
-| **Mute sound** / **Unmute sound** | switches this clip's own sound off — in the preview, the render and the export. The strip stays; the music is not affected | the clip has no sound |
-| **Delete sound** | removes the clip's sound; the picture keeps playing, silent. Undo brings it back | the sound is still linked — unlink it first |
-| **Clear points** | deletes the level points (the dots on the yellow line) from the selected strips. Fades are left alone | the sound has no level points |
-| **Lock** / **Unlock** | pins a shot to its place — everything else flows around it, and it cannot be dragged or trimmed | nothing is selected |
-| **Face Fix ×2** (Upscale & Face Fix) | queues a 2× re-render of the clip that keeps the face and the sound. When it lands, a line above the timeline offers **Swap it in** (same cut, same in and out points) or **Keep the old one**; the original file is not changed | nothing, several clips, a still or black is selected |
+| **스플릿** [[sc:editor.split]] | 플레이헤드에서 샷을 둘로. 이동 없음, 손실 없음 | 플레이헤드가 샷 위가 아니거나 컷 위, 또는 잠김 |
+| **리프트** [[sc:editor.lift]] | 선택을 빼고 **구멍을 검정으로 남김**. 뒤는 안 움직임 | 선택 없음 |
+| **리플 삭제** [[sc:editor.ripple]] | 선택을 빼고 **틈을 닫음** — 뒤가 앞으로, 필름이 짧아짐 | 선택 없음 |
+| **복제** [[sc:editor.duplicate]] | 바로 뒤에 같은 샷 — 트림, 속도, 페이드, 그레이드 포함. **오디오 트랙 소리**: 같은 트랙 바로 뒤. **음악(A2)** 또는 **클립 소리(A1)**: 오디오 트랙에 복사 | 선택 없음; 음악 길이를 아직 모름(**Prepare**); 소리 없거나 1×가 아님 |
+| **소리 언링크** / **링크** / **다시 링크** [[sc:editor.link]] | 소리를 그림에서 풀어 밀 수 있게(J컷·L컷). **링크**는 오프셋을 유지하고 같이 움직임. **다시 링크**는 소리가 그림 바로 아래일 때 | 스틸이나 검정, 소리 없음 |
+| **소리 리스싱크** [[sc:editor.resync]] | 소리를 자기 그림이 재생하는 곳으로. 트림은 유지, 언링크 유지 | 아직 링크(그래서 어긋날 수 없음), 소리 없음, 이미 맞음 |
+| **소리 음소거** / **음소거 해제** | 이 클립 자체 소리를 끔 — 프리뷰, 렌더, 보내기. 스트립은 남음. 음악은 안 건드림 | 소리 없음 |
+| **소리 삭제** | 클립 소리를 뺌. 그림은 무음으로 재생. 실행 취소로 돌아옴 | 아직 링크 — 먼저 언링크 |
+| **포인트 지우기** | 노란 선의 레벨 점 삭제. 페이드는 남김 | 레벨 점 없음 |
+| **잠금** / **잠금 해제** | 샷을 자리에 고정 — 나머지가 주위로 흐름, 드래그·트림 불가 | 선택 없음 |
+| **Face Fix ×2** (업스케일 & 얼굴 보정) | 얼굴·소리 유지 2× 재렌더. 도착하면 타임라인 위 줄이 **바꿔 넣기**(같은 컷, 같은 인/아웃) 또는 **옛것 유지**. 원본 파일은 안 바뀜 | 없거나 여러 클립, 스틸, 검정 |
 
-When the pane is too narrow, the last buttons move into **More ▾**. **Right-click** a clip for the same actions at the pointer; right-click a hole for **Close this hole** and **Generate a shot here…**.
+좁으면 마지막 버튼이 **더보기 ▾**. **우클릭**이 같은 동작. 구멍을 우클릭하면 **이 구멍 닫기**, **여기에 샷 생성…**.
 
-## The inspector (Advanced) {#inspector}
+## Inspector (고급) {#inspector}
 
-The panel beside the Program monitor holds the **properties** of the selected clip — the settings you change occasionally. It is closed until you open it: **Inspector** in the View group, [[sc:editor.inspector]], or a double-click on a clip; press again to close it. Whether it is open is remembered in this browser. It has three sections:
+프로그램 모니터 옆 **속성**. 가끔 바꾸는 설정. 닫혀 있다가: 보기 그룹 **Inspector**, [[sc:editor.inspector]], 클립 더블클릭. 다시 누르면 닫힘. 이 브라우저에 기억. 세 구역:
 
-- **Clip** — **Speed**, 0.25× to 4× (**0.5x**, **1x**, **2x** buttons); the clip's slot on the film changes and everything after it moves. **Retake** renders a new take of a storyboard shot — see [Replace a shot with a retake](#docs/editor/job-retake).
-- **Sound** — **Fade in** / **Fade out** in seconds, and **Add point at playhead** for the level line.
-- **Effects** — **Brightness** (−0.5 to +0.5, **Reset**), picture **Fade in** / **Fade out** (**Clear**), and **Zoom** (1× to 3×, **Reset**) with **Across** and **Down** to reframe the zoomed picture.
+- **클립** — **속도** 0.25×–4×(**0.5x**, **1x**, **2x**). 슬롯이 바뀌고 뒤가 움직임. **리테이크**는 스토리보드 샷의 새 테이크. [샷을 리테이크로](#docs/editor/job-retake).
+- **사운드** — **페이드 인** / **페이드 아웃** 초, 레벨 선용 **플레이헤드에 점 추가**.
+- **이펙트** — **밝기**(−0.5–+0.5, **리셋**), 그림 **페이드 인** / **페이드 아웃**(**지우기**), **줌**(1×–3×, **리셋**)과 **가로** / **세로**로 줌된 그림 재프레이밍.
 
-Select the mark between two clips and the inspector shows the **Transition**; select a title and it shows the **Text**.
+두 클립 사이 마크를 고르면 **트랜지션**, 타이틀을 고르면 **텍스트**.
 
-## Sound {#sound}
+## 사운드 {#sound}
 
-### Linked and unlinked {#linked}
+### 링크와 언링크 {#linked}
 
-A clip's sound starts **linked**: it moves with its picture, shows dimmer, and cannot be dragged on its own. **Unlink sound** frees it. An unlinked strip can be dragged, trimmed at either end, faded at its corners and shaped with level points — and it can drift out of sync, which is what Resync is for.
+클립 소리는 처음 **링크**: 그림과 같이 움직이고 더 어둡고 혼자 드래그 불가. **소리 언링크**가 풉니다. 언링크 스트립은 드래그, 양끝 트림, 모서리 페이드, 레벨 점 — 그리고 싱크가 어긋날 수 있어 리스싱크가 있습니다.
 
-### J-cuts and L-cuts {#j-cut}
+### J컷과 L컷 {#j-cut}
 
-A **J-cut** starts the next shot's sound before its picture; an **L-cut** lets a shot's sound run on under the next picture. Both are made the same way: unlink the sound, drag or trim the strip under the neighbouring shot, then **Link sound** to keep that offset.
+**J컷**은 다음 샷 소리가 그림보다 먼저. **L컷**은 샷 소리가 다음 그림 아래까지. 만드는 법은 같음: 언링크, 이웃 샷 아래로 드래그 또는 트림, 그다음 **링크**로 오프셋 유지.
 
-### Two sound lanes: crossfades {#ab-lanes}
+### 소리 레인 둘: 크로스페이드 {#ab-lanes}
 
-**A1** has two lanes, **Clip sound A** and **Clip sound B**. A new timeline lays its shots' sound on them in turn — the 1st shot on A, the 2nd on B, the 3rd on A — and a shot you add later goes on the lane its neighbour is not on. Sounds on **one** lane play one at a time (if two overlap there, the later one cuts the earlier one off); sounds on **different** lanes overlap and play together. That is what makes a sound dissolve: pull the end of one shot's sound under the start of the next and fade both.
+**A1**에 레인 둘, **Clip sound A**와 **Clip sound B**. 새 타임라인은 샷 소리를 번갈아 — 1샷 A, 2샷 B, 3샷 A — 나중에 넣는 샷은 이웃이 안 쓰는 레인. **한** 레인의 소리는 한 번에 하나(겹치면 나중이 앞을 끊음). **다른** 레인은 겹치고 같이 재생. 소리 디졸브: 한 샷 소리 끝을 다음 시작 아래로 끌어 둘 다 페이드.
 
-- **Alternate A/B** on the **Clip sound B** head — or right-click any shot or sound → **Alternate sound lanes** — lays an existing timeline's sound A, B, A… in film order. Nothing moves in time; one **Undo** puts the lanes back.
-- **Drag a sound up or down** to move it to the other lane — linked sounds too, since changing lane does not move them. Right-click a sound → **Move sound to lane B** / **Move sound to lane A** does the same.
-- Everything else works the same on both lanes: unlink, trim, J-cut and L-cut, fades, level points, Mute, Resync, Duplicate, snapping (a dragged edge also snaps to the other sounds' edges).
-- The preview plays both lanes, the render mixes them under the same safety limiter as the music (and **Duck under dialogue** follows sound on either lane), and the export puts **Clip sound B** on its own audio track, right after the first.
+- **Clip sound B** 헤드의 **A/B 교차** — 또는 샷·소리 우클릭 → **소리 레인 교차** — 기존 타임라인 소리를 필름 순서로 A, B, A…. 시간은 안 움직임. **실행 취소** 한 번이 레인을 되돌림.
+- **소리를 위아래 드래그**해 다른 레인 — 링크된 소리도, 레인만 바꾸는 것은 시간을 안 움직임. 우클릭 → **레인 B로** / **레인 A로**.
+- 나머지(언링크, 트림, J/L컷, 페이드, 레벨, 음소거, 리스싱크, 복제, 스냅)는 두 레인 같음.
+- 프리뷰는 두 레인, 렌더는 음악과 같은 리미터로 믹스(**대사 아래 덕**은 어느 레인이든),보내기는 **Clip sound B**를 자기 오디오 트랙으로.
 
-### Picture mode and Sound mode {#compact}
+### 그림 모드와 사운드 모드 {#compact}
 
-The Editor has two layouts and one switch between them — **Sound** in the View group, [[sc:editor.soundMode]], or the **▾** on the **A1 Clip sound A** head; all three are the same control.
+레이아웃 둘, 스위치 하나 — 보기 그룹 **사운드**, [[sc:editor.soundMode]], 또는 **A1 Clip sound A** 헤드의 **▾**. 셋이 같은 컨트롤.
 
-- **Picture mode** (the default) — the picture is big. **A1**, **A2** and every audio track are thin strips that show where each sound sits and what colour it is. A thin strip is a picture, not a control: click it to select it (the clip bar's sound verbs — mute, delete, unlink, resync, duplicate — all work on the selection), double-click it for sound mode. The timeline sits at the height you last dragged it to, as low as its thin lanes allow.
-- **Sound mode** — the sound is big and the picture is small. Every sound lane is at full height with its grips, corner fades, level line and points; the timeline takes the height and the Program monitor drops to its smallest size. Press the switch again for the picture.
-- **Nothing changes the split by itself.** No hover, click, selection, playback or timer moves a lane or a monitor — only the switch. Each mode remembers its own timeline height, and the mode itself is remembered in this browser, not in the film.
+- **그림 모드**(기본) — 그림이 큼. **A1**, **A2**, 오디오 트랙은 얇은 줄. 얇은 줄은 그림이지 컨트롤이 아님: 클릭이 선택(클립 바 사운드 동사 동작), 더블클릭이 사운드 모드.
+- **사운드 모드** — 소리가 크고 그림이 작음. 모든 소리 레인이 그립·모서리 페이드·레벨 선 높이. 프로그램 모니터는 최소.
+- **스스로 분할을 안 바꿉니다.** 호버, 클릭, 선택, 재생, 타이머가 레인·모니터를 안 움직임 — 스위치만. 모드마다 타임라인 높이를 기억. 모드 자체는 이 브라우저에, 필름이 아님.
 
-### When sound drifts: Resync {#resync}
+### 소리가 어긋날 때: 리스싱크 {#resync}
 
-An unlinked strip that is not under its own picture shows a label with the offset, such as **+0.25s**. Click the label, or select the clip and press **Resync sound** ([[sc:editor.resync]]), to slide it back. It stays unlinked, so you can move it again.
+자기 그림 아래가 아닌 언링크 스트립은 **+0.25s** 같은 라벨. 라벨을 누르거나 클립을 고르고 **소리 리스싱크**([[sc:editor.resync]]). 언링크 유지.
 
-### Muting {#mute}
+### 음소거 {#mute}
 
-- **Mute sound** on the clip bar is a decision about the film: that clip is silent in the preview, the render and the export.
-- 🔊 in the transport ([[sc:editor.mute]]) only silences what you hear while editing. The film is not changed.
+- 클립 바 **소리 음소거**는 필름 결정: 프리뷰·렌더·보내기에서 그 클립이 무음.
+- 트랜스포트 🔊 ([[sc:editor.mute]])는 편집 중에 듣는 것만. 필름은 안 바뀜.
 
-### Level points and fades {#levels}
+### 레벨 점과 페이드 {#levels}
 
-On an **unlinked** strip:
+**언링크** 스트립에서:
 
-- Drag a strip's **corner handle** inward for a fade.
-- **Click the yellow line** to add a level point, and drag it up or down to set the level. Double-clicking the strip adds one too, and **Add point at playhead** in the inspector puts one exactly there.
-- **⇧-click** or **right-click** a point to remove it; **Clear points** removes them all.
+- **모서리 핸들**을 안으로 페이드.
+- **노란 선 클릭**이 레벨 점, 위아래로 레벨. 스트립 더블클릭도 점. Inspector **플레이헤드에 점 추가**.
+- **⇧-클릭** 또는 **우클릭**이 점 제거. **포인트 지우기**가 전부.
 
-### The music track {#music}
+### 음악 트랙 {#music}
 
-- Open **▾** on the **A2 Music** head, give the soundtrack's path or **Change…**, then **Prepare**: it builds the waveform and finds the beat, which gives the timeline its beat grid.
-- The mode menu: **under the clips** mixes the music under the clips' own sound; **replaces clip sound** uses the music alone — any dialogue in the clips is lost.
-- **Level** sets the music's volume, 0–100%.
-- **Duck under dialogue** (off by default) steps the music back wherever a clip's own sound is playing. If you have drawn your own fades or level points on the music, they drive it instead, and the head says *"off — your own level line is driving the bed"*.
-- The music strip drags, trims, fades and takes level points exactly like a clip's sound.
+- **A2 Music** 헤드 **▾**, 사운드트랙 경로 또는 **변경…**, **Prepare**: 파형과 비트를 만들어 비트 그리드를 줍니다.
+- 모드: **클립 아래**는 클립 소리 아래 음악. **클립 소리 대체**는 음악만 — 클립 대사는 사라짐.
+- **레벨** 0–100%.
+- **대사 아래 덕**(기본 끔)은 클립 자체 소리가 나는 곳에서 음악을 물러나게. 음악에 페이드·레벨 점을 직접 그리면 그게 구동하고, 헤드가 *"끔 — 당신 레벨 선이 베드를 구동"*.
+- 음악 스트립은 클립 소리처럼 드래그·트림·페이드·레벨 점.
 
-### Audio tracks {#tracks}
+### 오디오 트랙 {#tracks}
 
-Under **A2 Music** are the audio tracks — **A3**, **A4** and on. A track holds any number of sounds; sounds on **different** tracks play together (a laugh on A3 over a sting on A4 over the music), and sounds on the **same** track play one at a time and never overlap.
+**A2 Music** 아래가 오디오 트랙 — **A3**, **A4** 등. 트랙은 소리를 여러 개. **다른** 트랙은 같이 재생(A3 웃음 위 A4 스팅 위 음악). **같은** 트랙은 한 번에 하나, 안 겹침.
 
-- **+ Add audio track** (under the track names) makes an empty one. Each track's head has its **name** (click to rename), **M** to mute the whole track, a **level** slider, and **×** to remove the track with its sounds (Undo brings it back).
-- **Put a sound on a track:** open **Sound** in the media pool — this sequence's own audio folder and every sound file in the outputs (.wav .m4a .mp3 .aac) — and press **+** (it lands at the playhead) or drag the row onto a track. **♪** on a video row, or dragging a video onto a track, takes **its sound only**. **♪** beside **+ Add audio track** is **Add sound file…**: paste the path of any sound on this Mac; a file outside the outputs is copied into the sequence's audio folder so the preview can play it.
-- Drop a sound on the dashed row under the last track and it gets **a track of its own**.
-- A sound on a track works like an unlinked clip sound: **drag** it (up or down onto another track too — onto the dashed row makes a new track), **drag either end** to trim it, **drag a corner** to fade it, **click the yellow line** for a level point. It snaps to cuts, to the other sounds and to the beat; ⌥ while dragging ignores them.
-- The clip bar acts on it: **Split** cuts the selected sound at the playhead, **Lift** / **Delete sound** take it off, **Ripple delete** also closes the gap on that track, **Duplicate**, **Mute sound**, **Clear points**, **Lock**. **⇧-click** / **⌘-click** selects several. Right-click it for the same verbs. **Unlink** and **Resync** stay grey — a sound on a track has no picture to link to.
-- The inspector shows the selected sound's **Level**, **Fade in** / **Fade out** and **Add point at playhead**. The level you hear is the sound's level times its track's level.
-- Everything plays in the preview, mixes into the render under the same safety limiter as the music, and exports: each audio track becomes its own audio track in Premiere / Resolve and its own layers in After Effects, with trims, levels, fades and mutes editable there.
+- **+ 오디오 트랙 추가**(트랙 이름 아래). 헤드에 **이름**(클릭해서 바꾸기), 트랙 전체 **M** 음소거, **레벨** 슬라이더, **×**로 트랙과 소리 제거(실행 취소로 복구).
+- **트랙에 소리 넣기:** 미디어 풀 **사운드** — 이 시퀀스 오디오 폴더와 outputs의 소리(.wav .m4a .mp3 .aac) — **+**(플레이헤드) 또는 행을 트랙에. 영상 행 **♪**, 또는 영상을 트랙에 드래그하면 **소리만**. **+ 오디오 트랙 추가** 옆 **♪**는 **소리 파일 추가…**: 이 맥 아무 소리 경로. outputs 밖 파일은 시퀀스 오디오 폴더로 복사해 프리뷰가 재생.
+- 마지막 트랙 아래 점선에 떨어뜨리면 **자기 트랙**.
+- 트랙 위 소리는 언링크 클립 소리처럼: **드래그**(위아래 다른 트랙, 점선은 새 트랙), **끝 드래그** 트림, **모서리** 페이드, **노란 선** 레벨. 컷·다른 소리·비트에 스냅. ⌥ 드래그는 무시.
+- 클립 바: **스플릿**이 플레이헤드에서 선택 소리를 자름, **리프트** / **소리 삭제**, **리플 삭제**는 그 트랙 틈도 닫음, **복제**, **음소거**, **포인트 지우기**, **잠금**. **⇧-클릭** / **⌘-클릭**. 우클릭 같은 동사. **언링크**와 **리스싱크**는 회색 — 트랙 소리는 링크할 그림이 없음.
+- Inspector는 선택 소리의 **레벨**, **페이드 인** / **페이드 아웃**, **플레이헤드에 점**. 들리는 레벨은 소리 레벨 × 트랙 레벨.
+- 프리뷰에서 전부 재생, 렌더는 음악과 같은 리미터,보내기는 오디오 트랙마다 Premiere / Resolve의 자기 트랙, After Effects의 레이어. 트림·레벨·페이드·뮤트가 거기서 편집 가능.
 
-### Room tone {#room-tone}
+### 룸톤 {#room-tone}
 
-**Room tone** is background noise — room noise, atmos, an ambience bed — that runs under the whole sequence on its own audio track, so a cut never drops to silence or jumps from one room to another. It is made for the sequence each time, in about a second, on the CPU.
+**룸톤**은 배경 — 방 소음, 대기, 앰비언스 베드 — 이 시퀀스 전체를 자기 오디오 트랙으로 깔아, 컷이 무음으로 떨어지거나 방이 갑자기 바뀌지 않게. 시퀀스마다 CPU에서 약 1초.
 
-- **Add it:** media pool → **Sound** → the **Room tone** card, or **♪** beside **+ Add audio track** → **Room tone…**. Pick a sound and press **Add room tone**. It lands on its own track (named *Room tone*), locked, from the first frame to the last.
-- **From this film** (the default) listens to the quiet moments of your own clips — the room between the lines, tape hiss, hum — and makes a continuous bed of that sound. When the clips have too little quiet sound it says so on the card and **Quiet room** stands in.
-- **Other sounds:** Quiet room, Living room, Office, TV studio, Kitchen, Car interior, Outdoors day, Night outside, City street, Rain, VHS tape, Big hall, Plane cabin.
-- **New take** makes another version of the same sound — a new one every click. **Use this sound** swaps to what the picker shows, at the same level. **Rebuild** makes it again from the sequence as it is now (after a re-cut). **Remove** takes it off (Undo brings it back).
-- **Level** is in LUFS: **−27** by default — clearly there, under dialogue that sits around −16. The track head's level slider is the same control in percent. Every change is one Undo step.
-- **It follows the sequence.** Trim, add or delete shots and the bed stays as long as the sequence; when the sequence outgrows the sound file, a longer one is made in the background. A bed you split or moved by hand is left alone — to dip it somewhere, unlock it (**Lock** on the clip bar) and add level points.
-- **Automatic cuts** — the Editor's first cut of a Storyboard, **Auto-edit…**, and Storyboard's automatic film — get a *From this film* room tone by default. Turn **Add room tone to automatic cuts** off on the card to stop it. A music-video cut (the song replaces the clips' sound) and clips with no quiet sound get none.
-- It plays in the preview, mixes into the render and exports as its own audio track, like any other track. The file lives in the sequence's `audio/room_tone/` folder.
+- **넣기:** 미디어 풀 → **사운드** → **룸톤** 카드, 또는 **+ 오디오 트랙 추가** 옆 **♪** → **룸톤…**. 소리를 고르고 **룸톤 추가**. 자기 트랙(*Room tone*), 잠김, 첫 프레임부터 끝까지.
+- **이 필름에서**(기본)는 클립의 조용한 순간 — 대사 사이 방, 테이프 히스, 험 — 을 듣고 연속 베드를 만듦. 조용한 소리가 너무 적으면 카드가 말하고 **Quiet room**이 대신.
+- **다른 소리:** Quiet room, Living room, Office, TV studio, Kitchen, Car interior, Outdoors day, Night outside, City street, Rain, VHS tape, Big hall, Plane cabin.
+- **새 테이크**가 같은 소리의 다른 버전. **이 소리 쓰기**가 피커가 보여 주는 것으로, 같은 레벨. **다시 만들기**는 지금 시퀀스에서(다시 컷 후). **제거**(실행 취소로 복구).
+- **레벨**은 LUFS: 기본 **−27** — 분명히 있고, 대사 −16 아래. 트랙 헤드 레벨 슬라이더가 퍼센트로 같은 컨트롤. 변경마다 실행 취소 한 단계.
+- **시퀀스를 따라감.** 샷을 트림·추가·삭제해도 베드는 시퀀스만큼. 시퀀스가 소리 파일보다 길면 더 긴 것을 뒤에서 만듦. 손으로 스플릿·이동한 베드는 안 건드림 — 어디를 낮추려면 잠금 해제하고 레벨 점.
+- **자동 컷** — 스토리보드 첫 컷, **Auto-edit…**, 스토리보드 자동 필름 — 기본 *이 필름에서* 룸톤. 카드에서 **자동 컷에 룸톤 추가**를 끄면 멈춤. 뮤직비디오 컷(노래가 클립 소리를 대체)과 조용한 소리 없는 클립은 없음.
+- 프리뷰에서 재생, 렌더에 믹스, 다른 트랙처럼보내기. 파일은 시퀀스 `audio/room_tone/`.
 
-**No clicks at cuts.** The render also puts a 12 ms fade on the start and end of every clip's sound, so a hard cut between two sounds cannot click. It is too short to hear as a fade. The preview does not do this, and an exported project leaves it to your editor.
+**컷에서 클릭 없음.** 렌더는 클립 소리 시작·끝에 12 ms 페이드를 넣어 하드 컷이 클릭하지 않게. 페이드로 들리기엔 짧음. 프리뷰는 안 하고,보낸 프로젝트는 에디터에 맡김.
 
-## Titles, cards and black {#titles}
+## 타이틀, 카드, 검정 {#titles}
 
-- **Add title** (media pool) puts a 3-second title on **V2 Overlay** at the playhead. In the inspector: the text, **Size**, **Colour**, **Align**, **Across** / **Down** position and **Box behind**, plus fades. Drag it to move it, drag its edges to change its length; [[sc:editor.removeOverlay]] removes it.
-- **A card** — press **▣** on a still in the media pool to lay it over the picture at the playhead. A black background is removed automatically; **Keep original** puts it back.
-- **Black** — **Add black** appends a black clip; **Lift** leaves one where a shot was.
+- **타이틀 추가**(미디어 풀)가 플레이헤드 **V2 Overlay**에 3초 타이틀. Inspector: 텍스트, **크기**, **색**, **정렬**, **가로** / **세로**, **뒤 박스**, 페이드. 드래그 이동, 가장자리로 길이. [[sc:editor.removeOverlay]]가 제거.
+- **카드** — 미디어 풀 스틸의 **▣**가 플레이헤드에서 그림 위에. 검정 배경은 자동 제거. **원본 유지**가 되돌림.
+- **검정** — **검정 추가**가 검정 클립을 붙임. **리프트**가 샷 있던 자리에 하나.
 
-### Holes {#holes}
+### 구멍 {#holes}
 
-A **hole** is empty space on the picture track — made by dragging a clip away from its neighbour. It shows its length and **fill it**. Click it to open *Fill this hole*: write the shot, choose **Length** and **Pass** (Draft or Delivery), and **Queue the shot**. When it lands, it waits under *Rendered but not on the timeline* — press **Place**.
+**구멍**은 그림 트랙의 빈 공간 — 이웃에서 클립을 끌어 만듦. 길이와 **채우기**. 누르면 *이 구멍 채우기*: 샷을 쓰고 **길이**와 **패스**(Draft 또는 Delivery), **샷 대기열**. 도착하면 *렌더됐지만 타임라인에 없음* — **배치**.
 
-> **Holes close when you render.** The render joins shots end to end, so a hole closes up and everything after it moves earlier. Render asks before it does that. Use black if you want the gap kept.
+> **렌더하면 구멍이 닫힙니다.** 렌더는 샷을 이어 붙여 구멍이 닫히고 뒤가 앞으로. 렌더가 그 전에 묻습니다. 틈을 남기려면 검정을 쓰세요.
 
-## Transitions {#transitions}
+## 트랜지션 {#transitions}
 
-1. Click the mark between two clips.
-2. In the inspector, choose **Kind**: **None — a hard cut**, **Dissolve** or **Fade through black**, and a **Length** (up to 2 seconds, and no more than half the shorter clip).
-3. **Remove** takes it off again ([[sc:editor.removeTransition]] with the cut selected).
+1. 두 클립 사이 마크를 누름.
+2. Inspector에서 **종류**: **없음 — 하드 컷**, **디졸브**, **검정을 지나 페이드**, **길이**(최대 2초, 더 짧은 클립의 절반 이하).
+3. **제거**가 다시 뺌([[sc:editor.removeTransition]], 컷 선택 시).
 
-A transition borrows extra picture from beyond each clip's trim, so the cut does not move and neither does the sound. If a clip has no picture to spare, the transition is refused with a message saying which side is short — trim that clip in, or shorten the transition. The preview only approximates a dissolve; the render is exact.
+트랜지션은 각 클립 트림 너머 여분 그림을 빌려, 컷과 소리가 안 움직임. 여분이 없으면 어느 쪽이 짧은지 말하고 거절 — 그 클립을 안으로 트림하거나 트랜지션을 짧게. 프리뷰는 디졸브를 근사, 렌더는 정확.
 
-## Saving, drafts and versions {#saving}
+## 저장, 초안, 버전 {#saving}
 
-- **Save** ([[sc:editor.save]]) is the only thing that writes your draft. The button lights up when there are unsaved changes. Between saves your edits are kept as a backup, and when one is newer than your last save the Editor offers it as an *unsaved snapshot* — **Restore it**, **Discard** or **Later**.
-- If saving keeps failing, a red bar says *SAVING IS FAILING* with **Try again**.
-- **Undo** / **Redo** ([[sc:editor.undo]] / [[sc:editor.redo]]) go back 80 steps. Switching drafts, Auto-edit and swapping in finished shots clear the undo history.
+- **저장** ([[sc:editor.save]])만 초안을 씁니다. 저장 안 된 변경이 있으면 버튼이 켜짐. 저장 사이 편집은 백업. 마지막 저장보다 새 백업이 있으면 *저장 안 된 스냅샷* — **복원**, **버리기**, **나중에**.
+- 저장이 계속 실패하면 빨간 바 *저장 실패*와 **다시 시도**.
+- **실행 취소** / **다시 실행** ([[sc:editor.undo]] / [[sc:editor.redo]]) 80단계. 초안 전환, Auto-edit, 끝난 샷 교체는 히스토리를 지움.
 
-**Drafts** — open them from the draft chip or **⋯ → Drafts and versions…**:
+**초안** — 초안 칩 또는 **⋯ → 초안과 버전…**:
 
-- A sequence can have several drafts. **Copy** starts a new draft from this one, **Empty** starts a blank one; each draft in the list has **Open**, **Copy**, **Rename** and **Delete**.
-- *Your saves of this draft* lists every save with **Restore**. Type a name and press **Keep** to mark a save you want to keep for good — old unnamed saves are pruned, kept ones never are.
-- If the same draft was saved from another tab, the Editor asks: **Load theirs** or **Keep mine**.
+- 시퀀스에 초안이 여러 개. **복사**가 이걸로 새 초안, **빈 것**이 빈 초안. 목록마다 **열기**, **복사**, **이름**, **삭제**.
+- *이 초안의 저장*이 저장마다 **복원**. 이름을 치고 **Keep**하면 오래 남김 — 이름 없는 옛 저장은 정리, 킵은 안 지움.
+- 같은 초안이 다른 탭에서 저장됐으면: **저쪽 불러오기** 또는 **내 것 유지**.
 
-## Render and deliver {#render}
+## 렌더와 납품 {#render}
 
-**Render** ([[sc:editor.render]]) saves first, then assembles the timeline into one file and opens it on the Storyboard film screen.
+**Render** ([[sc:editor.render]])가 먼저 저장한 뒤 타임라인을 한 파일로 조립하고 스토리보드 필름 화면에 엽니다.
 
-**▾ → Deliver as** chooses what the file is; the choices are remembered, and the Render button names them (*Render · 1080p*):
+**▾ → Deliver as**가 파일이 무엇인지. 선택은 기억되고 Render 버튼이 이름을 붙임(*Render · 1080p*):
 
-| Row | Choices | Notes |
+| 행 | 선택 | 메모 |
 |---|---|---|
-| **Format** | **H.264** · **HEVC** · **ProRes** | H.264 plays everywhere, HEVC is half the size, ProRes (.mov) is for grading |
-| **Size** | **As cut** · **1080p** · **4K** | only ever up, never a crop; 4K adds pixels, not detail |
-| **Finish** | **Clean** · **Grain** · **Heavy grain** | on the delivered file only — the preview and the export stay clean |
+| **포맷** | **H.264** · **HEVC** · **ProRes** | H.264는 어디서나, HEVC는 절반 크기, ProRes(.mov)는 그레이딩 |
+| **크기** | **컷 그대로** · **1080p** · **4K** | 위로만, 크롭 없음. 4K는 픽셀이지 디테일 아님 |
+| **마감** | **Clean** · **Grain** · **Heavy grain** | 납품 파일만 — 프리뷰와보내기는 클린 |
 
-**Export for Premiere / Resolve / AE** (in the same menu) writes a folder with an FCP7 XML (for Premiere and Resolve), an After Effects script and the media, and shows it in Finder. Sound comes out as separate stems, not the mixed track — the clips' sound (lane A, then lane B as its own track when it is used), the music, and one audio track per **A3, A4, …** (room tone included). Cuts, trims, speed, fades, mutes and reframing travel into the project as editable settings; titles do not, and transitions arrive as plain cuts.
+**Premiere / Resolve / AE로보내기**(같은 메뉴)가 FCP7 XML(Premiere·Resolve), After Effects 스크립트, 미디어 폴더를 쓰고 Finder에 보여 줌. 소리는 믹스가 아니라 스템 — 클립 소리(레인 A, 쓰이면 레인 B가 자기 트랙), 음악, **A3, A4, …**마다 하나(룸톤 포함). 컷, 트림, 속도, 페이드, 뮤트, 재프레이밍은 프로젝트에서 편집 가능. 타이틀은 안 가고, 트랜지션은 그냥 컷.
 
-**Auto-edit…** (⋯) re-cuts the sequence from scratch and throws away this arrangement — it asks first.
+**Auto-edit…**(⋯)가 시퀀스를 처음부터 다시 자르고 이 배열을 버림 — 먼저 묻습니다.
 
-## Common jobs {#jobs}
+## 흔한 작업 {#jobs}
 
-### Cut a scene out {#job-cut}
+### 장면 잘라 내기 {#job-cut}
 
-1. Put the playhead where the unwanted part starts and press **Split** ([[sc:editor.split]]).
-2. Move to where it ends ([[sc:editor.cut]] jumps between cuts, [[sc:editor.frame]] steps frames) and **Split** again.
-3. Click the piece in the middle.
-4. **Ripple delete** ([[sc:editor.ripple]]) to close the gap — or **Lift** ([[sc:editor.lift]]) to leave black in its place.
-5. **Save**.
+1. 원치 않는 부분 시작에 플레이헤드, **스플릿** ([[sc:editor.split]]).
+2. 끝나는 곳으로 ([[sc:editor.cut]]이 컷 사이, [[sc:editor.frame]]이 프레임) 다시 **스플릿**.
+3. 가운데 조각을 클릭.
+4. **리플 삭제** ([[sc:editor.ripple]])로 틈을 닫거나 **리프트** ([[sc:editor.lift]])로 검정을 남김.
+5. **저장**.
 
-### Fix sound that drifted {#job-drift}
+### 어긋난 소리 {#job-drift}
 
-1. Find the strip with an offset label (**+0.25s**) on **A1 Clip sound**.
-2. Click the label — or select the clip and press **Resync sound** ([[sc:editor.resync]]).
-3. To stop it drifting again, press **Link sound**.
-4. **Save**.
+1. **A1 Clip sound**에서 오프셋 라벨(**+0.25s**) 스트립.
+2. 라벨을 누르거나 클립을 고르고 **소리 리스싱크** ([[sc:editor.resync]]).
+3. 다시 어긋나지 않게 **링크**.
+4. **저장**.
 
-### Make a J-cut {#job-j-cut}
+### J컷 만들기 {#job-j-cut}
 
-1. Select the **incoming** shot and press **Unlink sound** ([[sc:editor.link]]).
-2. On **A1 Clip sound**, drag that strip's left end earlier, under the end of the previous shot (hold ⌥ to ignore the grid). The picture does not move.
-3. Optional: drag a corner handle for a short fade in.
-4. Press **Link sound** to keep the offset — the message confirms *Linked at …*.
-5. **Save**.
+1. **들어오는** 샷을 고르고 **소리 언링크** ([[sc:editor.link]]).
+2. **A1 Clip sound**에서 그 스트립 왼쪽 끝을 이전 샷 끝 아래로(⌥로 그리드 무시). 그림은 안 움직임.
+3. 선택: 모서리 핸들로 짧은 페이드 인.
+4. **링크**로 오프셋 유지 — 메시지가 *…에 링크됨*.
+5. **저장**.
 
-For an L-cut, do the same with the **outgoing** shot and drag its strip's right end later.
+L컷은 **나가는** 샷으로 같고 오른쪽 끝을 뒤로.
 
-### Crossfade two shots' sound {#job-crossfade}
+### 두 샷 소리 크로스페이드 {#job-crossfade}
 
-1. Check the two shots' sound sits on different lanes (**Clip sound A** and **Clip sound B**). If not, press **Alternate A/B** on the **Clip sound B** head, or drag one sound to the other lane.
-2. Select the **outgoing** shot, press **Unlink sound** ([[sc:editor.link]]) and drag its sound's right end later, under the next shot — it snaps to the next sound's start and to the cut.
-3. Drag the right corner handle of that strip for a fade out, and the left corner handle of the incoming sound for a fade in over the same seconds. (The incoming sound can reach back the same way: unlink it and drag its left end earlier.)
-4. Play across the cut — both sounds play together while they overlap.
-5. **Save**.
+1. 두 샷 소리가 다른 레인인지(**Clip sound A**와 **B**). 아니면 **Clip sound B** 헤드 **A/B 교차**, 또는 한 소리를 다른 레인으로.
+2. **나가는** 샷을 고르고 **언링크** ([[sc:editor.link]]), 소리 오른쪽 끝을 다음 샷 아래로 — 다음 소리 시작과 컷에 붙음.
+3. 그 스트립 오른쪽 모서리로 페이드 아웃, 들어오는 소리 왼쪽 모서리로 같은 초 페이드 인. (들어오는 소리도 언링크 후 왼쪽을 앞으로.)
+4. 컷을 재생 — 겹치는 동안 둘 다.
+5. **저장**.
 
-### Smooth the sound between cuts {#job-room-tone}
+### 컷 사이 소리 다듬기 {#job-room-tone}
 
-1. Media pool → **Sound**. The **Room tone** card is at the top.
-2. Leave **From this film** picked (or choose a room) and press **Add room tone**. A *Room tone* track appears under the other sounds, as long as the sequence.
-3. Play across a few cuts. Too loud or too quiet? Move **Level** (−27 LUFS is the default). Not the right texture? **New take**, or pick another sound and press **Use this sound**.
-4. **Save**.
+1. 미디어 풀 → **사운드**. 위 **룸톤** 카드.
+2. **이 필름에서**를 두고 **룸톤 추가**. *Room tone* 트랙이 다른 소리 아래, 시퀀스만큼.
+3. 몇 컷을 재생. 크거나 작으면 **레벨**(기본 −27 LUFS). 질감이 아니면 **새 테이크**, 또는 다른 소리를 고르고 **이 소리 쓰기**.
+4. **저장**.
 
-### Replace a shot with a retake {#job-retake}
+### 샷을 리테이크로 {#job-retake}
 
-1. Select the shot. Retake works on shots that came from a storyboard.
-2. In the inspector's **Clip** section press **Retake**.
-3. In *Retake this shot*, edit the prompt if you want, choose **Draft** or **Delivery**, and **Queue the retake**.
-4. When the new take finishes, the Editor says *New take of … is ready*: **Use it** swaps it in with the same cut and timings; **Keep the old one** leaves the timeline as it is (the new take stays in the media pool).
+1. 샷을 고름. 리테이크는 스토리보드에서 온 샷.
+2. Inspector **클립**에서 **리테이크**.
+3. *이 샷 리테이크*에서 프롬프트를 고치고 **Draft** 또는 **Delivery**, **리테이크 대기열**.
+4. 새 테이크가 끝나면 *…의 새 테이크 준비됨*: **쓰기**가 같은 컷·타이밍으로 넣고, **옛것 유지**는 타임라인 그대로(새 테이크는 미디어 풀).
 
-When shots from the board have been finished at the delivery pass since you cut, the Editor offers **Use the finished versions** the same way.
+보드 샷이 컷한 뒤 delivery pass로 끝나면 편집기가 **완성본 쓰기**를 같은 방식으로 줍니다.
 
-### Deliver 1080p {#job-1080p}
+### 1080p 납품 {#job-1080p}
 
-1. Press **▾** beside **Render**.
-2. Under **Deliver as**, choose **H.264**, **1080p** and **Clean** (or a grain).
-3. The button now reads **Render · 1080p**. Press it, or [[sc:editor.render]].
-4. If the timeline has holes, decide whether to let them close.
-5. The film opens on the Storyboard film screen when it is done.
+1. **Render** 옆 **▾**.
+2. **Deliver as**에서 **H.264**, **1080p**, **Clean**(또는 grain).
+3. 버튼이 **Render · 1080p**. 누르거나 [[sc:editor.render]].
+4. 타임라인에 구멍이 있으면 닫을지 결정.
+5. 끝나면 스토리보드 필름 화면에 열림.
 
-## Keys {#keys}
+## 키 {#keys}
 
-The same list is behind the **Keys** button above the tracks.
+트랙 위 **Keys** 뒤에 같은 목록.
 
 [[shortcuts:editor,editor-mouse]]

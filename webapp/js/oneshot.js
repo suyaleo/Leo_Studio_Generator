@@ -142,7 +142,7 @@ function osRenderLengths() {
   }).join('');
   g.querySelectorAll('[data-os-seconds]').forEach(b => b.onclick = () => osSetSeconds(parseInt(b.dataset.osSeconds, 10)));
   const meta = osEl('osLengthMeta');
-  if (meta) meta.textContent = `${OS.seconds / 5} beats of five seconds · ${osPartsText(OS.seconds)}`;
+  if (meta) meta.textContent = `5초 비트 ${OS.seconds / 5}개 · ${osPartsText(OS.seconds)}`;
 }
 function osQualityRows() {
   const o = OS.options || {};
@@ -169,9 +169,9 @@ function osRenderQualities() {
   const meta = osEl('osQualityMeta');
   if (meta) {
     meta.textContent = OS.engine === 'h3'
-      ? 'the size of every part · exports fit 720p'
-      : (OS.character ? 'a trained face keeps its identity on Pro · Draft is a quick look'
-                      : 'every part renders at this quality · Balanced exports at 720p');
+      ? '파트 크기 · 보내기는 720p에 맞춤'
+      : (OS.character ? '학습 얼굴은 Pro에서 유지 · Draft는 빠른 확인'
+                      : '모든 파트가 이 품질 · Balanced는 720p 보내기');
   }
 }
 function osRenderCharacters() {
@@ -408,7 +408,7 @@ async function osGenerate() {
   } catch (e) {
     if (est) est.textContent = `not queued: ${e.message || e}`;
   } finally {
-    if (btn) { btn.disabled = false; btn.textContent = 'Generate'; }
+    if (btn) { btn.disabled = false; btn.textContent = '생성'; }
   }
 }
 function osVerdict(v) {

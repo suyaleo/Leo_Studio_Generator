@@ -3710,9 +3710,9 @@ async function edShowPicker() {
   } catch (e) { boards = []; }
   if (!box) return;
   if (!boards.length) {
-    box.innerHTML = '<span class="sbe-note">Nothing has been rendered yet. ' +
-      'Anything you generate — on any engine — shows up in the media pool ' +
-      'on the left, and one click puts it on the track.</span>';
+    box.innerHTML = '<span class="sbe-note">왼쪽 미디어 풀의 클립을 트랙에 올리려면 시퀀스가 필요합니다. ' +
+      '아래에서 새로 만들거나, + 를 누르면 시퀀스를 만들고 바로 넣습니다.</span>' +
+      '<button type="button" class="primary" onclick="edNewSequence()">새 시퀀스</button>';
     return;
   }
   box.innerHTML = boards.map(b =>
@@ -3729,6 +3729,23 @@ function edOpenBoard(id) {
   if (!id) return;
   if (typeof workflowSwitch === 'function') workflowSwitch('editor');
   sbeOpen(id);
+}
+
+async function edNewSequence(title) {
+  let r;
+  try {
+    const fd = new URLSearchParams();
+    fd.set('title', title || '시퀀스');
+    r = await (await fetch('/storyboard/new', { method: 'POST', body: fd })).json();
+  } catch (e) {
+    r = { ok: false, error: String(e) };
+  }
+  if (!r || !r.ok || !r.id) {
+    phosToast((r && r.error) || '시퀀스를 만들지 못했습니다.', { kind: 'danger' });
+    return '';
+  }
+  edOpenBoard(r.id);
+  return r.id;
 }
 
 function sbeOpen(id, opts) {
@@ -8629,17 +8646,14 @@ function sbeSplitWhy() {
   if (ts.length) return sbeTsSplitWhy(ts);
   const under = sbeClipAt(SBE.clips, SBE.playhead);
   if (!under) {
-    return 'Put the playhead over a shot first — this cuts whatever is under '
-         + 'it into two.' + sbeKeyHint('editor.split');
+    return '먼저 플레이헤드를 샷 위에 두세요. 그 아래를 둘로 자릅니다.' + sbeKeyHint('editor.split');
   }
   if (under.locked) {
-    return 'The shot under the playhead is locked to its place. Unlock it to '
-         + 'cut it.';
+    return '플레이헤드 아래 샷이 잠겨 있습니다. 자르려면 잠금을 푸세요.';
   }
   const off = SBE.playhead - sbeNum(under.film_start);
   if (off < SBE_MIN_CLIP || sbeLen(under) - off < SBE_MIN_CLIP) {
-    return 'The playhead is right on a cut — move it into the middle of a '
-         + 'shot to split it.' + sbeKeyHint('editor.split');
+    return '플레이헤드가 컷 위에 있습니다. 샷 한가운데로 옮겨 스플릿하세요.' + sbeKeyHint('editor.split');
   }
   return '';
 }
@@ -8658,10 +8672,8 @@ function sbeCbarPlayhead() {
   if (el.disabled !== !!why) el.disabled = !!why;
 }
 
-const SBE_SPLIT_TITLE = 'Cuts the shot under the playhead into two at the '
-  + 'playhead. Nothing moves and nothing is lost.' + sbeKeyHint('editor.split');
-const SBE_TS_SPLIT_TITLE = 'Cuts the selected sound into two at the playhead. '
-  + 'Nothing moves; its fades and level points stay where they were.' + sbeKeyHint('editor.split');
+const SBE_SPLIT_TITLE = '플레이헤드에서 그 아래 샷을 둘로 자릅니다. 이동도 손실도 없습니다.' + sbeKeyHint('editor.split');
+const SBE_TS_SPLIT_TITLE = '플레이헤드에서 선택 소리를 둘로 자릅니다. 이동 없음. 페이드와 레벨 점은 그대로.' + sbeKeyHint('editor.split');
 
 // DUPLICATE, READ FOR WHATEVER KIND OF SOUND IS SELECTED. The owner: "the
 // duplicate button is disabled when you're touching the sound/music area." The
@@ -8675,26 +8687,21 @@ function sbeSoundLaneSel() {
 
 function sbeCbarDupRow(n, many, c, noSel) {
   const hint = sbeKeyHint('editor.duplicate');
-  const row = { id: 'sbeCbDup', act: 'sbeDuplicateSel()', label: 'Duplicate' };
+  const row = { id: 'sbeCbDup', act: 'sbeDuplicateSel()', label: '복제' };
   if (SBE.sel === '@music') {
     const r = sbeTsFromBed(SBE.audio, SBE.peaks ? SBE.peaks.duration : 0);
     return Object.assign(row, { why: r.why || '',
-      title: 'Copies the soundtrack onto an audio track, right after itself — A2 '
-             + 'holds one strip, so the copy lands on the first audio track with '
-             + 'room there, or on a new one.' + hint });
+      title: '사운드트랙을 바로 뒤 오디오 트랙으로 복사합니다. A2는 스트립 하나라 빈 첫 오디오 트랙 또는 새 트랙에 들어갑니다.' + hint });
   }
   if (c && sbeSoundLaneSel()) {
     const r = sbeTsFromClip(c);
     return Object.assign(row, { why: r.why || '',
-      title: 'Copies this clip\'s sound onto an audio track, right after itself — '
-             + 'the shot is not copied. It lands on the first audio track with room '
-             + 'there, or on a new one.' + hint });
+      title: '이 클립 소리를 바로 뒤 오디오 트랙으로 복사합니다. 샷은 안 복사됩니다. 빈 첫 오디오 트랙 또는 새 트랙.' + hint });
   }
   return Object.assign(row, { why: n ? '' : noSel,
-    title: (many ? 'Each selected shot again, right behind itself'
-                 : 'The same shot again, right after this one')
-           + ' — window, speed, fades and grade included. Everything after '
-           + 'it slides.' + hint });
+    title: (many ? '선택 샷마다 바로 뒤에 하나 더'
+                 : '바로 뒤에 같은 샷 하나 더')
+           + ' — 윈도, 속도, 페이드, 그레이드 포함. 뒤가 밀립니다.' + hint });
 }
 
 // WHY SPLIT CANNOT CUT the selected track sounds, or '' when it can.
@@ -8710,8 +8717,8 @@ function sbeTsSplitWhy(ids) {
     }
   }
   return locked
-    ? 'The sound under the playhead is locked. Unlock it to cut it.'
-    : 'Put the playhead inside the selected sound first — Split cuts it there.'
+    ? '플레이헤드 아래 소리가 잠겨 있습니다. 자르려면 잠금을 푸세요.'
+    : '먼저 플레이헤드를 선택 소리 안으로 — 스플릿이 거기서 자릅니다.'
       + sbeKeyHint('editor.split');
 }
 
@@ -8723,64 +8730,52 @@ function sbeCbarTsModel(ids) {
   const many = n > 1;
   const f = sbeTsFind(SBE.tracks, String(SBE.sel).slice(4)) || sbeTsFind(SBE.tracks, ids[0]);
   const s = f.strip;
-  const some = many ? ('all ' + n + ' sounds') : 'this sound';
-  const noPic = 'A sound on an audio track has no picture of its own — Link, Unlink and '
-              + 'Resync are for a clip\'s sound on A1.';
+  const some = many ? ('소리 ' + n + '개 전부') : '이 소리';
+  const noPic = '오디오 트랙 소리는 자기 그림이 없습니다. 링크·언링크·리스싱크는 A1 클립 소리용입니다.';
   const pts = ids.reduce((a, id) => {
     const g = sbeTsFind(SBE.tracks, id);
     return a + (g ? sbeAfx(g.strip, sbeTsWindow(g.strip).len).points.length : 0);
   }, 0);
   const rows = [
-    { id: 'sbeCbSplit', act: 'sbeSplitHere()', label: 'Split', why: sbeTsSplitWhy(ids),
+    { id: 'sbeCbSplit', act: 'sbeSplitHere()', label: '스플릿', why: sbeTsSplitWhy(ids),
       title: SBE_TS_SPLIT_TITLE },
-    { id: 'sbeCbLift', act: 'sbeLiftSelected()', label: 'Lift', why: '',
-      title: 'Takes ' + some + ' off its track and leaves the silence, so nothing after '
-             + 'it moves.' + sbeKeyHint('editor.lift') },
-    { id: 'sbeCbRipple', act: 'sbeRippleSelected()', label: 'Ripple delete', why: '',
-      title: 'Takes ' + some + ' off and closes the gap on that track — the sounds after '
-             + 'it on the same track slide earlier. The picture and the other tracks do '
-             + 'not move.' + sbeKeyHint('editor.ripple') },
-    { id: 'sbeCbDup', act: 'sbeDuplicateSel()', label: 'Duplicate', why: '',
-      title: (many ? 'Each selected sound again, right after itself'
-                   : 'The same sound again, right after itself')
-             + ' on its own track — or at the next free spot on it. Trim, level, fades '
-             + 'and points included.' + sbeKeyHint('editor.duplicate') },
+    { id: 'sbeCbLift', act: 'sbeLiftSelected()', label: '리프트', why: '',
+      title: some + '을(를) 트랙에서 빼고 무음을 남겨, 뒤는 안 움직입니다.' + sbeKeyHint('editor.lift') },
+    { id: 'sbeCbRipple', act: 'sbeRippleSelected()', label: '리플 삭제', why: '',
+      title: some + '을(를) 빼고 그 트랙 틈을 닫습니다. 같은 트랙 뒤 소리가 앞으로. 그림과 다른 트랙은 안 움직입니다.' + sbeKeyHint('editor.ripple') },
+    { id: 'sbeCbDup', act: 'sbeDuplicateSel()', label: '복제', why: '',
+      title: (many ? '선택 소리마다 바로 뒤에 하나 더'
+                   : '바로 뒤에 같은 소리 하나 더')
+             + ' — 자기 트랙, 또는 다음 빈자리. 트림, 레벨, 페이드, 점 포함.' + sbeKeyHint('editor.duplicate') },
     { id: 'sbeCbLink', act: 'sbeToggleAudioLink()', icon: '#ic-unlink',
-      label: 'Unlink sound', why: noPic, title: noPic },
-    { id: 'sbeCbResync', act: 'sbeResyncSel()', label: 'Resync sound', why: noPic,
+      label: '소리 언링크', why: noPic, title: noPic },
+    { id: 'sbeCbResync', act: 'sbeResyncSel()', label: '소리 리스싱크', why: noPic,
       title: noPic },
     { id: 'sbeCbMute', act: 'sbeToggleClipMute()',
       icon: s.muted === true ? '#ic-sound' : '#ic-mute',
       label: s.muted === true ? 'Unmute sound' : 'Mute sound', on: s.muted === true, why: '',
       title: s.muted === true
-        ? 'Lets ' + some + ' play again.'
-        : 'Switches ' + some + ' off — in the preview, the render and the export. The '
-          + 'strip stays where it is.' },
-    { id: 'sbeCbDelSound', act: 'sbeDeleteStripSel()', label: 'Delete sound', why: '',
-      title: 'Removes ' + some + ' from its track. Nothing else moves. Undo brings it '
-             + 'back.' },
-    { id: 'sbeCbPoints', act: 'sbeClearPoints()', label: 'Clear points',
-      why: pts ? '' : 'This sound has no level anchors on it. Click the yellow line on '
-                      + 'the strip — or double-click the strip — to put one down.',
-      title: 'Deletes the level anchors — the dots on the yellow line — from '
-             + (many ? 'every selected sound' : 'this sound') + '. The corner fades are '
-             + 'not points and are left alone.' },
+        ? some + '을(를) 다시 재생합니다.'
+        : some + '을(를) 끕니다 — 프리뷰, 렌더, 보내기. 스트립 위치는 그대로.' },
+    { id: 'sbeCbDelSound', act: 'sbeDeleteStripSel()', label: '소리 삭제', why: '',
+      title: some + '을(를) 트랙에서 뺍니다. 다른 것은 안 움직임. 실행 취소로 돌아옵니다.' },
+    { id: 'sbeCbPoints', act: 'sbeClearPoints()', label: '포인트 지우기',
+      why: pts ? '' : '이 소리에 레벨 점이 없습니다. 스트립 노란 선을 클릭하거나 더블클릭해서 점을 찍으세요.',
+      title: '노란 선의 레벨 점을 지웁니다 — ' + (many ? '선택 소리 전부' : '이 소리') + '. 모서리 페이드는 점이 아니라 남습니다.' },
     { id: 'sbeCbLock', act: 'sbeToggleLock()',
       icon: s.locked === true ? '#ic-unlock' : '#ic-lock',
       label: s.locked === true ? 'Unlock' : 'Lock', on: s.locked === true, why: '',
       title: s.locked === true
-        ? 'Lets ' + some + ' move and trim again.'
-        : 'Pins ' + some + ' to its place — it cannot be dragged, trimmed or shaped '
-          + 'until it is unlocked.' },
+        ? some + '을(를) 다시 옮기고 트림할 수 있습니다.'
+        : some + '을(를) 자리에 고정 — 잠금 해제 전까지 드래그·트림·변형 불가.' },
     { id: 'sbeCbFaceFix', act: 'sbeFaceFixSel()', label: 'Face Fix ×2',
-      why: 'A sound has no picture to upscale — select a clip on the picture lane.',
-      title: 'A sound has no picture to upscale — select a clip on the picture lane.' },
+      why: '소리는 업스케일할 그림이 없습니다. 그림 레인의 클립을 고르세요.',
+      title: '소리는 업스케일할 그림이 없습니다. 그림 레인의 클립을 고르세요.' },
   ];
   const name = s.title || String(s.path || '').split('/').pop() || 'sound';
   return { rows: rows, count: n, many: many,
-           who: many ? (n + ' sounds selected') : (sbeNiceName(name) + ' · ' + sbeTrackLabel(f.ti)),
-           whoWhy: 'Sounds on audio tracks. Shift-click or ⌘-click a second strip to '
-                   + 'add it; click a shot to go back to the picture.' };
+           who: many ? ('소리 ' + n + '개 선택') : (sbeNiceName(name) + ' · ' + sbeTrackLabel(f.ti)),
+           whoWhy: '오디오 트랙의 소리. Shift-클릭 또는 ⌘-클릭으로 스트립 추가. 샷을 누르면 그림으로.' };
 }
 
 function sbeCbarModel() {
@@ -8797,31 +8792,24 @@ function sbeCbarModel() {
   const split = !!(vid && w && w.split);
   const drift = c ? sbeAudioDrift(c) : 0;
   const pts = (c && w) ? sbeAfx(c, w.len).points.length : 0;
-  const some = many ? ('all ' + n + ' shots') : 'this shot';
+  const some = many ? ('샷 ' + n + '개 전부') : '이 샷';
   const splitWhy = sbeSplitWhy();
-  const pick = 'Click a shot on the track. Shift-click a second one to take '
-             + 'the range between them, ⌘-click to add or drop one.';
+  const pick = '트랙에서 샷을 클릭. Shift-클릭은 사이 범위, ⌘-클릭은 하나 더하거나 빼기.';
   const noSel = (!n && SBE.sel === '@music')
-    ? 'The soundtrack on A2 is selected, not a shot — its file, mode and level '
-      + 'are on the A2 head, and Duplicate copies it onto an audio track. ' + pick
-    : (!n && SBE.ovSel) ? 'A title or card is selected, not a shot '
-                  + '— its own controls are in the Inspector (⌘I), and '
-                  + '⌫ removes it. ' + pick
-              : ((!n && SBE.txSel) ? 'A cut is selected, not a shot — set its '
-                  + 'transition in the Inspector (⌘I). ' + pick
+    ? '샷이 아니라 A2 사운드트랙이 선택됨 — 파일·모드·레벨은 A2 헤드, 복제는 오디오 트랙으로. ' + pick
+    : (!n && SBE.ovSel) ? '샷이 아니라 타이틀이나 카드 — 컨트롤은 Inspector (⌘I), ⌫가 제거. ' + pick
+              : ((!n && SBE.txSel) ? '샷이 아니라 컷 — Inspector (⌘I)에서 트랜지션. ' + pick
                  : pick);
   const rows = [
-    { id: 'sbeCbSplit', act: 'sbeSplitHere()', label: 'Split',
+    { id: 'sbeCbSplit', act: 'sbeSplitHere()', label: '스플릿',
       why: splitWhy,
       title: SBE_SPLIT_TITLE },
-    { id: 'sbeCbLift', act: 'sbeLiftSelected()', label: 'Lift',
+    { id: 'sbeCbLift', act: 'sbeLiftSelected()', label: '리프트',
       why: n ? '' : noSel,
-      title: 'Takes ' + some + ' out and LEAVES the hole, so nothing after '
-             + 'it moves.' + sbeKeyHint('editor.lift') },
-    { id: 'sbeCbRipple', act: 'sbeRippleSelected()', label: 'Ripple delete',
+      title: some + '을(를) 빼고 구멍을 남겨, 뒤는 안 움직입니다.' + sbeKeyHint('editor.lift') },
+    { id: 'sbeCbRipple', act: 'sbeRippleSelected()', label: '리플 삭제',
       why: n ? '' : noSel,
-      title: 'Takes ' + some + ' out and CLOSES the gap — everything after '
-             + 'slides earlier and the film gets shorter.' + sbeKeyHint('editor.ripple') },
+      title: some + '을(를) 빼고 틈을 닫습니다. 뒤가 앞으로, 필름이 짧아집니다.' + sbeKeyHint('editor.ripple') },
     sbeCbarDupRow(n, many, c, noSel),
     // THE SOUND GROUP. Link and Resync are adjacent on purpose: the thing
     // that is hard to hold in your head is the difference between them, and
@@ -8831,96 +8819,69 @@ function sbeCbarModel() {
       label: !vid ? 'Unlink sound'
              : (w.linked ? 'Unlink sound'
                 : (sbeAudioIsThePicture(c) ? 'Re-link sound' : 'Link sound')),
-      why: !n ? noSel : (!vid ? 'Only a video clip has sound of its own — a '
-                                + 'still and a black slug have none to unlink.'
+      why: !n ? noSel : (!vid ? '영상 클립만 자기 소리가 있습니다. 스틸과 검정에는 언링크할 소리가 없습니다.'
                          : ''),
       title: (w && w.linked)
-        ? 'Frees ' + (many ? 'their' : 'this clip\'s') + ' sound from the '
-          + 'picture so you can slide it under the shot before or after — the '
-          + 'J-cut and the L-cut. The picture does not move.' + sbeKeyHint('editor.link')
+        ? (many ? '그' : '이 클립') + ' 소리를 그림에서 풀어, 앞뒤 샷 아래로 밀 수 있습니다 — J컷·L컷. 그림은 안 움직입니다.' + sbeKeyHint('editor.link')
         : ((c && sbeAudioIsThePicture(c))
-           ? 'Puts the sound back under its own picture and keeps the two '
-             + 'together from here.' + sbeKeyHint('editor.link')
-           : 'Keeps the ' + sbeDriftLabel(drift) + ' offset you made and '
-             + 'makes the pair travel together from here. Resync is the '
-             + 'button that puts it back under its own frame.' + sbeKeyHint('editor.link')) },
-    { id: 'sbeCbResync', act: 'sbeResyncSel()', label: 'Resync sound',
+           ? '소리를 자기 그림 아래로 되돌리고 둘을 같이 움직이게 합니다.' + sbeKeyHint('editor.link')
+           : '만든 ' + sbeDriftLabel(drift) + ' 오프셋을 유지하고 둘이 같이 움직입니다. 자기 프레임으로 되돌리는 버튼은 리스싱크입니다.' + sbeKeyHint('editor.link')) },
+    { id: 'sbeCbResync', act: 'sbeResyncSel()', label: '소리 리스싱크',
       why: !n ? noSel
            : (!split ? (w && w.linked
-                        ? 'This sound travels with its picture, so it cannot '
-                          + 'be out of sync. Unlink it first.'
-                        : 'This clip has no sound of its own.')
+                        ? '이 소리는 그림과 같이 움직여 어긋날 수 없습니다. 먼저 언링크하세요.'
+                        : '이 클립에는 자기 소리가 없습니다.')
               : (sbeAudioInSync(c)
-                 ? 'The sound is already under its own picture.' : '')),
-      title: 'Slides the sound back to where its own picture plays it — it is '
-             + sbeDriftLabel(drift) + ' out. The trim you gave it is kept and '
-             + 'it stays unlinked, so it can be moved again.' + sbeKeyHint('editor.resync') },
+                 ? '소리가 이미 자기 그림 아래에 있습니다.' : '')),
+      title: '소리를 자기 그림이 재생하는 곳으로 밉니다 — ' + sbeDriftLabel(drift) + ' 어긋남. 트림은 유지, 언링크 유지.' + sbeKeyHint('editor.resync') },
     { id: 'sbeCbMute', act: 'sbeToggleClipMute()',
       icon: (c && sbeClipMuted(c)) ? '#ic-sound' : '#ic-mute',
       label: (c && sbeClipMuted(c)) ? 'Unmute sound' : 'Mute sound',
       on: !!(c && sbeClipMuted(c)),
-      why: !n ? noSel : (!track ? 'This clip has no sound of its own to '
-                                  + 'switch off.' : ''),
+      why: !n ? noSel : (!track ? '이 클립에는 끌 자기 소리가 없습니다.' : ''),
       title: (c && sbeClipMuted(c))
-        ? 'Lets ' + (many ? 'their' : 'this clip\'s') + ' own sound play '
-          + 'again.'
-        : 'Switches ' + (many ? 'their' : 'this clip\'s') + ' own sound off — '
-          + 'in the preview, the render and the export. The strip stays where '
-          + 'it is and the soundtrack is not affected.' },
-    { id: 'sbeCbDelSound', act: 'sbeDeleteStripSel()', label: 'Delete sound',
+        ? (many ? '그' : '이 클립') + ' 자체 소리를 다시 재생합니다.'
+        : (many ? '그' : '이 클립') + ' 자체 소리를 끕니다 — 프리뷰, 렌더, 보내기. 스트립은 그대로, 사운드트랙은 안 건드림.' },
+    { id: 'sbeCbDelSound', act: 'sbeDeleteStripSel()', label: '소리 삭제',
       why: !n ? noSel
-           : (!split ? 'Unlink the sound first. On a clip whose sound is '
-                       + 'still attached to its picture, removing it and '
-                       + 'muting it would be the same button twice.' : ''),
-      title: 'Removes ' + (many ? 'their' : 'this clip\'s') + ' sound. The '
-             + 'picture keeps playing, silent, and does not move. Undo brings '
-             + 'it back.' },
-    { id: 'sbeCbPoints', act: 'sbeClearPoints()', label: 'Clear points',
+           : (!split ? '먼저 소리를 언링크하세요. 그림에 붙은 소리에서는 제거와 음소거가 같은 버튼이 두 번입니다.' : ''),
+      title: (many ? '그' : '이 클립') + ' 소리를 뺍니다. 그림은 무음으로 재생, 안 움직임. 실행 취소로 돌아옵니다.' },
+    { id: 'sbeCbPoints', act: 'sbeClearPoints()', label: '포인트 지우기',
       why: !n ? noSel
-           : (!pts ? 'This sound has no level anchors on it. Click the yellow '
-                     + 'line on a strip — or double-click the strip — to put '
-                     + 'one down.' : ''),
-      title: 'Deletes the level anchors — the dots on the yellow line — from '
-             + (many ? 'every selected strip' : 'this strip') + '. The corner '
-             + 'fades are not points and are left alone.' },
+           : (!pts ? '이 소리에 레벨 점이 없습니다. 스트립 노란 선을 클릭하거나 더블클릭해서 점을 찍으세요.' : ''),
+      title: '노란 선의 레벨 점을 지웁니다 — ' + (many ? '선택 스트립 전부' : '이 스트립') + '. 모서리 페이드는 점이 아니라 남습니다.' },
     { id: 'sbeCbLock', act: 'sbeToggleLock()',
       icon: (c && c.locked) ? '#ic-unlock' : '#ic-lock',
       label: (c && c.locked) ? 'Unlock' : 'Lock',
       on: !!(c && c.locked),
       why: n ? '' : noSel,
       title: (c && c.locked)
-        ? 'Lets ' + some + ' move and trim again.'
-        : 'Pins ' + some + ' to its place on the film — everything else '
-          + 'flows around it, and it cannot be dragged or trimmed until it '
-          + 'is unlocked.' },
+        ? some + '을(를) 다시 옮기고 트림할 수 있습니다.'
+        : some + '을(를) 필름 자리에 고정 — 나머지가 주위로 흐르고, 잠금 해제 전까지 드래그·트림 불가.' },
     // UPSCALE & FACE FIX, on the clip itself. Queues the face-safe 2× of the
     // clip's file; the timeline is not touched until the person says so.
     // Short label on the bar (the full name did not fit at 1512 px and fell
     // into More); the tooltip and the right-click menu carry the full name.
     { id: 'sbeCbFaceFix', act: 'sbeFaceFixSel()', label: 'Face Fix ×2', menuLabel: 'Upscale & Face Fix',
       why: !n ? noSel
-           : (many ? 'Pick one clip — each fix is its own render.'
-              : (!vid ? 'Only a video clip can be upscaled — a still or a black '
-                        + 'slug has no frames to fix.'
-                 : (isUpscaledPath(c && c.path) ? 'This clip is already upscaled.' : ''))),
-      title: 'Upscale & Face Fix — renders this clip again at twice the size with LTX-2.5 detail, '
-             + 'keeping the face and the sound. It runs in the queue; when it '
-             + 'lands, a line above the timeline offers to swap it in — same '
-             + 'cut, same in and out points. The original file is not changed.' },
+           : (many ? '클립 하나만 — 보정마다 렌더가 따로입니다.'
+              : (!vid ? '영상 클립만 업스케일됩니다. 스틸이나 검정에는 고칠 프레임이 없습니다.'
+                 : (isUpscaledPath(c && c.path) ? '이미 업스케일된 클립입니다.' : ''))),
+      title: '업스케일 & 얼굴 보정 — 이 클립을 LTX-2.5 디테일로 두 배 다시 찍고 얼굴·소리를 유지합니다. 대기열에서 돌고, 도착하면 타임라인 위 줄이 같은 컷·인/아웃으로 바꿔 넣기를 줍니다. 원본 파일은 안 바뀝니다.' },
   ];
   // The one readout that makes the rest of the row legible.
   // A SOUND IS NAMED AS A SOUND, so "Duplicate" beside it reads as copying
   // the sound: the A2 bed, or the A1 strip of the clip that was clicked.
-  let who = 'Nothing selected';
-  if (SBE.sel === '@music') who = 'Soundtrack (A2)';
+  let who = '선택 없음';
+  if (SBE.sel === '@music') who = '사운드트랙 (A2)';
   else if (c && sbeSoundLaneSel()) {
-    who = 'Sound of ' + sbeNiceName(c.title || String(c.path || '').split('/').pop() || 'clip');
-  } else if (many) who = n + ' clips selected';
+    who = sbeNiceName(c.title || String(c.path || '').split('/').pop() || 'clip') + '의 소리';
+  } else if (many) who = '클립 ' + n + '개 선택';
   else if (c) {
-    who = (kind === 'slug') ? 'Black'
+    who = (kind === 'slug') ? '검정'
       : sbeNiceName(c.title || String(c.path || '').split('/').pop() || 'clip');
-  } else if (SBE.ovSel) who = 'Title or card selected';
-  else if (SBE.txSel) who = 'Cut selected';
+  } else if (SBE.ovSel) who = '타이틀 또는 카드 선택';
+  else if (SBE.txSel) who = '컷 선택';
   return { rows: rows, who: who, count: n, many: many, whoWhy: noSel };
 }
 
@@ -10766,8 +10727,7 @@ function edPoolPaint() {
   if (note) {
     note.textContent = rows.length > show.length
       ? (show.length + ' of ' + rows.length + ' shown.')
-      : (rows.length + ' clip' + (rows.length === 1 ? '' : 's') +
-         ' · click one to watch it, + to put it at the end, or drag it onto the track.');
+      : (rows.length + '개 클립 · 클릭해서 보기, + 로 끝에 넣기, 또는 트랙으로 드래그.');
   }
 }
 
@@ -10817,8 +10777,8 @@ async function edPoolAdd(i, dropAt) {
   // A SOUND HAS NO PICTURE to put on V1 — it goes on an audio track.
   if (row.kind === 'sound') { await sbeTsAddSoundPath(row.path, '', SBE.playhead); return; }
   if (!SBE.open || !SBE.id) {
-    phosToast('Open a __SEQ__ first — the Editor holds one timeline at a time.', {});
-    return;
+    const id = await edNewSequence();
+    if (!id) return;
   }
   // The row's own word first, then the file's. The server checks the suffix
   // too — this is the half that keeps the CLIENT from asking /file for a
@@ -11051,10 +11011,10 @@ async function edPoolDragEnd(ev) {
 // ---------------------------------------------------------------------------
 // No server round trip, because there is nothing on disk to check, no
 // geometry to probe and no proxy to build. It is a length and a kind.
-function edAddSlug() {
+async function edAddSlug() {
   if (!SBE.open || !SBE.id) {
-    phosToast('Open a __SEQ__ first — the Editor holds one timeline at a time.', {});
-    return;
+    const id = await edNewSequence();
+    if (!id) return;
   }
   const box = document.getElementById('edSlugSecs');
   const secs = Math.max(SBE_MIN_CLIP, Math.min(60, sbeNum(box && box.value, 2) || 2));
@@ -12831,7 +12791,7 @@ Object.assign(globalThis, {
   sbeZoomToSlider, sbeZoomAnchor, sbeZoomScroll, sbeFollowScroll,
   sbeMonitorFit, sbeTlClamp, sbeLaneHeights, sbeTlPrefRead,
   sbeTlPrefWrite, edDoc, edRemember, edInit,
-  edShowPicker, edOpenBoard, sbeOpen, sbeSuspend,
+  edShowPicker, edOpenBoard, edNewSequence, sbeOpen, sbeSuspend,
   sbeCloseDoc, sbeClose, sbeGoToBoard, sbeTeardown,
   sbeLoad, sbeAdopt, sbeFetchPeaks, sbeMusicEditPath,
   sbePaintProtected, sbeSetState, sbeSnapshot, sbeRestore,

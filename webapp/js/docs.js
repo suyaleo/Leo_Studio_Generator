@@ -19,20 +19,20 @@
 // Served from /webapp/docs/ by the panel itself: no network, no CDN.
 
 const DOCS_SECTIONS = [
-  { id: 'getting-started', title: 'Getting started', group: 'Start', file: 'getting-started.md' },
-  { id: 'video', title: 'Video', group: 'Make', file: 'video.md' },
-  { id: 'one-shot', title: 'One Shot', group: 'Make', file: 'one-shot.md' },
-  { id: 'remix', title: 'Remix', group: 'Make', file: 'remix.md' },
-  { id: 'images', title: 'Images', group: 'Make', file: 'images.md' },
-  { id: 'storyboard', title: 'Storyboard', group: 'Make', file: 'storyboard.md' },
-  { id: 'audio', title: 'Audio', group: 'Make', file: 'audio.md' },
-  { id: 'editor', title: 'Editor', group: 'Cut', file: 'editor.md' },
-  { id: 'train-character', title: 'Train Character', group: 'Characters', file: 'train-character.md' },
-  { id: 'loras', title: 'LoRAs', group: 'Characters', file: 'loras.md' },
-  { id: 'settings', title: 'Settings', group: 'Reference', file: 'settings.md' },
-  { id: 'shortcuts', title: 'Keyboard shortcuts', group: 'Reference', file: 'shortcuts.md' },
-  { id: 'buttons', title: 'Buttons and icons', group: 'Reference', file: 'buttons.md' },
-  { id: 'troubleshooting', title: 'Troubleshooting', group: 'Reference', file: 'troubleshooting.md' },
+  { id: 'getting-started', title: '시작하기', group: '시작', file: 'getting-started.md' },
+  { id: 'video', title: '영상', group: '만들기', file: 'video.md' },
+  { id: 'one-shot', title: '원샷', group: '만들기', file: 'one-shot.md' },
+  { id: 'remix', title: '리믹스', group: '만들기', file: 'remix.md' },
+  { id: 'images', title: '이미지', group: '만들기', file: 'images.md' },
+  { id: 'storyboard', title: '스토리보드', group: '만들기', file: 'storyboard.md' },
+  { id: 'audio', title: '오디오', group: '만들기', file: 'audio.md' },
+  { id: 'editor', title: '편집', group: '자르기', file: 'editor.md' },
+  { id: 'train-character', title: '캐릭터 학습', group: '캐릭터', file: 'train-character.md' },
+  { id: 'loras', title: 'LoRAs', group: '캐릭터', file: 'loras.md' },
+  { id: 'settings', title: '설정', group: '참고', file: 'settings.md' },
+  { id: 'shortcuts', title: '키보드 단축키', group: '참고', file: 'shortcuts.md' },
+  { id: 'buttons', title: '버튼과 아이콘', group: '참고', file: 'buttons.md' },
+  { id: 'troubleshooting', title: '문제 해결', group: '참고', file: 'troubleshooting.md' },
 ];
 
 const DOCS = {
@@ -280,8 +280,8 @@ async function docsLoad() {
       if (!r.ok) throw new Error('HTTP ' + r.status);
       DOCS.md[sec.id] = await r.text();
     } catch (e) {
-      DOCS.md[sec.id] = '# ' + sec.title + '\n\nThis page could not be loaded (' + String(e.message || e) +
-        '). The panel serves it from webapp/docs/' + sec.file + '.';
+      DOCS.md[sec.id] = '# ' + sec.title + '\n\n이 페이지를 불러오지 못했습니다 (' + String(e.message || e) +
+        '). 패널이 webapp/docs/' + sec.file + '에서 제공합니다.';
     }
   })).then(() => { docsBuildIndex(); });
   return DOCS.loading;
@@ -329,8 +329,8 @@ function docsGo(section, anchor) {
     const prev = DOCS_SECTIONS[i - 1];
     const next = DOCS_SECTIONS[i + 1];
     docsEl('docsPageNav').innerHTML =
-      (prev ? '<a class="docs-page-prev" href="#docs/' + prev.id + '"><span>Previous</span>' + docsEsc(prev.title) + '</a>' : '<span></span>') +
-      (next ? '<a class="docs-page-next" href="#docs/' + next.id + '"><span>Next</span>' + docsEsc(next.title) + '</a>' : '<span></span>');
+      (prev ? '<a class="docs-page-prev" href="#docs/' + prev.id + '"><span>이전</span>' + docsEsc(prev.title) + '</a>' : '<span></span>') +
+      (next ? '<a class="docs-page-next" href="#docs/' + next.id + '"><span>다음</span>' + docsEsc(next.title) + '</a>' : '<span></span>');
     docsPaintToc();
   }
   docsEl('docsCrumb').textContent = sec.group + '  ›  ' + sec.title;
@@ -376,10 +376,10 @@ function docsPaintResults(q) {
   toc.hidden = true;
   box.hidden = false;
   if (!hits.length) {
-    box.innerHTML = '<div class="docs-noresult">Nothing matches “' + docsEsc(q) + '”. Try a word you see on the button, like <b>unlink</b> or <b>upscale</b>.</div>';
+    box.innerHTML = '<div class="docs-noresult">“' + docsEsc(q) + '”에 맞는 것이 없습니다. 버튼에 적힌 말로 찾아 보세요. 예: <b>언링크</b> 또는 <b>업스케일</b>.</div>';
     return;
   }
-  box.innerHTML = '<div class="docs-toc-group">' + hits.length + (hits.length === 1 ? ' match' : ' matches') + '</div>' +
+  box.innerHTML = '<div class="docs-toc-group">' + hits.length + '개 일치</div>' +
     hits.map((e, n) => {
       const sec = DOCS_SECTIONS.find(s => s.id === e.section);
       return '<a class="docs-hit" href="#docs/' + e.section + (e.anchor ? '/' + e.anchor : '') + '" data-n="' + n + '">' +

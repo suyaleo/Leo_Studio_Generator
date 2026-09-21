@@ -76,7 +76,7 @@ function renderVersionPill() {
   // restart to load the new code.
   if (_versionRestartPending) {
     pill.classList.add('pill-restart');
-    pill.innerHTML = '<svg class="ph" aria-hidden="true" style="margin-right:4px;vertical-align:-2px"><use href="#ph-arrow-clockwise-bold"/></svg>Restart Phosphene';
+    pill.innerHTML = '<svg class="ph" aria-hidden="true" style="margin-right:4px;vertical-align:-2px"><use href="#ph-arrow-clockwise-bold"/></svg>Leo Studio 재시작';
     const v = s.pull_pulled_to_version || s.pull_pulled_to_short || 'the new code';
     pill.title = s.pull_requires_full_update
       ? `Pulled ${v}. This update touched dependencies — use Pinokio's Update button (not just Stop+Start).`
@@ -91,7 +91,7 @@ function renderVersionPill() {
   if (s.stale_process) {
     if (!window._staleReported) { window._staleReported = true; _uiEvent('update_prompt', {action: 'restart_needed'}); }
     pill.classList.add('pill-restart');
-    pill.innerHTML = '<svg class="ph" aria-hidden="true" style="margin-right:4px;vertical-align:-2px"><use href="#ph-arrow-clockwise-bold"/></svg>Restart to finish update';
+    pill.innerHTML = '<svg class="ph" aria-hidden="true" style="margin-right:4px;vertical-align:-2px"><use href="#ph-arrow-clockwise-bold"/></svg>업데이트 끝내려면 재시작';
     // Name BOTH builds, each with its SHA. Most fixes land without a VERSION
     // bump, so on dev the two labels read the same number and a tooltip built
     // from labels alone said "Phosphene 4.6.0 is on disk, but this panel
@@ -148,13 +148,13 @@ function renderVersionPill() {
   // Current with origin/main.
   if (s.checked_ts && (s.behind_by | 0) === 0) {
     pill.classList.add('pill-current');
-    pill.innerHTML = `<svg class="ph" aria-hidden="true" style="margin-right:4px;vertical-align:-2px"><use href="#ph-check-bold"/></svg>Up to date · ${local}`;
+    pill.innerHTML = `<svg class="ph" aria-hidden="true" style="margin-right:4px;vertical-align:-2px"><use href="#ph-check-bold"/></svg>최신 · ${local}`;
     pill.title = `You're on ${local}, the latest version. Click to re-check now.`;
     return;
   }
   // First poll hasn't landed yet.
   pill.classList.add('pill-checking');
-  pill.textContent = `Checking · ${local}`;
+  pill.textContent = `확인 중 · ${local}`;
   pill.title = 'Checking for updates…';
 }
 
@@ -230,7 +230,7 @@ function _maybeShowUpdateModal(st) {
     onPrimary: () => {
       _uiEvent('update_prompt', {action: 'update_now'});
       const go = document.getElementById('ubUpdate');
-      if (go) { go.disabled = true; go.textContent = 'Updating…'; }
+      if (go) { go.disabled = true; go.textContent = '업데이트 중…'; }
       versionDoPull({skipConfirm: true});
     },
     // Later = this page load only. The banner (per-version dismissal)
@@ -318,7 +318,7 @@ function _ubRestartState(newVersion, requiresFullUpdate) {
       : 'Click Stop, then Start in Pinokio. Your queue and settings are preserved.';
   }
   if (go) { go.hidden = true; }
-  if (later) { later.textContent = 'Dismiss'; }
+  if (later) { later.textContent = '닫기'; }
   el.classList.add('ub-done');
   return true;
 }
@@ -343,7 +343,7 @@ function _ubWire() {
   if (go) go.onclick = () => {
     _uiEvent('update_prompt', {action: 'banner_update'});
     go.disabled = true;
-    go.textContent = 'Updating…';
+    go.textContent = '업데이트 중…';
     // Straight to the pull, with no confirm: this button already said what it
     // does. Reuses the pill's implementation, not a second copy of it.
     versionDoPull({skipConfirm: true});
@@ -462,10 +462,9 @@ function updateHealthChip() {
     face.dataset.short = 'attention';
   } else {
     face.textContent = clean(mem) || 'all good';
-    // The narrow-header face (review 2026-09-02): below 1400px the chip
-    // shows just the percentage — the full readout was being CLIPPED to
-    // "15/64" at Pinokio's window width. CSS swaps to data-short.
-    face.dataset.short = ((face.textContent.match(/(\d+)%/) || [])[1] || '') ? (face.textContent.match(/(\d+)%/)[1] + '%') : (face.textContent.split(/[\s·]+/)[0] || '');
+    // Do not also stash the percentage in data-short for a CSS ::after:
+    // that painted "78/128 GB · 61%61%" whenever the compact rule failed
+    // to hide the real text (Pinokio ~1300px, font-size:0 not collapsing).
   }
   document.querySelectorAll('#healthPop .hc-row').forEach(row => {
     const pill = row.querySelector('.pill');

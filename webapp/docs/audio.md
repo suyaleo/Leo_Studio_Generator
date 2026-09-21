@@ -1,16 +1,16 @@
-# Audio
+# 오디오
 
-The Audio tab makes a **video driven by a sound file you bring** — a voice line, a song. The sound steers the picture while it is generated (it is not laid on afterwards), so a mouth moves to the words and motion follows the music. It does not make sound from text; for that, describe the sound in any Video prompt.
+오디오 탭은 **가져온 소리 파일로 구동되는 영상**을 만듭니다. 대사, 노래. 소리는 나중에 얹는 게 아니라 생성 중에 그림을 이끕니다. 입이 말에 맞고, 움직임이 음악을 따라갑니다. 텍스트에서 소리를 만들지는 않습니다. 그건 영상 프롬프트에 소리를 적으세요.
 
-## Making one {#make}
+## 만들기 {#make}
 
-1. Drop the **Audio** — WAV, MP3, M4A or FLAC.
-2. Optional: a **Reference image** to open the clip on that frame — a portrait for a talking head. Leave it empty for pure audio-to-video.
-3. Write the prompt. **Enhance** rewrites it for the model.
-4. Set **Width** and **Height** (default 1024×576), **Audio start** (seconds into the file, e.g. 30 to drive the clip from 0:30) and **Duration** (1–30 s, default 7).
-5. **Audio conditioning strength** (0.5–5.0, default 1.0): higher holds the picture to the audio more tightly and leaves it less free.
-6. **Generate**.
+1. **오디오**를 넣습니다. WAV, MP3, M4A, FLAC.
+2. 선택: **레퍼런스 이미지**로 그 프레임에서 클립을 엽니다. 토킹 헤드면 초상. 비우면 순수 오디오→영상.
+3. 프롬프트를 적습니다. **다듬기**가 모델용으로 다시 씁니다.
+4. **Width** / **Height**(기본 1024×576), **Audio start**(파일에서 몇 초부터, 예: 30이면 0:30부터), **Duration**(1–30초, 기본 7).
+5. **Audio conditioning strength**(0.5–5.0, 기본 1.0): 높을수록 그림을 오디오에 더 붙입니다.
+6. **생성**.
 
-> **Tip** Some seeds do not take — if the mouth does not move, retry with a new seed. A large canvas with a long duration is a very long render; the tab warns you and suggests a smaller size.
+> **팁** Seed가 안 먹으면 입이 안 움직입니다. 새 Seed로 다시. 큰 캔버스에 긴 길이는 렌더가 매우 깁니다. 탭이 경고하고 작은 크기를 권합니다.
 
-Audio always renders on LTX: on the High (Q8) pipeline when it is installed, otherwise on the fast pipeline.
+오디오는 항상 LTX로 돕니다. High(Q8) 파이프라인이 있으면 그걸, 없으면 빠른 파이프라인.

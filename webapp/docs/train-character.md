@@ -1,49 +1,49 @@
-# Train Character
+# 캐릭터 학습
 
-Train Phosphene on one person's face — and, optionally, their voice — from your own photos. The result is a character you can put in any LTX shot. Training needs at least 24 GB of memory and runs on LTX-2.3 (the tab downloads what it needs).
+사진으로 한 사람 얼굴을 — 선택하면 음성도 — Leo Studio에 학습시킵니다. 결과는 LTX 샷에 넣을 수 있습니다. 학습은 메모리 24 GB 이상, LTX-2.3에서 돕니다(탭이 필요한 것을 받습니다).
 
-## The steps {#steps}
+## 단계 {#steps}
 
-1. **Train type** — **Character** (the face, and voice, of one person) or **Style** (a cinematic look, colour, lighting; experimental).
-2. **Dataset** — drop **15 to 50 photos** (up to 500) — PNG, JPG or WEBP, with matching `.txt` captions if you have them — or a ZIP of paired images and captions. Each preview shows the square crop the trainer sees. *How to train a character well* covers the mix of shots, light and backgrounds that works.
-3. **Captions** — see below.
-4. **Trigger word** — a rare, letters-only word the model ties to this character. **↻ Suggest** makes one. Avoid digits: they split into common tokens.
-5. **Quality preset** — see below.
-6. **Crop strategy** — **Center crop** for tight portraits, **Letterbox** to keep wide-shot proportions.
-7. **Voice** (optional) — see below.
-8. Check the estimate — **Estimated wall time**, **Peak RAM** — and press **Train Character**.
+1. **학습 종류** — **캐릭터**(한 사람 얼굴·음성) 또는 **스타일**(시네마틱 룩, 색, 조명. 실험적).
+2. **데이터셋** — **사진 15–50장**(최대 500). PNG, JPG, WEBP. 있으면 같은 이름 `.txt` 캡션. 또는 이미지+캡션 ZIP. 미리보기는 트레이너가 보는 정사각 크롭. *캐릭터를 잘 학습하려면*에 샷·빛·배경 조합이 있습니다.
+3. **캡션** — 아래.
+4. **트리거 단어** — 이 캐릭터에 묶이는 드문 영문 단어. **↻ 제안**. 숫자는 피하세요. 흔한 토큰으로 쪼개집니다.
+5. **품질 프리셋** — 아래.
+6. **크롭** — 타이트 초상은 **Center crop**, 와이드는 **Letterbox**.
+7. **음성**(선택) — 아래.
+8. 예상 — **예상 시간**, **피크 RAM** — 확인 후 **캐릭터 학습**.
 
-## Captions {#captions}
+## 캡션 {#captions}
 
-Each image needs a caption in the form `[VISUAL]: trigger, 50–80 words` followed by `[TEXT]: None`; missing tags are added for you. **Auto-caption with Gemma 3** writes one for every image (2–3 seconds each) and overwrites existing captions. A thumbnail marked **no cap** falls back to a caption made from the trigger word alone.
+이미지마다 `[VISUAL]: trigger, 50–80 words` 다음에 `[TEXT]: None`. 빠진 태그는 채워 줍니다. **Gemma 3으로 자동 캡션**이 장마다 씁니다(장당 2–3초). 기존 캡션을 덮습니다. **no cap** 표시는 트리거만으로 캡션을 만듭니다.
 
-Captions cannot be edited inside the tab: to change one, upload a corrected `.txt` (or ZIP). Training asks before it starts if captions are missing or very short.
+탭 안에서 캡션을 고칠 수는 없습니다. 고친 `.txt`(또는 ZIP)를 올리세요. 캡션이 없거나 너무 짧으면 시작 전에 묻습니다.
 
-## Presets, and what "identity graded" means {#presets}
+## 프리셋, "identity graded" {#presets}
 
-| Preset | On a Mac with 64 GB or more |
+| 프리셋 | 64 GB 이상 맥 |
 |---|---|
-| **Quick** | ~30 epochs, rank 8, 512px — a look, not a face · identity ungraded |
-| **Medium** | ~60 epochs, rank 16, 576px — more capacity · identity ungraded |
-| **High** | ~100 epochs, rank 32, 512px — validated for identity (recommended) |
+| **Quick** | ~30 epochs, rank 8, 512px — 룩이지 얼굴이 아님 · identity 미검증 |
+| **Medium** | ~60 epochs, rank 16, 576px — 용량 더 · identity 미검증 |
+| **High** | ~100 epochs, rank 32, 512px — identity 검증(권장) |
 
-**Identity graded** means the recipe has actually been measured on real faces and holds them. Only **High** on a 64 GB+ Mac is. Quick and Medium are for a fast look or a style, not a person.
+**Identity graded**는 실제 얼굴로 재서 유지되는지 확인한 레시피입니다. 64 GB+에서 **High**만 해당. Quick·Medium은 빠른 룩이나 스타일용이지 사람용이 아닙니다.
 
-On Macs under 64 GB, training runs a compact profile (fewer steps, lower rank), and even "High" there is **not** the graded recipe — the note under the presets says so. **Advanced** exposes rank, steps, learning rate, resolution and caption strategy.
+64 GB 미만은 컴팩트 프로필(스텝·랭크 낮음)이고, 거기 "High"도 검증 레시피가 아닙니다. 프리셋 아래 노트가 말합니다. **고급**에서 rank, steps, learning rate, 해상도, 캡션 전략을 엽니다.
 
-When a run finishes, Phosphene measures the result. A character that came out weak or carries nothing gets a **WEAK** or **DEAD** badge and a banner with advice — usually, train again on High.
+끝나면 결과를 잽니다. 약하거나 빈 캐릭터는 **WEAK** / **DEAD** 배지와 조언 — 보통 High로 다시.
 
-## Voice {#voice}
+## 음성 {#voice}
 
-Upload one clean clip — 10 to 25 seconds of a single speaker, MP3, WAV, M4A or FLAC, up to 50 MB — and tick **Train voice LoRA**. **Audio steps**: Smoke 100, Standard 250 (default) or Long 500. The button becomes **Train Character + Voice**.
+깨끗한 클립 하나 — 한 화자 10–25초, MP3, WAV, M4A, FLAC, 최대 50 MB — 올리고 **음성 LoRA 학습**을 켭니다. **Audio steps**: Smoke 100, Standard 250(기본), Long 500. 버튼이 **캐릭터 + 음성 학습**이 됩니다.
 
-## Using a character in Video {#use-in-video}
+## 영상에서 쓰기 {#use-in-video}
 
-Trained characters land in `mlx_models/loras/` and appear in two places:
+학습된 캐릭터는 `mlx_models/loras/`에 들어가고 두 곳에 보입니다.
 
-- **The Character mode** on the Video tab (LTX): pick the face from the strip. Voiced characters carry a music-note badge. Set **strength** (0–2, default 1.0), or split it into separate **face** and **voice** strengths. **No voice** keeps the face and drops the speech.
-- **The LoRA picker**, marked **Trained**, like any other LoRA.
+- 영상 탭 **캐릭터** 모드(LTX): 스트립에서 얼굴. 음성 있으면 음표 배지. **strength** 0–2, 기본 1.0. 또는 **얼굴** / **음성** 강도 분리. **음성 없음**은 얼굴만 남기고 말은 뺍니다.
+- **LoRA 피커**의 **Trained**, 다른 LoRA처럼.
 
-Use the trigger word in the prompt — *mrztrn man walking on the beach*. A trained character needs the full model: with one active, **Quick** and **Standard** are greyed out and the render uses High. The pencil on the strip renames or deletes a character; the trigger word itself cannot change.
+프롬프트에 트리거를 넣으세요 — *mrztrn man walking on the beach*. 학습 캐릭터는 풀 모델이 필요합니다. 켜져 있으면 **Quick**·**Standard**가 회색이고 High로 돕니다. 스트립 연필이 이름 바꾸기·삭제. 트리거 단어 자체는 못 바꿉니다.
 
-Clicking a character chip under *Use your trained characters* on the Train tab switches to the Video tab in Text mode with that character's LoRA on at strength 1.0, and fills an empty prompt with its trigger word.
+학습 탭 *학습한 캐릭터 쓰기*에서 칩을 누르면 영상 탭 텍스트 모드로 가고, 그 LoRA가 1.0으로 켜지고, 빈 프롬프트에 트리거가 채워집니다.

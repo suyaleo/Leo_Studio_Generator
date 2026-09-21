@@ -1,32 +1,32 @@
-# One Shot
+# 원샷
 
-One continuous shot of **30 seconds to 2 minutes** that never cuts. You write the whole shot once; Phosphene renders it in parts, each continuing from the last frame of the one before, and joins them into one file.
+자르지 않는 **30초~2분** 연속 샷입니다. 샷을 한 번 적으면, Leo Studio가 파트마다 직전 마지막 프레임에서 이어 찍고 한 파일로 붙입니다.
 
-## Making one {#make}
+## 만들기 {#make}
 
-1. Choose the **Engine**: **LTX 2.5** renders 10 s parts and is the one for faces, voices and dialogue; **Hailuo H3** renders 15 s parts and is the one for motion, landscapes and crowds.
-2. Write **The shot** — who, where, the time of day and the weather, the sound — once, for the whole shot. This is the only thing required.
-3. Pick a **Length**: 30 s, 45 s, 1 min, 1½ min or 2 min. Each chip shows how many beats and parts it makes.
-4. Pick a **Quality**. The estimate line says about how long it takes on this Mac.
-5. Press **Generate** (or [[sc:prompt.generate]] in the prompt box). The whole shot is one request in the queue.
+1. **엔진**: **LTX 2.5**는 10초 파트, 얼굴·목소리·대사. **Hailuo H3**는 15초 파트, 움직임·풍경·군중.
+2. **샷** — 누구, 어디, 시간대와 날씨, 소리 — 전체 샷에 한 번. 이것만 필수입니다.
+3. **길이**: 30초, 45초, 1분, 1½분, 2분. 칩에 비트·파트 수가 나옵니다.
+4. **품질**. 이 맥에서 대략 얼마나 걸리는지 추정 줄이 말합니다.
+5. **생성**(프롬프트 박스에서 [[sc:prompt.generate]]). 전체 샷이 대기열에 요청 하나입니다.
 
-## The optional parts {#options}
+## 선택 항목 {#options}
 
-- **Start frame** — *Choose an image* and the shot opens on it.
-- **Who is in it** (LTX) — pick a trained character: Quality switches to that character's qualities and **Hand off where the line ends** turns on.
-- **Beats** — one row per 5 seconds, each with its time stamp. Write what happens in each, or let Phosphene fill them: **Split my prompt into beats** puts one sentence per beat, **Write the beats for me** has the planner write them. [[sc:oneshot.beats]] Pasting a list fills the rows.
-- **Camera** — one move for the whole shot, its direction and speed. Every part continues it.
+- **시작 프레임** — *이미지 고르기*. 샷이 그 그림에서 열립니다.
+- **누가 나오나**(LTX) — 학습 캐릭터. 품질이 그 캐릭터 품질로 바뀌고 **대사가 끝나는 곳에서 넘기기**가 켜집니다.
+- **비트** — 5초마다 한 줄, 타임스탬프. 직접 쓰거나: **프롬프트를 비트로 나누기**는 문장마다, **비트 써 주기**는 기획이 씁니다. [[sc:oneshot.beats]] 목록 붙여넣기도 됩니다.
+- **카메라** — 샷 전체의 한 움직임, 방향과 속도. 모든 파트가 이어 갑니다.
 
-## The three switches {#switches}
+## 스위치 셋 {#switches}
 
-| Switch | On | Off |
+| 스위치 | 켜짐 | 꺼짐 |
 |---|---|---|
-| **Lock the light** | the same light in every part (default) | each beat as written |
-| **Redo a part that drifts** | a part that drifts is rendered once more, at most (default) | keep the first pass |
-| **Hand off where the line ends** | for a talking character: the next part starts where the spoken line stops | each part starts from the last frame |
+| **빛 고정** | 모든 파트 같은 빛(기본) | 비트에 적힌 대로 |
+| **드리프트 파트 다시** | 드리프트한 파트는 최대 한 번 더(기본) | 첫 패스 유지 |
+| **대사가 끝나는 곳에서 넘기기** | 말하는 캐릭터: 다음 파트가 대사 끝난 곳에서 | 각 파트는 마지막 프레임에서 |
 
-Under **More**: **Seed**, a **Label** for the queue, and **No music** (voice, sound and ambience only).
+**더보기** 아래: **Seed**, 대기열 **라벨**, **음악 없음**(목소리·소리·앰비언스만).
 
-## Watching it render {#status}
+## 렌더 보기 {#status}
 
-The status card updates every few seconds: *Rendering*, *part 2 of 6*, and when it is done, *in the gallery on the right*. For each finished part with speech it reports whether the voice is on the mouth — **voice on the mouth**, **borderline** or **voice-over** — and **light drifted** when a part's light moved.
+상태 카드가 몇 초마다 바뀝니다. *렌더 중*, *6 중 2파트*, 끝나면 *오른쪽 갤러리*. 대사가 있는 끝난 파트는 **입이 맞음**, **아슬아슬**, **보이스오버**. 빛이 움직이면 **빛 드리프트**.

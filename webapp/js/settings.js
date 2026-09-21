@@ -198,11 +198,9 @@ function updateModelsCard(s) {
   icon.innerHTML = '<svg class="ph" aria-hidden="true"><use href="#ph-check-bold"/></svg>';
   const ready = s.repos_ready ?? 0;
   const total = s.repos_total ?? 0;
-  title.textContent = `Models ready · ${ready}/${total}`;
-  const partialNote = (q8Ok && baseOk) ? '' : ` · ${total - ready} optional missing`;
-  sub.innerHTML =
-    `All installed weights detected${partialNote}. ` +
-    `<a style="color:var(--accent-bright,#7e98ff); cursor:pointer; text-decoration:underline" onclick="openModelsModal()">Manage models →</a>`;
+  title.textContent = `모델 준비됨 · ${ready}/${total}`;
+  const partialNote = (q8Ok && baseOk) ? '' : ` · 선택 ${total - ready}개 없음`;
+  sub.textContent = `설치된 가중치는 확인됨${partialNote}.`;
   actions.innerHTML = '';
 }
 

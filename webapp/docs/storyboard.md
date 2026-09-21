@@ -1,36 +1,36 @@
-# Storyboard
+# 스토리보드
 
-Storyboard plans a whole film from one idea, renders every shot, lets you grade them, and hands the keepers to the Editor. Its steps run across the top: **1 Plan**, **2 Shots**, **3 Edit**, **4 Film**.
+스토리보드는 아이디어 하나로 장편 샷을 짜고, 전부 렌더하고, 그레이딩한 뒤 킵을 편집기로 넘깁니다. 위 단계: **1 기획**, **2 샷**, **3 편집**, **4 필름**.
 
-## 1 · The brief {#brief}
+## 1 · 브리프 {#brief}
 
-- **Concept** — the film in a sentence or two.
-- **Shots** — how many, roughly: 6 *a scene*, 12 *a short*, 24 *a film*, 36 *long*, or **One Shot** with its own length.
-- **Engine** — **Auto** (character shots go to LTX, everything else to Hailuo H3), **Hailuo H3** (voice and sound) or **LTX** (characters).
-- **Soundtrack** — a track turns it into a music video cut to the beat, at 1, 2 or 4 bars.
-- **Look** — goes on every shot. **Who's in it** — optional, with a wardrobe line.
-- **Where it happens** — one line per place; shots reuse them.
-- **Shots it must include** — one per line.
-- **Auto** plans, renders every shot, cuts and makes the film in one go. **Start each shot from a still** (LTX) and **Long shots** (chained 5-second passes, needs the Q8 pack) are further options — the **?** beside them explains each.
+- **컨셉** — 한두 문장으로 필름.
+- **샷 수** — 대략: 6 *장면*, 12 *숏*, 24 *필름*, 36 *길게*, 또는 **원샷**과 그 길이.
+- **엔진** — **Auto**(캐릭터 샷은 LTX, 나머지는 Hailuo H3), **Hailuo H3**(목소리·소리), **LTX**(캐릭터).
+- **사운드트랙** — 넣으면 비트에 맞춘 뮤직비디오. 1, 2, 4 마디.
+- **룩** — 모든 샷에. **누가 나오나** — 선택, 의상 한 줄.
+- **어디서** — 장소마다 한 줄. 샷이 재사용.
+- **꼭 넣을 샷** — 한 줄에 하나.
+- **Auto**는 기획·렌더·컷·필름을 한 번에. **스틸에서 각 샷 시작**(LTX), **긴 샷**(5초 패스 연결, Q8 팩 필요)은 추가 옵션. 옆 **?**가 설명합니다.
 
-Press **Plan film**. Writing the plan takes about a minute and renders nothing yet.
+**필름 기획**을 누릅니다. 기획 쓰기는 약 1분이고 아직 렌더하지 않습니다.
 
-## 2 · The shot list {#shots}
+## 2 · 샷 목록 {#shots}
 
-Each shot card has its prompt, its cast and length, a **voice** chip when it has spoken lines, and **↑ / ↓**, the dice (a new seed) and **✕**. Drag cards to reorder, or use **+ Add a shot**. **Draft pass** is what you watch first; **Delivery pass** is what you keep.
+각 카드에 프롬프트, 캐스트, 길이, 대사가 있으면 **voice** 칩, **↑ / ↓**, 주사위(새 Seed), **✕**. 드래그로 순서, **+ 샷 추가**. **Draft pass**가 먼저 보는 것, **Delivery pass**가 남기는 것.
 
-**Render all drafts** starts the renders; **Pause**, **Stop shot** and **Stop film** control them (Stop film keeps everything already rendered). **Re-plan…** writes a new shot list from notes while keeping the concept and the look.
+**초안 전부 렌더**로 시작합니다. **일시정지**, **샷 중지**, **필름 중지**(이미 렌더한 것은 남김). **다시 기획…**은 컨셉·룩을 유지한 채 노트로 샷 목록을 다시 씁니다.
 
-## Grading {#grading}
+## 그레이딩 {#grading}
 
-Every rendered clip gets **KEEP**, **RE-ROLL** or **CUT**. RE-ROLL asks *what should change?* — that note goes back to the planner.
+렌더된 클립마다 **KEEP**, **RE-ROLL**, **CUT**. RE-ROLL은 *뭐가 바뀌어야 하나?* — 그 노트가 기획으로 돌아갑니다.
 
 [[shortcuts:storyboard]]
 
-- **Rewrite** re-plans only the RE-ROLL shots, from your notes.
-- **Render remaining** renders what is left.
-- **Finish keepers** renders the KEEP shots at the delivery pass.
+- **다시 쓰기**는 RE-ROLL 샷만 노트 기준으로 재기획.
+- **남은 것 렌더**는 남은 것.
+- **킵 마무리**는 KEEP 샷을 delivery pass로.
 
-## 3 · Into the Editor {#edit}
+## 3 · 편집기로 {#edit}
 
-**3 Edit**, **Open in Editor** on the board list, or **Re-cut in the Editor** on the film screen all open the board's shots as a timeline. See [Editor](#docs/editor).
+**3 편집**, 보드 목록의 **편집기에서 열기**, 필름 화면의 **편집기에서 다시 컷**이 샷을 타임라인으로 엽니다. [편집](#docs/editor).

@@ -31966,6 +31966,22 @@ class Handler(BaseHTTPRequestHandler):
             return storyboard.load_storyboard(STATE_DIR, bid)
 
         try:
+            # ---- empty sequence for the Editor --------------------------
+            # The Editor tab is a cut, not a planner: a user with clips in
+            # the media pool needs a timeline to drop them on. Plan requires
+            # a concept and starts the LLM; this just makes a board.
+            if action == "new":
+                title = f("title", "") or "시퀀스"
+                bid = "sb_%s_%s" % (
+                    time.strftime("%Y%m%d"),
+                    hashlib.sha1(
+                        (title + str(time.time())).encode()
+                    ).hexdigest()[:6])
+                board = storyboard.new_storyboard(bid, title)
+                storyboard.save_storyboard(STATE_DIR, board)
+                self._json({"ok": True, "id": bid, "title": board["title"]})
+                return
+
             # ---- plan / re-plan -----------------------------------------
             if action == "plan":
                 concept = f("concept", "")

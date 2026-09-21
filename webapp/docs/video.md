@@ -1,137 +1,137 @@
-# Video
+# 영상
 
-The Video tab turns a prompt — and, if you like, an image or a clip — into a video with sound. Pick a mode, write the prompt, choose Quality and Length, press **Generate** ([[sc:prompt.generate]] from the prompt box).
+영상 탭은 프롬프트 — 원하면 이미지나 클립 — 를 소리 있는 영상으로 바꿉니다. 모드를 고르고, 프롬프트를 쓰고, 품질과 길이를 고르고 **생성**([[sc:prompt.generate]]).
 
-## Modes {#modes}
+## 모드 {#modes}
 
-The chips across the top of the form. Each one says what it takes.
+폼 위 칩. 각각이 무엇을 받는지 말합니다.
 
-| Mode | Takes | What you get |
+| 모드 | 입력 | 결과 |
 |---|---|---|
-| **Text** | a prompt | a clip from words alone |
-| **Character** | a trained character + a prompt | your character's face (and voice) in a new shot — LTX only. See [Using a character](#docs/train-character/use-in-video) |
-| **Image** | a reference image + a prompt | a clip that starts from, or is inspired by, your picture |
-| **FFLF** | a start frame and an end frame | a clip that travels from one to the other |
-| **Keyframes** | 3–8 frames | a clip that passes through each |
-| **Extend** | a clip | more of that clip, after or before it |
-| **Remix** | your own media | Ingredients, Motion Control, Colorize, Upscale & Face Fix — see [Remix](#docs/remix) |
+| **텍스트** | 프롬프트 | 글만으로 클립 |
+| **캐릭터** | 학습 캐릭터 + 프롬프트 | 그 얼굴(과 음성)의 새 샷 — LTX만. [캐릭터 쓰기](#docs/train-character/use-in-video) |
+| **이미지** | 레퍼런스 이미지 + 프롬프트 | 그 그림에서 시작하거나, 그 그림에서 영감을 받은 클립 |
+| **FFLF** | 시작 프레임과 끝 프레임 | 하나에서 다른 하나로 가는 클립 |
+| **키프레임** | 3–8 프레임 | 각각을 지나가는 클립 |
+| **연장** | 클립 | 그 클립의 뒤 또는 앞을 더 |
+| **리믹스** | 내 미디어 | Ingredients, Motion Control, Colorize, 업스케일 & 얼굴 보정 — [리믹스](#docs/remix) |
 
-Hailuo H3 renders **Text** and **Image**; the other modes are LTX's.
+Hailuo H3는 **텍스트**와 **이미지**. 나머지 모드는 LTX입니다.
 
-### Image: Anchor or Inspire {#anchor-inspire}
+### 이미지: Anchor 또는 Inspire {#anchor-inspire}
 
-Drop a PNG, JPG or WEBP into **Reference image** — it is cover-cropped to the render size. On LTX-2.5 a **Reference use** row appears:
+PNG, JPG, WEBP를 **레퍼런스 이미지**에 넣습니다. 렌더 크기에 커버 크롭됩니다. LTX-2.5에는 **Reference use** 행이 생깁니다.
 
-- **Anchor** — *animate this image*. Your picture is frame one and the clip moves it.
-- **Inspire** — *new shot from it*. The clip takes the character or look into a new scene, and you will not see your picture as frame one. Good for "this character, new scene".
+- **Anchor** — *이 이미지를 움직이기*. 그림이 첫 프레임이고 클립이 그걸 움직입니다.
+- **Inspire** — *그걸로 새 샷*. 캐릭터나 룩을 새 장면으로 가져가고, 첫 프레임으로 그림이 보이진 않습니다. "이 캐릭터, 새 장면"에 맞습니다.
 
-On Hailuo H3 the image is always the first frame.
+Hailuo H3에서는 이미지가 항상 첫 프레임입니다.
 
-### FFLF and Keyframes {#fflf}
+### FFLF와 키프레임 {#fflf}
 
-- **FFLF** — **Start frame (frame 0)** opens the clip and its shape sets the output size; **End frame (last frame)** closes it. A close-up at the end holds a face through the clip.
-- **Keyframes** — choose **3 keyframes** to **8 keyframes**. Start and End are fixed; the others are the beats in between.
-- Both need the LTX High add-on (the Q8 model) and pick High quality on their own. If it is missing, Generate says so and tells you where to install it.
+- **FFLF** — **시작 프레임 (frame 0)**이 클립을 열고 그 비율이 출력 크기를 정합니다. **끝 프레임 (last frame)**이 닫습니다. 끝에 클로즈업이 얼굴을 붙잡습니다.
+- **키프레임** — **3 keyframes**에서 **8 keyframes**. Start와 End는 고정, 나머지는 사이 비트.
+- 둘 다 LTX High 애드온(Q8)이 필요하고 스스로 High 품질을 고릅니다. 없으면 생성이 어디에 설치할지 말합니다.
 
-### Extend {#extend}
+### 연장 {#extend}
 
-Pick the **Source video**, set **Extend by (seconds)** (0.5 to 10, default 2) and **Direction** (After or Before). Extend has its own two qualities:
+**원본 영상**, **Extend by (seconds)**(0.5–10, 기본 2), **방향**(이후 또는 이전). 연장만의 품질 둘:
 
-- **Q8 Draft** — 12 steps, safe on a 64 GB Mac.
-- **Q8 Pro** — 30 steps, wants 96 GB or more.
+- **Q8 Draft** — 12스텝, 64 GB 맥에서 안전.
+- **Q8 Pro** — 30스텝, 96 GB 이상.
 
-Stay on Q8 Draft unless the Mac has the memory.
+메모리가 충분하기 전에는 Q8 Draft에 두세요.
 
-## Writing the prompt {#prompt}
+## 프롬프트 쓰기 {#prompt}
 
-Describe the scene **and the sound**. Sound is generated with the picture; a prompt with no sound in it comes out near silent.
+장면 **그리고 소리**를 적으세요. 소리는 그림과 같이 나옵니다. 소리가 없는 프롬프트는 거의 무음입니다.
 
-- **Enhance** (LTX) rewrites your prompt in the style the model was trained on.
-- **No music** asks for voice, sound and ambience without a score.
-- **No voice** appears when the selected character has a voice: the face still locks, the audio stays ambient.
+- **다듬기**(LTX)가 모델이 학습된 스타일로 다시 씁니다.
+- **음악 없음**은 목소리·소리·앰비언스만, 스코어 없이.
+- **음성 없음**은 선택한 캐릭터에 음성이 있을 때: 얼굴은 잠그고 오디오는 앰비언트.
 
-### The Avoid box {#avoid}
+### 제외 박스 {#avoid}
 
-**Avoid +** opens a second box for what the model should *not* make — *blurry hands, distorted fingers, warped text*.
+**제외 +**가 모델이 *만들지 말아야* 할 것 — *흐린 손, 일그러진 손가락, 휜 글자*.
 
-> **When it works** Avoid applies on **High**, **High · 720p**, **Extend**, **FFLF** / **Keyframes** and **Audio**. **Quick**, **Balanced** and **Standard** run without guidance and ignore it. On Hailuo H3 there is no Avoid box: write refusals as plain sentences in the prompt, and only for what H3 adds unasked — camera drift and on-screen text.
+> **언제 먹히나** 제외는 **High**, **High · 720p**, **연장**, **FFLF** / **키프레임**, **오디오**에서. **Quick**, **Balanced**, **Standard**는 가이던스 없이 돌아서 무시합니다. Hailuo H3에는 제외 박스가 없습니다. 거절을 프롬프트에 문장으로, H3가 안 물어보고 넣는 것만 — 카메라 드리프트와 화면 글자.
 
-## Quality and Length on LTX {#ltx-quality}
+## LTX 품질과 길이 {#ltx-quality}
 
-Each Quality chip shows its size and an estimate for this Mac. A chip reads *unavailable* when this Mac cannot run it, or names the download it needs.
+품질 칩마다 크기와 이 맥 추정이 있습니다. 이 맥이 못 돌리면 *unavailable*, 또는 필요한 다운로드 이름.
 
-| Quality | Size | What it is |
+| 품질 | 크기 | 무엇인지 |
 |---|---|---|
-| **Quick** | 640×448 | the fastest look at the shot |
-| **Balanced** | 1024×576 | 16:9 at the size most things are watched — the default |
-| **Standard** | 1280×704 | the largest canvas the fast lane serves — bigger, not more detailed |
-| **High** | 1024×576 | a second, larger pass over the first: sharper detail and steadier motion, for about twice the wait |
-| **High · 720p** | 1280×704 | the High pass at 720p — the most detail LTX makes; measured peak 49.7 GB, so it wants a 64 GB Mac |
+| **Quick** | 640×448 | 샷을 가장 빨리 보기 |
+| **Balanced** | 1024×576 | 16:9, 가장 많이 보는 크기 — 기본 |
+| **Standard** | 1280×704 | 빠른 레인이 주는 가장 큰 캔버스 — 더 큼, 더 디테일은 아님 |
+| **High** | 1024×576 | 첫 패스 위 두 번째, 더 큰 패스: 더 선명, 더 안정된 모션, 대기 약 두 배 |
+| **High · 720p** | 1280×704 | High 패스를 720p — LTX가 만드는 최대 디테일. 측정 피크 49.7 GB, 64 GB 맥 |
 
-Quick, Balanced and Standard run on the fast (distilled) model; High and High · 720p need the High add-on (the Q8 model).
+Quick, Balanced, Standard는 빠른(distilled) 모델. High와 High · 720p는 High 애드온(Q8).
 
-**Length**: 3s, 5s (default), 7s, 10s — and 20s, which is offered at Quick only.
+**길이**: 3초, 5초(기본), 7초, 10초 — 그리고 20초는 Quick만.
 
-On the fast qualities, a **Speed** row offers **Tuned** or **Fast draft** — a faster schedule that changes the take. High has a **STG — detail guidance** slider.
+빠른 품질에는 **속도** 행이 **Tuned** 또는 **빠른 초안**. High에는 **STG — 디테일 가이던스** 슬라이더.
 
-With a trained character selected the chips become **Q8 Draft** (704×384), **Q8 Pro** (1024×576, *best identity*) and, on LTX-2.5, High and High · 720p. Trained faces hold best on Q8 Pro.
+학습 캐릭터를 고르면 칩이 **Q8 Draft**(704×384), **Q8 Pro**(1024×576, *아이덴티티 최선*), LTX-2.5에서는 High와 High · 720p. 학습 얼굴은 Q8 Pro에서 가장 잘 붙습니다.
 
-## Quality and Length on Hailuo H3 {#h3-quality}
+## Hailuo H3 품질과 길이 {#h3-quality}
 
-| Quality | Size | Notes |
+| 품질 | 크기 | 메모 |
 |---|---|---|
-| **Draft** | 640×384 | quick look — faces and fine detail only resolve at Standard and High |
-| **Standard** | 768×448 | the workhorse |
-| **High** | 1024×576 | true 16:9, the recommended delivery size |
-| **Native** | 1344×768 | the most detail H3 can make — worth it with Turbo on, a long wait without |
+| **Draft** | 640×384 | 빠른 보기 — 얼굴·세부는 Standard·High에서만 |
+| **Standard** | 768×448 | 실무 |
+| **High** | 1024×576 | 진짜 16:9, 권장 납품 크기 |
+| **Native** | 1344×768 | H3가 만들 수 있는 최대 디테일 — Turbo 켜면 값어치, 없으면 긴 대기 |
 
-**Length**: 3s, 5s (the longest single pass), **10s** and **15s**. 10 s and 15 s are chained from 5-second windows at render time, so choose the length before you render — there is no Extend afterwards.
+**길이**: 3초, 5초(한 패스 최장), **10초**, **15초**. 10초와 15초는 렌더 때 5초 창을 잇습니다. 렌더 전에 길이를 고르세요. 이후 연장은 없습니다.
 
-### Turbo and Steps {#turbo}
+### Turbo와 Steps {#turbo}
 
-- **Speed: Standard / Turbo.** Turbo is a 4-step adapter: much faster, and it overrules Steps. If it is not downloaded yet, the chip shows its size.
-- **Steps: Auto / 12 / 16 / 20.** More steps, a longer wait (20 is the official reference recipe, about 2.4× Auto).
-- On H3 installs whose runner has a single adapter slot, an **Adapter** row asks whether that slot goes to **Turbo** or **My LoRA** — they cannot both run. See [LoRAs on H3](#docs/loras/h3-stacking).
+- **속도: Standard / Turbo.** Turbo는 4스텝 어댑터: 훨씬 빠르고 Steps를 덮습니다. 아직 안 받으면 칩에 크기가 나옵니다.
+- **Steps: Auto / 12 / 16 / 20.** 스텝이 많을수록 대기(20은 공식 레퍼런스, Auto의 약 2.4배).
+- 어댑터 슬롯이 하나인 H3는 **Adapter** 행이 **Turbo** 또는 **내 LoRA** — 둘 다는 안 됩니다. [H3 LoRA](#docs/loras/h3-stacking).
 
-### Per-window prompts {#windows}
+### 구간별 프롬프트 {#windows}
 
-A 10 s or 15 s H3 clip asks every 5-second window for the same prompt, which can repeat the action. Open **Per-window prompts** and turn on **One line per window**: 10 s gives two boxes, 15 s three. A box left empty uses the main prompt.
+10초·15초 H3 클립은 5초 창마다 같은 프롬프트를 물어 동작이 반복될 수 있습니다. **구간별 프롬프트**를 열고 **구간마다 한 줄**: 10초는 상자 둘, 15초는 셋. 빈 상자는 메인 프롬프트.
 
-### H3 first frame and orientation {#h3-image}
+### H3 첫 프레임과 방향 {#h3-image}
 
-Image mode works on H3 — the picture is the first frame. Under **Customize**, **Orientation** turns the tier's canvas **Portrait** at the same cost.
+이미지 모드는 H3에서 됩니다 — 그림이 첫 프레임. **Customize** 아래 **화면 방향**이 같은 비용으로 티어 캔버스를 **세로**로 돌립니다.
 
-## Engines side by side {#engines}
+## 엔진 나란히 {#engines}
 
 | | LTX | Hailuo H3 |
 |---|---|---|
-| Modes | all Video modes, Remix, Audio | Text, Image |
-| Sound | joint with the picture | joint video, dialogue and sound |
-| Characters and LoRAs | trained characters, LoRA stacks | its own H3 LoRA library |
-| Avoid box | on High and the guided modes | none — say it in the prompt |
-| Longest clip | 20s (Quick), 10s otherwise | 15s, chained windows |
-| Memory | the Tier dialog (health chip → Tier) shows which qualities this Mac runs | 36 GB or more (see below) |
+| 모드 | 영상 모드 전부, 리믹스, 오디오 | 텍스트, 이미지 |
+| 소리 | 그림과 같이 | 영상·대사·소리 같이 |
+| 캐릭터와 LoRA | 학습 캐릭터, LoRA 스택 | 자체 H3 LoRA 라이브러리 |
+| 제외 박스 | High와 가이던스 모드 | 없음 — 프롬프트에 적기 |
+| 최장 클립 | 20초(Quick), 그외 10초 | 15초, 창을 이음 |
+| 메모리 | 티어 대화(상태 칩 → 티어)가 이 맥 품질을 보여 줌 | 36 GB 이상(아래) |
 
-**H3 and memory.** The full H3 engine needs 60 GB. From 36 GB up, H3 runs on its compact Q8 engine, which **Install Hailuo H3** in Pinokio's Phosphene sidebar builds locally (about 5 minutes, ~22 GB, no extra download). Settings → **Hailuo H3 model** chooses between Automatic, Full and Compact. Below 36 GB, H3 is not offered — render on LTX. See [Troubleshooting](#docs/troubleshooting/memory).
+**H3와 메모리.** 풀 H3는 60 GB. 36 GB부터는 컴팩트 Q8. 로컬 빌드 약 5분, ~22 GB, 추가 다운로드 없음. 설정 → **Hailuo H3 모델**이 Automatic, Full, Compact. 36 GB 미만이면 H3는 안 나옵니다. LTX로. [문제 해결](#docs/troubleshooting/memory).
 
-## Upscale and export {#upscale}
+## 업스케일과보내기 {#upscale}
 
-After the render, the clip can be resized without cropping.
+렌더 후 크롭 없이 크기를 바꿀 수 있습니다.
 
-**On Hailuo H3** (under Customize → **Upscale**):
+**Hailuo H3**(Customize → **Upscale**):
 
-- **Native** — as rendered.
-- **720p fit** / **1080p fit** — scaled and padded to fit. 720p fit is the default.
-Below the sizes, **Also run Upscale & Face Fix after the draft** is optional and off by default. When it is ticked, the draft ships as rendered and a second job re-renders it at twice the size with LTX-2.5, keeping the face and the sound; the fixed clip lands next to the draft. It needs the 0.3 GB Upscale adapter, downloaded from the Models window, and takes about the draft's time again.
+- **Native** — 렌더된 그대로.
+- **720p fit** / **1080p fit** — 맞춰 스케일·패드. 720p fit이 기본.
+크기 아래 **초안 뒤에 업스케일 & 얼굴 보정**은 선택, 기본 끔. 켜면 초안은 그대로 나가고 두 번째 잡이 LTX-2.5로 두 배, 얼굴·소리 유지. 0.3 GB Upscale 어댑터 필요, 초안 시간만큼 다시.
 
-**On LTX** (under Customize → **Export**): **Native** (default), **720p fit**, or **2×**. When it is not Native, **Method** chooses **Fast** (instant) or **Sharp** (a sharper upscaler, +30–90 s).
+**LTX**(Customize → **Export**): **Native**(기본), **720p fit**, **2×**. Native가 아니면 **Method**가 **Fast**(즉시) 또는 **Sharp**(더 선명, +30–90초).
 
-Any finished clip can also go through [Upscale & Face Fix](#docs/remix/upscale-face-fix) later — one click under the player.
+끝난 클립은 나중에 [업스케일 & 얼굴 보정](#docs/remix/upscale-face-fix)도 됩니다. 플레이어 아래 한 클릭.
 
-## More controls {#more}
+## 더 있는 컨트롤 {#more}
 
-- **Seed** — `-1` is random; reuse a seed to get the same take with a changed prompt.
-- **LoRAs** — the add-ons picker. See [LoRAs](#docs/loras).
-- **Orientation** (LTX) — 16:9 or 9:16.
-- **Customize** — width × height, duration and frames, and **Open file when done**.
-- **⊞ Batch** — paste many prompts and queue them all.
+- **Seed** — `-1`은 무작위. Seed를 재사용하면 프롬프트만 바꾼 같은 테이크.
+- **LoRAs** — 애드온 피커. [LoRAs](#docs/loras).
+- **화면 방향**(LTX) — 16:9 또는 9:16.
+- **Customize** — width × height, duration과 프레임, **끝나면 파일 열기**.
+- **일괄** — 프롬프트 여러 개 붙여 전부 대기열에.

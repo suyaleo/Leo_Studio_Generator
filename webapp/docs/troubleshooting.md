@@ -1,49 +1,49 @@
-# Troubleshooting
+# 문제 해결
 
-When Phosphene refuses a render, it says why and what to do. These are the messages people actually see.
+Leo Studio가 렌더를 거절하면 이유와 할 일을 말합니다. 사람들이 실제로 보는 메시지입니다.
 
-## Memory and this Mac's tier {#memory}
+## 메모리와 이 맥의 티어 {#memory}
 
-The health chip in the header shows memory at a glance; click it for the **Tier**, **Memory**, **Helper**, **Models**, **Queue** and **Render** rows. Click **Tier** to see what this Mac can run.
+헤더 상태 칩이 메모리를 한눈에 보여 줍니다. 누르면 **티어**, **메모리**, **헬퍼**, **모델**, **대기열**, **렌더**. **티어**를 누르면 이 맥이 돌릴 수 있는 것이 나옵니다.
 
-- *"Helper killed by the OS — out of memory"* — macOS stopped the render. Close memory-heavy apps (browsers, Slack, the iOS Simulator) and try again, or switch Quality to **Quick**, which uses about half the memory.
-- *"Image pre-flight: … needs a N GB Mac"* — that image engine does not fit this Mac. Pick **Auto** or a lighter preset. *"… needs ~N GB free"* means it fits, but other apps are holding the memory right now.
-- *"Training needs at least 24 GB of memory"* — character training cannot run on this Mac.
+- *"Helper killed by the OS — out of memory"* — macOS가 렌더를 죽였습니다. 메모리 많이 쓰는 앱(브라우저, Slack, iOS Simulator)을 닫고 다시, 또는 품질을 **Quick**으로. 메모리가 약 절반입니다.
+- *"Image pre-flight: … needs a N GB Mac"* — 그 이미지 엔진이 이 맥에 안 맞습니다. **Auto**나 더 가벼운 프리셋. *needs ~N GB free*는 맞지만 다른 앱이 지금 메모리를 잡고 있습니다.
+- *"Training needs at least 24 GB of memory"* — 이 맥에서 캐릭터 학습을 못 합니다.
 
-### Hailuo H3 on a 36–60 GB Mac {#h3-compact}
+### 36–60 GB 맥의 Hailuo H3 {#h3-compact}
 
-H3's full engine needs 60 GB. From 36 GB it runs on its compact Q8 engine, which has to be built once:
+H3 풀 엔진은 60 GB가 필요합니다. 36 GB부터는 컴팩트 Q8 엔진입니다. 한 번 빌드해야 합니다.
 
-> *"Hailuo H3 runs on this Mac — on its reduced-RAM lane … Run 'Install Hailuo H3' from the Phosphene sidebar in Pinokio — it builds that engine locally (~5 minutes, ~22 GB on disk, no extra download)."*
+> *"Hailuo H3 runs on this Mac — on its reduced-RAM lane … Run 'Install Hailuo H3' … (~5 minutes, ~22 GB on disk, no extra download)."*
 
-Do that, then choose Settings → **Hailuo H3 model** → Automatic or Compact. Below 36 GB, H3 is not available: render on LTX, which serves every mode.
+그다음 설정 → **Hailuo H3 모델** → Automatic 또는 Compact. 36 GB 미만이면 H3는 없습니다. LTX로 하세요. 모든 모드가 됩니다.
 
-## A model or add-on is not downloaded {#missing}
+## 모델·애드온이 없음 {#missing}
 
-- *"Extend needs the LTX-2.5 High add-on (the Q8 model), which isn't downloaded on this Mac yet"* — the same for Keyframes and High quality. Install it from the Models window (click the health chip, then **Models**).
-- *"Upscale & Face Fix needs the LTX-2.5 Pixel Spatial Upscaler adapter"* — download it from the Models window, then render again.
-- *"Stopped before rendering — the model weights are incomplete"* — a download was interrupted. Open the Models window and resume it. Settings → **Verify model files** checks every file and offers a re-download of any that are damaged.
+- *"Extend needs the LTX-2.5 High add-on (the Q8 model), which isn't downloaded on this Mac yet"* — 키프레임·High 품질도 같습니다. 모델 창에서 설치(상태 칩 → **모델**).
+- *"Upscale & Face Fix needs the LTX-2.5 Pixel Spatial Upscaler adapter"* — 모델 창에서 받은 뒤 다시 렌더.
+- *"Stopped before rendering — the model weights are incomplete"* — 받기가 끊겼습니다. 모델 창에서 이어 받으세요. 설정 → **모델 파일 검증**이 모든 파일을 확인하고 깨진 것만 다시 받기를 줍니다.
 
-## "Click Update" — an engine older than the panel {#stale-engine}
+## "Click Update" — 패널보다 오래된 엔진 {#stale-engine}
 
 *"This install's vendored engine predates LTX-2.5's text encoder … Click Update — and if the first click only moves the panel, click it once more."*
 
-The panel was updated but the engine underneath was not. Click **Update** in Pinokio's Phosphene sidebar. If nothing seems to change, click it a second time: an update started by an old version updates itself first. For H3, *"the installed Hailuo H3 runner is behind this panel"* means: re-run **Install Hailuo H3** — every weight already on disk is kept.
+패널만 업데이트되고 아래 엔진은 아닙니다. 한 번 더 업데이트하세요. 오래된 버전은 업데이터를 먼저 바꿉니다. H3는 *"the installed Hailuo H3 runner is behind this panel"* — **Install Hailuo H3**를 다시. 디스크의 가중치는 유지됩니다.
 
-If you updated and the panel still behaves like the old version, it is still running the old code. The version pill in the header then reads **Restart Phosphene** — click it, or click **Stop**, then **Start**, in Pinokio.
+업데이트했는데도 옛 버전처럼 동작하면 옛 코드가 아직 돌고 있습니다. 버전 칩이 **Leo Studio 재시작**이면 그걸 누르거나 패널을 끄고 다시 켜세요.
 
-## The GPU watchdog {#gpu-watchdog}
+## GPU 워치독 {#gpu-watchdog}
 
-*"the macOS GPU watchdog killed a Metal command buffer"* — macOS itself stopped a GPU task that ran too long. It is a driver-level kill, not a Phosphene bug report. Phosphene retries the prompt encoding at a shorter length for the rest of the session. If it keeps happening, the message links to the GitHub issue where chip, macOS version and the crash log help most.
+*"the macOS GPU watchdog killed a Metal command buffer"* — macOS가 너무 긴 GPU 작업을 끊었습니다. 드라이버 수준 킬이지 Leo Studio 버그 리포트가 아닙니다. 나머지 세션은 프롬프트 인코딩을 더 짧게 재시도합니다. 반복되면 칩·macOS 버전·크래시 로그가 있는 GitHub 이슈로 이어집니다.
 
-## The queue after a restart {#queue-restart}
+## 재시작 후 대기열 {#queue-restart}
 
-Restarting the panel resumes the queue: a queue that was paused when the panel stopped starts again on its own, and the log says so.
+패널을 다시 켜면 대기열이 이어집니다. 멈춘 채로 꺼졌으면 알아서 다시 시작하고, 로그가 말합니다.
 
-## Reading the log {#logs}
+## 로그 읽기 {#logs}
 
-The **Logs** tab in the bottom panel shows the render log. When a render dies, the last line that starts with `step:` names the stage it reached — that line is the most useful thing to include in a report. Pinokio's **Terminal** shows the same output.
+아래 패널 **로그**가 렌더 로그입니다. 렌더가 죽으면 `step:`으로 시작하는 마지막 줄이 도달한 단계입니다. 신고에 그걸 넣으세요.
 
-## Reporting an issue {#report}
+## 이슈 신고 {#report}
 
-The bug button in the header opens **Report a bug**: it fills in the version, your Mac's details and the last 50 log lines, and opens a GitHub issue in a new tab for you to finish — nothing is sent until you submit it there. Issues live at [github.com/mrbizarro/phosphene/issues](https://github.com/mrbizarro/phosphene/issues).
+헤더 버그 버튼이 **버그 신고**를 엽니다. 버전, 맥 정보, 로그 마지막 50줄을 채우고 GitHub 이슈를 새 탭으로 엽니다. 거기서 제출하기 전에는 아무것도 안 나갑니다. 이슈: [github.com/mrbizarro/phosphene/issues](https://github.com/mrbizarro/phosphene/issues).
