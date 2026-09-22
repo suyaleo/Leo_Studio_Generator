@@ -1304,18 +1304,101 @@ async function refreshUploadsStrip() {
       img.addEventListener('click', () => pickerSetImage(key, img.dataset.path));
     });
     els.recentStrip.querySelectorAll('.picker-recent-x').forEach(btn => {
-      btn.addEventListener('click', (e) => { e.stopPropagation(); deleteUpload(btn.dataset.path); });
+      btn.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        askDeleteUpload(btn.dataset.path);
+      });
     });
   });
 }
 
-// Delete an imported reference image from disk (plus its thumbnails), then
-// repaint every strip. A picker currently pointing at the deleted file is
-// cleared so a queued job cannot reference a path that no longer exists.
-async function deleteUpload(path) {
+// In-page confirm. Do not use window.confirm: an attached browser session
+// auto-accepts native dialogs. Nothing is deleted until the user clicks 삭제.
+function closeUploadDeleteModal() {
+  const bg = document.getElementById('uploadDeleteModal');
+  if (!bg) return;
+  bg.classList.remove('show');
+  bg._onOk = null;
+}
+
+function askUserConfirm(opts) {
+  let bg = document.getElementById('uploadDeleteModal');
+  if (!bg) {
+    bg = document.createElement('div');
+    bg.id = 'uploadDeleteModal';
+    bg.className = 'modal-bg';
+    bg.innerHTML = `
+      <div class="modal" role="dialog" aria-modal="true" aria-labelledby="uploadDeleteTitle">
+        <h3 id="uploadDeleteTitle"></h3>
+        <p id="uploadDeleteBody"></p>
+        <div class="modal-actions">
+          <button type="button" id="uploadDeleteCancel">취소</button>
+          <button type="button" id="uploadDeleteOk" class="danger">삭제</button>
+        </div>
+      </div>`;
+    document.body.appendChild(bg);
+    bg.addEventListener('click', (e) => {
+      if (e.target === bg) closeUploadDeleteModal();
+    });
+    bg.querySelector('#uploadDeleteCancel').addEventListener('click', (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      closeUploadDeleteModal();
+    });
+    bg.querySelector('#uploadDeleteOk').addEventListener('click', (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      const fn = bg._onOk;
+      closeUploadDeleteModal();
+      if (typeof fn === 'function') fn();
+    });
+  }
+  bg.querySelector('#uploadDeleteTitle').textContent = opts.title || '삭제';
+  bg.querySelector('#uploadDeleteBody').textContent = opts.body || '';
+  bg.querySelector('#uploadDeleteOk').textContent = opts.okLabel || '삭제';
+  bg._onOk = opts.onOk || null;
+  bg.classList.add('show');
+  const cancel = bg.querySelector('#uploadDeleteCancel');
+  if (cancel) cancel.focus();
+}
+
+function askDeleteUpload(path) {
   if (!path) return;
   const name = String(path).split('/').pop();
-  if (!confirm(`Delete "${name}" from your imported images? This removes the file.`)) return;
+  askUserConfirm({
+    title: '업로드 삭제',
+    body: `"${name}" 을 최근 업로드에서 지웁니다. 디스크의 파일도 삭제됩니다.`,
+    okLabel: '삭제',
+    onOk: () => deleteUpload(path),
+  });
+}
+
+function _dropDeletedUploadFromScreen(path) {
+  document.querySelectorAll('.picker-recent-x').forEach(btn => {
+    if (btn.dataset.path !== path) return;
+    const wrap = btn.closest('.picker-recent-wrap');
+    const strip = wrap && wrap.parentElement;
+    if (wrap) wrap.remove();
+    if (strip && !strip.querySelector('.picker-recent-wrap')) {
+      const recent = strip.closest('.picker-recent, .studio-ref-recent');
+      if (recent) recent.style.display = 'none';
+      strip.innerHTML = '';
+    }
+  });
+  if (typeof IMG_STUDIO !== 'undefined' && IMG_STUDIO.refs) {
+    IMG_STUDIO.refs.forEach((r, i) => {
+      if (r && r.path === path) {
+        IMG_STUDIO.refs[i] = null;
+        if (typeof imgStudioRenderSlot === 'function') imgStudioRenderSlot(i);
+      }
+    });
+  }
+}
+
+// Only called after the user clicks 삭제 in the in-page dialog.
+async function deleteUpload(path) {
+  if (!path) return;
   let r;
   try {
     r = await api('/upload/delete', 'POST', new URLSearchParams({path}));
@@ -1331,8 +1414,10 @@ async function deleteUpload(path) {
     const els = pickerEls(key);
     if (els && els.hidden && els.hidden.value === path) pickerSetImage(key, '');
   });
+  _dropDeletedUploadFromScreen(path);
   await refreshUploadsStrip();
   if (typeof refreshIngredientRecent === 'function') { try { refreshIngredientRecent(); } catch (e) {} }
+  if (typeof imgStudioRefreshRecent === 'function') { try { await imgStudioRefreshRecent(); } catch (e) {} }
 }
 
 // ====== Ingredients (multi-reference) picker ======
@@ -3540,15 +3625,22 @@ async function animateActive() {
 async function hide(path) { await fetch('/output/hide?path='+encodeURIComponent(path),{method:'POST'}); currentOutputs = []; poll(); }
 async function unhide(path) { await fetch('/output/show?path='+encodeURIComponent(path),{method:'POST'}); currentOutputs = []; poll(); }
 
-async function deleteOutput(path) {
-  // Per-card × button. Moves the media (and any sibling sidecar JSON)
-  // to the macOS Trash via /output/delete — files are recoverable
-  // from Finder Trash via Cmd-Z right after, or by dragging them out
-  // of the Trash bin later. Toast confirms the move; if the user was
-  // viewing this clip in the expand lightbox, that closes too.
+function deleteOutput(path) {
+  // Gallery trash for photo, video, and audio. The file stays until
+  // the user clicks 삭제 in the in-page dialog.
   if (!path) return;
   const base = path.split('/').pop();
-  if (!confirm('Move to Trash?\n\n' + base + '\n\nRestore from Finder if needed.')) return;
+  askUserConfirm({
+    title: '휴지통으로 이동',
+    body: base + '\n사진·영상·오디오를 휴지통으로 옮깁니다. Finder에서 되돌릴 수 있습니다.',
+    okLabel: '삭제',
+    onOk: () => commitDeleteOutput(path),
+  });
+}
+
+async function commitDeleteOutput(path) {
+  if (!path) return;
+  const base = path.split('/').pop();
   try {
     const fd = new URLSearchParams();
     fd.set('path', path);
@@ -5089,7 +5181,7 @@ Object.assign(globalThis, {
   h3FinishSetTier, h3FinishActive, setEngine, _syncEnginePromptTools,
   currentEngine, _syncEngineForMode, openH3InstallCard, closeH3InstallCard,
   enhancePrompt, applyAspect, applyQuality, updateDerived,
-  pickerSetImage, pickerUploadFile, pickerWire, refreshUploadsStrip,
+  pickerSetImage, pickerUploadFile, pickerWire, refreshUploadsStrip, deleteUpload, askDeleteUpload,
   refreshIngredientRecent, ingredientPickerWire, fmtMin, snippet,
   escapeHtml, api, _setOfflineBanner, startDeepVerify,
   friendlyJobError, poll, applyPackIncompleteGate, setRecentFilter,

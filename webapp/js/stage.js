@@ -39,6 +39,8 @@ function imgStudioUpdateValidity() {
     // 0.18+, so its "missing" case is really "update mflux", not a Qwen hint.
     invalidReason = (eng.value === 'ideogram4_inline')
       ? 'The Ideogram 4 engine needs mflux 0.18+ (the mflux-generate-ideogram4 CLI). Update the mflux add-on, then come back and Generate.'
+      : (eng.value === 'qwen_image_21_inline')
+      ? 'Qwen-Image-2.1 Heretic needs mflux with mflux-generate-qwen-2.1 (main at or after 8c00dab2). DiT/VAE are the official weights; the text encoder is pottokao/Qwen-Image-2.1-Text-Encoder-Heretic.'
       : 'The Qwen-Image-Edit engine isn\'t installed. It ships with the image-engine pack: click Update in Pinokio\'s Phosphene sidebar (NOT in this panel), then come back and Generate. If it\'s still missing after Update, the sidebar also shows "Reinstall image engines (Ideogram 4 + Qwen-Edit)" — ~30 s, ~150 MB.';
   } else if (engInfo && engInfo.fits_mac === false) {
     invalidReason = 'This engine needs a ' + engInfo.mac_gb_needed + ' GB Mac — this one has '
@@ -465,15 +467,21 @@ async function imgStudioRefreshRecent() {
   const items = (data && data.uploads) || [];
   if (!items.length) {
     wrap.style.display = 'none';
+    strip.innerHTML = '';
     return;
   }
   wrap.style.display = '';
+  // Same per-thumb "×" as the video pickers. Listeners, not inline onclick.
   strip.innerHTML = items.map(u => `
-    <img class="studio-ref-recent-thumb"
-         src="${escapeHtml(u.url)}"
-         data-path="${escapeHtml(u.path)}"
-         title="${escapeHtml(u.name)} · ${u.size_kb} KB · ${escapeHtml(u.mtime)}"
-         alt="">
+    <span class="picker-recent-wrap">
+      <img class="studio-ref-recent-thumb"
+           src="${escapeHtml(u.url)}"
+           data-path="${escapeHtml(u.path)}"
+           title="${escapeHtml(u.name)} · ${u.size_kb} KB · ${escapeHtml(u.mtime)}"
+           alt="">
+      <button type="button" class="picker-recent-x" data-path="${escapeHtml(u.path)}"
+              title="이 업로드 삭제"><svg class="ph" aria-hidden="true"><use href="#ph-x-bold"/></svg></button>
+    </span>
   `).join('');
   strip.querySelectorAll('img').forEach(img => {
     img.addEventListener('click', () => {
@@ -485,6 +493,13 @@ async function imgStudioRefreshRecent() {
       IMG_STUDIO.refs[target] = { path, name: fname };
       imgStudioRenderSlot(target);
       imgStudioMarkRecentInUse();
+    });
+  });
+  strip.querySelectorAll('.picker-recent-x').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      if (typeof askDeleteUpload === 'function') askDeleteUpload(btn.dataset.path);
     });
   });
   imgStudioMarkRecentInUse();

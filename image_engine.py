@@ -551,6 +551,12 @@ MFLUX_FAMILY_BIN = {
     "z_image_turbo":  "mflux-generate-z-image-turbo",
     "fibo":           "mflux-generate-fibo",
     "qwen":           "mflux-generate-qwen",
+    # Qwen-Image-2.1 (text-to-image, optional single-image img2img).
+    # Official weights have no safety checker; the hosted demo filter is
+    # not in the local pipeline. Needs mflux main at or after 8c00dab2
+    # (`mflux-generate-qwen-2.1`). Edit/instruction mode is not in that
+    # port yet — refs go through --image-path as img2img, not multi-ref edit.
+    "qwen21":         "mflux-generate-qwen-2.1",
     # Qwen-Image-Edit-2509 (multi-reference, 1-3 input images via --image-paths).
     # Apache 2.0. Default model: Qwen/Qwen-Image-Edit-2509.
     # Trained for "person + person", "person + product", "person + scene"
@@ -585,6 +591,10 @@ MFLUX_FAMILY_DEFAULTS = {
     "z_image_turbo": {"steps": 9,  "guidance": 0.0,  "base_model": ""},
     "fibo":          {"steps": 30, "guidance": 5.0,  "base_model": ""},
     "qwen":          {"steps": 30, "guidance": 5.0,  "base_model": ""},
+    # Qwen-Image-2.1: authors and mflux both default to 40 steps and no
+    # guidance (1.0). bf16 (quantize omitted) is the measured fastest path
+    # on M5 Max. base_model is the architecture enum, not the HF repo.
+    "qwen21":        {"steps": 40, "guidance": 1.0,  "base_model": "qwen-image-2.1"},
     # qwen_edit default: 8 steps. The Qwen card recommends 30-40 for
     # final-quality, but the agent + Image Studio are iteration tools —
     # ~1 min/image at Q4-8steps, then bump to 30 steps once the user
@@ -633,6 +643,11 @@ def _infer_mflux_family(model: str) -> str:
         return "kontext"
     if "fibo" in s or "briaai/fibo" in s:
         return "fibo"
+    # 2.1 before edit and the 1.x qwen branch: "qwen-image-2.1" contains
+    # both "qwen" and "image", and must not land on mflux-generate-qwen.
+    if ("qwen-image-2" in s or "qwen_image_2" in s or "qwen-image-21" in s
+            or "qwen21" in s or "qwen-2.1" in s):
+        return "qwen21"
     # qwen_edit must be matched BEFORE plain qwen — "qwen-image-edit-2509"
     # contains "qwen" + "image" so the plain qwen branch would steal it.
     if "qwen" in s and ("image-edit" in s or "image_edit" in s or "qwen-edit" in s):
@@ -1005,10 +1020,15 @@ def _generate_mflux(prompt: str, n: int, width: int, height: int,
             "--steps", str(eff_steps),
             "--width", str(width),
             "--height", str(height),
-            "-q", str(config.mflux_quantize),
             "--guidance", str(eff_guidance),
             "--seed", *[str(s) for s in seeds],
         ]
+        # bf16 (no -q) is the Qwen-Image-2.1 default on a 128 GB Mac.
+        # Passing -q 0 is not a valid mflux flag. Other families still
+        # quantize; insert before --guidance so the flag stays paired.
+        if fam != "qwen21" or config.mflux_quantize:
+            gidx = cmd.index("--guidance")
+            cmd[gidx:gidx] = ["-q", str(config.mflux_quantize or 6)]
     # Reference image input — three different argument shapes across
     # mflux's edit-flavored CLIs:
     #   qwen_edit  / flux2_edit  : --image-paths (plural, 1+ images)
@@ -1019,10 +1039,10 @@ def _generate_mflux(prompt: str, n: int, width: int, height: int,
     if refs and fam in ("qwen_edit", "flux2_edit"):
         refs_used = [str(Path(r).resolve()) for r in refs]
         cmd.extend(["--image-paths", *refs_used])
-    elif refs and fam == "kontext":
-        # kontext only consumes a single image. Use the first ref;
-        # the agent's tools.py refs validation already caps at 3 so
-        # we silently take refs[0] without warning here.
+    elif refs and fam in ("kontext", "qwen21"):
+        # kontext and Qwen-Image-2.1 consume a single image via
+        # --image-path. 2.1's instruction/multi-ref edit port is not in
+        # mflux yet; a dropped photo is img2img, not a Qwen-Edit compose.
         refs_used = [str(Path(refs[0]).resolve())]
         cmd.extend(["--image-path", refs_used[0]])
     # Optional Lightning / acceleration LoRAs.
