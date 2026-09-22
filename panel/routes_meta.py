@@ -311,14 +311,12 @@ def post_restart(h, path, qs, ctype) -> None:
 
 @post("/version/check")
 def post_version_check(h, path, qs, ctype) -> None:
-    # Force an immediate remote check (UI button on the version
-    # pill). Runs synchronously so the client gets the fresh
-    # state in the response — at most a 10s round-trip to GitHub.
-    try:
-        P._check_remote_once()
-        h._json({"ok": True, "state": P.get_version_state()})
-    except Exception as exc:
-        h._json({"ok": False, "error": str(exc)}, 500)
+    # No upstream poll. Return the frozen local stamp and stop.
+    h._json({
+        "ok": False,
+        "error": "Leo Studio does not check upstream for updates.",
+        "state": P.get_version_state(),
+    }, 403)
 
 
 @post("/analytics/ui")
@@ -365,6 +363,13 @@ def post_analytics_ui(h, path, qs, ctype) -> None:
 
 @post("/version/pull")
 def post_version_pull(h, path, qs, ctype) -> None:
+    # Leo Studio does not follow upstream Phosphene. A click, a stale page,
+    # or a direct POST must not git-pull origin into this tree.
+    h._json({
+        "ok": False,
+        "error": "Leo Studio does not follow upstream updates.",
+    }, 403)
+    return
     # The "magic button" path — when the pill is in the behind
     # state and the user clicks it, this endpoint runs git pull
     # on the panel repo and reports back. The user still has to

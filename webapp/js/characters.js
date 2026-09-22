@@ -2092,7 +2092,7 @@ async function trainAutoCaption() {
   if (label) label.textContent = 'Captioning…';
   if (prog) prog.hidden = false;
   if (fill) fill.style.width = '0%';
-  if (status) status.textContent = `Loading Gemma 3 (~3s)…`;
+  if (status) status.textContent = `Gemma 4 불러오는 중…`;
   const fd = new FormData();
   fd.set('train_job_id', TRAIN.jobId);
   fd.set('trigger', trig);
@@ -2151,7 +2151,7 @@ function trainAutoCaptionFinish() {
   const btn = document.getElementById('trainAutoCaptionBtn');
   const label = document.getElementById('trainAutoCaptionLabel');
   if (btn) btn.disabled = false;
-  if (label) label.textContent = 'Auto-caption with Gemma 3';
+  if (label) label.textContent = 'Gemma 4로 자동 캡션';
   // Leave the progress strip visible at 100% so the user has a record
   // of the run; it'll reset to 0% next time the button is clicked.
   trainUpdateButtonState();
@@ -2174,7 +2174,7 @@ function trainUpdateAutoCaptionState() {
     else if (trig.length < 3) btn.title = 'Trigger word must be 3+ characters.';
     else btn.title = 'Trigger word is too long (max 32).';
   } else {
-    btn.title = `Run Gemma 3 on all ${n} image(s) — ~${(2.5 * n).toFixed(0)}s`;
+    btn.title = `Gemma 4로 ${n}장 캡션 — 약 ${(2.5 * n).toFixed(0)}초`;
   }
 }
 

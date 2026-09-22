@@ -12738,8 +12738,13 @@ try {
   // this list or the tab simply never restores across a reload.
   // 2026-08-17 — 'editor' is the timeline's own tab. Same rule, same list.
   if (saved === 'studio' || saved === 'train' || saved === 'characters' ||
-      saved === 'audio' || saved === 'storyboard' || saved === 'editor') {
+      saved === 'audio' || saved === 'storyboard' || saved === 'editor' ||
+      saved === 'oneshot') {
     workflowSwitch(saved);
+  } else {
+    // Video is the default and previously left the attribute unset, so
+    // body[data-workflow="manual"] rules (stage scroll) never matched.
+    document.body.setAttribute('data-workflow', 'manual');
   }
   // Clear any stale agent-fullscreen flag from the removed chat surface.
   try { localStorage.removeItem('phos_agent_fullscreen'); } catch(e) {}

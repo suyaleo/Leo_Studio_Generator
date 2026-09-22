@@ -25,16 +25,11 @@ let _versionRestartPending = false;   // set after a successful /version/pull;
                                       // pill turns into a "restart" reminder.
 
 async function refreshVersionPill() {
-  try {
-    const r = await fetch('/version');
-    _versionState = await r.json();
-  } catch (e) {
-    return;             // network blip; don't blow away last good state
-  }
-  renderVersionPill();
-  try { _ubRender(_versionState); } catch (e) {}
-  try { _maybeShowUpdateModal(_versionState); } catch (e) {}
-  try { _maybeShowBroadcastModal(_versionState); } catch (e) {}
+  // Leo Studio does not display a version or offer upstream updates.
+  const pill = document.getElementById('versionPill');
+  if (pill) pill.remove();
+  const banner = document.getElementById('updateBanner');
+  if (banner) banner.hidden = true;
 }
 
 function _versionDisplayLabel(s) {
@@ -212,6 +207,8 @@ function _uiEvent(event, props) {
 }
 
 function _maybeShowUpdateModal(st) {
+  return; // Leo Studio does not nag for upstream updates.
+
   if (window._updModalShownThisLoad || window._phModalOpen) return;
   if (!st || st.error || st.suppress_reason || !st.checked_ts) return;
   if ((st.behind_by | 0) <= 0 || _versionRestartPending) return;
@@ -278,6 +275,10 @@ function _maybeShowBroadcastModal(st) {
 window._ubStarSettings = null;
 
 function _ubRender(s) {
+  const banner = document.getElementById('updateBanner');
+  if (banner) banner.hidden = true;
+  return; // upstream update banner stays off
+
   const el = document.getElementById('updateBanner');
   if (!el) return;
   const behind = (s && !s.error && s.checked_ts && (s.behind_by | 0) > 0);
@@ -526,6 +527,7 @@ async function panelRestart() {
 }
 
 async function versionPillClick() {
+  return; // version pill and upstream pull are removed
   if (_versionRestartPending) {
     // Educational click: tell the user what's needed.
     const s = _versionState || {};
@@ -681,11 +683,9 @@ async function versionDoPull(opts) {
   }
 }
 
-// Boot: first /version read happens 2 seconds after DOM ready (gives the
-// panel's startup-delay thread time to complete its first remote check),
-// then every 5 minutes thereafter.
-setTimeout(refreshVersionPill, 2000);
-setInterval(refreshVersionPill, 5 * 60 * 1000);
+// Upstream version polling is off. Drop a leftover pill if an old
+// snapshot painted one before this script loaded.
+refreshVersionPill();
 
 // ====== Modal reliability scaffold ======
 // One global scaffold for all 8 modals on the panel (.models-modal,

@@ -13,7 +13,7 @@ first try.
 Nothing here imports mlx in the panel's process. See MEMORY POLICY below.
 
 
-MODEL: gemma-3-12b-it-4bit, the weights the panel ALREADY has
+MODEL: gemma-4-12b-it-4bit, the chat weights the panel plans with
 -------------------------------------------------------------
 `storyboard.py`'s docstring says the planner is Qwen3.5-4B-4bit (decision 4492775, 2026-07-24).
 That decision is sound on the merits and stays the target — but it is not shippable on this
@@ -27,7 +27,7 @@ machine today and the module must not pretend otherwise:
   * The 19 GB ollama `heretic-32b` is out of the question for a step that must run
     BEFORE a render on a unified-memory Mac.
 
-So the planner runs on `mlx_models/gemma-3-12b-it-4bit` — the exact weights
+So the planner runs on `mlx_models/gemma-4-12b-it-4bit` — the exact weights
 `/prompt/enhance` already loads (`mlx_warm_helper.get_gemma_lm()`), through the exact
 runtime (`mlx_lm.load` + `mlx_lm.generate` + `make_sampler`, mlx-lm 0.31.1 in
 `ltx-2-mlx/env`). Zero new bytes on disk, and the failure mode "planner model missing" is
@@ -144,21 +144,28 @@ ROOT = Path(__file__).resolve().parent
 MODELS_DIR = Path(os.environ.get("LTX_MODELS_DIR", str(ROOT / "mlx_models")))
 DEFAULT_MODEL_PATH = Path(
     os.environ.get("LTX_STORYBOARD_PLANNER")
-    or os.environ.get("LTX_GEMMA_PATH")
-    or (MODELS_DIR / "gemma-3-12b-it-4bit")
+    or (MODELS_DIR / "gemma-4-12b-it-4bit")
 )
 
-# The child needs mlx + mlx_lm; the panel's own interpreter may not have them (it is 3.9).
-# Same resolution order as the panel's _resolve_helper_python().
+# The child needs mlx-lm new enough to load gemma4_unified. That build wants
+# mlx>=0.32, which the video venv must not take (LTX stays on mlx 0.31.1).
+# planner-venv is that split. LTX_HELPER_PYTHON is the video interpreter and
+# must not win here.
+_PLANNER_PY = ROOT / "planner-venv" / "bin" / "python3.11"
 _VENV_PY = ROOT / "ltx-2-mlx" / "env" / "bin" / "python3.11"
 
 
 def _resolve_worker_python() -> Path:
-    cand = os.environ.get("LTX_HELPER_PYTHON")
-    if cand and Path(cand).is_file():
-        return Path(cand)
-    if _VENV_PY.is_file():
-        return _VENV_PY
+    # The video venv is already allowed to load MLX. A fresh planner-venv
+    # is blocked by macOS library policy, so it is only an override.
+    for cand in (
+        os.environ.get("LTX_STORYBOARD_PYTHON"),
+        os.environ.get("LTX_HELPER_PYTHON"),
+        str(_VENV_PY),
+        str(_PLANNER_PY),
+    ):
+        if cand and Path(cand).is_file():
+            return Path(cand)
     alt = ROOT / "ltx-2-mlx" / "env" / "bin" / "python"
     if alt.is_file():
         return alt
@@ -2558,8 +2565,9 @@ class PlannerSession(object):
             return
         if not self.model_path.exists():
             raise PlannerError(
-                "planner model not found at %s — set LTX_STORYBOARD_PLANNER to an "
-                "mlx-lm-loadable directory" % self.model_path)
+                "planner model not found at %s — Gemma 4 12B "
+                "(mlx_models/gemma-4-12b-it-4bit) or set LTX_STORYBOARD_PLANNER"
+                % self.model_path)
         env = dict(os.environ)
         env.setdefault("PYTHONUNBUFFERED", "1")
         env.setdefault("TOKENIZERS_PARALLELISM", "false")

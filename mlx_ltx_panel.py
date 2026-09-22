@@ -104,6 +104,9 @@ ROOT = Path(os.environ.get("LTX_STUDIO_ROOT", str(Path(__file__).resolve().paren
 MLX = Path(os.environ.get("LTX_MLX_PATH", str(ROOT / "ltx-2-mlx")))
 MODELS_DIR = Path(os.environ.get("LTX_MODELS_DIR", str(ROOT / "mlx_models")))
 GEMMA = Path(os.environ.get("LTX_GEMMA_PATH", str(MODELS_DIR / "gemma-3-12b-it-4bit")))
+# Chat / planner weights. Not the LTX-2.5 text encoder (gemma4-12b-ltx25-q4):
+# that tower conditions video and cannot plan a film.
+GEMMA4_IT = Path(os.environ.get("LTX_STORYBOARD_PLANNER", str(MODELS_DIR / "gemma-4-12b-it-4bit")))
 OUTPUT = Path(os.environ.get("LTX_OUTPUT_DIR", str(ROOT / "mlx_outputs")))
 UPLOADS = Path(os.environ.get("LTX_UPLOADS_DIR", str(ROOT / "panel_uploads")))
 AUDIO_DEFAULT = Path(os.environ.get("LTX_DEFAULT_AUDIO", str(ROOT / "audio_inputs/default.wav")))
@@ -447,7 +450,10 @@ PROFILE = _detect_profile()
 # frames in release tests, so keep it hidden unless explicitly opted in.
 MODEL_UPSCALE_ENABLED = _optional_bool_env("LTX_ENABLE_MODEL_UPSCALE") is True
 PIPERSR_UPSCALE_ENABLED = _optional_bool_env("LTX_ENABLE_PIPERSR") is not False and importlib.util.find_spec("pipersr") is not None
-VERSION_CHECK_ENABLED = _optional_bool_env("PHOSPHENE_DISABLE_VERSION_CHECK") is not True
+# Leo Studio does not follow upstream Phosphene releases. The header no
+# longer shows a version, and nothing here polls GitHub or git-pulls origin.
+# PHOSPHENE_DISABLE_VERSION_CHECK cannot turn this back on.
+VERSION_CHECK_ENABLED = False
 # Default port: 8198 production, 8199 dev — so both panels can run side by
 # side. LTX_PORT env var still overrides if the user wants something else.
 DEFAULT_PORT = 8199 if PROFILE == "dev" else 8198
@@ -2972,12 +2978,12 @@ def _train_required_models() -> list[dict]:
         },
         {
             "key": "gemma_text_encoder",
-            "label": "Gemma 3 12B (text encoder)",
-            "blurb": "Encodes prompts for both inference and training. Already "
-                     "required by Phosphene's renderer, so this is usually green.",
-            "repo_id": gemma_repo_id,
+            "label": "Gemma 4 12B (기획·다듬기)",
+            "blurb": "스토리보드 기획과 프롬프트 다듬기가 쓰는 챗 모델입니다. "
+                     "영상 인코더(gemma4-12b-ltx25)와는 다른 가중치입니다.",
+            "repo_id": "mlx-community/gemma-4-12B-it-4bit",
             "filename": "config.json",
-            "local_dir": str(gemma_local_dir),
+            "local_dir": str(GEMMA4_IT),
             "size_gb": 6.0,
             "ready": _file_present(gemma_local_dir, gemma_repo_id, "config.json"),
         },
@@ -5726,19 +5732,22 @@ def storage_rows() -> list[dict]:
     # Storyboard on every generation. Stating why something CANNOT go is part of
     # this section's job — a user hunting 7 GB should find the answer here
     # rather than delete it and file a bug.
-    gemma3 = next((r for r in _repos() if r.get("key") == "gemma"), None)
-    if gemma3:
-        base = ROOT / gemma3["local_dir"]
-        nbytes = _dir_size_bytes(base)
+    chat = GEMMA4_IT if GEMMA4_IT.is_dir() else None
+    if chat is None:
+        gemma3 = next((r for r in _repos() if r.get("key") == "gemma"), None)
+        if gemma3:
+            legacy = ROOT / gemma3["local_dir"]
+            chat = legacy if legacy.is_dir() else None
+    if chat is not None:
+        nbytes = _dir_size_bytes(chat)
         if nbytes:
             rows.append({
                 "key": "gemma",
-                "name": "Gemma 3 12B",
-                "paths": [gemma3["local_dir"]],
+                "name": "Gemma 4 12B" if chat == GEMMA4_IT else "Gemma 3 12B",
+                "paths": [str(chat.relative_to(ROOT)) if chat.is_relative_to(ROOT) else str(chat)],
                 "bytes": nbytes,
                 "size": _fmt_gb(nbytes),
-                "note": "Kept — this is also what Enhance and the Storyboard "
-                        "planner run on.",
+                "note": "기획·다듬기용. 영상 인코더(gemma4-12b-ltx25)와는 다른 가중치입니다.",
                 "removable": False,
             })
     music_bytes = _dir_size_bytes(MUSIC_MODELS)
@@ -16791,7 +16800,7 @@ class WarmHelper:
             # reusing LTX_GEMMA here made Enhance spend the whole client
             # timeout loading Gemma 4 and then close with no response body.
             # Keep the generative Gemma 3 root on its own explicit seam.
-            env["LTX_ENHANCE_GEMMA"] = str(GEMMA)
+            env["LTX_ENHANCE_GEMMA"] = str(GEMMA4_IT if GEMMA4_IT.is_dir() else GEMMA)
             env["LTX_IDLE_TIMEOUT"] = str(HELPER_IDLE_TIMEOUT)
             env["LTX_LOW_MEMORY"] = HELPER_LOW_MEMORY
             env["LTX_LOW_RAM_STREAM"] = "1" if low_ram_streaming_enabled() else "0"

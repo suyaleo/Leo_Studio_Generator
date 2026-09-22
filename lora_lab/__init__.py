@@ -92,22 +92,24 @@ def resolve_default_model_dir() -> str:
 
 
 def resolve_default_text_encoder() -> str:
-    """Locate Gemma 3 12B (LTX's text encoder) the same way.
+    """Locate the chat Gemma used for captions and planning.
 
-    Same resolution rules as ``resolve_default_model_dir`` but for
-    Gemma. Falls back to the HF repo id (``mlx-community/gemma-3-12b
-    -it-4bit``) which mlx-vlm / ltx-trainer-mlx can fetch on first run.
+    Prefers Gemma 4 12B instruct. Falls back to Gemma 3 if that folder
+    is the only one on disk.
     """
+    names = ("gemma-4-12b-it-4bit", "gemma-3-12b-it-4bit")
     env_dir = os.environ.get("LTX_MODELS_DIR")
+    roots = []
     if env_dir:
-        candidate = Path(env_dir).expanduser() / "gemma-3-12b-it-4bit"
-        if candidate.is_dir():
-            return str(candidate)
+        roots.append(Path(env_dir).expanduser())
     here = Path(__file__).resolve()
     for parent in here.parents:
-        candidate = parent / "mlx_models" / "gemma-3-12b-it-4bit"
-        if candidate.is_dir():
-            return str(candidate)
+        roots.append(parent / "mlx_models")
         if (parent / ".git").exists():
             break
-    return "mlx-community/gemma-3-12b-it-4bit"
+    for root in roots:
+        for name in names:
+            candidate = root / name
+            if candidate.is_dir():
+                return str(candidate)
+    return "mlx-community/gemma-4-12B-it-4bit"

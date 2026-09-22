@@ -211,21 +211,9 @@
     <span id="queuePill" class="pill">queue 0</span>
     <span id="jobPill" class="pill">idle</span>
   </div>
-  <!-- Update-available pill. Hidden by default; renders only when the
-       /version poller finds the install behind origin/main. Click → modal
-       listing the unseen commits. We do this because users keep telling
-       us "I clicked Update but I don't see anything" — by the time they
-       do, we've usually pushed three more fixes. -->
-  <!-- Version pill — the "magic button". Always visible so users learn
-       where to look. Clicking does the right thing for the state:
-         pill-current   Y1.001          click → re-check GitHub now
-         pill-update    ↑ Y1.002        click → git pull (then restart)
-         pill-restart   ↻ restart       click → just a reminder hint
-         pill-dev       Y1.001 ⚙        click → toast with reason
-         pill-checking  Y1.001          (idle, while first poll runs)
-       No modal — confirm() + small toast for everything. -->
-  <span id="versionPill" class="pill pill-checking" style="cursor:pointer"
-        onclick="versionPillClick()" title="Leo Studio 버전">Leo Studio · …</span>
+  <!-- Version pill removed. Leo Studio does not follow upstream
+       Phosphene releases, so the header does not show a version or an
+       Update control. /version/pull is refused server-side. -->
   <!-- Bug-report button — neon-pulsing in the header pill row. Opens a
        modal that pre-fills environment info + log tail and finishes with a
        pre-filled GitHub issue (URL-built client-side, no auth). Sits before
@@ -2505,7 +2493,7 @@ The same wizard walks out of frame. Audio: footsteps on leaves."></textarea>
           </div>
           <div class="train-guidance-section">
             <h3>캡션 규칙</h3>
-            <p>샷마다 <b>달라지는 것</b>을 적으세요 — 옷, 장소, 포즈, 조명, 프레이밍. 안 바뀌는 아이덴티티(얼굴형, 머리색, 체형)는 적지 마세요. LoRA가 알아서 흡수합니다. 자동 캡션은 Gemma 3가 이 규칙의 <code>[VISUAL]:</code> 형식으로 씁니다.</p>
+            <p>샷마다 <b>달라지는 것</b>을 적으세요 — 옷, 장소, 포즈, 조명, 프레이밍. 안 바뀌는 아이덴티티(얼굴형, 머리색, 체형)는 적지 마세요. LoRA가 알아서 흡수합니다. 자동 캡션은 Gemma 4가 이 규칙의 <code>[VISUAL]:</code> 형식으로 씁니다.</p>
           </div>
         </div>
         <!-- Style guidance — shown when train_type=style. Hand-picked movie
@@ -2620,10 +2608,10 @@ The same wizard walks out of frame. Audio: footsteps on leaves."></textarea>
                   class="train-autocaption-btn"
                   onclick="trainAutoCaption()" disabled>
             <svg class="ph" aria-hidden="true"><use href="#ph-sparkle-fill"/></svg>
-            <span id="trainAutoCaptionLabel">Auto-caption with Gemma 3</span>
+            <span id="trainAutoCaptionLabel">Gemma 4로 자동 캡션</span>
           </button>
           <span class="train-autocaption-hint" id="trainAutoCaptionHint">
-            Local Gemma 3 12B writes one <code>[VISUAL]:</code> caption per image (~2–3 sec each). Overwrites existing captions.
+            로컬 Gemma 4 12B가 이미지마다 <code>[VISUAL]:</code> 캡션을 씁니다(장당 약 2–3초). 기존 캡션을 덮습니다.
           </span>
         </div>
         <div class="train-autocaption-progress" id="trainAutoCaptionProgress" hidden>
@@ -3033,7 +3021,7 @@ The same wizard walks out of frame. Audio: footsteps on leaves."></textarea>
       </div>
       <div class="form-action-footer">
         <div class="sb-ramline" id="sbRamLine">
-          <span>기획은 약 1분 메모리를 빌렸다가 돌려줍니다.</span>
+          <span>기획은 Gemma 4 12B가 약 1분 메모리를 빌렸다가 돌려줍니다.</span>
           <button type="button" class="help-dot" id="sbRamHelpBtn" aria-expanded="false"
                   aria-controls="sbRamHelpNote" title="Why?" onclick="sbToggleRamHelp()">?</button>
         </div>
@@ -5564,8 +5552,5 @@ const BOOT = __BOOTSTRAP__;</script>
 <script type="module" src="/webapp/js/oneshot.js"></script>
 <script type="module" src="/webapp/js/main.js"></script>
 <div class="phos-toast-container" id="phosToast" aria-live="polite" aria-atomic="false"></div>
-</body>
-</html>
-alse"></div>
 </body>
 </html>
