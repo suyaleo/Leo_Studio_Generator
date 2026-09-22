@@ -25054,6 +25054,12 @@ _PREFLIGHT_BASE_GB: dict[tuple[str, int], float] = {
     ("flux1", 4): 6.0,
     ("flux1", 6): 8.0,
     ("flux1", 8): 12.0,
+    # Qwen-Image-2.1 bf16 peak on M5 Max is ~46 GB (mflux README).
+    # Key 0 means "no -q" / full bf16. 8-bit prequant is ~36 GB without
+    # --low-ram. This Mac is 128 GB; the number is for the fit pill.
+    ("qwen21", 0): 46.0,
+    ("qwen21", 8): 36.0,
+    ("qwen21", 4): 28.0,
 }
 
 # When the user picks the explicit `_high_inline` Klein-Base-9B path the
@@ -25085,6 +25091,8 @@ def _preflight_estimate_ram_gb(cfg) -> float:
         # `mock` engine doesn't allocate; `bfl` is cloud-side.
         return 1.0
     fam = (cfg.mflux_family or "auto").lower()
+    if fam == "qwen21" and not cfg.mflux_quantize:
+        return _PREFLIGHT_BASE_GB.get(("qwen21", 0), 46.0)
     q = int(cfg.mflux_quantize or 6)
     model = (getattr(cfg, "mflux_model", "") or "").lower()
     if fam == "flux2" and "9b" in model:
@@ -25130,10 +25138,14 @@ def _preflight_model_cached(cfg) -> bool:
     model = (getattr(cfg, "mflux_model", "") or "").strip()
     if not model:
         return True
-    # Local path or named shorthand (e.g. "flux2-klein-4b") — mflux resolves
-    # these via its own bundled cache, not HF Hub. Treat as cached.
+    # Named shorthand (e.g. "flux2-klein-4b") — mflux resolves these via
+    # its own bundled cache, not HF Hub. An absolute or ~/ path is a local
+    # bundle (official DiT/VAE plus a swapped text encoder); do not look it
+    # up as an HF repo id.
     if "/" not in model:
         return True
+    if model.startswith("/") or model.startswith("~"):
+        return Path(model).expanduser().is_dir()
     return _repo_hf_cache_dir(model) is not None
 
 
@@ -25142,6 +25154,7 @@ _IMAGE_ENGINE_LABELS = {
     "qwen_edit_lightning_inline": "Reference Edit — Fast",
     "qwen_edit_inline": "Reference Edit — Standard",
     "qwen_edit_high_inline": "Reference Edit — Quality",
+    "qwen_image_21_inline": "Qwen-Image-2.1 Heretic",
     "ideogram4_inline": "Ideogram 4",
     "hidream_fast_inline": "HiDream Fast",
     "hidream_inline": "HiDream Medium",
@@ -30858,6 +30871,25 @@ def _build_image_engine_config(
     # to a temp .json and feeds via `--prompt-file`. Steps/guidance are inert
     # on this CLI — the sampler PRESET defines them, so we thread `ideo_preset`
     # (V4_DEFAULT_20 / V4_TURBO_12 / V4_QUALITY_48) into `mflux_preset`.
+    # ===== Qwen-Image-2.1 + Heretic text encoder =========================
+    # DiT and VAE stay the official Qwen/Qwen-Image-2.1 weights. The text
+    # encoder is pottokao's Heretic ablation (refusals 100/100 -> 5/100).
+    # The hosted demo filter is not in either set. Local bundle is assembled
+    # under mlx_models so mflux reads text_encoder/ from the abliterated
+    # shards. mflux_lora_paths=[] is load-bearing: the dataclass default is
+    # a Qwen-Edit Lightning LoRA, which 2.1 cannot apply.
+    if engine_override == "qwen_image_21_inline":
+        return agent_image_engine.ImageEngineConfig(
+            kind="mflux",
+            mflux_model="/Users/macbook/phosphene/mlx_models/qwen-image-2.1-heretic",
+            mflux_family="qwen21",
+            mflux_base_model="qwen-image-2.1",
+            mflux_quantize=0,
+            mflux_steps=40,
+            mflux_guidance=1.0,
+            mflux_lora_paths=[],
+            mflux_lora_scales=[],
+        )
     if engine_override == "ideogram4_inline":
         _ideo_preset = str(form.get("ideo_preset") or "V4_DEFAULT_20").strip() or "V4_DEFAULT_20"
         # Quantize level for the fp8 weights. Default 6 — the M1-safe level

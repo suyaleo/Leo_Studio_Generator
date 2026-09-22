@@ -48,6 +48,7 @@ function _currentLoraModeFilter() {
   }
   // Image Studio: read the engine override + map to compat tag.
   const eng = (document.getElementById('imgStudioEngine')?.value || 'auto').toLowerCase();
+  if (eng.startsWith('qwen_image_21')) return 'image:qwen21';
   if (eng.startsWith('qwen_edit')) return 'image:qwen';
   if (eng.startsWith('ideogram'))  return 'image:ideogram';
   if (eng.startsWith('flux2_edit') || eng.startsWith('flux2'))  return 'image:flux2';

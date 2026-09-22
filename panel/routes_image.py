@@ -269,6 +269,9 @@ def get_image_engine_status(h, parsed) -> None:
         # made N=1 understate and N=4+ overstate the wall-time. The
         # studio now estimates correctly across all batch sizes.
         ENGINES = [
+            # Qwen-Image-2.1 DiT/VAE are already cached. The pill tracks the
+            # Heretic text encoder (~17.5 GB), the part that removes refusals.
+            ("qwen_image_21_inline",       "pottokao/Qwen-Image-2.1-Text-Encoder-Heretic", 17.5,  78.0,  40.0),
             # Qwen-Image-Edit-2511 — three-tier ladder. ~24 GB
             # download (one-time) shared across all three tiers.
             # ALL tiers use FBCache via the mflux patch — at 8+
@@ -296,6 +299,7 @@ def get_image_engine_status(h, parsed) -> None:
         # check). HiDream lives outside mflux; we surface its
         # install status via the lab-model existence check below.
         ENGINE_FAMILY = {
+            "qwen_image_21_inline":       "qwen21",
             "qwen_edit_lightning_inline": "qwen_edit",
             "qwen_edit_inline":           "qwen_edit",
             "qwen_edit_high_inline":      "qwen_edit",
@@ -385,7 +389,9 @@ def get_image_engine_status(h, parsed) -> None:
                 # one-time-download heads-up until the weights land.
                 "gated": False,
                 "license_url": ("https://huggingface.co/" + repo)
-                               if (repo and engine == "ideogram4_inline") else None,
+                               if (repo and engine in (
+                                   "ideogram4_inline", "qwen_image_21_inline"
+                               )) else None,
             })
         h._json({"engines": out,
                  "host_ram_gb": int(round(float(P.SYSTEM_RAM_GB or 0)))})

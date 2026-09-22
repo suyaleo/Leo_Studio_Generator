@@ -1916,7 +1916,7 @@ The same wizard walks out of frame. Audio: footsteps on leaves."></textarea>
         <div class="composer-refs">
           <div class="show">
             <h2>레퍼런스 이미지
-              <span class="h2-hint">사진을 놓으면 편집·변환 · 인물 2–3명: Qwen Edit</span>
+              <span class="h2-hint">없으면 텍스트로 생성 · 사진 1장은 변환 · 인물 편집은 Reference Edit</span>
             </h2>
             <div class="studio-ref-grid" id="imgStudioRefs">
               <div class="studio-ref-slot" data-slot="0">
@@ -2183,7 +2183,8 @@ The same wizard walks out of frame. Audio: footsteps on leaves."></textarea>
           <div class="studio-engine-row">
             <select id="imgStudioEngine" onchange="if(typeof ideoSyncVisibility==='function')ideoSyncVisibility();imgStudioUpdateValidity();imgStudioRefreshEngineStatus();imgStudioUpdateEstimate();imgStudioUpdateRefWarning();if(typeof renderLorasList==='function')renderLorasList()">
               <option value="auto">Auto (use Settings)</option>
-              <option value="qwen_edit_lightning_inline" selected>Reference Edit &mdash; Fast (image-to-image, Lightning 4-step, ~1:20, default, multi-ref)</option>
+              <option value="qwen_image_21_inline" selected>Qwen-Image-2.1 Heretic &mdash; 거부 제거 텍스트 인코더 (40-step bf16)</option>
+              <option value="qwen_edit_lightning_inline">Reference Edit &mdash; Fast (image-to-image, Lightning 4-step, ~1:20, multi-ref)</option>
               <option value="qwen_edit_inline">Reference Edit &mdash; Standard (image-to-image, 8-step Q6, ~2:05, no LoRA)</option>
               <option value="qwen_edit_high_inline">Reference Edit &mdash; Quality (image-to-image, 40-step Q8 + CFG, ~3:50, final renders)</option>
               <option value="ideogram4_inline">Ideogram 4 &mdash; typography &amp; layout (text-in-image; optional reference bridge)</option>
