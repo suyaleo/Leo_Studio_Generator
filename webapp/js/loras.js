@@ -1180,6 +1180,7 @@ function _renderManualCharactersList() {
       ? `<span class="chars-avatar-voice" title="Has voice LoRA + reference clip"><svg class="ph"><use href="#ph-music-notes"/></svg></span>`
       : '';
     const idAttr = JSON.stringify(c.id).replace(/"/g, '&quot;');
+    const nameAttr = JSON.stringify(name).replace(/"/g, '&quot;');
     const tt = `${escapeHtml(name)} · ${escapeHtml(trigger)}${hasVoice ? ' · has voice' : ' · silent'}${active ? ' · click to deselect' : ''}`;
     chips.push(`
       <button type="button" class="chars-avatar-chip ${active ? 'active' : ''}"
@@ -1188,6 +1189,8 @@ function _renderManualCharactersList() {
         ${avatar}
         <span class="chars-avatar-name">${escapeHtml(name)}</span>
         ${voiceBadge}
+        <span class="chars-avatar-x" role="button" title="Remove ${escapeHtml(name)}"
+              onclick="event.preventDefault(); event.stopPropagation(); removeManualCharacter(${idAttr}, ${nameAttr})">×</span>
       </button>
     `);
   }
@@ -1354,6 +1357,32 @@ function renderCharacterStrip() {
 }
 
 
+// X on a video-tab character chip. Same removal as the manage modal:
+// face LoRA, audio LoRA, voice clip, and avatar cache go; the training
+// dataset under state/train_character/ stays so it can be retrained.
+async function removeManualCharacter(id, name) {
+  const displayName = name || id;
+  if (!confirm(`Remove "${displayName}"?\n\nThis removes the face LoRA, audio LoRA, voice clip, and avatar cache. Your training dataset under state/train_character/ is kept so you can retrain.`)) {
+    return;
+  }
+  try {
+    const r = await fetch(`/characters/${encodeURIComponent(id)}/delete`, { method: 'POST' });
+    const data = await r.json().catch(() => ({}));
+    if (!r.ok || !data.ok) {
+      alert('Remove failed: ' + (data.error || `HTTP ${r.status}`));
+      return;
+    }
+    if (typeof _selectedCharacterId !== 'undefined' && _selectedCharacterId === id) {
+      _selectedCharacterId = '';
+      const inp = document.getElementById('characterIdInput');
+      if (inp) inp.value = '';
+    }
+    try { refreshManualCharacters(); } catch (_) {}
+  } catch (e) {
+    alert('Remove failed: ' + (e.message || e));
+  }
+}
+
 // ---- published to the page --------------------------------------------------
 // Inline handlers in the markup and the other files resolve these through
 // the global scope; everything NOT listed here is private to this module.
@@ -1363,7 +1392,7 @@ Object.assign(globalThis, {
   setH3LoraSlot, _serializeLoras, addLoraToActive, populateIngredientCharLoras,
   onIngredientCharChange, onIngredientCharStrength, refreshLoras, _loraGenerationCompatible,
   renderLorasList, appendTriggerToPrompt, _updateCharsPickerVisibility, refreshManualCharacters,
-  _renderManualCharactersList, _renderCharsAppliedNote, renderCharacterStrip,
+  _renderManualCharactersList, _renderCharsAppliedNote, renderCharacterStrip, removeManualCharacter,
   // inline-handler targets: generated markup resolves these through the
   // global scope (the v4.9.0 regression, PR #69)
   deleteLora, downloadLora, removeLoraFromActive, renameLora,

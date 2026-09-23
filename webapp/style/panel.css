@@ -8596,6 +8596,27 @@
     .chars-avatar-chip .chars-avatar-voice .ph {
       width: 9px; height: 9px;
     }
+    /* Remove control on the video-tab character chip. Left side, so it
+       does not cover the voice badge on the right. */
+    .chars-avatar-chip .chars-avatar-x {
+      position: absolute;
+      top: 0; left: 0;
+      width: 16px; height: 16px;
+      border-radius: 50%;
+      border: 1px solid var(--border-strong, rgba(255,255,255,.28));
+      background: rgba(20, 20, 24, .92);
+      color: #f2f2f2;
+      font-size: 12px;
+      line-height: 14px;
+      text-align: center;
+      cursor: pointer;
+      z-index: 3;
+    }
+    .chars-avatar-chip .chars-avatar-x:hover {
+      background: #c0392b;
+      border-color: #c0392b;
+      color: #fff;
+    }
 
     /* Under-strip meta line — shows the trigger + a compact inline
        strength slider when a character is active. Hidden when no
